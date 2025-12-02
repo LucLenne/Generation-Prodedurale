@@ -1,11 +1,12 @@
 class_name TileConfig extends Node
 
 # Global Settings
-const TILE_SIZE = 8
 const SOURCE_ID = 1
+const TILE_SIZE = 8
 
-# --- Basic Tiles ---
+# Basic tiles
 const GRASS = Vector2i(5, 4)       # Herbe verte
+const DIRT = Vector2i(1, 1)        # Terre
 const WALL = Vector2i(1, 0)        # Mur générique
 const DOOR = Vector2i(2, 2)        # Porte
 const TREE = Vector2i(5, 5)        # Arbre

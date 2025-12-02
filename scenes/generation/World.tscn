@@ -8,13 +8,15 @@
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
 script = ExtResource("1_gen")
-width = null
-height = null
-house_count = null
+zone_count_range = Vector2i(3, 6)
+zone_size_range = Vector2i(500, 700)
+zone_dirt_ratio = 0.7
+path_smoothness = 1.0
+path_edge_grass_ratio = 0.2
 npc_scene = ExtResource("4_npc")
+house_scenes = Array[PackedScene]([ExtResource("5_house")])
 ground_layer = NodePath("GroundLayer")
 wall_layer = NodePath("WallLayer")
-house_scenes = Array[PackedScene]([ExtResource("5_house")])
 
 [node name="GroundLayer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("2_tiles")

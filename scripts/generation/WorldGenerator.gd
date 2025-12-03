@@ -22,12 +22,6 @@ class_name WorldGenerator extends Node2D
 @export var npc_scene : PackedScene
 @export var house_scenes : Array[PackedScene]
 
-@export_group("Decorations")
-@export var decoration_tiles: Array[Vector2i] = []
-@export var decoration_scenes: Array[PackedScene] = []
-@export_range(0.0, 1.0) var decoration_density: float = 0.05
-@export var decoration_scene_count_range: Vector2i = Vector2i(0, 2)
-
 @export_group("Layers")
 @export var ground_layer : TileMapLayer
 @export var wall_layer : TileMapLayer
@@ -36,6 +30,10 @@ const HouseGenScript = preload("res://scripts/generation/HouseGenerator.gd")
 const HouseScript = preload("res://scripts/House.gd")
 const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 const ZoneScript = preload("res://scripts/generation/Zone.gd")
+const BiomeResourceScript = preload("res://scripts/generation/BiomeResource.gd")
+
+@export var available_biomes: Array[BiomeResource] = []
+var biome_grid: Array = [] # 2D Array [x][y] -> BiomeResource
 
 var zones: Array = []  # Array of Zone objects
 var zone_graph: Dictionary = {}  # Adjacency list
@@ -69,19 +67,64 @@ func generate_world():
 		npc.queue_free()
 	npcs.clear()
 	
+	npcs.clear()
+	
+	# 1. Generate Seeds & Biomes
+	var zone_seeds = generate_zone_seeds()
+	generate_biome_map(zone_seeds)
+	
+	# 2. Fill Base Terrain (Forest) based on Biomes
 	fill_forest()
+	
+	# 3. River (Overwrites Biomes)
 	generate_river()
-	generate_zones()
+	
+	# 4. Zones & Connections
+	generate_zones(zone_seeds)
 	connect_zones()
 	populate_zones()
 	print("World Generation Complete.")
 
-func fill_forest():
-	# Fill entire map with forest (TREE)
+func generate_biome_map(seeds: Array[Vector2i]):
+	print("Generating Biome Map...")
+	biome_grid = []
+	biome_grid.resize(width)
+	for x in range(width):
+		biome_grid[x] = []
+		biome_grid[x].resize(height)
+	
+	# Assign random biome to each seed
+	var seed_biomes = {}
+	if available_biomes.is_empty():
+		# Create default biome if none provided
+		var default_biome = BiomeResourceScript.new()
+		available_biomes.append(default_biome)
+		
+	for seed in seeds:
+		seed_biomes[seed] = available_biomes.pick_random()
+		
+	# Voronoi: Assign closest seed's biome to each cell
 	for x in range(width):
 		for y in range(height):
-			ground_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, TileConfig.GRASS)
-			wall_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, TileConfig.TREE)
+			var current_pos = Vector2i(x, y)
+			var closest_seed = seeds[0]
+			var min_dist = 999999.0
+			
+			for seed in seeds:
+				var dist = current_pos.distance_to(seed)
+				if dist < min_dist:
+					min_dist = dist
+					closest_seed = seed
+			
+			biome_grid[x][y] = seed_biomes[closest_seed]
+
+func fill_forest():
+	# Fill entire map with forest (TREE) based on Biome
+	for x in range(width):
+		for y in range(height):
+			var biome = biome_grid[x][y]
+			ground_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, biome.ground_tile)
+			wall_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, biome.wall_tile)
 
 func generate_river():
 	print("Generating river...")
@@ -127,9 +170,9 @@ func generate_river():
 		var tile = TileConfig.get_river_tile(mask)
 		wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)
 
-func generate_zones():
+func generate_zones(zone_seeds: Array[Vector2i]):
 	print("Generating zones...")
-	var zone_seeds = generate_zone_seeds()
+	# Seeds already generated passed as argument
 	var all_zone_cells = {}  # Track all cells occupied by zones
 	
 	var zone_id = 0
@@ -152,12 +195,13 @@ func generate_zones():
 			
 			# Carve out the zone from forest
 			for cell in zone.cells:
+				var biome = biome_grid[cell.x][cell.y]
 				wall_layer.set_cell(cell, -1)  # Remove tree
 				# Mix of grass and dirt for natural look
 				if randf() < zone_dirt_ratio:
-					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.DIRT)
+					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome.dirt_tile)
 				else:
-					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.GRASS)
+					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome.ground_tile)
 			
 			zone_id += 1
 	
@@ -209,6 +253,10 @@ func grow_zone_organically(zone_id: int, seed: Vector2i, target_size: int, exist
 	# Priority Queue simulation: Dictionary [Vector2i] -> float (score)
 	var candidates = {}
 	var visited = {} # Track visited to avoid re-calculating
+	
+	# Random Aspect Ratio for Rectangular Shape
+	# 0.5 = Tall, 2.0 = Wide
+	var aspect_ratio = randf_range(0.5, 2.0)
 	
 	# Add seed
 	candidates[seed] = 1000.0 # High score for seed
@@ -263,15 +311,22 @@ func grow_zone_organically(zone_id: int, seed: Vector2i, target_size: int, exist
 				continue
 				
 			# Calculate Score:
-			# 1. Distance from center (closer is better)
-			var dist = neighbor.distance_to(Vector2(seed))
+			# 1. Weighted Chebyshev Distance for Rectangular Shape
+			var dx = abs(neighbor.x - seed.x)
+			var dy = abs(neighbor.y - seed.y)
+			
+			# If aspect_ratio > 1 (Wide), dy costs more, so it grows less in Y.
+			# If aspect_ratio < 1 (Tall), dy costs less (multiplied by small number), so it grows more in Y? 
+			# Wait: max(dx, dy * 0.5). If dy=10, term is 5. If dx=10, term is 10. Max is 10.
+			# So Y is "cheaper" -> grows MORE in Y. Correct.
+			var dist = max(dx, dy * aspect_ratio)
 			
 			# 2. Noise (Organic shape)
 			var noise_val = noise.get_noise_2d(neighbor.x * 0.1, neighbor.y * 0.1)
 			
 			# Score formula: Prefer closer + noise influence
 			# Negative distance so closer = higher score
-			var score = -dist + (noise_val * 10.0) 
+			var score = -dist + (noise_val * 5.0) 
 			
 			candidates[neighbor] = score
 			
@@ -423,8 +478,9 @@ func carve_path_between_zones(zone_a: Zone, zone_b: Zone):
 						wall_layer.set_cell(cell, -1) # Remove water collision
 						ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.FLOOR) # Wood floor as bridge
 					else:
+						var biome = biome_grid[cell.x][cell.y]
 						wall_layer.set_cell(cell, -1)  # Remove tree
-						ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.PATH)
+						ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome.path_tile)
 		
 		# Add natural mix around the path (1-2 tiles on each side)
 		for dx in range(-local_width / 2 - 2, local_width / 2 + 3):
@@ -446,19 +502,20 @@ func carve_path_between_zones(zone_a: Zone, zone_b: Zone):
 
 					var current_wall = wall_layer.get_cell_source_id(side_cell)
 					var current_ground = ground_layer.get_cell_atlas_coords(side_cell)
+					var biome = biome_grid[side_cell.x][side_cell.y]
 					
 					# Only modify forest (has tree) or plain grass (cleared but not yet filled)
-					if current_wall != -1 or current_ground == TileConfig.GRASS:
+					if current_wall != -1 or current_ground == biome.ground_tile:
 						var rand_val = randf()
-						if rand_val < path_edge_grass_ratio:  # Grass
+						if rand_val < path_edge_grass_ratio:  # Ground
 							wall_layer.set_cell(side_cell, -1)
-							ground_layer.set_cell(side_cell, TileConfig.SOURCE_ID, TileConfig.GRASS)
+							ground_layer.set_cell(side_cell, TileConfig.SOURCE_ID, biome.ground_tile)
 						elif rand_val < path_edge_grass_ratio + path_edge_dirt_ratio:  # Dirt
 							wall_layer.set_cell(side_cell, -1)
-							ground_layer.set_cell(side_cell, TileConfig.SOURCE_ID, TileConfig.DIRT)
+							ground_layer.set_cell(side_cell, TileConfig.SOURCE_ID, biome.dirt_tile)
 						else:  # Keep/restore tree
-							wall_layer.set_cell(side_cell, TileConfig.SOURCE_ID, TileConfig.TREE)
-							ground_layer.set_cell(side_cell, TileConfig.SOURCE_ID, TileConfig.GRASS)
+							wall_layer.set_cell(side_cell, TileConfig.SOURCE_ID, biome.wall_tile)
+							ground_layer.set_cell(side_cell, TileConfig.SOURCE_ID, biome.ground_tile)
 						
 						# Mark as processed
 						processed_edge_cells[side_cell] = true
@@ -547,9 +604,10 @@ func populate_zones():
 				# Only carve path on grass or dirt (not on buildings)
 				if zone.is_point_inside(point) and not occupied_cells.has(point):
 					var current_tile = ground_layer.get_cell_atlas_coords(point)
-					if current_tile == TileConfig.GRASS or current_tile == TileConfig.DIRT:
+					var biome = biome_grid[point.x][point.y]
+					if current_tile == biome.ground_tile or current_tile == biome.dirt_tile:
 						wall_layer.set_cell(point, -1) # Remove tree/wall
-						ground_layer.set_cell(point, TileConfig.SOURCE_ID, TileConfig.PATH)
+						ground_layer.set_cell(point, TileConfig.SOURCE_ID, biome.path_tile)
 						# Add this new path cell to the list for future connections
 						path_cells_in_zone.append(point)
 		
@@ -565,12 +623,15 @@ func populate_zones():
 	print("Populated %d zones" % zones.size())
 
 func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array[Vector2i]):
+	# Use biome decorations from the zone center (assuming zone is mostly one biome)
+	var biome = biome_grid[zone.center.x][zone.center.y]
+	
 	# 1. Place Decoration Scenes (Camps, etc.)
-	var scene_count = randi_range(decoration_scene_count_range.x, decoration_scene_count_range.y)
+	var scene_count = randi_range(biome.decoration_scene_count_range.x, biome.decoration_scene_count_range.y)
 	var placed_scenes: Array[Rect2i] = []
 	
 	for i in range(scene_count):
-		if decoration_scenes.is_empty(): break
+		if biome.decoration_scenes.is_empty(): break
 		
 		var attempts = 0
 		while attempts < 20:
@@ -590,7 +651,7 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 			if on_path: continue
 			
 			# Try to place scene
-			var scene = decoration_scenes.pick_random()
+			var scene = biome.decoration_scenes.pick_random()
 			var temp = scene.instantiate()
 			var tile_layer = temp.get_node_or_null("TileMapLayer")
 			var deco_size = Vector2i(3, 3)
@@ -632,7 +693,7 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 				break
 
 	# 2. Place Decoration Tiles (Flowers, Rocks, etc.)
-	if decoration_tiles.size() > 0:
+	if biome.decoration_tiles.size() > 0:
 		for cell in zone.cells:
 			# Skip if occupied, path, or water
 			if occupied_cells.has(cell): continue
@@ -645,7 +706,7 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 			
 			# Check if ground is valid (Grass/Dirt)
 			var ground_tile = ground_layer.get_cell_atlas_coords(cell)
-			if ground_tile != TileConfig.GRASS and ground_tile != TileConfig.DIRT:
+			if ground_tile != biome.ground_tile and ground_tile != biome.dirt_tile:
 				continue
 				
 			# Check if wall is empty (no tree)
@@ -653,8 +714,8 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 				continue
 				
 			# Chance to place
-			if randf() < decoration_density:
-				var tile = decoration_tiles.pick_random()
+			if randf() < biome.decoration_density:
+				var tile = biome.decoration_tiles.pick_random()
 				wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)
 
 func try_place_building_at(zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary) -> Dictionary:

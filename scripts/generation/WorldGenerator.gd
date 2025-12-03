@@ -22,6 +22,12 @@ class_name WorldGenerator extends Node2D
 @export var npc_scene : PackedScene
 @export var house_scenes : Array[PackedScene]
 
+@export_group("Decorations")
+@export var decoration_tiles: Array[Vector2i] = []
+@export var decoration_scenes: Array[PackedScene] = []
+@export_range(0.0, 1.0) var decoration_density: float = 0.05
+@export var decoration_scene_count_range: Vector2i = Vector2i(0, 2)
+
 @export_group("Layers")
 @export var ground_layer : TileMapLayer
 @export var wall_layer : TileMapLayer
@@ -64,6 +70,7 @@ func generate_world():
 	npcs.clear()
 	
 	fill_forest()
+	generate_river()
 	generate_zones()
 	connect_zones()
 	populate_zones()
@@ -75,6 +82,50 @@ func fill_forest():
 		for y in range(height):
 			ground_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, TileConfig.GRASS)
 			wall_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, TileConfig.TREE)
+
+func generate_river():
+	print("Generating river...")
+	var start_y = randi_range(height / 4, height * 3 / 4)
+	var end_y = randi_range(height / 4, height * 3 / 4)
+	
+	var curve_frequency = randf_range(0.05, 0.1)
+	var curve_amplitude = randf_range(10.0, 20.0)
+	
+	var river_cells = {} # Track river cells for autotiling
+	
+	for x in range(width):
+		# Sinusoidal base + noise
+		var t = float(x) / width
+		var base_y = lerp(float(start_y), float(end_y), t)
+		var sine_offset = sin(x * curve_frequency) * curve_amplitude
+		var noise_offset = noise.get_noise_1d(x * 0.5) * 10.0
+		
+		var center_y = int(base_y + sine_offset + noise_offset)
+		var river_width = randi_range(3, 5)
+		
+		for y in range(center_y - river_width / 2, center_y + river_width / 2 + 1):
+			if y >= 0 and y < height:
+				var pos = Vector2i(x, y)
+				wall_layer.set_cell(pos, TileConfig.SOURCE_ID, TileConfig.WATER_BASE)
+				ground_layer.set_cell(pos, TileConfig.SOURCE_ID, TileConfig.DIRT) # Dirt under water
+				river_cells[pos] = true
+
+	# Autotiling
+	for cell in river_cells.keys():
+		var mask = 0
+		# Check neighbors: If NOT in river_cells, it's LAND (Border)
+		var top = cell + Vector2i(0, -1)
+		var right = cell + Vector2i(1, 0)
+		var bottom = cell + Vector2i(0, 1)
+		var left = cell + Vector2i(-1, 0)
+		
+		if not river_cells.has(top): mask += 1
+		if not river_cells.has(right): mask += 2
+		if not river_cells.has(bottom): mask += 4
+		if not river_cells.has(left): mask += 8
+		
+		var tile = TileConfig.get_river_tile(mask)
+		wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)
 
 func generate_zones():
 	print("Generating zones...")
@@ -150,111 +201,80 @@ func generate_zone_seeds() -> Array[Vector2i]:
 
 func grow_zone_organically(zone_id: int, seed: Vector2i, target_size: int, existing_zones: Dictionary) -> Zone:
 	var zone = Zone.new(zone_id, seed)
-	var open_set: Array[Vector2i] = [seed]
-	var visited = {}
 	
 	# Check if seed is already in another zone
 	if existing_zones.has(seed):
 		return zone  # Return empty zone
 	
-	# Calculate effective radius from target size (area = pi*r^2)
-	var effective_radius = sqrt(target_size / PI) * 1.5  # Multiply by 1.5 for better growth
+	# Priority Queue simulation: Dictionary [Vector2i] -> float (score)
+	var candidates = {}
+	var visited = {} # Track visited to avoid re-calculating
 	
-	while zone.get_size() < target_size and open_set.size() > 0:
-		var current = open_set.pop_front()
-		if visited.has(current):
-			continue
-		
-		# Bounds check
-		if current.x < 1 or current.x >= width - 1 or current.y < 1 or current.y >= height - 1:
-			continue
-		
-		# Check if this cell is already in another zone or buffer
-		if existing_zones.has(current):
-			continue
-		
-		# Multi-octave organic noise for natural shapes
-		var dist = current.distance_to(Vector2(seed))
-		var noise_val1 = noise.get_noise_2d(current.x * 0.15, current.y * 0.15)  # Large features
-		var noise_val2 = noise.get_noise_2d(current.x * 0.4, current.y * 0.4) * 0.5  # Medium details
-		var noise_val3 = noise.get_noise_2d(current.x * 0.8, current.y * 0.8) * 0.25  # Fine details
-		var combined_noise = noise_val1 + noise_val2 + noise_val3
-		
-		# Improved probability formula for better size scaling
-		var dist_factor = 1.0 - (dist / effective_radius)
-		var prob = clamp(dist_factor + combined_noise * 0.6, 0.0, 1.0)
-		
-		if randf() < prob:
-			zone.add_cell(current)
-			visited[current] = true
-			
-			# Add neighbors (sometimes diagonal for more organic growth)
-			var neighbors = [
-				current + Vector2i(0, -1),
-				current + Vector2i(1, 0),
-				current + Vector2i(0, 1),
-				current + Vector2i(-1, 0)
-			]
-			# Occasionally add diagonal neighbors for rounder shapes
-			if randf() < 0.3:
-				neighbors.append_array([
-					current + Vector2i(1, -1),
-					current + Vector2i(1, 1),
-					current + Vector2i(-1, 1),
-					current + Vector2i(-1, -1)
-				])
-			
-			for neighbor in neighbors:
-				if not visited.has(neighbor) and not existing_zones.has(neighbor):
-					open_set.append(neighbor)
+	# Add seed
+	candidates[seed] = 1000.0 # High score for seed
 	
-	return zone
-
-	
-	while zone.get_size() < target_size and open_set.size() > 0:
-		var current = open_set.pop_front()
-		if visited.has(current):
-			continue
+	while zone.get_size() < target_size and candidates.size() > 0:
+		# Pick candidate with highest score
+		var best_cell = Vector2i.ZERO
+		var best_score = -999999.0
 		
-		# Bounds check
-		if current.x < 1 or current.x >= width - 1 or current.y < 1 or current.y >= height - 1:
-			continue
+		for cell in candidates:
+			if candidates[cell] > best_score:
+				best_score = candidates[cell]
+				best_cell = cell
 		
-		# Multi-octave organic noise for natural shapes
-		var dist = current.distance_to(Vector2(seed))
-		var noise_val1 = noise.get_noise_2d(current.x * 0.15, current.y * 0.15)  # Large features
-		var noise_val2 = noise.get_noise_2d(current.x * 0.4, current.y * 0.4) * 0.5  # Medium details
-		var noise_val3 = noise.get_noise_2d(current.x * 0.8, current.y * 0.8) * 0.25  # Fine details
-		var combined_noise = noise_val1 + noise_val2 + noise_val3
+		# Remove from candidates
+		candidates.erase(best_cell)
 		
-		# Improved probability formula for better size scaling
-		var dist_factor = 1.0 - (dist / effective_radius)
-		var prob = clamp(dist_factor + combined_noise * 0.6, 0.0, 1.0)
+		# Add to zone
+		zone.add_cell(best_cell)
+		visited[best_cell] = true
 		
-		if randf() < prob:
-			zone.add_cell(current)
-			visited[current] = true
+		# Add neighbors to candidates
+		var neighbors = [
+			best_cell + Vector2i(0, -1),
+			best_cell + Vector2i(1, 0),
+			best_cell + Vector2i(0, 1),
+			best_cell + Vector2i(-1, 0)
+		]
+		# Occasional diagonals
+		if randf() < 0.4:
+			neighbors.append_array([
+				best_cell + Vector2i(1, -1),
+				best_cell + Vector2i(1, 1),
+				best_cell + Vector2i(-1, 1),
+				best_cell + Vector2i(-1, -1)
+			])
 			
-			# Add neighbors (sometimes diagonal for more organic growth)
-			var neighbors = [
-				current + Vector2i(0, -1),
-				current + Vector2i(1, 0),
-				current + Vector2i(0, 1),
-				current + Vector2i(-1, 0)
-			]
-			# Occasionally add diagonal neighbors for rounder shapes
-			if randf() < 0.3:
-				neighbors.append_array([
-					current + Vector2i(1, -1),
-					current + Vector2i(1, 1),
-					current + Vector2i(-1, 1),
-					current + Vector2i(-1, -1)
-				])
+		for neighbor in neighbors:
+			if visited.has(neighbor) or candidates.has(neighbor):
+				continue
+				
+			# Bounds check
+			if neighbor.x < 1 or neighbor.x >= width - 1 or neighbor.y < 1 or neighbor.y >= height - 1:
+				continue
+				
+			# Check if occupied
+			if existing_zones.has(neighbor):
+				continue
+				
+			# Check water
+			if TileConfig.is_water(wall_layer.get_cell_atlas_coords(neighbor)):
+				continue
+				
+			# Calculate Score:
+			# 1. Distance from center (closer is better)
+			var dist = neighbor.distance_to(Vector2(seed))
 			
-			for neighbor in neighbors:
-				if not visited.has(neighbor):
-					open_set.append(neighbor)
-	
+			# 2. Noise (Organic shape)
+			var noise_val = noise.get_noise_2d(neighbor.x * 0.1, neighbor.y * 0.1)
+			
+			# Score formula: Prefer closer + noise influence
+			# Negative distance so closer = higher score
+			var score = -dist + (noise_val * 10.0) 
+			
+			candidates[neighbor] = score
+			
 	return zone
 
 func connect_zones():
@@ -359,6 +379,13 @@ func carve_path_between_zones(zone_a: Zone, zone_b: Zone):
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.update()
 	
+	# Set high cost for water to prefer land, but allow bridges
+	for x in range(width):
+		for y in range(height):
+			var cell = Vector2i(x, y)
+			if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+				astar.set_point_weight_scale(cell, 10.0) # High cost for water
+	
 	var full_path: Array[Vector2i] = []
 	for i in range(waypoints.size() - 1):
 		var segment = astar.get_id_path(waypoints[i], waypoints[i + 1])
@@ -391,8 +418,13 @@ func carve_path_between_zones(zone_a: Zone, zone_b: Zone):
 			for dy in range(-local_width / 2, local_width / 2 + 1):
 				var cell = point + Vector2i(dx, dy)
 				if cell.x >= 0 and cell.x < width and cell.y >= 0 and cell.y < height:
-					wall_layer.set_cell(cell, -1)  # Remove tree
-					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.PATH)
+					# Check for water -> Bridge
+					if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+						wall_layer.set_cell(cell, -1) # Remove water collision
+						ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.FLOOR) # Wood floor as bridge
+					else:
+						wall_layer.set_cell(cell, -1)  # Remove tree
+						ground_layer.set_cell(cell, TileConfig.SOURCE_ID, TileConfig.PATH)
 		
 		# Add natural mix around the path (1-2 tiles on each side)
 		for dx in range(-local_width / 2 - 2, local_width / 2 + 3):
@@ -408,6 +440,10 @@ func carve_path_between_zones(zone_a: Zone, zone_b: Zone):
 					continue
 					
 				if side_cell.x >= 0 and side_cell.x < width and side_cell.y >= 0 and side_cell.y < height:
+					# Check if on WATER (River) - Preserve it!
+					if TileConfig.is_water(wall_layer.get_cell_atlas_coords(side_cell)):
+						continue
+
 					var current_wall = wall_layer.get_cell_source_id(side_cell)
 					var current_ground = ground_layer.get_cell_atlas_coords(side_cell)
 					
@@ -512,6 +548,7 @@ func populate_zones():
 				if zone.is_point_inside(point) and not occupied_cells.has(point):
 					var current_tile = ground_layer.get_cell_atlas_coords(point)
 					if current_tile == TileConfig.GRASS or current_tile == TileConfig.DIRT:
+						wall_layer.set_cell(point, -1) # Remove tree/wall
 						ground_layer.set_cell(point, TileConfig.SOURCE_ID, TileConfig.PATH)
 						# Add this new path cell to the list for future connections
 						path_cells_in_zone.append(point)
@@ -521,8 +558,104 @@ func populate_zones():
 			# Spawn NPC 1 tile in front of door (outside the building)
 			var npc_pos = Vector2(door.x, door.y + 1)  # Assuming door faces down
 			spawn_npc(npc_pos)
+			
+		# Place Decorations
+		place_decorations(zone, occupied_cells, path_cells_in_zone)
 	
 	print("Populated %d zones" % zones.size())
+
+func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array[Vector2i]):
+	# 1. Place Decoration Scenes (Camps, etc.)
+	var scene_count = randi_range(decoration_scene_count_range.x, decoration_scene_count_range.y)
+	var placed_scenes: Array[Rect2i] = []
+	
+	for i in range(scene_count):
+		if decoration_scenes.is_empty(): break
+		
+		var attempts = 0
+		while attempts < 20:
+			attempts += 1
+			var cell = zone.cells.pick_random()
+			
+			# Basic checks
+			if occupied_cells.has(cell) or TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+				continue
+			
+			# Check if on path
+			var on_path = false
+			for p in path_cells:
+				if p == cell:
+					on_path = true
+					break
+			if on_path: continue
+			
+			# Try to place scene
+			var scene = decoration_scenes.pick_random()
+			var temp = scene.instantiate()
+			var tile_layer = temp.get_node_or_null("TileMapLayer")
+			var deco_size = Vector2i(3, 3)
+			var offset = Vector2i.ZERO
+			var actual_cells = []
+			
+			if tile_layer:
+				var rect = tile_layer.get_used_rect()
+				if rect.has_area():
+					deco_size = rect.size
+					offset = rect.position
+					for used in tile_layer.get_used_cells():
+						actual_cells.append(cell + (used - offset))
+			temp.free()
+			
+			# Validate placement
+			var valid = true
+			var deco_rect = Rect2i(cell, deco_size)
+			
+			for check_cell in actual_cells:
+				if not zone.is_point_inside(check_cell): valid = false; break
+				if occupied_cells.has(check_cell): valid = false; break
+				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(check_cell)): valid = false; break
+				# Check path
+				for p in path_cells:
+					if p == check_cell: valid = false; break
+				if not valid: break
+			
+			if valid:
+				# Place it
+				var instance = scene.instantiate()
+				instance.position = Vector2(cell - offset) * TileConfig.TILE_SIZE
+				add_child(instance)
+				zone.buildings.append(instance) # Add to buildings list to avoid overlap if we wanted, but here we just place
+				
+				# Mark cells as occupied
+				for check_cell in actual_cells:
+					occupied_cells[check_cell] = true
+				break
+
+	# 2. Place Decoration Tiles (Flowers, Rocks, etc.)
+	if decoration_tiles.size() > 0:
+		for cell in zone.cells:
+			# Skip if occupied, path, or water
+			if occupied_cells.has(cell): continue
+			if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)): continue
+			
+			var is_path = false
+			for p in path_cells:
+				if p == cell: is_path = true; break
+			if is_path: continue
+			
+			# Check if ground is valid (Grass/Dirt)
+			var ground_tile = ground_layer.get_cell_atlas_coords(cell)
+			if ground_tile != TileConfig.GRASS and ground_tile != TileConfig.DIRT:
+				continue
+				
+			# Check if wall is empty (no tree)
+			if wall_layer.get_cell_source_id(cell) != -1:
+				continue
+				
+			# Chance to place
+			if randf() < decoration_density:
+				var tile = decoration_tiles.pick_random()
+				wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)
 
 func try_place_building_at(zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary) -> Dictionary:
 	var result = {"success": false, "rect": Rect2i(), "door": Vector2i()}
@@ -568,6 +701,10 @@ func try_place_building_at(zone: Zone, pos: Vector2i, placed_buildings: Array[Re
 			var ground_tile = ground_layer.get_cell_atlas_coords(cell)
 			if ground_tile == TileConfig.PATH:
 				return result
+			
+			# Check if on WATER (River)
+			if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+				return result
 		
 		# Check collision with other buildings (with larger spacing)
 		for other in placed_buildings:
@@ -602,6 +739,10 @@ func try_place_building_at(zone: Zone, pos: Vector2i, placed_buildings: Array[Re
 				# Check if on main path
 				var ground_tile = ground_layer.get_cell_atlas_coords(Vector2i(x, y))
 				if ground_tile == TileConfig.PATH:
+					return result
+				
+				# Check if on WATER (River)
+				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(Vector2i(x, y))):
 					return result
 		
 		# Check collision with other buildings (with larger spacing)

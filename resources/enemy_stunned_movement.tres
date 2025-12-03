@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dwhtkltr0pm6f" path="res://scripts/Resource/movement_parameters.gd" id="1_vgk2w"]
 
-
 [resource]
 script = ExtResource("1_vgk2w")
 speed_max = 50.0

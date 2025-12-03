@@ -4,6 +4,7 @@ signal life_changed(current_life : int)
 
 enum ORIENTATION {FREE, DPAD_8, DPAD_4}
 enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
+enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 
 @export_group("Life")
 @export var life : int = 3 :
@@ -24,6 +25,12 @@ enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
 @export var attack_spawn_point : Node2D
 @export var attack_cooldown : float = 0.3
 @export var orientation : ORIENTATION = ORIENTATION.FREE
+
+@export_group ("Behaviour")
+@export var _friendly : int = 0
+@export var _intimidating : int = 0
+@export var _persuasive : int = 0
+@export var _behaviour_max_point : int = 20
 
 # Life
 var _last_hit_time : float
@@ -103,6 +110,11 @@ func apply_knockback(duration : float, velocity : Vector2) -> void:
 
 func _set_state(state : STATE) -> void:
 	_state = state
+
+func _add_point_behaviour(friendly = 0, persuasive = 0, intimidating = 0) -> void :
+	_friendly = clamp(_friendly + friendly, 0,_behaviour_max_point)
+	_persuasive = clamp(_persuasive + persuasive, 0,_behaviour_max_point)
+	_intimidating = clamp(_intimidating + intimidating, 0,_behaviour_max_point)
 
 
 func blink() -> void:

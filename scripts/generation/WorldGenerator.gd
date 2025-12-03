@@ -6,6 +6,7 @@ class_name WorldGenerator extends Node2D
 @export_group("Zone Configuration")
 @export var zone_count_range: Vector2i = Vector2i(5, 12)
 @export var zone_size_range: Vector2i = Vector2i(15, 40)
+@export var min_zone_distance: int = 50
 
 @export_group("Zone Details")
 @export var entrance_count_range: Vector2i = Vector2i(1, 4)
@@ -195,6 +196,10 @@ func generate_zones(zone_seeds: Array[Vector2i]):
 			
 			# Carve out the zone from forest
 			for cell in zone.cells:
+				# Skip water (River) - Preserve it!
+				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+					continue
+					
 				var biome = biome_grid[cell.x][cell.y]
 				wall_layer.set_cell(cell, -1)  # Remove tree
 				# Mix of grass and dirt for natural look
@@ -220,7 +225,6 @@ func generate_zone_seeds() -> Array[Vector2i]:
 	# Poisson Disk Sampling for natural spacing
 	var seeds: Array[Vector2i] = []
 	var zone_count = randi_range(zone_count_range.x, zone_count_range.y)
-	var min_distance = 25  # Minimum distance between zone centers
 	
 	var attempts = 0
 	var max_attempts = zone_count * 100
@@ -234,7 +238,7 @@ func generate_zone_seeds() -> Array[Vector2i]:
 		
 		var valid = true
 		for existing in seeds:
-			if candidate.distance_to(existing) < min_distance:
+			if candidate.distance_to(existing) < min_zone_distance:
 				valid = false
 				break
 		
@@ -306,9 +310,9 @@ func grow_zone_organically(zone_id: int, seed: Vector2i, target_size: int, exist
 			if existing_zones.has(neighbor):
 				continue
 				
-			# Check water
-			if TileConfig.is_water(wall_layer.get_cell_atlas_coords(neighbor)):
-				continue
+			# Check water - ALLOWED now, but we won't clear it later
+			# if TileConfig.is_water(wall_layer.get_cell_atlas_coords(neighbor)):
+			# 	continue
 				
 			# Calculate Score:
 			# 1. Weighted Chebyshev Distance for Rectangular Shape
@@ -597,15 +601,33 @@ func populate_zones():
 				if occupied_cell != door and astar.is_in_bounds(occupied_cell.x, occupied_cell.y):
 					astar.set_point_solid(occupied_cell)
 			
+			# Set high cost for water in the entire A* region to allow bridges
+			for x in range(astar.region.position.x, astar.region.end.x):
+				for y in range(astar.region.position.y, astar.region.end.y):
+					var cell = Vector2i(x, y)
+					if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+						astar.set_point_weight_scale(cell, 5.0) # Cost for bridge
+			
 			var path = astar.get_id_path(nearest_path_cell, door)
 			# Carve path up to (but not including) the door
 			for i in range(path.size() - 1):  # -1 to not overwrite door
 				var point = path[i]
-				# Only carve path on grass or dirt (not on buildings)
-				if zone.is_point_inside(point) and not occupied_cells.has(point):
+				
+				# Skip if occupied (shouldn't happen due to A* solids, but safety check)
+				if occupied_cells.has(point):
+					continue
+					
+				# Check for water -> Bridge
+				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(point)):
+					wall_layer.set_cell(point, -1) # Remove water collision
+					ground_layer.set_cell(point, TileConfig.SOURCE_ID, TileConfig.FLOOR) # Wood floor as bridge
+					path_cells_in_zone.append(point)
+				else:
+					# Normal ground path
 					var current_tile = ground_layer.get_cell_atlas_coords(point)
 					var biome = biome_grid[point.x][point.y]
-					if current_tile == biome.ground_tile or current_tile == biome.dirt_tile:
+					# Only overwrite natural ground or existing path
+					if current_tile == biome.ground_tile or current_tile == biome.dirt_tile or current_tile == TileConfig.PATH:
 						wall_layer.set_cell(point, -1) # Remove tree/wall
 						ground_layer.set_cell(point, TileConfig.SOURCE_ID, biome.path_tile)
 						# Add this new path cell to the list for future connections

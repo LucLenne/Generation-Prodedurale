@@ -1,6 +1,15 @@
 class_name BiomeResource extends Resource
 
+enum ZoneShape {
+	RECTANGULAR,   # Forme rectangulaire nette
+	CIRCULAR,      # Forme circulaire/elliptique
+	ORGANIC        # Forme organique avec bruit
+}
+
 @export var biome_name: String = "Forest"
+
+@export_group("Zone Generation")
+@export var zone_shape: ZoneShape = ZoneShape.ORGANIC
 
 @export_group("Tiles")
 @export var ground_tile: Vector2i = Vector2i(5, 4) # Default Grass

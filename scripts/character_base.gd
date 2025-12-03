@@ -11,10 +11,13 @@ enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 	set(value) :
 		life = value
 		life_changed.emit(life)
+		if(life <= 0):
+			is_dead = true
 @export var invincibility_duration : float = 1.0
 @export var invincibility_blink_period : float = 0.2
 @export var dead_color : Color = Color.GRAY
 @export var sprites : Array[Sprite2D] = []
+@export var is_dead : bool = false
 
 @export_group("Movement")
 @export var default_movement : MovementParameters
@@ -34,6 +37,9 @@ enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 
 # Life
 var _last_hit_time : float
+
+#Inventory
+var _inventory = Array[CollectibleBase]
 
 # Movement
 var _direction : Vector2
@@ -116,6 +122,8 @@ func _add_point_behaviour(friendly = 0, persuasive = 0, intimidating = 0) -> voi
 	_persuasive = clamp(_persuasive + persuasive, 0,_behaviour_max_point)
 	_intimidating = clamp(_intimidating + intimidating, 0,_behaviour_max_point)
 
+func item_in_inventory(item : CollectibleBase) -> bool:
+	return _inventory.has(item)
 
 func blink() -> void:
 	_is_blinking = true

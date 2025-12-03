@@ -8,7 +8,6 @@ static var Instance : Player
 # Collectible
 var key_count : int
 
-
 func _init() -> void:
 	Instance = self
 

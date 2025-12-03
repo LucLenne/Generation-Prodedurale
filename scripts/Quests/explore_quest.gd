@@ -1,10 +1,11 @@
 class_name ExploreQuest extends QuestBase
 
-var _biome : String
+var _biomes : Array[String]
 
-func _init(biome : String) -> void :
+func _init(biomes : String) -> void :
 	_type = TYPE.EXPLORE
-	_biome = biome
+	_biomes = biomes
 
 func _process(delta: float) -> void:
-	
+	for biome in _biomes:
+		if()

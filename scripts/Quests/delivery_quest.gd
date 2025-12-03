@@ -1,15 +1,18 @@
 class_name DeliveryQuest extends QuestBase
 
 var _pnj : PNJ
-var _item : CollectibleBase
+var _items : Array[CollectibleBase]
 
-func _init(pnj : PNJ, item : CollectibleBase) -> void :
+func _init(pnj : PNJ, items : Array[CollectibleBase]) -> void :
 	_type = TYPE.DELIVERY
 	_pnj = pnj
-	_item = item
+	_items = items
 
 func _process(delta: float) -> void:
 	if(_pnj.is_dead):
 		_fail_quest()
-	if(_pnj.item_in_inventory(_item)):
+	for item in _items:
+		if(Player.Instance.item_in_inventory(item)):
+			_items.erase(item)
+	if(_items.is_empty()):
 		_valid_quest()

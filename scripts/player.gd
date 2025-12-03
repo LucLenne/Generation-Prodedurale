@@ -27,6 +27,8 @@ func enter_room(room : Room) -> void:
 	_room = room
 	_room.on_enter_room(previous)
 
+func add_life( Life : int):
+	life += Life
 
 func _update_room() -> void:
 	var room_bounds : Rect2 = _room.get_world_bounds()

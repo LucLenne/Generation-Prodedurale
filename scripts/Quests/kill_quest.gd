@@ -1,11 +1,14 @@
 class_name KillQuest extends QuestBase
 
-var _target : PNJ
+var _targets : Array[PNJ]
 
-func _init(target : PNJ) -> void :
+func _init(targets : Array[PNJ]) -> void :
 	_type = TYPE.KILL
-	_target = target
+	_targets = targets
 
 func _process(delta: float) -> void:
-	if(_target.is_dead):
+	for target in _targets:
+		if(target.is_dead):
+			_targets.erase(target)
+	if(_targets.is_empty()):
 		_valid_quest()

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cgppahdnfi2p2" path="res://scripts/generation/CameraMovement.gd" id="3_cam"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
 [ext_resource type="PackedScene" uid="uid://yw7co2mhrgcq" path="res://scenes/houses/FireCamp.tscn" id="4_ywfdd"]
-[ext_resource type="PackedScene" uid="uid://cahp7guiogyeq" path="res://scenes/houses/SimpleHouse.tscn" id="5_house"]
+[ext_resource type="PackedScene" uid="uid://cahp7guiogyeq" path="res://scenes/houses/MediumHouse.tscn" id="5_house"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
 script = ExtResource("1_gen")

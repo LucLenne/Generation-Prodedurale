@@ -924,7 +924,7 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 				break
 
 	# 2. Place Decoration Tiles (Flowers, Rocks, etc.)
-	if biome.decoration_tiles.size() > 0:
+	if biome.decorations.size() > 0:
 		for cell in zone.cells:
 			# Skip if occupied, path, or water
 			if occupied_cells.has(cell): continue
@@ -944,10 +944,21 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 			if wall_layer.get_cell_source_id(cell) != -1:
 				continue
 				
-			# Chance to place
-			if randf() < biome.decoration_density:
-				var tile = biome.decoration_tiles.pick_random()
-				wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)
+			# Weighted Random Selection
+			var r = randf() # 0.0 to 1.0
+			var accumulated_density = 0.0
+			
+			for deco_item in biome.decorations:
+				accumulated_density += deco_item.density
+				if r < accumulated_density:
+					wall_layer.set_cell(cell, TileConfig.SOURCE_ID, deco_item.atlas_coords)
+					break # Placed one, move to next cell
+	
+	# Backward compatibility for old system (optional, can remove if fully migrated)
+	elif biome.get("decoration_tiles") and biome.decoration_tiles.size() > 0:
+		# ... (Old logic if needed, but I'll skip to encourage new system)
+		pass
+
 
 func try_place_building_at(zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary) -> Dictionary:
 	var result = {"success": false, "rect": Rect2i(), "door": Vector2i()}

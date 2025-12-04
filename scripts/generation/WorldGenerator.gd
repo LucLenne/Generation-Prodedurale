@@ -21,6 +21,7 @@ class_name WorldGenerator extends Node2D
 
 @export_group("Resources")
 @export var npc_scene : PackedScene
+@export var player_scene : PackedScene
 @export var house_scenes : Array[PackedScene]
 
 @export_group("Layers")
@@ -40,12 +41,15 @@ var biome_grid: Array = [] # 2D Array [x][y] -> BiomeResource
 var zones: Array = []  # Array of Zone objects
 var zone_graph: Dictionary = {}  # Adjacency list
 var npcs : Array[NPC] = []
+var player_instance : Node2D = null
 var noise : FastNoiseLite
 
 func _ready():
 	print("WorldGenerator _ready called.")
 	if npc_scene == null:
 		npc_scene = preload("res://scenes/generation/NPC.tscn")
+	if player_scene == null:
+		player_scene = preload("res://scenes/Player.tscn")
 	
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
@@ -71,6 +75,10 @@ func generate_world():
 	
 	npcs.clear()
 	
+	if player_instance != null:
+		player_instance.queue_free()
+		player_instance = null
+	
 	# 1. Generate Seeds & Biomes
 	var zone_seeds = generate_zone_seeds()
 	generate_biome_map(zone_seeds)
@@ -85,7 +93,65 @@ func generate_world():
 	generate_zones(zone_seeds)
 	connect_zones()
 	populate_zones()
+	spawn_player()
 	print("World Generation Complete.")
+
+func spawn_player():
+	if player_scene == null:
+		printerr("Player scene not assigned!")
+		return
+		
+	if zones.is_empty():
+		printerr("No zones generated, cannot spawn player.")
+		return
+		
+	print("Spawning player...")
+	player_instance = player_scene.instantiate()
+	
+	# Try to find a valid spawn position (not wall, not water) near center
+	var center = zones[0].center
+	var spawn_pos = center
+	var found = false
+	
+	# Spiral search for free spot
+	for radius in range(0, 10):
+		for x in range(center.x - radius, center.x + radius + 1):
+			for y in range(center.y - radius, center.y + radius + 1):
+				var cell = Vector2i(x, y)
+				# Check bounds
+				if cell.x < 0 or cell.x >= width or cell.y < 0 or cell.y >= height:
+					continue
+					
+				# Check collision (Wall layer should be empty)
+				if wall_layer.get_cell_source_id(cell) != -1:
+					continue
+					
+				# Check water (just in case)
+				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
+					continue
+					
+				spawn_pos = cell
+				found = true
+				break
+			if found: break
+		if found: break
+	
+	if not found:
+		printerr("Could not find valid spawn position, spawning at center anyway.")
+	
+	player_instance.position = Vector2(spawn_pos) * TileConfig.TILE_SIZE
+	
+	add_child(player_instance)
+	
+	# Configure Camera Bounds
+	var camera = player_instance.get_node_or_null("Camera2D")
+	if camera:
+		camera.limit_left = 0
+		camera.limit_top = 0
+		camera.limit_right = width * TileConfig.TILE_SIZE
+		camera.limit_bottom = height * TileConfig.TILE_SIZE
+		
+	print("Player spawned at: ", spawn_pos)
 
 func generate_biome_map(seeds: Array[Vector2i]):
 	print("Generating Biome Map...")
@@ -181,7 +247,11 @@ func generate_zones(zone_seeds: Array[Vector2i]):
 	var zone_id = 0
 	for seed in zone_seeds:
 		var target_size = randi_range(zone_size_range.x, zone_size_range.y)
-		var zone = grow_zone_organically(zone_id, seed, target_size, all_zone_cells)
+		
+		# Get biome for this zone seed
+		var biome = biome_grid[seed.x][seed.y]
+		
+		var zone = grow_zone(zone_id, seed, target_size, all_zone_cells, biome)
 		
 		if zone.get_size() > 10:  # Only keep zones with reasonable size
 			zones.append(zone)
@@ -202,13 +272,13 @@ func generate_zones(zone_seeds: Array[Vector2i]):
 				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
 					continue
 					
-				var biome = biome_grid[cell.x][cell.y]
+				var biome_at_cell = biome_grid[cell.x][cell.y]
 				wall_layer.set_cell(cell, -1)  # Remove tree
 				# Mix of grass and dirt for natural look
 				if randf() < zone_dirt_ratio:
-					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome.dirt_tile)
+					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
 				else:
-					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome.ground_tile)
+					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
 			
 			zone_id += 1
 	
@@ -249,7 +319,95 @@ func generate_zone_seeds() -> Array[Vector2i]:
 	
 	return seeds
 
-func grow_zone_organically(zone_id: int, seed: Vector2i, target_size: int, existing_zones: Dictionary) -> Zone:
+func grow_zone(zone_id: int, seed: Vector2i, target_size: int, existing_zones: Dictionary, biome: BiomeResource) -> Zone:
+	# Dispatcher: Choose generation method based on biome zone shape
+	match biome.zone_shape:
+		BiomeResource.ZoneShape.RECTANGULAR:
+			return grow_zone_rectangular(zone_id, seed, target_size, existing_zones)
+		BiomeResource.ZoneShape.CIRCULAR:
+			return grow_zone_circular(zone_id, seed, target_size, existing_zones)
+		BiomeResource.ZoneShape.ORGANIC:
+			return grow_zone_organic(zone_id, seed, target_size, existing_zones)
+		_:
+			# Fallback to organic
+			return grow_zone_organic(zone_id, seed, target_size, existing_zones)
+
+func grow_zone_rectangular(zone_id: int, seed: Vector2i, target_size: int, existing_zones: Dictionary) -> Zone:
+	var zone = Zone.new(zone_id, seed)
+	
+	# Check if seed is already in another zone
+	if existing_zones.has(seed):
+		return zone  # Return empty zone
+	
+	# Random Aspect Ratio for Rectangular Shape
+	var aspect_ratio = randf_range(0.5, 2.0)  # 0.5 = tall, 2.0 = wide
+	
+	# Calculate dimensions based on target_size and aspect_ratio
+	# area = width * height, width = height * aspect_ratio
+	# So: target_size = height * aspect_ratio * height = height^2 * aspect_ratio
+	var height = int(sqrt(target_size / aspect_ratio))
+	var width = int(height * aspect_ratio)
+	
+	# Fill rectangle from center
+	var half_width = width / 2
+	var half_height = height / 2
+	
+	for x in range(seed.x - half_width, seed.x + half_width + 1):
+		for y in range(seed.y - half_height, seed.y + half_height + 1):
+			var cell = Vector2i(x, y)
+			
+			# Bounds check
+			if cell.x < 1 or cell.x >= width - 1 or cell.y < 1 or cell.y >= height - 1:
+				continue
+			
+			# Check if occupied
+			if existing_zones.has(cell):
+				continue
+			
+			zone.add_cell(cell)
+	
+	return zone
+
+func grow_zone_circular(zone_id: int, seed: Vector2i, target_size: int, existing_zones: Dictionary) -> Zone:
+	var zone = Zone.new(zone_id, seed)
+	
+	# Check if seed is already in another zone
+	if existing_zones.has(seed):
+		return zone  # Return empty zone
+	
+	# Calculate radius from target_size
+	# area = π * r^2, so r = sqrt(area / π)
+	var radius = sqrt(target_size / PI)
+	
+	# Optional: Make it elliptical
+	var ellipse_ratio = randf_range(0.7, 1.3)  # Slight variation from perfect circle
+	var radius_x = radius * ellipse_ratio
+	var radius_y = radius / ellipse_ratio
+	
+	# Fill circular/elliptical shape
+	for x in range(int(seed.x - radius_x - 1), int(seed.x + radius_x + 2)):
+		for y in range(int(seed.y - radius_y - 1), int(seed.y + radius_y + 2)):
+			var cell = Vector2i(x, y)
+			
+			# Bounds check
+			if cell.x < 1 or cell.x >= width - 1 or cell.y < 1 or cell.y >= height - 1:
+				continue
+			
+			# Check if occupied
+			if existing_zones.has(cell):
+				continue
+			
+			# Check if inside ellipse
+			var dx = float(cell.x - seed.x) / radius_x
+			var dy = float(cell.y - seed.y) / radius_y
+			var dist = sqrt(dx * dx + dy * dy)
+			
+			if dist <= 1.0:
+				zone.add_cell(cell)
+	
+	return zone
+
+func grow_zone_organic(zone_id: int, seed: Vector2i, target_size: int, existing_zones: Dictionary) -> Zone:
 	var zone = Zone.new(zone_id, seed)
 	
 	# Check if seed is already in another zone

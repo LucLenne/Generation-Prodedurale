@@ -4,9 +4,5 @@
 
 [node name="MainScene" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(175, -145)
-zoom = Vector2(2.25, 2.25)
-
 [node name="World" parent="." instance=ExtResource("1_w2twt")]
 position = Vector2(-1648, -1312)

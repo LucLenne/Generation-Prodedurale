@@ -10,6 +10,8 @@ enum ZoneShape {
 
 @export_group("Zone Generation")
 @export var zone_shape: ZoneShape = ZoneShape.ORGANIC
+@export_range(0.0, 1.0) var border_tree_density: float = 0.0
+
 
 @export_group("Tiles")
 @export var ground_tile: Vector2i = Vector2i(5, 4) # Default Grass

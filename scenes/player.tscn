@@ -1,27 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bib07te5reau7"]
+[gd_scene load_steps=4 format=3 uid="uid://b8x4y201a3c4"]
 
-[ext_resource type="Texture2D" uid="uid://coomnanjg4knk" path="res://sprites/placeholder.png" id="1_4grqu"]
-[ext_resource type="Script" uid="uid://c0tc77spyevjo" path="res://scripts/player.gd" id="1_ups2j"]
+[ext_resource type="Script" uid="uid://ti53uf71wedn" path="res://scripts/Player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://cxg0ijjq68r28" path="res://sprites/Tiles/Colored/tile_0004.png" id="2_v6fml"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_eidcf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(4, 7)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 13
-motion_mode = 1
-wall_min_slide_angle = 0.0
-script = ExtResource("1_ups2j")
+script = ExtResource("1_player")
+speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_eidcf")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_1")
 
-[node name="BodySprite" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-z_index = 2
-scale = Vector2(5, 5)
-texture = ExtResource("1_4grqu")
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
 
-[node name="NoseSprite" type="Sprite2D" parent="BodySprite"]
-z_index = 2
-position = Vector2(2, 2.98023e-08)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_4grqu")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_v6fml")

@@ -22,6 +22,7 @@ class_name WorldGenerator extends Node2D
 @export_group("Resources")
 @export var npc_scene : PackedScene
 @export var player_scene : PackedScene
+@export var collision_scene : PackedScene
 @export var house_scenes : Array[PackedScene]
 
 @export_group("Layers")
@@ -33,7 +34,6 @@ const HouseScript = preload("res://scripts/House.gd")
 const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 const ZoneScript = preload("res://scripts/generation/Zone.gd")
 const BiomeResourceScript = preload("res://scripts/generation/BiomeResource.gd")
-const BiomeCollision = preload("res://scenes/biome_collision.tscn")
 
 @export var available_biomes: Array[BiomeResource] = []
 var biome_grid: Array = [] # 2D Array [x][y] -> BiomeResource
@@ -50,6 +50,7 @@ func _ready():
 		npc_scene = preload("res://scenes/generation/NPC.tscn")
 	if player_scene == null:
 		player_scene = preload("res://scenes/Player.tscn")
+	
 	
 	noise = FastNoiseLite.new()
 	noise.seed = randi()

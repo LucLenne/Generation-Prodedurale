@@ -52,6 +52,7 @@ Attack={
 2d_physics/layer_1="default"
 2d_physics/layer_2="player attack"
 2d_physics/layer_3="enemies attack"
+2d_physics/layer_4="biome_collision"
 
 [physics]
 

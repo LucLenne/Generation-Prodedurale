@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
-[ext_resource type="TileSet" uid="uid://d0xpxxamjanyt" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
+[ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
 [ext_resource type="Script" uid="uid://cgppahdnfi2p2" path="res://scripts/generation/CameraMovement.gd" id="3_cam"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]

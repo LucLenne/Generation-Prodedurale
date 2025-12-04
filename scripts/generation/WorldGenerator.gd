@@ -32,6 +32,7 @@ const HouseScript = preload("res://scripts/House.gd")
 const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 const ZoneScript = preload("res://scripts/generation/Zone.gd")
 const BiomeResourceScript = preload("res://scripts/generation/BiomeResource.gd")
+const BiomeCollision = preload("res://scenes/biome_collision.tscn")
 
 @export var available_biomes: Array[BiomeResource] = []
 var biome_grid: Array = [] # 2D Array [x][y] -> BiomeResource
@@ -126,6 +127,7 @@ func fill_forest():
 			var biome = biome_grid[x][y]
 			ground_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, biome.ground_tile)
 			wall_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, biome.wall_tile)
+
 
 func generate_river():
 	print("Generating river...")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ba101fnwl5x8"]
+[gd_scene load_steps=11 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
 [ext_resource type="TileSet" uid="uid://d0xpxxamjanyt" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
@@ -13,6 +13,7 @@
 resource_local_to_scene = true
 script = ExtResource("4_ywfdd")
 zone_shape = 1
+border_tree_density = 0.045
 decoration_tiles = Array[Vector2i]([Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)])
 decoration_scenes = Array[PackedScene]([ExtResource("5_p6oac")])
 decoration_density = 0.02
@@ -22,14 +23,14 @@ metadata/_custom_type_script = "uid://c27v73t3q056k"
 script = ExtResource("4_ywfdd")
 biome_name = "ZOMBIE"
 zone_shape = 1
-ground_tile = Vector2i(12, 8)
-dirt_tile = Vector2i(12, 8)
+border_tree_density = 0.045
+ground_tile = Vector2i(1, 1)
 decoration_tiles = Array[Vector2i]([Vector2i(10, 0), Vector2i(11, 0), Vector2i(9, 1), Vector2i(8, 7), Vector2i(9, 7)])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
 script = ExtResource("1_gen")
-zone_count_range = Vector2i(80, 80)
+zone_count_range = Vector2i(25, 40)
 zone_size_range = Vector2i(1800, 3000)
 min_zone_distance = 0
 building_count_range = Vector2i(2, 6)

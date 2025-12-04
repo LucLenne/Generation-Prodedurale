@@ -105,6 +105,9 @@ func spawn_player():
 		return
 		
 	print("Spawning player...")
+	if player_scene == null:
+		printerr("Cannot spawn player: player_scene is null.")
+		return
 	player_instance = player_scene.instantiate()
 	
 	# Try to find a valid spawn position (not wall, not water) near center
@@ -288,8 +291,36 @@ func generate_zones(zone_seeds: Array[Vector2i]):
 				else:
 					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
 
+			# Process Outer Border (Forest Edge) for gaps
+			# We want to remove trees from the forest immediately surrounding the zone
+			# based on the INVERSE of the density (Low density = More gaps)
+			var outer_boundary_set = {}
+			for b_cell in boundary_cells:
+				var neighbors = [
+					b_cell + Vector2i(0, -1),
+					b_cell + Vector2i(1, 0),
+					b_cell + Vector2i(0, 1),
+					b_cell + Vector2i(-1, 0)
+				]
+				for neighbor in neighbors:
+					# If neighbor is NOT in the zone, it's part of the outer forest ring
+					if not boundary_set.has(neighbor) and not zone.is_point_inside(neighbor):
+						# Check bounds
+						if neighbor.x >= 0 and neighbor.x < width and neighbor.y >= 0 and neighbor.y < height:
+							outer_boundary_set[neighbor] = true
+			
+			for outer_cell in outer_boundary_set:
+				# Check if we should create a gap here
+				# If density is 0.2, we have 80% chance to remove the tree
+				if randf() > biome.border_tree_density:
+					# Remove tree
+					wall_layer.set_cell(outer_cell, -1)
+					# Set ground to dirt to look like a path/gap
+					var biome_at_cell = biome_grid[outer_cell.x][outer_cell.y]
+					ground_layer.set_cell(outer_cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
 			
 			zone_id += 1
+
 	
 	# Identify entrances (boundary cells)
 	for zone in zones:
@@ -843,6 +874,7 @@ func place_decorations(zone: Zone, occupied_cells: Dictionary, path_cells: Array
 			
 			# Try to place scene
 			var scene = biome.decoration_scenes.pick_random()
+			if scene == null: continue
 			var temp = scene.instantiate()
 			var tile_layer = temp.get_node_or_null("TileMapLayer")
 			var deco_size = Vector2i(3, 3)
@@ -919,6 +951,7 @@ func try_place_building_at(zone: Zone, pos: Vector2i, placed_buildings: Array[Re
 	
 	if use_scene:
 		var scene = house_scenes.pick_random()
+		if scene == null: return result
 		var temp = scene.instantiate()
 		
 		var local_door = Vector2i(2, 4)
@@ -1047,6 +1080,7 @@ func build_house_from_data(data):
 	spawn_npc(data.npc_position)
 
 func spawn_npc(pos: Vector2):
+	if npc_scene == null: return
 	var npc = npc_scene.instantiate()
 	npc.position = pos * TileConfig.TILE_SIZE
 	add_child(npc)

@@ -35,6 +35,9 @@ enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 @export var _persuasive : int = 0
 @export var _behaviour_max_point : int = 20
 
+@export_group("Others")
+@export var _name : String = ""
+
 # Life
 var _last_hit_time : float
 

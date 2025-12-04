@@ -19,6 +19,7 @@ script = ExtResource("4_ywfdd")
 biome_name = "Ice"
 border_tree_density = 1.0
 decoration_tiles = Array[Vector2i]([Vector2i(6, 1)])
+decoration_scenes = Array[PackedScene]([null])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]

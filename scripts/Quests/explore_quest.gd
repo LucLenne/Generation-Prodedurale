@@ -1,11 +1,15 @@
 class_name ExploreQuest extends QuestBase
 
-var _biomes : Array[String]
+var _biome : String
 
-func _init(biomes : String) -> void :
+func _init() -> void :
 	_type = TYPE.EXPLORE
-	_biomes = biomes
+	var rd = randi_range(0, ManagerQuest.Instance.list_biomes.size())
+	_biome = ManagerQuest.Instance.list_biomes[rd]
 
-func _process(delta: float) -> void:
-	for biome in _biomes:
-		if()
+
+
+func _process(_delta: float) -> void:
+	if(Player.Instance.current_biome_name == _biome):
+		_valid_quest()
+		

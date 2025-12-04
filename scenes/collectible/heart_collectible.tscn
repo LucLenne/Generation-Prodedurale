@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dov4nkfsf27hs"]
 
-[ext_resource type="Script" uid="uid://x6f0xsm6civi" path="res://scripts/heart_collectible.gd" id="1_r6bx7"]
+[ext_resource type="Script" uid="uid://x6f0xsm6civi" path="res://scripts/Collectible/heart_collectible.gd" id="1_r6bx7"]
 [ext_resource type="Texture2D" uid="uid://b05sq5d5ukqij" path="res://sprites/heart.png" id="2_i6ggl"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
 

@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://nmpi1435amt"]
 
-[ext_resource type="Script" uid="uid://wdc6frh6smt6" path="res://scripts/key_collectible.gd" id="1_4fw67"]
+[ext_resource type="Script" uid="uid://wdc6frh6smt6" path="res://scripts/Collectible/key_collectible.gd" id="1_4fw67"]
 [ext_resource type="Texture2D" uid="uid://ccagva0fbuvja" path="res://sprites/props.png" id="2_hjwn8"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxpyt"]
 

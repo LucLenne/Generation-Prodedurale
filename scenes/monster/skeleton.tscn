@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bgp7le7djm5ni"]
+
+[node name="Skeleton" type="Sprite2D"]

@@ -1,14 +1,14 @@
 class_name CollectQuest extends QuestBase
 
-var _items : Array[CollectibleBase]
+var _item : CollectibleBase
 
-func _init(items : Array[CollectibleBase]) -> void :
+func _init() -> void :
 	_type = TYPE.COLLECT
-	_items = items
+	var rd = randi_range(0, ManagerQuest.Instance.list_collectibles.size()) 
+	_item = ManagerQuest.Instance.list_collectibles[rd]
+	
+	
 
-func _process(delta: float) -> void:
-	for item in _items:
-		if(Player.Instance.item_in_inventory(item)):
-			_items.erase(item)
-	if(_items.is_empty()):
+func _process(_delta: float) -> void:
+	if(Player.Instance.item_in_inventory(_item)):
 		_valid_quest()

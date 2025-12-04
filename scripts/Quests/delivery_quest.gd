@@ -1,18 +1,18 @@
 class_name DeliveryQuest extends QuestBase
 
 var _pnj : PNJ
-var _items : Array[CollectibleBase]
+var _item : CollectibleBase
 
-func _init(pnj : PNJ, items : Array[CollectibleBase]) -> void :
+func _init() -> void :
 	_type = TYPE.DELIVERY
-	_pnj = pnj
-	_items = items
+	
+	var rd = randi_range(0, ManagerQuest.Instance.list_collectibles.size()) 
+	_item = ManagerQuest.Instance.list_collectibles[rd]
+	rd = randi_range(0, ManagerQuest.Instance.list_pnj.size()) 
+	_pnj = ManagerQuest.Instance.list_pnj[rd]
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(_pnj.is_dead):
 		_fail_quest()
-	for item in _items:
-		if(Player.Instance.item_in_inventory(item)):
-			_items.erase(item)
-	if(_items.is_empty()):
+	if(Player.Instance.item_in_inventory(_item)):
 		_valid_quest()

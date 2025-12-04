@@ -1,14 +1,12 @@
 class_name KillQuest extends QuestBase
 
-var _targets : Array[PNJ]
+var _target : CharacterBase
 
-func _init(targets : Array[PNJ]) -> void :
+func _init() -> void :
 	_type = TYPE.KILL
-	_targets = targets
+	var rd = randi_range(0, ManagerQuest.Instance.list_character_to_kill.size())
+	_target = ManagerQuest.Instance.list_character_to_kill[rd]
 
-func _process(delta: float) -> void:
-	for target in _targets:
-		if(target.is_dead):
-			_targets.erase(target)
-	if(_targets.is_empty()):
+func _process(_delta: float) -> void:
+	if(_target.is_dead):
 		_valid_quest()

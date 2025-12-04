@@ -11,25 +11,25 @@
 [sub_resource type="Resource" id="Resource_p6oac"]
 script = ExtResource("4_ywfdd")
 zone_shape = 1
-decoration_tiles = Array[Vector2i]([Vector2i(4, 1)])
+decoration_tiles = Array[Vector2i]([Vector2i(11, 0)])
 decoration_scenes = Array[PackedScene]([ExtResource("5_p6oac")])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
 [sub_resource type="Resource" id="Resource_eq7oc"]
 script = ExtResource("4_ywfdd")
 biome_name = "Ice"
+zone_shape = 1
 decoration_tiles = Array[Vector2i]([Vector2i(6, 1)])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
 script = ExtResource("1_gen")
 zone_count_range = Vector2i(10, 15)
-zone_size_range = Vector2i(800, 800)
-min_zone_distance = 25
-entrance_count_range = Vector2i(50, 4)
+zone_size_range = Vector2i(2699, 2700)
+min_zone_distance = 0
 building_count_range = Vector2i(5, 8)
-zone_dirt_ratio = 0.7
-path_width = 1
+zone_dirt_ratio = 0.5
+path_width = 6
 path_smoothness = 2.0
 path_edge_grass_ratio = 0.2
 npc_scene = ExtResource("4_npc")

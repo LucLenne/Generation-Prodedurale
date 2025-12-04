@@ -16,12 +16,21 @@ func _physics_process(delta):
 		if Input.is_action_pressed("Right"): direction.x += 1
 		direction = direction.normalized()
 		
-	
-	if direction != Vector2.ZERO:
-		print("Input detected: ", direction)
-		
 	velocity = direction * speed
 	move_and_slide()
 	
 	if velocity != Vector2.ZERO:
-		print("Player moving, velocity: ", velocity, " Position: ", position)
+		pass
+		
+	detect_biome()
+
+var current_biome_name: String = ""
+
+func detect_biome():
+	var world_gen = get_parent()
+	if world_gen and world_gen.has_method("get_biome_at"):
+		var biome = world_gen.get_biome_at(position)
+		if biome:
+			if biome.biome_name != current_biome_name:
+				current_biome_name = biome.biome_name
+				print("Entered Biome: ", current_biome_name)

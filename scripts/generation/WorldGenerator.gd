@@ -265,10 +265,20 @@ func generate_zones(zone_seeds: Array[Vector2i]):
 							all_zone_cells[buffer_cell] = -1  # -1 = buffer zone
 			
 			# Carve out the zone from forest
+			var boundary_cells = zone.get_boundary_cells()
+			var boundary_set = {}
+			for b_cell in boundary_cells:
+				boundary_set[b_cell] = true
+				
 			for cell in zone.cells:
 				# Skip water (River) - Preserve it!
 				if TileConfig.is_water(wall_layer.get_cell_atlas_coords(cell)):
 					continue
+				
+				# Check border density
+				if boundary_set.has(cell):
+					if randf() < biome.border_tree_density:
+						continue # Keep tree
 					
 				var biome_at_cell = biome_grid[cell.x][cell.y]
 				wall_layer.set_cell(cell, -1)  # Remove tree
@@ -277,6 +287,7 @@ func generate_zones(zone_seeds: Array[Vector2i]):
 					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
 				else:
 					ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
+
 			
 			zone_id += 1
 	
@@ -1040,3 +1051,14 @@ func spawn_npc(pos: Vector2):
 	npc.position = pos * TileConfig.TILE_SIZE
 	add_child(npc)
 	npcs.append(npc)
+
+func get_biome_at(world_position: Vector2) -> BiomeResource:
+	var grid_pos = Vector2i(world_position / TileConfig.TILE_SIZE)
+	
+	if grid_pos.x < 0 or grid_pos.x >= width or grid_pos.y < 0 or grid_pos.y >= height:
+		return null
+		
+	if biome_grid.is_empty() or biome_grid[grid_pos.x].is_empty():
+		return null
+		
+	return biome_grid[grid_pos.x][grid_pos.y]

@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 project/assembly_name="Procedural"
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "green"
+}
+
 [input]
 
 Left={

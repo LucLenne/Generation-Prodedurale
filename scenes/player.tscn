@@ -8,7 +8,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eidcf"]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprites", "attack_spawn_point")]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("sprites", "attack_spawn_point")]
 collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0

@@ -1,7 +1,15 @@
 class_name WorldGenerator extends Node2D
 
-@export var width : int = 120
-@export var height : int = 120
+@export_group("Map Size (Screens)")
+@export var screens_x: int = 4
+@export var screens_y: int = 4
+@export var tiles_per_screen: Vector2i = Vector2i(32, 24)
+
+var width: int:
+	get: return screens_x * tiles_per_screen.x
+var height: int:
+	get: return screens_y * tiles_per_screen.y
+
 
 @export_group("Zone Configuration")
 @export var zone_count_range: Vector2i = Vector2i(5, 12)

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
 [ext_resource type="TileSet" uid="uid://d0xpxxamjanyt" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
 [ext_resource type="Script" uid="uid://cgppahdnfi2p2" path="res://scripts/generation/CameraMovement.gd" id="3_cam"]
+[ext_resource type="PackedScene" uid="uid://b8x4y201a3c4" path="res://scenes/Player.tscn" id="3_p6oac"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
 [ext_resource type="PackedScene" uid="uid://cahp7guiogyeq" path="res://scenes/houses/SimpleHouse.tscn" id="5_house"]
@@ -37,6 +38,7 @@ path_width = 4
 path_smoothness = 100.0
 path_edge_grass_ratio = 0.2
 npc_scene = ExtResource("4_npc")
+player_scene = ExtResource("3_p6oac")
 house_scenes = Array[PackedScene]([ExtResource("5_house")])
 ground_layer = NodePath("GroundLayer")
 wall_layer = NodePath("WallLayer")

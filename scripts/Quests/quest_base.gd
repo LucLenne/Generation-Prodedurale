@@ -1,4 +1,4 @@
-class_name QuestBase extends Node
+class_name QuestBase extends Node2D
 
 
 enum TYPE {COLLECT, KILL, EXPLORE, DELIVERY, TALK, NONE}
@@ -18,3 +18,6 @@ func _fail_quest()-> void:
 
 func _give_reward()-> void:
 	Player.Instance.give_life(_amount_life_reward)
+
+func setup(world_gen: Node2D) -> void:
+	pass

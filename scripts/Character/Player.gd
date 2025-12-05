@@ -2,7 +2,11 @@ class_name Player extends CharacterBody2D
 static var Instance : Player
 
 @export var speed: float = 100.0
-@export var _inventory : Array[Item]
+@export var _inventory : Array[CollectibleBase]
+
+func _enter_tree():
+	if Instance == null:
+		Instance = self
 
 func _ready():
 	$Camera2D.make_current()

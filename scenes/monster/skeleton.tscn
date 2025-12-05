@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://bgp7le7djm5ni"]
+[gd_scene load_steps=4 format=3 uid="uid://bgp7le7djm5ni"]
 
-[node name="Skeleton" type="Sprite2D"]
+[ext_resource type="Texture2D" uid="uid://dp0fxhbjjbvv1" path="res://sprites/Tiles/Colored/tile_0010.png" id="1_6uepc"]
+[ext_resource type="Script" uid="uid://bjghydfepayuu" path="res://scripts/Character/Skeleton.gd" id="1_txsr6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqac8"]
+size = Vector2(8, 8)
+
+[node name="Base" type="CharacterBody2D"]
+script = ExtResource("1_txsr6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6uepc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bqac8")

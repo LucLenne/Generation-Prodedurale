@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct6nvsrsswmct"]
+
+[ext_resource type="Script" uid="uid://vu7615j8je0y" path="res://scripts/generation/NPC.gd" id="1_npc"]
+[ext_resource type="Texture2D" uid="uid://bobdbroo70rrq" path="res://sprites/Tiles/Colored/tile_0005.png" id="2_iqjc7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npc"]
+radius = 16.0
+
+[node name="NPC" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_npc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_npc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_iqjc7")

@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=4 uid="uid://buuwp4chbvml5"]
 
-[ext_resource type="Script" uid="uid://du4m66ihgjwbx" path="res://scripts/room.gd" id="1_hqrnj"]
-[ext_resource type="TileSet" uid="uid://boei5dbdfnuex" path="res://resources/tilesets/placeholder_tileset.tres" id="2_8b88s"]
+[ext_resource type="Script" uid="uid://du4m66ihgjwbx" path="res://scripts/Structure/room.gd" id="1_hqrnj"]
+[ext_resource type="TileSet" path="res://resources/tilesets/placeholder_tileset.tres" id="2_8b88s"]
+
 
 [node name="Room2" type="Node2D" node_paths=PackedStringArray("tilemap_layers")]
 script = ExtResource("1_hqrnj")

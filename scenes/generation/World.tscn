@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://ba101fnwl5x8"]
+
+[ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
+[ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
+[ext_resource type="Script" uid="uid://cgppahdnfi2p2" path="res://scripts/generation/CameraMovement.gd" id="3_cam"]
+[ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
+[ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
+[ext_resource type="PackedScene" uid="uid://cahp7guiogyeq" path="res://scenes/houses/SimpleHouse.tscn" id="5_house"]
+
+[sub_resource type="Resource" id="Resource_p6oac"]
+script = ExtResource("4_ywfdd")
+zone_shape = 1
+border_tree_density = 0.5
+decoration_tiles = Array[Vector2i]([Vector2i(4, 1)])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_eq7oc"]
+script = ExtResource("4_ywfdd")
+biome_name = "Ice"
+border_tree_density = 1.0
+decoration_tiles = Array[Vector2i]([Vector2i(6, 1)])
+decoration_scenes = Array[PackedScene]([null])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
+script = ExtResource("1_gen")
+zone_count_range = Vector2i(3, 6)
+zone_size_range = Vector2i(1000, 1000)
+building_count_range = Vector2i(5, 8)
+zone_dirt_ratio = 0.7
+path_smoothness = 1.0
+path_edge_grass_ratio = 0.2
+npc_scene = ExtResource("4_npc")
+house_scenes = Array[PackedScene]([ExtResource("5_house")])
+ground_layer = NodePath("GroundLayer")
+wall_layer = NodePath("WallLayer")
+available_biomes = Array[ExtResource("4_ywfdd")]([SubResource("Resource_p6oac"), SubResource("Resource_eq7oc")])
+
+[node name="GroundLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tiles")
+
+[node name="WallLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_tiles")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(675, 352)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("3_cam")

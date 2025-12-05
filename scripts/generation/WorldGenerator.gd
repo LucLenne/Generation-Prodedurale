@@ -22,6 +22,7 @@ class_name WorldGenerator extends Node2D
 @export_group("Resources")
 @export var npc_scene : PackedScene
 @export var player_scene : PackedScene
+@export var collision_scene : PackedScene
 @export var house_scenes : Array[PackedScene]
 
 @export_group("Layers")
@@ -49,6 +50,7 @@ func _ready():
 		npc_scene = preload("res://scenes/generation/NPC.tscn")
 	if player_scene == null:
 		player_scene = preload("res://scenes/Player.tscn")
+	
 	
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
@@ -195,6 +197,7 @@ func fill_forest():
 			var biome = biome_grid[x][y]
 			ground_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, biome.ground_tile)
 			wall_layer.set_cell(Vector2i(x, y), TileConfig.SOURCE_ID, biome.wall_tile)
+
 
 func generate_river():
 	print("Generating river...")

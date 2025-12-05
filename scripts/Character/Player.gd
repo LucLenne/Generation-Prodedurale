@@ -1,6 +1,8 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
+static var Instance : Player
 
 @export var speed: float = 100.0
+@export var _inventory : Array[Item]
 
 func _ready():
 	$Camera2D.make_current()

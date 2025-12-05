@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 static var Instance : Player
 
 @export var speed: float = 100.0
+var _quest_book_ui = preload("res://scripts/UI/quest_book_ui.gd")
 
 func _ready():
 	$Camera2D.make_current()
@@ -16,7 +17,9 @@ func _physics_process(delta):
 		if Input.is_action_pressed("Left"): direction.x -= 1
 		if Input.is_action_pressed("Right"): direction.x += 1
 		direction = direction.normalized()
-		
+	if(Input.is_action_pressed("open_inventory")):
+		if _quest_book_ui is QuestBookUI:
+			_quest_book_ui.visible = !_quest_book_ui.visible
 	velocity = direction * speed
 	move_and_slide()
 	

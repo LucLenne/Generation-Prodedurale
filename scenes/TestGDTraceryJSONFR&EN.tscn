@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/TestGDTraceryJSONFR&EN.gd" id="1_dm38y"]
 [ext_resource type="JSON" path="res://Assets/TestEN.json" id="2_5e8ay"]
-[ext_resource type="JSON" path="res://Assets/Epitaphes.json" id="3_m30nb"]
+[ext_resource type="JSON" path="res://Assets/GDTEST.json" id="3_usihe"]
 
 [node name="TestJSONTraceryNode" type="Node"]
 script = ExtResource("1_dm38y")
 jsonEN = ExtResource("2_5e8ay")
-jsonFR = ExtResource("3_m30nb")
+jsonFR = ExtResource("3_usihe")

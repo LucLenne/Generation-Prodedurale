@@ -12,12 +12,18 @@ config_version=5
 
 config/name="Procedural"
 run/main_scene="uid://db5cfan2a3vjb"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Procedural"
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "green"
+}
 
 [input]
 

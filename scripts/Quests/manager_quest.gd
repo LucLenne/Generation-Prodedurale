@@ -8,12 +8,25 @@ static var Instance : ManagerQuest
 @export var list_biomes : Array[String]
 @export var list_character_to_kill : Array[CharacterBase]
 @export var list_pnj : Array[PNJ]
+var _pnj_in_quest : Array[PNJ]
+
+@export_group("Talk")
+@export var max_dist_pnj : float = 50
 
 
 var _typeQuest : Array[Script] = [CollectQuest,DeliveryQuest,ExploreQuest,KillQuest,TalkQuest]
 var _listQuest : Array[QuestBase]
 var _successQuest : Array[QuestBase]
 var _failQuest : Array[QuestBase]
+
+func GetPNJ() -> PNJ:
+	for pnj in list_pnj:
+		if(Player.Instance.position.distance_to(pnj.position) < max_dist_pnj):
+			_pnj_in_quest.append(pnj)
+			list_pnj.erase(pnj)
+			return pnj
+	print("No pnj available at this distance")
+	return
 
 func GeneratesQuest()-> void:
 	for i in range(_numberQuest):

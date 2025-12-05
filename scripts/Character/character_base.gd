@@ -5,6 +5,7 @@ signal life_changed(current_life : int)
 enum ORIENTATION {FREE, DPAD_8, DPAD_4}
 enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
 enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
+enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 
 @export_group("Life")
 @export var life : int = 3 :
@@ -37,6 +38,7 @@ enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 
 @export_group("Others")
 @export var _name : String = ""
+@export var emotion : EMOTION = EMOTION.NEUTRAL
 
 # Life
 var _last_hit_time : float

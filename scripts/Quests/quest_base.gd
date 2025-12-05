@@ -2,9 +2,9 @@ class_name QuestBase extends Node
 
 
 enum TYPE {COLLECT, KILL, EXPLORE, DELIVERY, TALK, NONE}
-enum STATE {HIDE, TO_DO,SUCCESS,FAIL}
+enum STATE { TO_DO,SUCCESS,FAIL}
 
-var _state : STATE = STATE.HIDE
+var _state : STATE = STATE.TO_DO
 var _type : TYPE = TYPE.NONE
 
 @export var _amount_life_reward : int = 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ba101fnwl5x8"]
+[gd_scene load_steps=16 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
 [ext_resource type="TileSet" uid="uid://d0xpxxamjanyt" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
@@ -8,29 +8,53 @@
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
 [ext_resource type="PackedScene" uid="uid://cahp7guiogyeq" path="res://scenes/houses/SimpleHouse.tscn" id="5_house"]
 [ext_resource type="PackedScene" uid="uid://yw7co2mhrgcq" path="res://scenes/houses/FireCamp.tscn" id="5_p6oac"]
+[ext_resource type="Script" uid="uid://v1fnj4abka1u" path="res://scripts/generation/DecorationItem.gd" id="7_w234y"]
 
 [sub_resource type="Resource" id="Resource_p6oac"]
 resource_local_to_scene = true
 script = ExtResource("4_ywfdd")
 zone_shape = 1
 border_tree_density = 0.045
-decoration_tiles = Array[Vector2i]([Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)])
 decoration_scenes = Array[PackedScene]([ExtResource("5_p6oac")])
-decoration_density = 0.02
 metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_w234y"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(8, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_68qco"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(9, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_dfiiy"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(10, 0)
+density = 0.005
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_o65u8"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(11, 0)
+density = 0.005
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
 
 [sub_resource type="Resource" id="Resource_eq7oc"]
 script = ExtResource("4_ywfdd")
-biome_name = "ZOMBIE"
+biome_name = "cimetière"
 zone_shape = 1
 border_tree_density = 0.045
-ground_tile = Vector2i(1, 1)
-decoration_tiles = Array[Vector2i]([Vector2i(10, 0), Vector2i(11, 0), Vector2i(9, 1), Vector2i(8, 7), Vector2i(9, 7)])
+ground_tile = Vector2i(16, 1)
+dirt_tile = Vector2i(16, 1)
+decorations = Array[ExtResource("7_w234y")]([SubResource("Resource_w234y"), SubResource("Resource_68qco"), SubResource("Resource_dfiiy"), SubResource("Resource_o65u8")])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
 script = ExtResource("1_gen")
-zone_count_range = Vector2i(25, 40)
+zone_count_range = Vector2i(30, 30)
 zone_size_range = Vector2i(1800, 3000)
 min_zone_distance = 0
 building_count_range = Vector2i(2, 6)

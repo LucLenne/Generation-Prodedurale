@@ -7,8 +7,7 @@ func _init() -> void :
 	_type = TYPE.DELIVERY
 	var rd = randi_range(0, ManagerQuest.Instance.list_collectibles.size()) 
 	_item = ManagerQuest.Instance.list_collectibles[rd]
-	rd = randi_range(0, ManagerQuest.Instance.list_pnj.size()) 
-	_pnj = ManagerQuest.Instance.list_pnj[rd]
+	_pnj = ManagerQuest.Instance.GetPNJ()
 
 func _process(_delta: float) -> void:
 	if(_pnj.is_dead):

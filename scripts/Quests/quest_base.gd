@@ -5,7 +5,7 @@ enum TYPE {COLLECT, KILL, EXPLORE, DELIVERY, TALK, NONE}
 enum STATE { TO_DO,SUCCESS,FAIL}
 
 var _state : STATE = STATE.TO_DO
-var _type : TYPE = TYPE.NONE
+var type : TYPE = TYPE.NONE
 
 @export var _amount_life_reward : int = 5
 

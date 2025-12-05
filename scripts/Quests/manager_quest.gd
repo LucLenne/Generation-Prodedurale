@@ -32,6 +32,8 @@ func GeneratesQuest()-> void:
 	for i in range(_numberQuest):
 		var quest = _typeQuest.pick_random()
 		var new_quest = quest.new()
+		if new_quest is QuestBase:
+			QuestBookUI.Instance._create_quest(quest.type)
 		_listQuest.append(new_quest)
 
 

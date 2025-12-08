@@ -130,6 +130,7 @@ text = "i love my job, i love my job,i love my job ,i love my job ,i love my job
 
 [node name="ClickButton" type="Button" parent="DialogueContainer"]
 layout_mode = 2
+focus_mode = 0
 flat = true
 
 [node name="ResponseButtons" type="HBoxContainer" parent="."]

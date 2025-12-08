@@ -1,8 +1,16 @@
 class_name DialogueSystem extends Node
 
+@export_group("Dialogue Files")
 @export var dialogue_ui : DialogueSystemUI
 @export var npc_json_file : JSON
 @export var monster_json_file : JSON
+
+@export_group("Dialogue Difficulty")
+@export var player_controller : PlayerController
+@export var DC_EASY = 5   # Choix Tactique Parfait (Avantage)
+@export var DC_MEDIUM = 10 # Choix Neutre (Même état)
+@export var DC_HARD = 15   # Mauvais Choix (Désavantage)
+
 
 enum Mood { INTIMIDATING, FRIENDLY, PERSUASIVE }
 enum Directions { NORD, SUD, EST, OUEST }
@@ -17,6 +25,8 @@ var current_quest_data = {
 
 var is_fighting_monster: bool = false
 var is_intro: bool = true
+
+var is_reaction: bool = false
 
 var grammar_npc : TraceryFR.GrammarFR
 var grammar_monster : TraceryFR.GrammarFR
@@ -35,6 +45,7 @@ func _ready():
 func generate_new_quest():
 	is_intro = true
 	is_fighting_monster = false
+	is_reaction = false
 	
 	grammar_npc = TraceryFR.GrammarFR.new(npc_json_file.data)
 	grammar_npc.add_modifiers(TraceryFR.UniversalModifiersFR.get_modifiers())
@@ -96,36 +107,98 @@ func _get_mood_key(mood : Mood) -> String:
 
 func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 	var opponent_mood = current_quest_data.target_mood if target_is_monster else current_quest_data.giver_mood
+	
+	var difficulty = DC_MEDIUM # Par défaut (Neutre)
+	
 	match opponent_mood:
-		Mood.INTIMIDATING: return player_choice == Mood.FRIENDLY
-		Mood.FRIENDLY: return player_choice == Mood.PERSUASIVE
-		Mood.PERSUASIVE: return player_choice == Mood.INTIMIDATING
-	return false
+		Mood.INTIMIDATING:
+			if player_choice == Mood.FRIENDLY: difficulty = DC_EASY      
+			elif player_choice == Mood.PERSUASIVE: difficulty = DC_HARD   
+			
+		Mood.FRIENDLY:
+			if player_choice == Mood.PERSUASIVE: difficulty = DC_EASY     
+			elif player_choice == Mood.INTIMIDATING: difficulty = DC_HARD 
+			
+		Mood.PERSUASIVE:
+			if player_choice == Mood.INTIMIDATING: difficulty = DC_EASY   
+			elif player_choice == Mood.FRIENDLY: difficulty = DC_HARD   
+	
+	var player_stat_value = 0.0
+	match player_choice:
+		Mood.INTIMIDATING: 
+			player_stat_value = player_controller._intimidating
+		Mood.FRIENDLY: 
+			player_stat_value = player_controller._friendly
+		Mood.PERSUASIVE: 
+			player_stat_value = player_controller._persuasive
+	
+
+	var d20_roll = randi_range(1, 20)
+	var stat_modifier = player_stat_value - 10 # ex: Stat 15 donne +5, Stat 5 donne -5
+	var final_score = d20_roll + stat_modifier
+	
+	# 5. Donner l'XP (Même en cas d'échec, on apprend !)
+	player_controller.gain_xp(player_choice)
+	
+	# 6. Afficher les logs pour débugger (et comprendre ce qui se passe)
+	print("--- TEST DE COMPÉTENCE ---")
+	print("Adversaire: %s | Joueur: %s" % [Mood.keys()[opponent_mood], Mood.keys()[player_choice]])
+	print("Difficulté (DC): %d" % difficulty)
+	print("Stat Joueur: %.1f (Mod: %.1f)" % [player_stat_value, stat_modifier])
+	print("Jet de dé: %d" % d20_roll)
+	print("SCORE FINAL: %d (Objectif: > %d)" % [final_score, difficulty])
+	
+	# 7. Résultat
+	return final_score >= difficulty
 
 func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
-		
-		
 		await get_tree().create_timer(2.0).timeout
 		
 		is_fighting_monster = true
-		
 		var monster_data = get_monster_dialogue()
 		if dialogue_ui:
 			dialogue_ui.show_interaction_dialogue(monster_data)
+			
+	# CASE 2: Reaction Finished (End of current interaction)
+	elif is_reaction:
+		is_reaction = false
+		pass 
+		
+		_handle_post_reaction()
+
+
+var _last_success : bool = false
 
 func _on_player_answered(mood: Mood):
-	var success = check_success(mood, is_fighting_monster)
+	_last_success = check_success(mood, is_fighting_monster)
 	
-	if success:
-		print("Quest Won!")
+	var reaction_text = ""
+	
+	# Select which grammar to use for reaction
+	var active_grammar = grammar_monster if is_fighting_monster else grammar_npc
+	
+	if _last_success:
+		reaction_text = active_grammar.flatten("#reaction_victoire#")
 	else:
+		reaction_text = active_grammar.flatten("#reaction_echec#")
+
+	is_reaction = true
+	if dialogue_ui:
+		dialogue_ui.start_dialogue_sequence(reaction_text, false) # False = Just reading, then close
+
+
+func _handle_post_reaction():
+	if _last_success:
+		print("Quest Won!")
+		# Here we could restart or show 'The End'
+	else:
+		# Failure
 		if is_fighting_monster:
 			print("Failed! Returning to NPC...")
-			is_fighting_monster = false
+			is_fighting_monster = false # Now we go to NPC
 			
-			# Wait a short delay
 			await get_tree().create_timer(1.0).timeout
 			
 			var npc_data = get_second_chance_dialogue()

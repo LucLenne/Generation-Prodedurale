@@ -18,6 +18,7 @@ signal player_answered(mood: DialogueSystem.Mood)
 @export_group("UI Parameters")
 @export var typing_speed: float = 0.02 # Secondes par caractère
 
+var text_queue: Array[String] = []
 var is_typing: bool = false
 var is_interaction_mode: bool = false
 var current_tween: Tween
@@ -40,10 +41,13 @@ func _on_bubble_clicked():
 		is_typing = false
 		
 	else:
-		if is_interaction_mode:
-			response_container.visible = true
+		if not text_queue.is_empty():
+			_display_next_line()
 		else:
-			close_dialogue()
+			if is_interaction_mode:
+				response_container.visible = true
+			else:
+				close_dialogue()
 
 func _on_response_pressed(mood: DialogueSystem.Mood):
 	player_answered.emit(mood)
@@ -55,22 +59,40 @@ func close_dialogue():
 
 func show_intro_dialogue(text: String):
 	is_interaction_mode = false
-	_start_dialogue(text)
+	start_dialogue_sequence(text, false)
 
 func show_interaction_dialogue(data: Dictionary):
-	is_interaction_mode = true
-	
+	# Setup buttons first
 	btn_intimidate.text = data["btn_intimidate"]
 	btn_friendly.text = data["btn_friendly"]
 	btn_persuade.text = data["btn_persuade"]
 	
-	_start_dialogue(data["text"])
+	is_interaction_mode = true
+	start_dialogue_sequence(data["text"], true)
 
 
-func _start_dialogue(text: String):
+func start_dialogue_sequence(raw_text: String, is_interactive: bool):
 	visible = true
 	response_container.visible = false
-	dialogue_text.text = text
+	
+	var parts = raw_text.split("&&")
+	text_queue.clear()
+	for part in parts:
+		var p = part.strip_edges()
+		if not p.is_empty():
+			text_queue.append(p)
+			
+	if text_queue.is_empty():
+		text_queue.append("...")
+		
+	_display_next_line()
+
+func _display_next_line():
+	if text_queue.is_empty():
+		return
+		
+	var line = text_queue.pop_front()
+	dialogue_text.text = line
 	dialogue_text.visible_ratio = 0.0
 	_start_typing_effect()
 

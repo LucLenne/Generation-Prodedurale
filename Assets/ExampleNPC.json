@@ -10,23 +10,30 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"C'est #proprietaire#. Il y a #type_monstre.indef# vers #direction.def#. Il hurle, casse tout et refuse de partir ! Je t'en supplie, aide-moi !"
+		"C'est #proprietaire#.&&Il y a #type_monstre.indef# vers #direction.def#.&&Il hurle, casse tout et refuse de partir !&&Je t'en supplie, aide-moi !"
 	],
 	"intro_quete_amical": [
-		"C'est #proprietaire#. Il y a #type_monstre.indef# vers #direction.def#. Il pleure toutes les larmes de son corps... C'est triste, mais il doit partir."
+		"C'est #proprietaire#.&&Il y a #type_monstre.indef# vers #direction.def#.&&Il pleure toutes les larmes de son corps...&&C'est triste, mais il doit partir."
 	],
 	"intro_quete_persuasif": [
-		"C'est #proprietaire#. Il y a #type_monstre.indef# vers #direction.def#. Il a sorti un code civil et veut négocier un bail ! Fais quelque chose !"
+		"C'est #proprietaire#.&&Il y a #type_monstre.indef# vers #direction.def#.&&Il a sorti un code civil et veut négocier un bail !&&Fais quelque chose, je déteste la paperasse."
 	],
 
 	"retour_echec_intimidant": [
-		"Quoi ? Tu as peur ? Retourne là-bas et vire-le, sinon c'est toi que je vire !"
+		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
 	],
 	"retour_echec_amical": [
-		"Oh non... Tu n'as pas réussi ? Je ne sais plus quoi faire, je suis désespéré..."
+		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
 	],
 	"retour_echec_persuasif": [
-		"Écoute, la situation est simple : il doit partir. Trouve les bons arguments, je te paie pour ça."
+		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
+	],
+	
+	"reaction_victoire": [
+		"Tu as réussi ? Incroyable !&&#proprietaire# te remercie du fond du cœur.&&Voici ta récompense."
+	],
+	"reaction_echec": [
+		"C'est une catastrophe absolue...&&Sors de ma vue !"
 	],
 
 	"btn_intimidation": ["(Force) Dégage ou je frappe !"],
@@ -34,18 +41,18 @@
 	"btn_persuasion": ["(Négo) Soyons logiques..."],
 
 	"nom": [
-		"Gérard", 
-		"^Julie", 
-		"Arthur", 
-		"Hélène"
+		"Gérard",
+		"^Julie",
+		"Arthur",
+		"^Hélène"
 	],
 	"monstre": [
-		"zombie",          
-		"^banshee",        
-		"orque",           
-		"*homme-rat",       
-		"hobbit",         
-		"^harpie"         
+		"zombie",
+		"^banshee",
+		"orque",
+		"homme-rat",
+		"*hobbit",
+		"^*harpie"
 	],
 	"dir": ["Nord", "Sud", "Est", "Ouest"]
 }

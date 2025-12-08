@@ -11,11 +11,12 @@ static var Instance : ManagerQuest
 var _pnj_in_quest : Array[PNJ]
 
 @export_group("Talk")
-@export var max_dist_pnj : float = 50
+@export var max_dist_pnj : float = 1000
 
 
 var _typeQuest : Array[Script] = [CollectQuest,DeliveryQuest,ExploreQuest,KillQuest,TalkQuest]
-var _listQuest : Array[QuestBase]
+var _activeQuest : Array[QuestBase]
+var _inactiveQuest : Array[QuestBase]
 var _successQuest : Array[QuestBase]
 var _failQuest : Array[QuestBase]
 
@@ -33,15 +34,28 @@ func GeneratesQuest()-> void:
 		var quest = _typeQuest.pick_random()
 		var new_quest = quest.new()
 		if new_quest is QuestBase:
-			QuestBookUI.Instance._create_quest(quest.type)
-		_listQuest.append(new_quest)
+			new_quest.id = i
+		_inactiveQuest.append(new_quest)
 
+func DeleteQuestUI(id : int):
+	QuestBookUI.Instance.delete_quest(id)
+
+func ActivateQuest(id : int):
+	for quest in _inactiveQuest:
+		if quest.id == id:
+			_inactiveQuest.erase(quest)
+			_activeQuest.append(quest)
+			QuestBookUI.Instance._create_quest(str(quest.type),quest.id)
+			return
+	print("quest not inactive")
 
 func _process(_delta: float) -> void:
-	for quest in _listQuest:
+	for quest in _activeQuest:
 		if(quest._state == QuestBase.STATE.SUCCESS):
+			DeleteQuestUI(quest.id)
 			_successQuest.append(quest)
-			_listQuest.erase(quest)
+			_activeQuest.erase(quest)
 		if(quest._state == QuestBase.STATE.FAIL):
+			DeleteQuestUI(quest.id)
 			_failQuest.append(quest)
-			_listQuest.erase(quest)
+			_activeQuest.erase(quest)

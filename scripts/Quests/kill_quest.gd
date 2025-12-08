@@ -3,7 +3,7 @@ class_name KillQuest extends QuestBase
 var _target : CharacterBase
 
 func _init() -> void :
-	_type = TYPE.KILL
+	type = TYPE.KILL
 
 func setup(world_gen: Node2D) -> void:
 	var target_scene = null

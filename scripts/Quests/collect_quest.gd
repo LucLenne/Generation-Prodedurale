@@ -3,7 +3,7 @@ class_name CollectQuest extends QuestBase
 var _item : CollectibleBase
 
 func _init() -> void :
-	_type = TYPE.COLLECT
+	type = TYPE.COLLECT
 	var rd = randi_range(0, ManagerQuest.Instance.list_collectibles.size()) 
 	_item = ManagerQuest.Instance.list_collectibles[rd]
 	

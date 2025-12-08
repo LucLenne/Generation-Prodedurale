@@ -3,6 +3,7 @@ class_name quest_ui extends Control
 
 @export var Text : String = ""
 @export var img : Texture
+var id : int 
 
 
 func _init() -> void :

@@ -139,7 +139,8 @@ class UniversalModifiersFR extends ModifiersFR:
 			"partDef" : [UniversalModifiersFR, "_partDef"],
 			"partIndef" : [UniversalModifiersFR, "_partIndef"],
 			"a" : [UniversalModifiersFR, "_a"],
-			"poss" : [UniversalModifiersFR, "_poss"],
+			"poss_s" : [UniversalModifiersFR, "_poss_s"],
+			"poss_m" : [UniversalModifiersFR, "_poss_m"],
 			"dem" : [UniversalModifiersFR, "_dem"],
 			"f" : [UniversalModifiersFR, "_f"],
 			"s": [UniversalModifiersFR, "_s"],
@@ -201,9 +202,9 @@ class UniversalModifiersFR extends ModifiersFR:
 			return "à la " + _get_word_without_marker(string)
 		return "au " + _get_word_without_marker(string)
 	
-	static func _poss(string : String) -> String :
+	static func _poss_s(string : String) -> String :
 		if string.is_empty() :
-			push_error("_poss : string is empty")
+			push_error("_poss_s : string is empty")
 		if _is_plural(string) :
 			return "ses " + _get_word_without_marker(string)
 		if _need_elision(string):
@@ -211,6 +212,17 @@ class UniversalModifiersFR extends ModifiersFR:
 		if _is_female(string):
 			return "sa " + _get_word_without_marker(string)
 		return "son " + _get_word_without_marker(string)
+		
+	static func _poss_m(string : String) -> String :
+		if string.is_empty() :
+			push_error("_poss_m : string is empty")
+		if _is_plural(string) :
+			return "mes " + _get_word_without_marker(string)
+		if _need_elision(string):
+			return "mon " + _get_word_without_marker(string)
+		if _is_female(string):
+			return "ma " + _get_word_without_marker(string)
+		return "mon " + _get_word_without_marker(string)
 	
 	static func _dem(string : String) -> String :
 		if string.is_empty() :
@@ -532,9 +544,15 @@ class GrammarFR extends RefCounted:
 			"s": 2,          # Nombre en second
 			"def": 3,        # Articles en troisième
 			"indef": 3,
-			"part": 3,
+			"partDef": 3,
+			"partIndef":3,
+			"poss_m":3,
+			"poss_s":3,
+			"dem" : 3,
 			"a" : 3,
+			
 		}
+	
 		
 		# 0. Expansion des modificateurs dynamiques (variables)
 		# On doit le faire AVANT le tri pour que si une variable contient "f", elle soit triée comme "f" (priorité 1)

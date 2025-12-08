@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://d0xpxxamjanyt"]
 
-[ext_resource type="Texture2D" uid="uid://b150y1dsx1ktj" path="res://sprites/Tilemap/colored_tilemap_packed.png" id="1_tex"]
+[ext_resource type="Texture2D" uid="uid://b150y1dsx1ktj" path="res://scenes/sprites/Tilemap/colored_tilemap_packed.png" id="1_o63ri"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_packed"]
-texture = ExtResource("1_tex")
+texture = ExtResource("1_o63ri")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)

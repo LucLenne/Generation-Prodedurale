@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=4 uid="uid://dueu6vexma7ox"]
 
 [ext_resource type="Script" uid="uid://c6snvejm4imbs" path="res://scripts/House.gd" id="1_gjocg"]
-[ext_resource type="TileSet" uid="uid://2rmp57x3ojmi" path="res://sprites/Tilemap/biomeq_tile_set.tres" id="2_gjocg"]
+[ext_resource type="TileSet" uid="uid://2rmp57x3ojmi" path="res://scenes/sprites/Tilemap/biomeq_tile_set.tres" id="2_gjocg"]
+
 
 [node name="SimpleHouse" type="Node2D"]
 script = ExtResource("1_gjocg")

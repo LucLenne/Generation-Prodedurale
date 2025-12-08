@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://ct6nvsrsswmct"]
 
 [ext_resource type="Script" uid="uid://vu7615j8je0y" path="res://scripts/generation/NPC.gd" id="1_npc"]
-[ext_resource type="Texture2D" uid="uid://bobdbroo70rrq" path="res://sprites/Tiles/Colored/tile_0005.png" id="2_iqjc7"]
+[ext_resource type="Texture2D" uid="uid://bobdbroo70rrq" path="res://scenes/sprites/Tiles/Colored/tile_0005.png" id="2_iqjc7"]
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_npc"]
 radius = 16.0

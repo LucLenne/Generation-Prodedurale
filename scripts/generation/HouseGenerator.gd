@@ -16,36 +16,6 @@ class HouseData:
 # [space] = Empty/Void (use this to make non-rectangular shapes)
 const PRESETS = [
 	{
-		"name": "Small Hut",
-		"layout": [
-			"WWWWW",
-			"W...W",
-			"W...W",
-			"WWDWW"
-		]
-	},
-	{
-		"name": "L-Shape House",
-		"layout": [
-			"WWWWWWWW",
-			"W......W",
-			"W......W",
-			"W...WWWW",
-			"W...W   ",
-			"W...W   ",
-			"WWDWW   "
-		]
-	},
-	{
-		"name": "Long Hall",
-		"layout": [
-			"WWWWWWWWW",
-			"W.......W",
-			"W.......W",
-			"WWWWDWWWW"
-		]
-	},
-		{
 		"name": "Peni",
 		"layout": [
 			"....W....",

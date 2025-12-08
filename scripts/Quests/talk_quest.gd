@@ -4,11 +4,11 @@ var _pnj1 : CharacterBase
 var _pnj2 : CharacterBase
 
 func _init() -> void :
-	_type = TYPE.TALK
+	type = TYPE.TALK
 
 func setup(world_gen: Node2D) -> void:
-	_pnj1 = ManagerQuest.Instance.GetPNJ(world_gen)
-	_pnj2 = ManagerQuest.Instance.GetPNJ(world_gen)
+	_pnj1 = QuestManager.Instance.GetPNJ(world_gen)
+	_pnj2 = QuestManager.Instance.GetPNJ(world_gen)
 	if _pnj1: _pnj1.emotion = CharacterBase.EMOTION.ANGRY
 	if _pnj2: _pnj2.emotion = CharacterBase.EMOTION.ANGRY
 

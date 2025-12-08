@@ -6,6 +6,7 @@ enum STATE { TO_DO,SUCCESS,FAIL}
 
 var _state : STATE = STATE.TO_DO
 var type : TYPE = TYPE.NONE
+var id : int
 
 @export var _amount_life_reward : int = 5
 

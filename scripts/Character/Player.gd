@@ -4,9 +4,14 @@ static var Instance : Player
 @export var speed: float = 100.0
 var _quest_book_ui = preload("res://scripts/UI/quest_book_ui.gd")
 
+
+
 func _ready():
 	$Camera2D.make_current()
 
+func _process(_delta: float) -> void:
+	if(Input.is_action_pressed("open_inventory")):
+		QuestBookUI.Instance.visible = !QuestBookUI.Instance.visible
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO

@@ -1,61 +1,153 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba101fnwl5x8"]
+[gd_scene load_steps=45 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
-[ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
 [ext_resource type="Script" uid="uid://cgppahdnfi2p2" path="res://scripts/generation/CameraMovement.gd" id="3_cam"]
-[ext_resource type="PackedScene" uid="uid://cdr8rcp4d3abu" path="res://scenes/Player.tscn" id="3_w234y"]
+[ext_resource type="PackedScene" uid="uid://b8x4y201a3c4" path="res://scenes/Player.tscn" id="3_p6oac"]
 [ext_resource type="PackedScene" uid="uid://di4q2e3cdu5uq" path="res://scenes/generation/biome_collision.tscn" id="4_68qco"]
-[ext_resource type="PackedScene" uid="uid://dovl2tbyrw1d" path="res://scenes/Quest/ManagerQuest.tscn" id="4_eq7oc"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
-[ext_resource type="Script" uid="uid://v1fnj4abka1u" path="res://scripts/generation/DecorationItem.gd" id="5_p6oac"]
+[ext_resource type="PackedScene" uid="uid://dovl2tbyrw1d" path="res://scenes/Quest/ManagerQuest.tscn" id="5_w234y"]
+[ext_resource type="PackedScene" uid="uid://cekv5rwqf8jch" path="res://scenes/houses/Biome_P/MediumHouseP1.tscn" id="7_68qco"]
+[ext_resource type="PackedScene" uid="uid://c85lwwlt3138q" path="res://scenes/houses/Biome_P/SimpleHouseP2.tscn" id="7_ikso6"]
+[ext_resource type="Script" uid="uid://v1fnj4abka1u" path="res://scripts/generation/DecorationItem.gd" id="7_w234y"]
+[ext_resource type="TileSet" uid="uid://2rmp57x3ojmi" path="res://scenes/sprites/Tilemap/biomeq_tile_set.tres" id="8_68qco"]
+[ext_resource type="PackedScene" uid="uid://djspu8srsty1o" path="res://scenes/houses/Biome_P/SimpleHouseP1.tscn" id="8_cg1mt"]
+[ext_resource type="PackedScene" uid="uid://grqjca3hilx8" path="res://scenes/houses/Biome_P/MediumHouseP2.tscn" id="9_1kmxa"]
+[ext_resource type="PackedScene" uid="uid://csqdexv7wfpte" path="res://scenes/houses/Biome_P/LargeHouseP2.tscn" id="11_3wx70"]
+[ext_resource type="PackedScene" uid="uid://cm1olipppcd2f" path="res://scenes/houses/Biome_H/SimpleHouseH2.tscn" id="13_doppt"]
+[ext_resource type="PackedScene" uid="uid://b22mpsy6oblbr" path="res://scenes/houses/Biome_H/SimpleHouseH1.tscn" id="14_u7oxn"]
+[ext_resource type="PackedScene" uid="uid://i3d1vpborfnj" path="res://scenes/houses/Biome_H/MediumHouseH2.tscn" id="15_q1gux"]
+[ext_resource type="PackedScene" uid="uid://dxcoofb0dn8wh" path="res://scenes/houses/Biome_H/MediumHouseH1.tscn" id="16_rgbw1"]
+[ext_resource type="PackedScene" uid="uid://b0bj3vkfkp6j0" path="res://scenes/houses/Biome_H/LargeHouseH2.tscn" id="17_c2a15"]
+[ext_resource type="PackedScene" uid="uid://cmx76xdcgs8km" path="res://scenes/houses/Biome_H/LargeHouseH1.tscn" id="18_m00mv"]
+[ext_resource type="PackedScene" uid="uid://clb5mcl1s1fiq" path="res://scenes/houses/Biome_E/SimpleHouseE2.tscn" id="19_dcb0m"]
+[ext_resource type="PackedScene" uid="uid://2dfbhspmi2of" path="res://scenes/houses/Biome_E/SimpleHouseE1.tscn" id="20_xsclf"]
+[ext_resource type="PackedScene" uid="uid://cmnc1jf062qt1" path="res://scenes/houses/Biome_E/MediumHouseE2.tscn" id="21_w78bo"]
+[ext_resource type="PackedScene" uid="uid://bs1jef4wosqmg" path="res://scenes/houses/Biome_E/MediumHouseE1.tscn" id="22_tgsgs"]
+[ext_resource type="PackedScene" uid="uid://3j42bq68yi33" path="res://scenes/houses/Biome_E/LargeHouseE2.tscn" id="23_q2d7p"]
+[ext_resource type="PackedScene" uid="uid://dyy6psq0sron0" path="res://scenes/houses/Biome_E/LargeHouseE1.tscn" id="24_0bbqr"]
+[ext_resource type="PackedScene" uid="uid://d1dyhih44c23y" path="res://scenes/houses/Biome_A/SimpleHouseA2.tscn" id="25_7p5jb"]
+[ext_resource type="PackedScene" uid="uid://bvukuh4m1u2kk" path="res://scenes/houses/Biome_A/SimpleHouseA1.tscn" id="26_vvrsd"]
+[ext_resource type="PackedScene" uid="uid://tcspuygap45t" path="res://scenes/houses/Biome_A/MediumHouseA2.tscn" id="27_4a4pd"]
+[ext_resource type="PackedScene" uid="uid://73oaom2aybru" path="res://scenes/houses/Biome_A/MediumHouseA1.tscn" id="28_ujxn3"]
+[ext_resource type="PackedScene" uid="uid://kkfio6wg0g4p" path="res://scenes/houses/Biome_A/LargeHouseA2.tscn" id="29_p2w3d"]
+[ext_resource type="PackedScene" uid="uid://3as6m3kyw63a" path="res://scenes/houses/Biome_A/LargeHouseA1.tscn" id="30_45v7f"]
 
-[sub_resource type="Resource" id="Resource_w234y"]
-script = ExtResource("5_p6oac")
-atlas_coords = Vector2i(10, 5)
-density = 0.9
+[sub_resource type="Resource" id="Resource_v4eo4"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(8, 7)
+density = 0.01
 metadata/_custom_type_script = "uid://v1fnj4abka1u"
 
-[sub_resource type="Resource" id="Resource_68qco"]
-script = ExtResource("5_p6oac")
-atlas_coords = Vector2i(5, 1)
-density = 0.1
+[sub_resource type="Resource" id="Resource_doppt"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(9, 7)
+density = 0.01
 metadata/_custom_type_script = "uid://v1fnj4abka1u"
 
 [sub_resource type="Resource" id="Resource_p6oac"]
+resource_local_to_scene = true
 script = ExtResource("4_ywfdd")
+biome_name = "Forest(spring)"
 zone_shape = 1
-border_tree_density = 0.1
-decorations = Array[ExtResource("5_p6oac")]([SubResource("Resource_w234y"), SubResource("Resource_68qco")])
+border_tree_density = 0.045
+decorations = Array[ExtResource("7_w234y")]([SubResource("Resource_v4eo4"), SubResource("Resource_doppt")])
+house_scenes = Array[PackedScene]([ExtResource("7_ikso6"), ExtResource("8_cg1mt"), ExtResource("9_1kmxa"), ExtResource("7_68qco"), ExtResource("11_3wx70"), ExtResource("11_3wx70")])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
-[sub_resource type="Resource" id="Resource_eq7oc"]
+[sub_resource type="Resource" id="Resource_u7oxn"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(14, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_q1gux"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(15, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_5gwx6"]
 script = ExtResource("4_ywfdd")
-biome_name = "Ice"
+biome_name = "Forest(winter)"
+zone_shape = 1
+border_tree_density = 0.024
+ground_tile = Vector2i(15, 10)
+wall_tile = Vector2i(15, 11)
+path_tile = Vector2i(14, 10)
+decorations = Array[ExtResource("7_w234y")]([SubResource("Resource_u7oxn"), SubResource("Resource_q1gux")])
+house_scenes = Array[PackedScene]([ExtResource("13_doppt"), ExtResource("14_u7oxn"), ExtResource("15_q1gux"), ExtResource("16_rgbw1"), ExtResource("17_c2a15"), ExtResource("18_m00mv")])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_rgbw1"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(22, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_c2a15"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(23, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_ikso6"]
+script = ExtResource("4_ywfdd")
+biome_name = "Forest(summer)"
+zone_shape = 1
+ground_tile = Vector2i(23, 4)
+wall_tile = Vector2i(23, 5)
+path_tile = Vector2i(22, 4)
+decorations = Array[ExtResource("7_w234y")]([SubResource("Resource_rgbw1"), SubResource("Resource_c2a15")])
+house_scenes = Array[PackedScene]([ExtResource("19_dcb0m"), ExtResource("20_xsclf"), ExtResource("21_w78bo"), ExtResource("22_tgsgs"), ExtResource("23_q2d7p"), ExtResource("24_0bbqr")])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_m00mv"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(12, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_dcb0m"]
+script = ExtResource("7_w234y")
+atlas_coords = Vector2i(13, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_cg1mt"]
+script = ExtResource("4_ywfdd")
+biome_name = "Forest(Autumn)"
+zone_shape = 1
 border_tree_density = 1.0
+ground_tile = Vector2i(13, 10)
+wall_tile = Vector2i(13, 11)
+path_tile = Vector2i(12, 10)
+decorations = Array[ExtResource("7_w234y")]([SubResource("Resource_m00mv"), SubResource("Resource_dcb0m")])
+house_scenes = Array[PackedScene]([ExtResource("25_7p5jb"), ExtResource("26_vvrsd"), ExtResource("27_4a4pd"), ExtResource("28_ujxn3"), ExtResource("29_p2w3d"), ExtResource("30_45v7f")])
 metadata/_custom_type_script = "uid://c27v73t3q056k"
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("ground_layer", "wall_layer")]
 script = ExtResource("1_gen")
-zone_count_range = Vector2i(3, 6)
-zone_size_range = Vector2i(1000, 1000)
-building_count_range = Vector2i(5, 8)
-zone_dirt_ratio = 0.7
-path_smoothness = 1.0
+zone_count_range = Vector2i(10, 10)
+zone_size_range = Vector2i(1000, 2000)
+min_zone_distance = 10
+building_count_range = Vector2i(2, 6)
+zone_dirt_ratio = 0.9
+path_smoothness = 25.0
 path_edge_grass_ratio = 0.2
 npc_scene = ExtResource("4_npc")
-player_scene = ExtResource("3_w234y")
+player_scene = ExtResource("3_p6oac")
 collision_scene = ExtResource("4_68qco")
-manager_quest_scene = ExtResource("4_eq7oc")
+manager_quest_scene = ExtResource("5_w234y")
 ground_layer = NodePath("GroundLayer")
 wall_layer = NodePath("WallLayer")
-available_biomes = Array[ExtResource("4_ywfdd")]([SubResource("Resource_p6oac"), SubResource("Resource_eq7oc")])
+available_biomes = Array[ExtResource("4_ywfdd")]([SubResource("Resource_p6oac"), SubResource("Resource_5gwx6"), SubResource("Resource_ikso6"), SubResource("Resource_cg1mt")])
 
 [node name="GroundLayer" type="TileMapLayer" parent="."]
-tile_set = ExtResource("2_tiles")
+tile_set = ExtResource("8_68qco")
 
 [node name="WallLayer" type="TileMapLayer" parent="."]
-tile_set = ExtResource("2_tiles")
+tile_set = ExtResource("8_68qco")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(675, 352)

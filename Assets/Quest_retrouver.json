@@ -1,0 +1,90 @@
+
+{
+  
+  "origin": [
+	"#setPronouns##politesse.capitalize# #Relation.heroGender# [cible:#nom#] est parti vers #direction# #demande# C'est un #occupation# #fin de phrase#"
+  
+ ],
+ 
+ "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+
+ 
+  "politesse": [
+	"Bonjour étranger, j'ai un problème,",
+	"Salut l'vivant,",
+	"Qui t'es toi ? Aide moi,",
+	"Bienvenue, ça t'intéresserait un boulot pour quelques pièces ?"
+
+ ],
+ 
+ "Relation": [
+	"!frère",
+	"soeur",
+	"^mère",
+	"!mari",
+	"^femme",
+	"Ami"
+
+ ],
+
+  "name": [
+	"Lolane",
+	"Miskina",
+	"Brach",
+	"Sapin",
+	"Brolone",
+	"Judas",
+	"Salazar",
+	"Terrange",
+	"Sophin",
+	"Médor",
+	"Rascale",
+	"Petfor",
+	"Suçin",
+	"Pélerine",
+	"Malazar",
+	"Arthur",
+	"Jean-guy",
+	"Marlouf"
+
+ ],
+
+ "occupation": [
+	"zombie",
+	"squelette",
+	"humain",
+	"chien",
+	"bon chien",
+	"spectre"
+ ],
+
+  "direction": [
+	"l'est. ",
+	"l'ouest. ",
+	"le nord. ",
+	"le sud. "
+ ],
+
+  "fin de phrase": [
+	"Aller, bouge toi ! ",
+	"Reviens vite et avec des bonnes nouvelles !",
+	"Merci de m'aider, je te paierais grassement.",
+	"*Burp* grouille toi, je vais me décomposer avant que tu revienne sinon.",
+	"Qu'est ce que tu fais encore là ? Va bosser ! Hop hop hop !",
+	"Merci beaucoup de m'aider.",
+	"J'espère que tu sera à la hauteur...",
+	"Retrouve #Relation# je t'en supplie...",
+	"J'espère que tu trouveras mon bon à rien de #Relation#  | J'espère que tu trouveras ma bonne à rien de #Relation#"
+ ],
+
+  "demande": [
+	"Ramène le moi, tu veux ? Attention, il peut être intimidant.",
+	"Dis lui de revenir, il me manque !",
+	"Je sens qu'il est mort, mais je veux en être sûr.",
+	"Il m'a volé mon tibias ce con, ramène le moi."
+ ]
+
+}

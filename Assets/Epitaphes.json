@@ -88,25 +88,25 @@
 		"sir | lady" ,
 		"le petit | la petite" ,
 		"Mon fidèle chien" ,
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		"",
-		""
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" "
 	],
 	
   "état": [
@@ -190,7 +190,8 @@
 		"son absence de foi a sans doute condamné son âme aux limbes",
 		"s'est ôté la vie",
 		"#heroSubj# ne connaissait personne d'encore en vie",
-		"son corps fut retrouvé en cet endroit même un bon matin"
+		"son corps fut retrouvé en cet endroit même un bon matin",
+		"#état.heroGender# après 20 jours de prison abominablement durs."
 		
 	]
   

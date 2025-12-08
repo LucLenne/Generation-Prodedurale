@@ -104,10 +104,13 @@ func carve_zone(data: MapData, zone: Zone, biome: BiomeResource):
 		var biome_at_cell = data.get_biome_at(cell.x, cell.y)
 		data.wall_layer.set_cell(cell, -1) # Remove tree
 		
-		if randf() < zone_dirt_ratio:
-			data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
+		if biome_at_cell:
+			if randf() < zone_dirt_ratio:
+				data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
+			else:
+				data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
 		else:
-			data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
+			printerr("Warning: No biome found at zone cell ", cell)
 
 	# Outer Border Gaps
 	process_outer_border(data, zone, boundary_set, biome)
@@ -128,7 +131,8 @@ func process_outer_border(data: MapData, zone: Zone, boundary_set: Dictionary, b
 		if randf() > biome.border_tree_density:
 			data.wall_layer.set_cell(outer_cell, -1)
 			var biome_at_cell = data.get_biome_at(outer_cell.x, outer_cell.y)
-			data.ground_layer.set_cell(outer_cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
+			if biome_at_cell:
+				data.ground_layer.set_cell(outer_cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
 
 func identify_entrances(zones: Array):
 	for zone in zones:

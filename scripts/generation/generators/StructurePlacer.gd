@@ -219,16 +219,26 @@ func connect_doors_to_paths(data: MapData, zone: Zone, doors: Array[Vector2i], o
 			else:
 				var ct = data.ground_layer.get_cell_atlas_coords(point)
 				var biome = data.get_biome_at(point.x, point.y)
-				if ct == biome.ground_tile or ct == biome.dirt_tile or ct == TileConfigScript.PATH:
-					data.wall_layer.set_cell(point, -1)
-					data.ground_layer.set_cell(point, TileConfigScript.SOURCE_ID, biome.path_tile)
-					path_cells_in_zone.append(point)
+				# Check biome existence
+				if biome:
+					if ct == biome.ground_tile or ct == biome.dirt_tile or ct == TileConfigScript.PATH:
+						data.wall_layer.set_cell(point, -1)
+						data.ground_layer.set_cell(point, TileConfigScript.SOURCE_ID, biome.path_tile)
+						path_cells_in_zone.append(point)
+				else:
+					# Fallback or skip if biome not found
+					if ct == TileConfigScript.PATH:
+						path_cells_in_zone.append(point)
 					
 	# Pass path_cells to place_decorations via meta or argument
 	zone.set_meta("path_cells", path_cells_in_zone)
 
 func place_decorations(data: MapData, zone: Zone, occupied_cells: Dictionary, parent: Node2D):
 	var biome = data.get_biome_at(zone.center.x, zone.center.y)
+	if not biome: 
+		printerr("Warning: No biome found at zone center ", zone.center)
+		return
+		
 	var path_cells = zone.get_meta("path_cells", [])
 	
 	# Scenes

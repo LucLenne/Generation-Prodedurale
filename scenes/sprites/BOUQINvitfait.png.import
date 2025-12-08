@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://e5lmradr80yg"
-path="res://.godot/imported/BOUQINvitfait.png-3d1881c89d6ae667f0dd9129652ab972.ctex"
+path="res://.godot/imported/BOUQINvitfait.png-13e7755adb1e626a6159f13b84a2ac60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/BOUQINvitfait.png"
-dest_files=["res://.godot/imported/BOUQINvitfait.png-3d1881c89d6ae667f0dd9129652ab972.ctex"]
+source_file="res://scenes/sprites/BOUQINvitfait.png"
+dest_files=["res://.godot/imported/BOUQINvitfait.png-13e7755adb1e626a6159f13b84a2ac60.ctex"]
 
 [params]
 

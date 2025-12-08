@@ -38,8 +38,8 @@ func generate(data: MapData):
 				# Get centered water tile (default or biome specific)
 				# This acts as initialization before autotiling
 				var water = TileConfig.WATER_BASE
-				if biome and biome.river_tiles.has(0): # 0 is typically the center/full tile
-					water = biome.river_tiles[0]
+				if biome and biome.river_tiles.has("center"): 
+					water = biome.river_tiles["center"]
 
 				data.wall_layer.set_cell(pos, TileConfig.SOURCE_ID, water)
 				data.ground_layer.set_cell(pos, TileConfig.SOURCE_ID, dirt) # Dirt under water
@@ -65,7 +65,9 @@ func generate(data: MapData):
 		# Biome override
 		var biome = data.get_biome_at(cell.x, cell.y)
 		if biome and not biome.river_tiles.is_empty():
-			if biome.river_tiles.has(mask):
-				tile = biome.river_tiles[mask]
+			if TileConfig.RIVER_MASK_NAMES.has(mask):
+				var key = TileConfig.RIVER_MASK_NAMES[mask]
+				if biome.river_tiles.has(key):
+					tile = biome.river_tiles[key]
 
 		data.wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)

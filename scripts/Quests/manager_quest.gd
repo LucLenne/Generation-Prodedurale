@@ -118,7 +118,7 @@ func spawn_quests_in_world(world_gen: WorldGenerator) -> void:
 		
 		# Also register in internal list if it's a QuestBase
 		if instance is QuestBase:
-			_listQuest.append(instance)
+			_inactiveQuest.append(instance)
 			instance.setup(world_gen)
 
 

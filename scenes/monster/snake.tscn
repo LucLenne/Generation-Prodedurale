@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c1mqcu1tpd5h8"]
+
+[node name="Snake" type="Sprite2D"]

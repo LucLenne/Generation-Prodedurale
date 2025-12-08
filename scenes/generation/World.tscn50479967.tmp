@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba101fnwl5x8"]
+[gd_scene load_steps=12 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
 [ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
 [ext_resource type="Script" uid="uid://cgppahdnfi2p2" path="res://scripts/generation/CameraMovement.gd" id="3_cam"]
-[ext_resource type="PackedScene" uid="uid://cdr8rcp4d3abu" path="res://scenes/Player.tscn" id="3_w234y"]
-[ext_resource type="PackedScene" uid="uid://di4q2e3cdu5uq" path="res://scenes/generation/biome_collision.tscn" id="4_68qco"]
 [ext_resource type="PackedScene" uid="uid://dovl2tbyrw1d" path="res://scenes/Quest/ManagerQuest.tscn" id="4_eq7oc"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
@@ -44,8 +42,6 @@ zone_dirt_ratio = 0.7
 path_smoothness = 1.0
 path_edge_grass_ratio = 0.2
 npc_scene = ExtResource("4_npc")
-player_scene = ExtResource("3_w234y")
-collision_scene = ExtResource("4_68qco")
 manager_quest_scene = ExtResource("4_eq7oc")
 ground_layer = NodePath("GroundLayer")
 wall_layer = NodePath("WallLayer")

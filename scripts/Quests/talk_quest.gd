@@ -4,7 +4,7 @@ var _pnj1 : CharacterBase
 var _pnj2 : CharacterBase
 
 func _init() -> void :
-	_type = TYPE.TALK
+	type = TYPE.TALK
 
 func setup(world_gen: Node2D) -> void:
 	_pnj1 = ManagerQuest.Instance.GetPNJ(world_gen)

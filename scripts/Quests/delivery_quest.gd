@@ -4,7 +4,7 @@ var _pnj : PNJ
 var _item : CollectibleBase
 
 func _init() -> void :
-	_type = TYPE.DELIVERY
+	type = TYPE.DELIVERY
 
 func setup(world_gen: Node2D) -> void:
 	var rd = randi_range(0, ManagerQuest.Instance.list_collectibles.size()) 

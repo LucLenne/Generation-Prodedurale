@@ -13,7 +13,7 @@ func generate(data: MapData, parent_node: Node2D):
 	print("Populating zones...")
 	for zone in data.zones:
 		var biome = data.get_biome_at(zone.center.x, zone.center.y)
-		var current_house_scenes = []
+		var current_house_scenes: Array[PackedScene] = []
 		if biome and not biome.house_scenes.is_empty():
 			current_house_scenes = biome.house_scenes
 			
@@ -35,7 +35,10 @@ func generate(data: MapData, parent_node: Node2D):
 				if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH:
 					continue
 					
-				var result = try_place_building_at(data, zone, cell, placed_buildings, occupied_cells, parent_node, current_house_scenes)
+				var use_procedural = false
+				if biome: use_procedural = biome.use_procedural_buildings
+				
+				var result = try_place_building_at(data, zone, cell, placed_buildings, occupied_cells, parent_node, current_house_scenes, use_procedural)
 				if result.success:
 					placed_buildings.append(result.rect)
 					building_doors.append(result.door)
@@ -62,13 +65,22 @@ func generate(data: MapData, parent_node: Node2D):
 		# Place Decorations
 		place_decorations(data, zone, occupied_cells, parent_node)
 
-func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary, parent: Node2D, available_scenes: Array[PackedScene]) -> Dictionary:
+func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary, parent: Node2D, available_scenes: Array[PackedScene], force_procedural: bool = false) -> Dictionary:
 	var result = {"success": false, "rect": Rect2i(), "door": Vector2i()}
 	
-	var use_scene = available_scenes.size() > 0 and randf() > 0.5
 	var offset = Vector2i.ZERO
 	var building_size = Vector2i(5, 5)
 	var door_pos = pos
+	var use_scene = false
+	
+	if force_procedural:
+		# Explicitly forced procedural
+		pass 
+	elif available_scenes.size() > 0:
+		use_scene = true
+	else:
+		# Scenes expected but none available -> Do nothing
+		return result
 	
 	if use_scene:
 		var scene = available_scenes.pick_random()
@@ -118,7 +130,7 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 		return result
 		
 	else:
-		# Procedural Logic
+		# Procedural Logic (Only reached if force_procedural is true)
 		var house_data = HouseGenScript.generate_random_house(pos)
 		var building_rect = house_data.rect
 		door_pos = house_data.door_position

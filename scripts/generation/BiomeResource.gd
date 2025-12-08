@@ -42,5 +42,6 @@ enum ZoneShape {
 @export var decorations: Array[DecorationItem] = []
 @export var decoration_scenes: Array[PackedScene] = []
 @export var house_scenes: Array[PackedScene] = [] # Buildings specific to this biome
+@export var use_procedural_buildings: bool = false # If true, ignores house_scenes and generates procedurally
 # @export_range(0.0, 1.0) var decoration_density: float = 0.05 # Deprecated
 @export var decoration_scene_count_range: Vector2i = Vector2i(0, 2)

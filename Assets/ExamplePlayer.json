@@ -1,6 +1,6 @@
 {
 	"origin": [
-		"#setPronouns##setOccupation#[hero:#nom#][home:#lieu#]#histoire1#"
+		"#setPronouns##setOccupation#[hero:#nom#][home:#lieu#]#reponseAmical#"
 	],
 	"nom": [
 		"Chéri",
@@ -69,16 +69,15 @@
 		"[metier:guerrier | guerrière][action:a combattu #monstre.indef#,a sauvé #home.def# d'#monstre.indef#,a perdu #objet.poss# au combat,a vaincu #monstre.def# #adjectif#]"
 	],
 	
-	
-	"histoire1": [
+	"reponseAmical": [
 		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
 	],
 	
-	"histoire2": [
+	"reponseIntimidante": [
 		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
 	],
 	
-	"histoire3": [
+	"reponsePersuasive": [
 		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
 	]
 	

@@ -29,8 +29,20 @@ func generate(data: MapData):
 		for y in range(center_y - river_width / 2, center_y + river_width / 2 + 1):
 			if y >= 0 and y < height:
 				var pos = Vector2i(x, y)
-				data.wall_layer.set_cell(pos, TileConfig.SOURCE_ID, TileConfig.WATER_BASE)
-				data.ground_layer.set_cell(pos, TileConfig.SOURCE_ID, TileConfig.DIRT) # Dirt under water
+				var biome = data.get_biome_at(x, y)
+				
+				# Get biome-specific dirt or default
+				var dirt = TileConfig.DIRT
+				if biome: dirt = biome.dirt_tile
+					
+				# Get centered water tile (default or biome specific)
+				# This acts as initialization before autotiling
+				var water = TileConfig.WATER_BASE
+				if biome and biome.river_tiles.has(0): # 0 is typically the center/full tile
+					water = biome.river_tiles[0]
+
+				data.wall_layer.set_cell(pos, TileConfig.SOURCE_ID, water)
+				data.ground_layer.set_cell(pos, TileConfig.SOURCE_ID, dirt) # Dirt under water
 				river_cells[pos] = true
 
 	# Autotiling
@@ -47,5 +59,13 @@ func generate(data: MapData):
 		if not river_cells.has(bottom): mask += 4
 		if not river_cells.has(left): mask += 8
 		
+		# Default tile
 		var tile = TileConfig.get_river_tile(mask)
+		
+		# Biome override
+		var biome = data.get_biome_at(cell.x, cell.y)
+		if biome and not biome.river_tiles.is_empty():
+			if biome.river_tiles.has(mask):
+				tile = biome.river_tiles[mask]
+
 		data.wall_layer.set_cell(cell, TileConfig.SOURCE_ID, tile)

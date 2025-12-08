@@ -18,6 +18,7 @@ enum ZoneShape {
 @export var dirt_tile: Vector2i = Vector2i(1, 1)   # Default Dirt
 @export var wall_tile: Vector2i = Vector2i(5, 5)   # Default Tree
 @export var path_tile: Vector2i = Vector2i(4, 4)   # Default Path
+@export var river_tiles: Dictionary = {}           # Mask (int) -> Vector2i (Atlas Coords)
 
 @export_group("Decorations")
 # @export var decoration_tiles: Array[Vector2i] = [] # Deprecated
@@ -25,3 +26,4 @@ enum ZoneShape {
 @export var decoration_scenes: Array[PackedScene] = []
 # @export_range(0.0, 1.0) var decoration_density: float = 0.05 # Deprecated
 @export var decoration_scene_count_range: Vector2i = Vector2i(0, 2)
+

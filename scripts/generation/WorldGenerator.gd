@@ -62,6 +62,19 @@ func _ready():
 	if ground_layer == null or wall_layer == null:
 		printerr("Error: TileMapLayers are not assigned in WorldGenerator!")
 		return
+
+	# Auto-detect TileSet Source ID
+	if ground_layer.tile_set:
+		var source_count = ground_layer.tile_set.get_source_count()
+		if source_count > 0:
+			var found_id = ground_layer.tile_set.get_source_id(0)
+			# Update the static variable
+			TileConfigScript.SOURCE_ID = found_id
+			print("Detected TileSet Source ID: ", found_id)
+		else:
+			printerr("Warning: TileSet assigned to Ground Layer has no sources.")
+	else:
+		printerr("Warning: No TileSet assigned to Ground Layer.")
 		
 	# Initialize MapData
 	map_data = MapDataScript.new(width, height, ground_layer, wall_layer, randi())

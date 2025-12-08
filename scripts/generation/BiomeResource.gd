@@ -41,5 +41,6 @@ enum ZoneShape {
 # @export var decoration_tiles: Array[Vector2i] = [] # Deprecated
 @export var decorations: Array[DecorationItem] = []
 @export var decoration_scenes: Array[PackedScene] = []
+@export var house_scenes: Array[PackedScene] = [] # Buildings specific to this biome
 # @export_range(0.0, 1.0) var decoration_density: float = 0.05 # Deprecated
 @export var decoration_scene_count_range: Vector2i = Vector2i(0, 2)

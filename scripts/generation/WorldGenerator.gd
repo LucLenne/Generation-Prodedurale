@@ -25,7 +25,6 @@ class_name WorldGenerator extends Node2D
 @export var npc_scene : PackedScene
 @export var player_scene : PackedScene
 @export var collision_scene : PackedScene
-@export var house_scenes : Array[PackedScene]
 @export var manager_quest_scene : PackedScene
 
 @export_group("Layers")
@@ -100,7 +99,7 @@ func generate_world():
 	var river_gen = RiverGenScript.new()
 	var zone_gen = ZoneGenScript.new(zone_count_range, zone_size_range, min_zone_distance, entrance_count_range, zone_dirt_ratio)
 	var path_gen = PathGenScript.new(path_width, path_smoothness, path_edge_grass_ratio, path_edge_dirt_ratio)
-	var structure_gen = StructureGenScript.new(building_count_range, house_scenes)
+	var structure_gen = StructureGenScript.new(building_count_range)
 	var spawner_gen = SpawnerScript.new(player_scene, npc_scene, manager_quest_scene)
 	
 	# 2. Pipeline Execution
@@ -148,7 +147,7 @@ func get_random_zone() -> Zone: # Returns Zone object
 	if not map_data or map_data.zones.is_empty(): return null
 	return map_data.zones.pick_random()
 
-func get_random_zone_position(specific_zone = null) -> Vector2:
+func get_random_zone_position(specific_zone = null, size: Vector2i = Vector2i(1, 1)) -> Vector2:
 	var target_zone = specific_zone
 	if target_zone == null:
 		target_zone = get_random_zone()
@@ -159,18 +158,23 @@ func get_random_zone_position(specific_zone = null) -> Vector2:
 	# Attempt to find a valid spot (Not water, Not occupied, Area check)
 	for i in range(20):
 		var cell = target_zone.cells.pick_random()
-		if _is_area_safe(cell, 4): # Check 4 tile radius (9x9) for large quests
-			return Vector2(cell) * TileConfigScript.TILE_SIZE
+		if _is_rect_safe(cell, size):
+			var world_pos = Vector2(cell) * TileConfigScript.TILE_SIZE
+			register_reserved_area(world_pos, max(size.x, size.y) / 2 + 1)
+			return world_pos
 	
 	# Fallback
-	return Vector2(target_zone.cells.pick_random()) * TileConfigScript.TILE_SIZE
+	var fallback_cell = target_zone.cells.pick_random()
+	var fallback_pos = Vector2(fallback_cell) * TileConfigScript.TILE_SIZE
+	register_reserved_area(fallback_pos, max(size.x, size.y) / 2 + 1)
+	return fallback_pos
 
-func get_random_building_door() -> Vector2:
+func get_random_building_door(size: Vector2i = Vector2i(1, 1)) -> Vector2:
 	if not map_data: return Vector2.ZERO
 	
 	var valid_zones = map_data.zones.filter(func(z): return z.has_meta("building_doors") and not z.get_meta("building_doors").is_empty())
 	if valid_zones.is_empty(): 
-		return get_random_zone_position()
+		return get_random_zone_position(null, size)
 		
 	var zone = valid_zones.pick_random()
 	var doors = zone.get_meta("building_doors")
@@ -185,17 +189,29 @@ func get_random_building_door() -> Vector2:
 				var cell = Vector2i(x,y)
 				if map_data.reserved_cells.has(cell): continue
 				
-				# Check safety (no water, no trees) - Radius 3 allows for decent sized decorations
-				if _is_area_safe(cell, 3): 
-					return Vector2(cell) * TileConfigScript.TILE_SIZE
+				# Check safety (no water, no trees)
+				if _is_rect_safe(cell, size):
+					var world_pos = Vector2(cell) * TileConfigScript.TILE_SIZE
+					register_reserved_area(world_pos, max(size.x, size.y) / 2 + 1) 
+					return world_pos
 
-	return Vector2(door) * TileConfigScript.TILE_SIZE
+	var fallback_pos = Vector2(door) * TileConfigScript.TILE_SIZE
+	register_reserved_area(fallback_pos, max(size.x, size.y) / 2 + 1)
+	return fallback_pos
 
 func _is_area_safe(center: Vector2i, radius: int) -> bool:
+	return _is_rect_safe(center - Vector2i(radius, radius), Vector2i(radius * 2, radius * 2))
+
+func _is_rect_safe(top_left: Vector2i, size: Vector2i) -> bool:
 	if not map_data: return false
 	
-	for x in range(center.x - radius, center.x + radius + 1):
-		for y in range(center.y - radius, center.y + radius + 1):
+	# Safety buffer around the rect
+	var buffer = 1
+	var start = top_left - Vector2i(buffer, buffer)
+	var end = top_left + size + Vector2i(buffer, buffer)
+	
+	for x in range(start.x, end.x):
+		for y in range(start.y, end.y):
 			var c = Vector2i(x,y)
 			if not map_data.is_in_bounds(c.x, c.y): return false
 			

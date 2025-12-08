@@ -132,7 +132,7 @@ func carve_path_between_zones(data: MapData, zone_a: Zone, zone_b: Zone):
 				if data.is_in_bounds(cell.x, cell.y):
 					if TileConfigScript.is_water(data.wall_layer.get_cell_atlas_coords(cell)):
 						data.wall_layer.set_cell(cell, -1)
-						data.ground_layer.set_cell(cell, TileConfigScript.SOURCE_ID, TileConfigScript.FLOOR)
+						data.ground_layer.set_cell(cell, TileConfigScript.SOURCE_ID, TileConfigScript.BRIDGE)
 					else:
 						var biome = data.get_biome_at(cell.x, cell.y)
 						data.wall_layer.set_cell(cell, -1)

@@ -12,6 +12,7 @@ const DOOR = Vector2i(2, 2)        # Porte
 const TREE = Vector2i(5, 5)        # Arbre
 const PATH = Vector2i(4, 4)        # Chemin terre
 const FLOOR = Vector2i(1, 1)       # Plancher bois
+const BRIDGE = Vector2i(11, 5)      # Pont (par défaut même que le sol)
 const SQUARE = Vector2i(4, 4)      # Pavé pierre pour la place
 const WATER_BASE = Vector2i(12, 8) # Eau pleine (fallback)
 

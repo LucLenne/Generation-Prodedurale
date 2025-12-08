@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://de803bokh0ieh"]
+
+[ext_resource type="Script" uid="uid://yr8c14qo708p" path="res://scripts/Dialogue/dialogue_system.gd" id="1_8rghh"]
+[ext_resource type="PackedScene" uid="uid://d1umgfern6hay" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="2_8rghh"]
+[ext_resource type="JSON" path="res://Assets/ExampleNPC.json" id="2_lksov"]
+[ext_resource type="JSON" path="res://Assets/ExampleMonster.json" id="3_cyii7"]
+
+[node name="DialogueSystem" type="Node" node_paths=PackedStringArray("dialogue_ui")]
+script = ExtResource("1_8rghh")
+dialogue_ui = NodePath("DialogueSystemUI")
+npc_json_file = ExtResource("2_lksov")
+monster_json_file = ExtResource("3_cyii7")
+metadata/_custom_type_script = "uid://yr8c14qo708p"
+
+[node name="DialogueSystemUI" parent="." instance=ExtResource("2_8rghh")]

@@ -440,7 +440,6 @@ class GrammarFR extends RefCounted:
 			var symbol := parts[0]
 			var modifiers := parts.slice(1, parts.size())
 
-			# Je choisis la règle à partir des données sauvegardées ou des règles de base
 			var selected_rule: Variant
 			if _save_data.has(symbol):
 				selected_rule = _save_data[symbol]
@@ -459,15 +458,10 @@ class GrammarFR extends RefCounted:
 					resolved = ""
 				else:
 					var choice : String = arr[rng.randi() % arr.size()]
-					# Je réapplique flatten sur le choix pour gérer les tags imbriqués
-					# IMPORTANT: On ne strip pas les marqueurs ici pour que les modificateurs puissent les voir
 					resolved = flatten(choice, false)
 			else:
-				# Si c'est une simple chaîne je la passe à flatten pour gérer les tags éventuels
-				# IMPORTANT: On ne strip pas les marqueurs ici
 				resolved = flatten(str(selected_rule), false)
 
-			# J'applique les modificateurs via la fonction dédiée qui gère l'ordre et les valeurs par défaut
 			if resolved.length() > 1 :
 				resolved = _apply_modifiers(resolved, modifiers)
 
@@ -477,25 +471,23 @@ class GrammarFR extends RefCounted:
 			# Je continue la recherche après la fin du tag traité
 			pos = end
 
-		# J'ajoute le texte restant après le dernier tag
-		# J'ajoute le texte restant après le dernier tag
 		result += rule.substr(pos)
 		
-		# On nettoie les marqueurs du résultat final pour l'affichage UNIQUEMENT si demandé
+	
 		if strip_markers:
 			return ModifiersFR._get_word_without_marker(result)
 		return result
 	
 	
 	func _resolve_save_symbols(rule: String) -> String:
-		# Je cherche toutes les actions de type [nom:valeur] ou [nom]
+		
 		var matches := _save_symbol_regex.search_all(rule)
 		if matches.is_empty():
 			return rule
 
 		for m in matches:
-			var full := m.get_string(0) # Exemple "[hero:#name#]"
-			# Je retire les crochets pour ne garder que "hero:#name#"
+			var full := m.get_string(0)
+			
 			var content := full.substr(1, full.length() - 2)
 			var parts := content.split(":")
 
@@ -505,14 +497,13 @@ class GrammarFR extends RefCounted:
 				var rhs := parts[1].strip_edges()
 
 				if rhs.find(",") != -1:
-					# Si la valeur contient des virgules je considère que c'est une liste de règles
+					
 					var arr := []
 					for p in rhs.split(","):
 						arr.append(p.strip_edges())
 					_save_data[name] = arr
 				else:
-					# Sinon je résous la valeur immédiatement et je la stocke comme texte
-					# IMPORTANT: On ne strip pas les marqueurs pour garder le genre/nombre
+					
 					_save_data[name] = flatten(rhs, false)
 			else:
 				# Cas [nom] que je résous comme #nom#
@@ -520,29 +511,26 @@ class GrammarFR extends RefCounted:
 				# IMPORTANT: On ne strip pas les marqueurs
 				_save_data[name2] = flatten("#" + name2 + "#", false)
 
-		# Je renvoie la règle nettoyée sans les actions de sauvegarde
+		
 		return _save_symbol_regex.sub(rule, "", true)
 
 	
 	
 	func _get_modifiers(symbol: String) -> Array:
-		# A partir d'un tag "#hero.capitalize.a#" je récupère ["capitalize", "a"]
+	
 		var modifiers := symbol.replace("#", "").split(".")
 		if modifiers.size() > 0:
-			# Je retire le premier élément qui est le nom du symbole
+	
 			modifiers.remove_at(0)
 		return modifiers
 	
 	
 	func _apply_modifiers(resolved: String, modifiers: Array) -> String:
-		# Fonction utilitaire si je veux appliquer une liste de modificateurs à part
-		# Ordre d'application: genre ("f") -> nombre ("s") -> articles ("def", "indef", "part") -> reste
-		
 		# Définir les priorités
 		var priority_map = {
-			"f": 1,          # Genre en premier
-			"s": 2,          # Nombre en second
-			"def": 3,        # Articles en troisième
+			"f": 1,         
+			"s": 2,          
+			"def": 3,        
 			"indef": 3,
 			"partDef": 3,
 			"partIndef":3,
@@ -554,8 +542,6 @@ class GrammarFR extends RefCounted:
 		}
 	
 		
-		# 0. Expansion des modificateurs dynamiques (variables)
-		# On doit le faire AVANT le tri pour que si une variable contient "f", elle soit triée comme "f" (priorité 1)
 		var expanded_modifiers = []
 		for m in modifiers:
 			if _save_data.has(m):
@@ -563,8 +549,6 @@ class GrammarFR extends RefCounted:
 				if typeof(val) == TYPE_ARRAY:
 					expanded_modifiers.append_array(val)
 				else:
-					# On split au cas où la variable contienne plusieurs modificateurs (ex: "f.s")
-					# Note: flatten renvoie une string, donc c'est généralement un seul modificateur ou une chaîne
 					expanded_modifiers.append(str(val))
 			else:
 				expanded_modifiers.append(m)
@@ -572,23 +556,18 @@ class GrammarFR extends RefCounted:
 		# Trier les modificateurs selon leur priorité
 		var sorted_modifiers = expanded_modifiers
 		sorted_modifiers.sort_custom(func(a, b):
-			var priority_a = priority_map.get(a, 999)  # 999 pour les modificateurs sans priorité définie
+			var priority_a = priority_map.get(a, 999)  
 			var priority_b = priority_map.get(b, 999)
 			return priority_a < priority_b
 		)
 		
-		# 1. Gestion implicite du Masculin
-		# Si on ne demande pas explicitement le féminin ("f"), on garde la partie gauche du séparateur de genre "|"
-		# On vérifie dans la liste étendue
+
 		if "f" not in sorted_modifiers:
 			resolved = ModifiersFR._get_word_without_gender_separator(resolved)
 		
 		# 2. Application des modificateurs
 		for m in sorted_modifiers:
 			
-			# Gestion implicite du Singulier avant les articles
-			# Si on n'a pas demandé le pluriel ("s") et qu'on n'est pas en train de traiter "f" (qui peut générer des "/")
-			# On doit nettoyer le séparateur de nombre "/" avant d'appliquer des articles qui ont besoin du mot final
 			if m != "f" and m != "s" and "s" not in sorted_modifiers:
 				resolved = ModifiersFR._get_word_without_number_separator(resolved)
 			
@@ -597,11 +576,8 @@ class GrammarFR extends RefCounted:
 				var func_name = _modifier_lookup[m][1]
 				resolved = obj.call(func_name, resolved)
 			
-			# Note: On ne gère plus _save_data ici car tout a été étendu au début
-			# Les modificateurs inconnus sont ignorés silencieusement (ou on pourrait loguer un warning)
 					
-		# 3. Nettoyage final du Singulier
-		# Si "s" n'était pas présent et qu'aucun article n'a déclenché le nettoyage, on le fait maintenant
+
 		if "s" not in sorted_modifiers:
 			resolved = ModifiersFR._get_word_without_number_separator(resolved)
 			

@@ -3,7 +3,7 @@
 signal life_changed(current_life : int)
 
 enum ORIENTATION {FREE, DPAD_8, DPAD_4}
-enum STATE {IDLE, ATTACKING, STUNNED, DEAD}
+enum STATE {IDLE, CHASE, ATTACKING, STUNNED, DEAD}
 enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 
@@ -44,7 +44,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 var _last_hit_time : float
 
 #Inventory
-var _inventory = Array[CollectibleBase]
+var _inventory : Array[CollectibleBase] = []
 
 # Movement
 var _direction : Vector2
@@ -65,6 +65,14 @@ var _room #: Room
 @onready var main_sprite : Sprite2D = $"BodySprite"
 
 
+func _ready() -> void:
+	if default_movement == null:
+		printerr("CharacterBase: 'default_movement' is missing on ", name, "! Assign a MovementParameters resource.")
+		# Fallback to avoid crash, though behavior will be weird (no speed)
+		default_movement = MovementParameters.new()
+		
+	_current_movement = default_movement
+
 func _process(delta: float) -> void:
 	_update_state(delta)
 
@@ -77,7 +85,8 @@ func _physics_process(_delta: float) -> void:
 	if _direction.length() > 0.000001:
 		velocity += _direction * _current_movement.acceleration * get_physics_process_delta_time()
 		velocity = velocity.limit_length(_current_movement.speed_max)
-		main_sprite.rotation = _compute_orientation_angle(_direction)
+		if main_sprite:
+			main_sprite.rotation = _compute_orientation_angle(_direction)
 	else:
 		## If direction length == 0, Apply friction
 		var friction_length = _current_movement.friction * get_physics_process_delta_time()

@@ -6,8 +6,6 @@ func _init() -> void :
 	type = TYPE.COLLECT
 	var rd = randi_range(0, ManagerQuest.Instance.list_collectibles.size()) 
 	_item = ManagerQuest.Instance.list_collectibles[rd]
-	
-	
 
 func _process(_delta: float) -> void:
 	if(Player.Instance.item_in_inventory(_item)):

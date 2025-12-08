@@ -1,0 +1,138 @@
+{
+  "origin": [
+    "#setPronouns# #début.heroGender.capitalize# #distinction.heroGender#, #nom#, #épitaphe.heroGender.capitalize#."
+  ],
+
+  "début": [
+	  "Ci-gît",
+	  "Ici repose",
+	  "Enterré bien profond ici | Enterrée bien profond ici",
+	  "Enterré pour la deuxième fois | Enterrée pour la deuxième fois",
+      "Inhumé en ce lieu | Inhumée en ce lieu"
+  ],
+ 
+  "nom": [
+		"Berjamin",
+		"Gustrand",
+		"Cecile",
+		"Merlin",
+		"Fleur",
+		"Xavier",
+		"Jean-plume",
+		"Jacqueline",
+		"Alice",
+		"Pascal",
+		"Toma",
+		"Sabine",
+		"Jean-Michel",
+		"Emile",
+		"INCONNU",
+		"-Le nom est rayé et illisible-",
+		"Turlupin | Turlupine",
+		"Sac-à-rat",
+		"Eddie #heroObj# fourbe",
+		"Jack 'sansdents'",
+		"Wassim l'aimable",
+		"Dragan #heroObj# vil",
+		"Manu",
+        "Tulipe"
+	],
+  
+  "distinction": [
+		"le baron | la baronne",
+		"le boucher | la bouchère",
+		"le fossoyeur | la fossoyeuse",
+		"le brasseur | la brasseuse",
+		"le vagabond | la vagabonde",
+		"le poète | la poétesse",
+		"le peintre | la peintresse",
+		"frère | soeur",
+		"le terrible | la terrible",
+		"l'abominable",
+		"le doux | la douce",
+		"sir | lady",
+		"le petit | la petite",
+		"mon fidèle chien",
+        "notre ami | notre amie"
+	],
+	
+  "état": [
+		"mort",
+		"décédé",
+		"crevé",
+		"disparu",
+		"#heroSubj# nous a quitté",
+        "eternellement endormi"
+	],
+	
+  "action": [
+		"mangé",
+		"tué",
+		"fauché",
+		"écartelé",
+		"trainé dans la boue",
+		"écorché",
+		"pendu",
+		"assassiné",
+		"pris",
+		"exécuté",
+		"terrassé",
+		"immolé",
+		"brûlé",
+		"cramé",
+		"égorgé",
+		"grignoté",
+		"écrasé",
+		"noyé",
+        "éventré"
+	],
+	
+  "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+        "[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+  "épitaphe": [
+		"#état.heroGender# de faim",
+		"#état.heroGender# de flemme",
+		"#action.heroGender# par sa propre mère",
+		"#état.heroGender# je sais plus comment",
+		"#action.heroGender# dans la fleur de l'âge",
+		"#état.heroGender# vieux et à peu près heureux | #état.heroGender# vieille et à peu près heureuse",
+		"#état.heroGender# triste et seul | #état.heroGender# triste et seule",
+		"son corps fut zombifié, décomposé, enterré",
+		"#action.heroGender# par un ami",
+		"criminel endurci, dieu ait son âme | criminelle endurcie, dieu ait son âme",
+		"enfant du boucher du village",
+		"#état.heroGender# dans le désespoir et la folie",
+		"#action.heroGender# lentement par de vils zombies",
+		"#action.heroGender# pour trahison",
+		"#action.heroGender# dans son sommeil",
+		"ne nous embêtera plus",
+		"au revoir vieil ami | au revoir vieille amie",
+		"chut ! mieux vaut ne pas #heroObj# réveiller",
+		"#action.heroGender# injustement par de terribles monstres",
+		"gros démon parti trop tard",
+		"petit ange parti trop tôt",
+		"faites qu'#heroSubj# y reste cette fois ci...",
+		"#état.heroGender# d'épectase",
+		"#heroSubj# ira en enfer à coup sûr",
+		"peut être sera-t-#heroSubj# plus heureux dans la terre | peut être sera-t-#heroSubj# plus heureuse dans la terre",
+		"#état.heroGender# d'avoir trop pleuré",
+		"#action.heroGender# pour motif inconnu",
+		"#action.heroGender# puis #action.heroGender# et enfin #action.heroGender#",
+		"#action.heroGender# en place publique",
+		"la famille est priée de venir payer la mise en bière au plus vite",
+		"#état.heroGender# ivre, comme #heroSubj# a vécu",
+		"s'est #action.heroGender# #heroSubj#-même par désespoir",
+		"puisse-t-#heroSubj# rejoindre le créateur en paix avec les immondices qu'#heroSubj# a commis",
+		"#heroSubj# a rejoint son amant qui lui manquait tant",
+		"puisse tu être dans un monde meilleur mon enfant...",
+		"-Des marques de griffure masquent l'épitaphe-",
+		"-Une main a été clouée sur la pierre tombale, 2 de ses doigts ont été rongés-",
+		"#action.heroGender# le jour de ses 5 ans",
+		"#état.heroGender# une bonne fois pour toutes",
+		"Si vous trouvez cette tombe vide, merci de vous adresser aux services funéraires",
+        "#action.heroGender# par un médiateur macabre qu'#heroSubj# avait refusé de payer"
+	]
+}

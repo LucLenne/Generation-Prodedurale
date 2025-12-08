@@ -456,7 +456,8 @@ class GrammarFR extends RefCounted:
 				resolved = flatten(str(selected_rule), false)
 
 			# J'applique les modificateurs via la fonction dédiée qui gère l'ordre et les valeurs par défaut
-			resolved = _apply_modifiers(resolved, modifiers)
+			if resolved.length() > 1 :
+				resolved = _apply_modifiers(resolved, modifiers)
 
 			# J'ajoute le texte final au résultat
 			result += resolved
@@ -586,4 +587,4 @@ class GrammarFR extends RefCounted:
 		if "s" not in sorted_modifiers:
 			resolved = ModifiersFR._get_word_without_number_separator(resolved)
 			
-		return resolved
+		return ModifiersFR._get_word_without_marker(resolved) 

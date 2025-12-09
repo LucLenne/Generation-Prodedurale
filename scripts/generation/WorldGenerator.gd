@@ -129,6 +129,10 @@ func generate_world():
 	
 	print("World Generation Complete.")
 
+func _on_regenerate_button_pressed():
+	print("Regenerate button pressed. Regenerating world...")
+	generate_world()
+
 # --- Public API / Helpers (Preserved for Compatibility) ---
 
 # Helper called by EntitySpawner

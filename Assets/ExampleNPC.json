@@ -58,7 +58,7 @@
 	"cible_nom": [
 	"Lolane",
 	"Miskina",
-	"Brach",
+	"Braché",
 	"Sapin",
 	"Brolone",
 	"Judas",
@@ -73,7 +73,11 @@
 	"Malazar",
 	"Arthur",
 	"Jean-guy",
-	"Marlouf"
+	"Marlouf",
+	"Fapabien",
+	"Hugore",
+	"Ibérith",
+	"Gertrude"
 
 	 ],
 
@@ -178,7 +182,7 @@
 	"#heroSubj# a oublié sa jambe en plus, #heroSubj# va pas arrêter de se casser la gueule",
 	"#heroSubj# m'a volé #objet.indef# en plus ce con",
 	"c'est pas tant que je l'aime, mais #heroSubj# fait bien la cuisine",
-	"",
+	"#heroSubj# est parti en déblatèrant des inepties sur le druide, alors que tout le monde sait qu'il veut notre bien",
 	"",
 	"",
 	"",
@@ -193,20 +197,22 @@
 	"Qu'est ce que t'attend ? tu veux un bisous ? Aller bouge ! ",
 	"#heroSubj# verra ce que ça fait de me quitter comme ça.",
 	"#heroSubj# va pas en revenir de la beigne qu'il prendra quand tu me l'auras ramené.",
-	"j'en reviens pas qu'#heroSubj soit parti... sale #insulte# #insulte.partindef# #insulte.partindef#"
+	"j'en reviens pas qu'#heroSubj soit parti... sale #insulte# #insulte.partindef# #insulte.partindef#",
+	"et si t'essaie de me la mettre à l'envers, j'ai un #objet# et j'hésiterais pas à m'en servir"
  	],
 
 	"conclusion_amical": [
-	"#cible# s'enfuie tout le temps, pourtant je lui fais pas de mal je crois ?",
+	"#cible_nom# s'enfuit tout le temps, pourtant je lui fais pas de mal je crois ?",
 	"retrouve #rela.herogender.poss_m# je t'en supplie...",
 	"je ne sais pas ce que je ferais sans #heroSubj#, ramène #heroObj# je t'en prie.",
 	"J'espère que tu sera à la hauteur...",
 	"reviens vite étranger, je te donnerais tout ce que j'ai si tu me #heroObj# ramène.",
-	"si tu meurs en chemin, je jure que je te retrouverais pour enterrer ton corps, un jour ou l'autre quand je passerais par là."
+	"si tu meurs en chemin, je jure que je te retrouverais pour enterrer ton corps, un jour ou l'autre quand je passerais par là.",
+	""
  	],
 	
 	"conclusion_persuasif": [
-	"#cible# me doit beaucoup d'argent, ramène #heroObj# vite.",
+	"#cible_nom# me doit beaucoup d'argent, ramène #heroObj# vite.",
 	"fais vite, tu sais aller vite non ? Un grand gaillard comme toi.",
 	"et si tu reviens très vite, je te donnerais peut être #objet.indef.poss_m#, mais il y à de grandes chances que non.",
 	"que le druide te protège sur ta route étranger.",

@@ -23,6 +23,7 @@ var is_typing: bool = false
 var is_interaction_mode: bool = false
 var current_tween: Tween
 
+
 func _ready():
 	response_container.visible = false
 	

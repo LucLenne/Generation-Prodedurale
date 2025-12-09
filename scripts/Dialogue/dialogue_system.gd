@@ -1,5 +1,7 @@
 class_name DialogueSystem extends Node
 
+@export var pnj : PNJ
+
 @export_group("Dialogue Files")
 @export var dialogue_ui : DialogueSystemUI
 @export var npc_json_file : JSON
@@ -65,6 +67,7 @@ func generate_new_quest():
 	current_quest_data.owner_name = grammar_npc._save_data.get("proprietaire", ["Inconnu"])
 
 	grammar_monster._save_data["proprietaire"] = [current_quest_data.owner_name]
+
 
 func get_quest_intro_text() -> String:
 	var mood_key = _get_mood_key(current_quest_data.target_mood)
@@ -153,6 +156,7 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
+		QuestManager.Instance.ActivateQuest(pnj)
 		await get_tree().create_timer(2.0).timeout
 		
 		is_fighting_monster = true

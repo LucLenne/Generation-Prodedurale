@@ -1,5 +1,4 @@
 class_name QuestManager extends Node
-static var Instance : QuestManager
 
 
 @export_group("Génération")
@@ -10,11 +9,6 @@ static var Instance : QuestManager
 @export var list_pnj : Array[PackedScene]
 var _pnj_in_quest : Array[PNJ]
 
-func _enter_tree() -> void:
-	if Instance == null:
-		Instance = self
-	else:
-		queue_free()
 
 @export_group("Talk")
 @export var max_dist_pnj : float = 50
@@ -110,14 +104,14 @@ func spawn_quests_in_world(world_gen: WorldGenerator) -> void:
 			instance.setup(world_gen)
 
 func DeleteQuestUI(id : int):
-	QuestBookUI.Instance.delete_quest(id)
+	QuestBookUi.delete_quest(id)
 
 func ActivateQuest(pnj : PNJ):
 	var quest = pnj.current_quest
 	if quest._state == QuestBase.STATE.INACTIVE:
 		_inactiveQuest.erase(quest)
 		_activeQuest.append(quest)
-		QuestBookUI.Instance._create_quest(str(quest.type),quest.id)
+		QuestBookUi._create_quest(str(quest.type),quest.id)
 		return
 	print("quest not inactive")
 

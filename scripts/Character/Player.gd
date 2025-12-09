@@ -11,11 +11,6 @@ func _enter_tree():
 func _ready():
 	$Camera2D.make_current()
 
-func _process(_delta: float) -> void:
-	if(Input.is_action_pressed("open_inventory")):
-		if QuestBookUI.Instance:
-			QuestBookUI.Instance.visible = !QuestBookUI.Instance.visible
-
 
 
 func _physics_process(delta):
@@ -27,10 +22,8 @@ func _physics_process(delta):
 		if Input.is_action_pressed("Left"): direction.x -= 1
 		if Input.is_action_pressed("Right"): direction.x += 1
 		direction = direction.normalized()
-	if(Input.is_action_pressed("open_inventory")):
-		if QuestBookUI.Instance:
-			var quest_book_ui : QuestBookUI =  QuestBookUI.Instance
-			quest_book_ui.visible = !quest_book_ui.visible
+	if(Input.is_action_just_pressed("open_inventory")):
+		QuestBookUi.visible = !QuestBookUi.visible
 	velocity = direction * speed
 	move_and_slide()
 	

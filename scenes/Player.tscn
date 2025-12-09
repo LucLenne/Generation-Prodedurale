@@ -13,6 +13,10 @@ script = ExtResource("1_v6fml")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_1")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_1")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true

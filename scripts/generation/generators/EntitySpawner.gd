@@ -12,17 +12,17 @@ func _init(p_scene: PackedScene, n_scene: PackedScene, mq_scene: PackedScene):
 	manager_quest_scene = mq_scene
 
 func spawn_manager_quest(parent: Node2D, world_gen_node: Node2D):
-	if ManagerQuest.Instance == null:
+	if ManagerQuest == null:
 		if manager_quest_scene:
 			print("Instantiating ManagerQuest...")
 			var instance = manager_quest_scene.instantiate()
 			parent.add_child(instance)
 			
-	if ManagerQuest.Instance:
+	if ManagerQuest:
 		# Call setup or spawn_quests
 		# The original code called spawn_quests_in_world(self)
 		# We should pass the WorldGenerator instance (which proxies needed info)
-		ManagerQuest.Instance.spawn_quests_in_world(world_gen_node)
+		ManagerQuest.spawn_quests_in_world(world_gen_node)
 	else:
 		print("Failed to initialize ManagerQuest.")
 

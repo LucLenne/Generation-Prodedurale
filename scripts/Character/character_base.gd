@@ -14,6 +14,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 		life_changed.emit(life)
 		if(life <= 0):
 			is_dead = true
+			_set_state(STATE.DEAD)
 @export var invincibility_duration : float = 1.0
 @export var invincibility_blink_period : float = 0.2
 @export var dead_color : Color = Color.GRAY
@@ -211,3 +212,11 @@ func _spawn_attack_scene() -> void:
 
 func _can_move() -> bool:
 	return _state == STATE.IDLE
+
+
+
+func take_damage(damage :int):
+	life -=damage
+
+func heal(heal: int):
+	life +=heal

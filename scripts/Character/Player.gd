@@ -1,12 +1,19 @@
-class_name Player extends CharacterBody2D
+class_name Player extends PlayerController
 static var Instance : Player
 
 @export var speed: float = 100.0
-@export var _inventory : Array[CollectibleBase]
+
 
 func _enter_tree():
-	if Instance == null:
-		Instance = self
+	if Instance != null:
+		push_warning("Attention : Deux Player existent en même temps !")
+		queue_free()
+		return
+	Instance = self
+
+func _exit_tree():
+	if Instance == self:
+		Instance = null
 
 func _ready():
 	$Camera2D.make_current()

@@ -23,6 +23,19 @@ var is_typing: bool = false
 var is_interaction_mode: bool = false
 var current_tween: Tween
 
+static var instance : DialogueSystemUI
+
+func _enter_tree():
+	if instance != null:
+		push_warning("Attention : Deux DialogueSystemUI existent en même temps !")
+		queue_free()
+		return
+	instance = self
+
+func _exit_tree():
+	if instance == self:
+		instance = null
+		
 
 func _ready():
 	response_container.visible = false

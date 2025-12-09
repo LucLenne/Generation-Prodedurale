@@ -1,14 +1,17 @@
 class_name DialogueSystem extends Node
 
-@export var pnj : PNJ
+var pnj : PNJ
 
 @export_group("Dialogue Files")
-@export var dialogue_ui : DialogueSystemUI
-@export var npc_json_file : JSON
-@export var monster_json_file : JSON
+@onready var dialogue_ui : DialogueSystemUI = %DialogueSystemUI
+var npc_json_file : JSON
+var monster_json_file : JSON
+
+const NPC_FOLDER_PATH = "res://Assets/NPCJson/"
+const MONSTER_FOLDER_PATH = "res://Assets/MonsterJSON/"
 
 @export_group("Dialogue Difficulty")
-@export var player_controller : PlayerController
+var player_controller : PlayerController
 @export var DC_EASY = 5
 @export var DC_MEDIUM = 10 
 @export var DC_HARD = 15 
@@ -34,9 +37,20 @@ var grammar_npc : TraceryFR.GrammarFR
 var grammar_monster : TraceryFR.GrammarFR
 
 func _ready():
+	player_controller = Player.Instance
+	if !player_controller:
+		push_error("Aucun Player présent dans la scène")
+	
+	if !dialogue_ui:
+		dialogue_ui = DialogueSystemUI.instance
+	
 	if dialogue_ui:
 		dialogue_ui.dialogue_closed.connect(_on_dialogue_closed)
 		dialogue_ui.player_answered.connect(_on_player_answered)
+	else:
+		push_error("Aucun Dialogue System UI présent dans la scène")
+		
+	load_random_json_files()
 	
 	generate_new_quest()
 	
@@ -193,6 +207,7 @@ func _on_player_answered(mood: Mood):
 
 func _handle_post_reaction():
 	if _last_success:
+		pnj.current_quest.valid_quest()
 		print("Quest Won!")
 		
 	else:
@@ -206,4 +221,41 @@ func _handle_post_reaction():
 			if dialogue_ui:
 				dialogue_ui.show_interaction_dialogue(npc_data)
 		else:
+			pnj.current_quest._fail_quest()
 			print("Game Over! Quest Failed.")
+
+func load_random_json_files():
+	var npc_files = _get_json_files_in_folder(NPC_FOLDER_PATH)
+	if npc_files.size() > 0:
+		var random_npc_path = npc_files.pick_random()
+		npc_json_file = load(random_npc_path)
+		print("Fichier PNJ chargé : " + random_npc_path)
+	else:
+		push_error("Aucun fichier JSON trouvé dans : " + NPC_FOLDER_PATH)
+
+	var monster_files = _get_json_files_in_folder(MONSTER_FOLDER_PATH)
+	if monster_files.size() > 0:
+		var random_monster_path = monster_files.pick_random()
+		monster_json_file = load(random_monster_path)
+		print("Fichier Monstre chargé : " + random_monster_path)
+	else:
+		push_error("Aucun fichier JSON trouvé dans : " + MONSTER_FOLDER_PATH)
+
+
+func _get_json_files_in_folder(path: String) -> Array[String]:
+	var files: Array[String] = []
+	var dir = DirAccess.open(path)
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".json"):
+				files.append(path + "/" + file_name)
+			
+			file_name = dir.get_next()
+	else:
+		push_error("Impossible d'ouvrir le dossier : " + path)
+	
+	return files

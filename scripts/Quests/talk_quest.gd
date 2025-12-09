@@ -13,7 +13,7 @@ func setup(world_gen: Node2D) -> void:
 	if _pnj2: _pnj2.emotion = CharacterBase.EMOTION.ANGRY
 
 func _process(_delta: float) -> void:
-	if(_pnj1.emotion != CharacterBase.EMOTION.ANGRY && _pnj2.emotion != CharacterBase.EMOTION.ANGRY):
+	if(_pnj1.emotion != CharacterBase.EMOTION.ANGRY || _pnj2.emotion != CharacterBase.EMOTION.ANGRY):
 		_valid_quest()
 	if(_pnj1.is_dead || _pnj2.is_dead):
 		_fail_quest()

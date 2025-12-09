@@ -1,9 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://2i7imvprbpwm"]
+[gd_scene load_steps=2 format=3 uid="uid://cgwxgdr33uonm"]
 
-[ext_resource type="PackedScene" uid="uid://6nyg2cnh4k7n" path="res://scenes/TestGDTraceryJSONFR&EN.tscn" id="1_g7g4h"]
-[ext_resource type="JSON" path="res://Assets/TestEN.json" id="2_j8ivh"]
+[ext_resource type="PackedScene" uid="uid://bf2ekjqvqg037" path="res://scenes/TestGDTraceryJSONFR&EN.tscn" id="1_g7g4h"]
 
 [node name="TestScene" type="Node2D"]
 
 [node name="Node" parent="." instance=ExtResource("1_g7g4h")]
-file = ExtResource("2_j8ivh")

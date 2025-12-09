@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://6nyg2cnh4k7n"]
+[gd_scene load_steps=4 format=3 uid="uid://bf2ekjqvqg037"]
 
-[ext_resource type="Script" uid="uid://bmfvd66vurgsg" path="res://scripts/TestGDTraceryJSONFR&EN.gd" id="1_dm38y"]
+[ext_resource type="Script" path="res://scripts/TestGDTraceryJSONFR&EN.gd" id="1_dm38y"]
 [ext_resource type="JSON" path="res://Assets/TestEN.json" id="2_5e8ay"]
-[ext_resource type="JSON" path="res://Assets/GDTEST.json" id="3_dm38y"]
+[ext_resource type="JSON" path="res://Assets/ExampleNPC.json" id="3_yje3n"]
 
 [node name="TestJSONTraceryNode" type="Node"]
 script = ExtResource("1_dm38y")
 jsonEN = ExtResource("2_5e8ay")
-jsonFR = ExtResource("3_dm38y")
+jsonFR = ExtResource("3_yje3n")

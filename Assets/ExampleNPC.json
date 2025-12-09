@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"[proprietaire:#nom#][type_monstre:#monstre#][mood_monstre:#choix_humeur#][direction:#dir#]"
+		"#setPronouns#[proprietaire:#nom#][type_monstre:#monstre#][mood_monstre:#choix_humeur#][direction:#dir#]"
 	],
 	
 	"choix_humeur": [
@@ -10,13 +10,13 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"C'est #proprietaire#.&&Il y a #type_monstre.indef# vers #direction.def#.&&Il hurle, casse tout et refuse de partir !&&Je t'en supplie, aide-moi !"
+		"#politesse_intimidant# #jmapl#.&&#demande_intimidant#. C'est #type_monstre.indef#.&& #heroObj# #parti# #direction.def#.&&#conclusion_intimidant#"
 	],
 	"intro_quete_amical": [
-		"C'est #proprietaire#.&&Il y a #type_monstre.indef# vers #direction.def#.&&Il pleure toutes les larmes de son corps...&&C'est triste, mais il doit partir."
+		"#politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.indef#.&& #heroObj# #parti# #direction.def# #complement_parti#.&&#conclusion_Amical#"
 	],
 	"intro_quete_persuasif": [
-		"C'est #proprietaire#.&&Il y a #type_monstre.indef# vers #direction.def#.&&Il a sorti un code civil et veut négocier un bail !&&Fais quelque chose, je déteste la paperasse."
+		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.indef#.&& #heroObj# #parti# #direction.def# #complement_parti#.&&#conclusion_intimidant#"
 	],
 
 	"retour_echec_intimidant": [
@@ -30,23 +30,166 @@
 	],
 
 
-	"btn_intimidation": ["(Force) Dégage ou je frappe !"],
+	"btn_intimidation": [" Dégage ou je frappe !"],
 	"btn_amical": ["(Calme) On peut t'aider..."],
 	"btn_persuasion": ["(Négo) Soyons logiques..."],
 
 	"nom": [
 		"Gérard",
-		"^Julie",
-		"Arthur",
-		"^Hélène"
+		"^Julire",
+		"Arthurion",
+		"^Hélènu",
+		"^Blanquette",
+		"^Stuprine",
+		"Marco",
+		"^Jean-paulette",
+		"Ticon",
+		"Falzus",
+		"Sarahbin",
+		"Anorak",
+		"^Pétale"
+		
 	],
+	
+	"cible_nom": [
+	"Lolane",
+	"Miskina",
+	"Brach",
+	"Sapin",
+	"Brolone",
+	"Judas",
+	"Salazar",
+	"Terrange",
+	"Sophin",
+	"Médor",
+	"Rascale",
+	"Petfor",
+	"Suçin",
+	"Pélerine",
+	"Malazar",
+	"Arthur",
+	"Jean-guy",
+	"Marlouf"
+
+	 ],
+
 	"monstre": [
 		"zombie",
-		"^banshee",
-		"orque",
-		"homme-rat",
-		"*hobbit",
-		"^*harpie"
+		"squelette",
+		"spectre"
 	],
+	
+	 "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+	"politesse_intimidant" :[
+		"Salut l'vivant,",
+		"Qui t'es toi ? Aide moi,",
+		"Mauvais jour à toi étranger,"
+	],
+	
+	"politesse_Amical" :[
+		"Salut à toi médiateur,",
+		"Bonjour l'ami, tu pourrais venir en aide à une pauvre âme comme moi ? Alors,",
+		"Ah, enfin un médiateur ! J'ai cru que personne ne viendrait jamais. Bon,"
+	],
+	
+	"politesse_persuasif" :[
+		"Bien le bonjour jeune médiateur,",
+		"Bienvenue, ça t'intéresserait un boulot pour quelques pièces ? Alors,",
+		"Tiens tiens, un médiateur ? Si tu cherches à te faire des sous, tu pourrais m'aider,"
+	],
+	
+	"jmapl" :[
+		"Moi c'est #proprietaire#",
+		"Mon nom est #proprietaire#",
+		"Je me présente, je suis #proprietaire#",
+		"Je me prénome #proprietaire#",
+		"Tu peux m'appeler #proprietaire#",
+		"Moi c'est #proprietaire#.&&, mais mes amis m'appelent pas souvent",
+		"Ma mère m'a nommé #proprietaire# mais je préfère qu'on m'appel mon seigneur",
+		"",
+		""
+		
+	],
+	
+	"demande_intimidant":[
+		"Retrouve vite #relation.herogender.possm# #cible_nom#",
+		"Va vite chercher #relation.herogender.possm# #cible_nom#",
+		"Dépèche toi de retrouver #relation.herogender.possm# #cible_nom#",
+		"Faut que tu retrouves #relation.herogender.possm# #cible_nom#",
+		"#relation.herogender.possm# #cible_nom# a disparu, retrouve #heroObj#"
+		
+	],
+	
+	"demande_amical":[
+		"je t'en supplie, j'ai perdu #relation.herogender.possm#, #heroObj# se nomme #cible_nom#",
+		"retrouve #relation.herogender.possm# #cible_nom#",
+		"si tu me retrouves #relation.herogender.possm# #cible_nom# je te serais éternellement reconnaissant",
+		"retrouves #relation.herogender.possm# #cible_nom# s'il te plait",
+		"#cible_nom#, #relation.herogender.possm# a disparu, par pitié, retrouve #heroObj#"
+		
+	],
+	
+	"demande_persuasif":[
+		"si tu retrouves #cible_nom#, #relation.herogender.possm#, tu auras une récompense ",
+		"cela fait des jours que #relation.herogender.possm# #cible_nom# à disparu",
+		"tu es bien médiateur non ? Va chercher #relation.herogender.possm# #cible_nom#, c'est ton métier après tout.",
+		"tu dois me venir en aide, ton serment t'y oblige, retrouves #relation.herogender.possm# #cible_nom#",
+		"si tu retrouves #cible_nom#, #relation.herogender.possm# pour moi, je t'en devrais une"
+		
+	],
+	
+	"Relation": [
+	"frère | soeur",
+	"père | mère",
+	"mari | femme",
+	"pote",
+	"cousin | cousine",
+	"grand père | grand mère"
+
+ 	],
+	
+	"parti": [
+	"est parti vers | est partie vers",
+	"s'est barré vers | s'est barrée vers",
+	"s'est cassé vers | s'est cassée vers",
+	"s'en est allé vers | s'en est allée vers"
+ ],
+	"complement_parti": [
+	"c'est là bas que notre famille est enterrée",
+	"#heroSubj# à fuit car il doit de l'argent au service funéraire",
+	"je ne sais pas ce qu'il pense trouver là bas, il n'y à rien nulle part dans ces bois..",
+	"#heroSubj# veut retrouver sa bague de marriage, mais c'est moi qui l'ai vendue pour payer l'impôt du Druide",
+	"#heroSubj# a perdu un oeil vers là bas quand on y habitait",
+	"je n'en peux plus de lui, il part toujours comme ça depuis qu'il est mort",
+	"il a oublié sa jambe en plus, il va pas arrêter de se casser la gueule",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	""
+ ],
+
+	"conclusion_intimidant": [
+	"aller, bouge toi ! ",
+	"reviens vite et avec des bonnes nouvelles !",
+	"qu'est ce que tu fais encore là ? Va bosser ! Hop hop hop !",
+	"j'espère que tu sera à la hauteur...",
+	""
+ ],
+
+	"conclusion_amical": [
+	"#cible# s'enfuie tout le temps, pourtant je lui fais pas de mal je crois ?",
+	"retrouve #relation.poss_m# je t'en supplie...",
+	"je ne sais pas ce que je ferais sans #heroSubj#, ramène #heroObj# je t'en prie",
+	"J'espère que tu sera à la hauteur...",
+	""
+ ],
+	
 	"dir": ["Nord", "Sud", "Est", "Ouest"]
 }

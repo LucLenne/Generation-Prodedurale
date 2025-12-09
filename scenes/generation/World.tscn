@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ba101fnwl5x8"]
+[gd_scene load_steps=16 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
 [ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="2_tiles"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
 [ext_resource type="Script" uid="uid://v1fnj4abka1u" path="res://scripts/generation/DecorationItem.gd" id="5_p6oac"]
+[ext_resource type="Script" uid="uid://48twraillamx" path="res://scripts/Quests/manager_quest.gd" id="10_dfiiy"]
+[ext_resource type="PackedScene" uid="uid://bsuw0j1jai11u" path="res://scenes/ui/quest_book_ui.tscn" id="11_dfiiy"]
 
 [sub_resource type="Resource" id="Resource_w234y"]
 script = ExtResource("5_p6oac")
@@ -61,3 +63,9 @@ tile_set = ExtResource("2_tiles")
 position = Vector2(675, 352)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("3_cam")
+
+[node name="QuestManager" type="Node" parent="."]
+script = ExtResource("10_dfiiy")
+metadata/_custom_type_script = "uid://48twraillamx"
+
+[node name="quest_book_ui" parent="." instance=ExtResource("11_dfiiy")]

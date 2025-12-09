@@ -1,4 +1,4 @@
-class_name QuestBookUI extends Control
+class_name QuestBookUI extends CanvasLayer
 static var Instance : QuestBookUI
 
 var _quest_ui = preload("res://scripts/UI/quest_ui.gd")

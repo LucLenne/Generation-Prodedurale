@@ -13,7 +13,10 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if(Input.is_action_pressed("open_inventory")):
-		QuestBookUI.Instance.visible = !QuestBookUI.Instance.visible
+		if QuestBookUI.Instance:
+			QuestBookUI.Instance.visible = !QuestBookUI.Instance.visible
+
+
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO
@@ -25,8 +28,9 @@ func _physics_process(delta):
 		if Input.is_action_pressed("Right"): direction.x += 1
 		direction = direction.normalized()
 	if(Input.is_action_pressed("open_inventory")):
-		var quest_book_ui : QuestBookUI =  QuestBookUI.Instance
-		quest_book_ui.visible = !quest_book_ui.visible
+		if QuestBookUI.Instance:
+			var quest_book_ui : QuestBookUI =  QuestBookUI.Instance
+			quest_book_ui.visible = !quest_book_ui.visible
 	velocity = direction * speed
 	move_and_slide()
 	

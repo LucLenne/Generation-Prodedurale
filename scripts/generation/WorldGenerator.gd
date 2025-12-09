@@ -127,7 +127,57 @@ func generate_world():
 	spawner_gen.spawn_npcs(map_data, self)
 	player_instance = spawner_gen.spawn_player(map_data, self)
 	
+	setup_player_camera(player_instance)
+	
 	print("World Generation Complete.")
+
+@onready var world_camera : CameraManager = $Camera2D
+
+func setup_player_camera(player_node):
+	if not is_instance_valid(player_node): return
+	
+	# Ensure world camera is active and targeted
+	world_camera.enabled = true
+	world_camera.make_current()
+	world_camera.set_target(player_node)
+	world_camera.is_free_roam = false # Force follow mode start
+	
+	# Disable player's internal camera just in case
+	var p_cam = player_node.get_node_or_null("Camera2D")
+	if p_cam: p_cam.enabled = false
+
+	update_camera_limits(player_node.global_position)
+
+func update_camera_limits(pos: Vector2):
+	if not map_data: return
+	
+	var tile_pos = Vector2i(pos / TileConfigScript.TILE_SIZE)
+	var found_zone = null
+	
+	for zone in map_data.zones:
+		if zone.shape_bounds.has_point(tile_pos):
+			found_zone = zone
+			break
+	
+	if found_zone:
+		var limits = found_zone.shape_bounds
+		# Convert Rect2i (tiles) to Rect2 (pixels)
+		var pixel_limits = Rect2(
+			limits.position.x * TileConfigScript.TILE_SIZE,
+			limits.position.y * TileConfigScript.TILE_SIZE,
+			limits.size.x * TileConfigScript.TILE_SIZE,
+			limits.size.y * TileConfigScript.TILE_SIZE
+		)
+		world_camera.set_limits(pixel_limits)
+	else:
+		# Fallback: Map Limits
+		var map_rect = Rect2(0, 0, width * TileConfigScript.TILE_SIZE, height * TileConfigScript.TILE_SIZE)
+		world_camera.set_limits(map_rect)
+
+func toggle_camera():
+	if world_camera:
+		world_camera.toggle_mode()
+
 
 func _on_regenerate_button_pressed():
 	print("Regenerate button pressed. Regenerating world...")

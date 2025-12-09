@@ -175,7 +175,7 @@ func _build_house_procedural(data: MapData, house_data):
 		if not wall_set.has(bottom) and not floor_set.has(bottom): border_mask += 4
 		if not wall_set.has(left) and not floor_set.has(left): border_mask += 8
 		
-		var coords = TileConfigScript.get_wzdall_tile(border_mask)
+		var coords = TileConfigScript.get_wall_tile(border_mask)
 		data.wall_layer.set_cell(cell, TileConfigScript.SOURCE_ID, coords)
 		
 	data.wall_layer.set_cell(house_data.door_position, TileConfigScript.SOURCE_ID, TileConfigScript.DOOR)

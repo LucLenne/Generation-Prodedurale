@@ -13,6 +13,8 @@ func _ready() -> void:
 	else:
 		push_warning("PlayerController: 'Default Movement' n'est pas assigné dans l'inspecteur !")
 
+
+
 func _update_state(delta: float) -> void:
 	if !_can_move():
 		_direction = Vector2.ZERO

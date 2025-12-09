@@ -3,12 +3,12 @@ class_name KillQuest extends QuestBase
 var _target : CharacterBase
 
 func _init() -> void :
-	_type = TYPE.KILL
+	type = TYPE.KILL
 
 func setup(world_gen: Node2D) -> void:
 	var target_scene = null
-	if not ManagerQuest.Instance.list_character_to_kill.is_empty():
-		target_scene = ManagerQuest.Instance.list_character_to_kill.pick_random()
+	if not QuestManager.Instance.list_character_to_kill.is_empty():
+		target_scene = QuestManager.Instance.list_character_to_kill.pick_random()
 	else:
 		print("KillQuest Debug: list_character_to_kill is EMPTY!")
 	
@@ -19,7 +19,7 @@ func setup(world_gen: Node2D) -> void:
 	if world_gen.has_method("get_random_zone_position"):
 		spawn_pos = world_gen.get_random_zone_position()
 		
-	var spawned_obj = ManagerQuest.Instance.spawn_entity_in_world(target_scene, 200, 500, spawn_pos)
+	var spawned_obj = QuestManager.Instance.spawn_entity_in_world(target_scene, 200, 500, spawn_pos)
 	_target = spawned_obj as CharacterBase
 	
 	if spawned_obj != null and _target == null:

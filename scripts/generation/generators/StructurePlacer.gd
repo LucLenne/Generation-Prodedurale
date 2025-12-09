@@ -5,15 +5,18 @@ const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 
 
 var building_count_range: Vector2i
-var house_scenes: Array[PackedScene]
 
-func _init(count_range: Vector2i, scenes: Array[PackedScene]):
+func _init(count_range: Vector2i):
 	building_count_range = count_range
-	house_scenes = scenes
 
 func generate(data: MapData, parent_node: Node2D):
 	print("Populating zones...")
 	for zone in data.zones:
+		var biome = data.get_biome_at(zone.center.x, zone.center.y)
+		var current_house_scenes: Array[PackedScene] = []
+		if biome and not biome.house_scenes.is_empty():
+			current_house_scenes = biome.house_scenes
+			
 		var building_count = randi_range(building_count_range.x, building_count_range.y)
 		var placed_buildings: Array[Rect2i] = []
 		var building_doors: Array[Vector2i] = []
@@ -32,7 +35,10 @@ func generate(data: MapData, parent_node: Node2D):
 				if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH:
 					continue
 					
-				var result = try_place_building_at(data, zone, cell, placed_buildings, occupied_cells, parent_node)
+				var use_procedural = false
+				if biome: use_procedural = biome.use_procedural_buildings
+				
+				var result = try_place_building_at(data, zone, cell, placed_buildings, occupied_cells, parent_node, current_house_scenes, use_procedural)
 				if result.success:
 					placed_buildings.append(result.rect)
 					building_doors.append(result.door)
@@ -59,16 +65,25 @@ func generate(data: MapData, parent_node: Node2D):
 		# Place Decorations
 		place_decorations(data, zone, occupied_cells, parent_node)
 
-func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary, parent: Node2D) -> Dictionary:
+func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary, parent: Node2D, available_scenes: Array[PackedScene], force_procedural: bool = false) -> Dictionary:
 	var result = {"success": false, "rect": Rect2i(), "door": Vector2i()}
 	
-	var use_scene = house_scenes.size() > 0 and randf() > 0.5
 	var offset = Vector2i.ZERO
 	var building_size = Vector2i(5, 5)
 	var door_pos = pos
+	var use_scene = false
+	
+	if force_procedural:
+		# Explicitly forced procedural
+		pass 
+	elif available_scenes.size() > 0:
+		use_scene = true
+	else:
+		# Scenes expected but none available -> Do nothing
+		return result
 	
 	if use_scene:
-		var scene = house_scenes.pick_random()
+		var scene = available_scenes.pick_random()
 		if scene == null: return result
 		
 		# Instantiate temp to check size
@@ -115,7 +130,7 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 		return result
 		
 	else:
-		# Procedural Logic
+		# Procedural Logic (Only reached if force_procedural is true)
 		var house_data = HouseGenScript.generate_random_house(pos)
 		var building_rect = house_data.rect
 		door_pos = house_data.door_position
@@ -214,21 +229,31 @@ func connect_doors_to_paths(data: MapData, zone: Zone, doors: Array[Vector2i], o
 			
 			if TileConfigScript.is_water(data.wall_layer.get_cell_atlas_coords(point)):
 				data.wall_layer.set_cell(point, -1)
-				data.ground_layer.set_cell(point, TileConfigScript.SOURCE_ID, TileConfigScript.FLOOR)
+				data.ground_layer.set_cell(point, TileConfigScript.SOURCE_ID, TileConfigScript.BRIDGE)
 				path_cells_in_zone.append(point)
 			else:
 				var ct = data.ground_layer.get_cell_atlas_coords(point)
 				var biome = data.get_biome_at(point.x, point.y)
-				if ct == biome.ground_tile or ct == biome.dirt_tile or ct == TileConfigScript.PATH:
-					data.wall_layer.set_cell(point, -1)
-					data.ground_layer.set_cell(point, TileConfigScript.SOURCE_ID, biome.path_tile)
-					path_cells_in_zone.append(point)
+				# Check biome existence
+				if biome:
+					if ct == biome.ground_tile or ct == biome.dirt_tile or ct == TileConfigScript.PATH:
+						data.wall_layer.set_cell(point, -1)
+						data.ground_layer.set_cell(point, TileConfigScript.SOURCE_ID, biome.path_tile)
+						path_cells_in_zone.append(point)
+				else:
+					# Fallback or skip if biome not found
+					if ct == TileConfigScript.PATH:
+						path_cells_in_zone.append(point)
 					
 	# Pass path_cells to place_decorations via meta or argument
 	zone.set_meta("path_cells", path_cells_in_zone)
 
 func place_decorations(data: MapData, zone: Zone, occupied_cells: Dictionary, parent: Node2D):
 	var biome = data.get_biome_at(zone.center.x, zone.center.y)
+	if not biome: 
+		printerr("Warning: No biome found at zone center ", zone.center)
+		return
+		
 	var path_cells = zone.get_meta("path_cells", [])
 	
 	# Scenes

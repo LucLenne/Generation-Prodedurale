@@ -4,6 +4,7 @@ var _target : CharacterBase
 
 func _init() -> void :
 	type = TYPE.KILL
+	title = "Tu dois tuer" + _target._name + "."
 
 func setup(world_gen: Node2D) -> void:
 	var target_scene = null

@@ -5,6 +5,7 @@ var _item : CollectibleBase
 
 func _init() -> void :
 	type = TYPE.DELIVERY
+	title = "Tu dois donner" + _item.Name + ", à " + _pnj._name + "."
 
 func setup(world_gen: Node2D) -> void:
 	var rd = randi_range(0, ManagerQuest.list_collectibles.size()) 

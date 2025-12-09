@@ -5,6 +5,7 @@ var _pnj2 : CharacterBase
 
 func _init() -> void :
 	type = TYPE.TALK
+	title = "Tu dois réconcilier " + _pnj1._name + " et " + _pnj2.name + "."
 
 func setup(world_gen: Node2D) -> void:
 	_pnj1 = ManagerQuest.GetPNJ(world_gen)

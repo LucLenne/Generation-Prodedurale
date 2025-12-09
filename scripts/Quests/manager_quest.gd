@@ -111,7 +111,7 @@ func ActivateQuest(pnj : PNJ):
 	if quest._state == QuestBase.STATE.INACTIVE:
 		_inactiveQuest.erase(quest)
 		_activeQuest.append(quest)
-		QuestBookUi._create_quest(str(quest.type),quest.id)
+		QuestBookUi._create_quest(quest.title,quest.id)
 		return
 	print("quest not inactive")
 

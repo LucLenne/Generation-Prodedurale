@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"#setPronouns#[proprietaire:#nom#][type_monstre:#monstre#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
+		"#setPronouns#[proprietaire:#nom#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
 	],
 	
 	"choix_humeur": [
@@ -10,13 +10,13 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"#politesse_intimidant# #jmapl#.&&#demande_intimidant#. C'est #type_monstre.heroGender.indef#.&& #heroSubj# #parti# #direction.def#.&&#conclusion_intimidant#"
+		"#politesse_intimidant# #jmapl#.&&#demande_intimidant#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def#.&&#conclusion_intimidant#"
 	],
 	"intro_quete_amical": [
-		"#heroSubj##heroSubj##heroSubj##heroSubj##rela##rela##rela##rela##politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.heroGender.indef#.&&#heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_amical#"
+		"#heroSubj##heroSubj##heroSubj##heroSubj##rela##rela##rela##rela##politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.indef#.&&#heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_amical#"
 	],
 	"intro_quete_persuasif": [
-		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.heroGender.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif#"
+		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif#"
 	],
 
 	"retour_echec_intimidant": [
@@ -125,10 +125,10 @@
 	],
 	
 	"demande_intimidant":[
-		"Retrouve vite #rela.heroGender.poss_m# #cible_nom#",
-		"Va vite chercher #rela.heroGender.poss_m# #cible_nom#",
-		"Dépèche toi de retrouver #rela.heroGender.poss_m# #cible_nom#",
-		"Faut que tu retrouves #rela.heroGender.poss_m# #cible_nom#",
+		"retrouve vite #rela.heroGender.poss_m# #cible_nom#",
+		"va vite chercher #rela.heroGender.poss_m# #cible_nom#",
+		"dépèche toi de retrouver #rela.heroGender.poss_m# #cible_nom#",
+		"faut que tu retrouves #rela.heroGender.poss_m# #cible_nom#",
 		"#rela.heroGender.poss_m# #cible_nom# a disparu, retrouve #heroObj#"
 		
 	],
@@ -137,7 +137,7 @@
 		"je t'en supplie, j'ai perdu #rela.heroGender.poss_m#, #heroObj# se nomme #cible_nom#",
 		"retrouve #rela.heroGender.poss_m# #cible_nom#",
 		"si tu me retrouves #rela.heroGender.poss_m# #cible_nom# je te serais éternellement reconnaissant",
-		"retrouves #rela.heroGender.poss_m# #cible_nom# s'il te plait",
+		"retrouve #rela.heroGender.poss_m# #cible_nom# s'il te plait",
 		"#cible_nom#, #rela.heroGender.poss_m# a disparu, par pitié, retrouve #heroObj#",
 		
 	],

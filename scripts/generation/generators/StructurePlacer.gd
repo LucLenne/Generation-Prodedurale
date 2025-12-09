@@ -91,6 +91,12 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 		var local_door = Vector2i(2, 4)
 		var actual_cells: Array[Vector2i] = []
 		var tile_layer = temp.get_node_or_null("TileMapLayer")
+		if not tile_layer:
+			# Search children for any TileMap-like node
+			for child in temp.get_children():
+				if child is TileMapLayer or child is TileMap:
+					tile_layer = child
+					break
 		
 		if tile_layer:
 			var rect = tile_layer.get_used_rect()
@@ -102,6 +108,13 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 					actual_cells.append(world_cell)
 					if tile_layer.get_cell_atlas_coords(cell) == TileConfigScript.DOOR:
 						local_door = cell
+		
+		# Fallback: If no cells found (e.g. valid scene but no tiles read), use bounding box
+		if actual_cells.is_empty():
+			for x in range(building_size.x):
+				for y in range(building_size.y):
+					actual_cells.append(pos + Vector2i(x,y))
+
 		temp.free()
 		
 		door_pos = pos + (local_door - offset)
@@ -109,13 +122,14 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 		# Validation
 		var building_rect = Rect2i(pos, building_size)
 		for cell in actual_cells:
+			if not data.is_in_bounds(cell.x, cell.y): return result # Strict Map Bounds
 			if not zone.is_point_inside(cell): return result
 			if occupied_cells.has(cell): return result
 			if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH: return result
 			if TileConfigScript.is_water(data.wall_layer.get_cell_atlas_coords(cell)): return result
 			
 		for other in placed_buildings:
-			if building_rect.grow(3).intersects(other): return result
+			if building_rect.grow(5).intersects(other): return result # Increased buffer
 			
 		# Place
 		var instance = scene.instantiate()
@@ -140,13 +154,14 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 		for x in range(building_rect.position.x, building_rect.end.x):
 			for y in range(building_rect.position.y, building_rect.end.y):
 				var cell = Vector2i(x,y)
+				if not data.is_in_bounds(cell.x, cell.y): return result # Strict Map Bounds
 				if not zone.is_point_inside(cell): return result
 				if occupied_cells.has(cell): return result
 				if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH: return result
 				if TileConfigScript.is_water(data.wall_layer.get_cell_atlas_coords(cell)): return result
 		
 		for other in placed_buildings:
-			if building_rect.grow(3).intersects(other): return result
+			if building_rect.grow(5).intersects(other): return result # Increased buffer
 			
 		_build_house_procedural(data, house_data)
 		zone.buildings.append(house_data)

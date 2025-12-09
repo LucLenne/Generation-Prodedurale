@@ -7,9 +7,9 @@ class_name DialogueSystem extends Node
 
 @export_group("Dialogue Difficulty")
 @export var player_controller : PlayerController
-@export var DC_EASY = 5   # Choix Tactique Parfait (Avantage)
-@export var DC_MEDIUM = 10 # Choix Neutre (Même état)
-@export var DC_HARD = 15   # Mauvais Choix (Désavantage)
+@export var DC_EASY = 5
+@export var DC_MEDIUM = 10 
+@export var DC_HARD = 15 
 
 
 enum Mood { INTIMIDATING, FRIENDLY, PERSUASIVE }
@@ -134,13 +134,12 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 	
 
 	var d20_roll = randi_range(1, 20)
-	var stat_modifier = player_stat_value - 10 # ex: Stat 15 donne +5, Stat 5 donne -5
+	var stat_modifier = player_stat_value - 10
 	var final_score = d20_roll + stat_modifier
 	
 	# 5. Donner l'XP (Même en cas d'échec, on apprend !)
 	player_controller.gain_xp(player_choice)
 	
-	# 6. Afficher les logs pour débugger (et comprendre ce qui se passe)
 	print("--- TEST DE COMPÉTENCE ---")
 	print("Adversaire: %s | Joueur: %s" % [Mood.keys()[opponent_mood], Mood.keys()[player_choice]])
 	print("Difficulté (DC): %d" % difficulty)
@@ -148,7 +147,7 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 	print("Jet de dé: %d" % d20_roll)
 	print("SCORE FINAL: %d (Objectif: > %d)" % [final_score, difficulty])
 	
-	# 7. Résultat
+
 	return final_score >= difficulty
 
 func _on_dialogue_closed():
@@ -161,13 +160,12 @@ func _on_dialogue_closed():
 		if dialogue_ui:
 			dialogue_ui.show_interaction_dialogue(monster_data)
 			
-	# CASE 2: Reaction Finished (End of current interaction)
+			
 	elif is_reaction:
 		is_reaction = false
 		pass 
 		
 		_handle_post_reaction()
-
 
 var _last_success : bool = false
 
@@ -176,7 +174,7 @@ func _on_player_answered(mood: Mood):
 	
 	var reaction_text = ""
 	
-	# Select which grammar to use for reaction
+	
 	var active_grammar = grammar_monster if is_fighting_monster else grammar_npc
 	
 	if _last_success:
@@ -192,12 +190,11 @@ func _on_player_answered(mood: Mood):
 func _handle_post_reaction():
 	if _last_success:
 		print("Quest Won!")
-		# Here we could restart or show 'The End'
+		
 	else:
-		# Failure
 		if is_fighting_monster:
 			print("Failed! Returning to NPC...")
-			is_fighting_monster = false # Now we go to NPC
+			is_fighting_monster = false 
 			
 			await get_tree().create_timer(1.0).timeout
 			

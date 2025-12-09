@@ -28,13 +28,7 @@
 	"retour_echec_persuasif": [
 		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
 	],
-	
-	"reaction_victoire": [
-		"Tu as réussi ? Incroyable !&&#proprietaire# te remercie du fond du cœur.&&Voici ta récompense."
-	],
-	"reaction_echec": [
-		"C'est une catastrophe absolue...&&Sors de ma vue !"
-	],
+
 
 	"btn_intimidation": ["(Force) Dégage ou je frappe !"],
 	"btn_amical": ["(Calme) On peut t'aider..."],

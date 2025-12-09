@@ -37,6 +37,7 @@ class_name WorldGenerator extends Node2D
 
 var map_data: MapData
 var npcs : Array = [] # Kept for compatibility / tracking
+var generated_objects : Array = []
 var player_instance : Node2D = null
 
 # --- Scripts ---
@@ -87,6 +88,12 @@ func generate_world():
 	# Cleanup
 	ground_layer.clear()
 	wall_layer.clear()
+	
+	for obj in generated_objects:
+		if is_instance_valid(obj):
+			obj.queue_free()
+	generated_objects.clear()
+	
 	for npc in npcs:
 		if is_instance_valid(npc): npc.queue_free()
 	npcs.clear()
@@ -188,6 +195,9 @@ func _on_regenerate_button_pressed():
 # Helper called by EntitySpawner
 func register_npc(npc_node):
 	npcs.append(npc_node)
+
+func register_generated_object(node: Node):
+	generated_objects.append(node)
 
 func register_reserved_area(world_pos: Vector2, radius: int = 2) -> void:
 	var center_cell = Vector2i(world_pos / TileConfigScript.TILE_SIZE)

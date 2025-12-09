@@ -46,7 +46,10 @@ func spawn_entity_in_world(scene: PackedScene, min_dist: float = 100, max_dist: 
 		instance.global_position = center + offset
 
 	if Player.Instance and Player.Instance.get_parent():
-		Player.Instance.get_parent().call_deferred("add_child", instance)
+		var parent = Player.Instance.get_parent()
+		parent.call_deferred("add_child", instance)
+		if parent.has_method("register_generated_object"):
+			parent.call_deferred("register_generated_object", instance)
 	else:
 		get_tree().root.call_deferred("add_child", instance)
 		
@@ -99,6 +102,8 @@ func spawn_quests_in_world(world_gen: WorldGenerator) -> void:
 		instance.position = spawn_pos
 		instance.scale = entity_scale
 		world_gen.add_child(instance)
+		if world_gen.has_method("register_generated_object"):
+			world_gen.register_generated_object(instance)
 		
 		if world_gen.has_method("register_reserved_area"):
 			world_gen.register_reserved_area(spawn_pos, 2)

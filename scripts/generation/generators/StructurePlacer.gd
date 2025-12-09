@@ -121,6 +121,8 @@ func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buil
 		var instance = scene.instantiate()
 		instance.position = Vector2(pos - offset) * TileConfigScript.TILE_SIZE
 		parent.add_child(instance)
+		if parent.has_method("register_generated_object"):
+			parent.register_generated_object(instance)
 		zone.buildings.append(instance)
 		
 		result.success = true
@@ -295,6 +297,8 @@ func place_decorations(data: MapData, zone: Zone, occupied_cells: Dictionary, pa
 				var instance = scene.instantiate()
 				instance.position = Vector2(cell - offset) * TileConfigScript.TILE_SIZE
 				parent.add_child(instance)
+				if parent.has_method("register_generated_object"):
+					parent.register_generated_object(instance)
 				zone.buildings.append(instance)
 				for ac in actual_cells: occupied_cells[ac] = true
 				break

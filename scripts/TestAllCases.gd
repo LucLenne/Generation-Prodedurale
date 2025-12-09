@@ -23,13 +23,13 @@ func _init():
 		"boucher": ["Boucher"],
 		"heureux": ["Heureux"],
 		
-		# --- LOGIQUE VOYELLES & H (Selon ta logique: * = Élision, Sans * = Consonne) ---
+		# --- LOGIQUE VOYELLES & H ---
 		"avion": ["Avion"],
 		"image": ["Image"],
 		"homme": ["*Homme"],       # H * -> Élision
 		"histoire": ["*Histoire"], # H * -> Élision
 		"hibou": ["Hibou"],        # H sans * -> Consonne
-		"hache": ["Hache"],        # H sans * -> Consonne
+		"hache": ["^Hache"],        # H sans * -> Consonne
 		
 		# --- PARSING ---
 		"vieux": ["vieux / vieux | vieille / vieilles"],
@@ -64,8 +64,18 @@ func _init():
 		"heroine": ["*Héroïne"],   # Étoile -> Voyelle/Élision (Son Héroïne)
 		"hopital": ["*Hôpital / *Hôpitaux"], # Étoile -> L'Hôpital
 		
-		# 7. Ajout pour test Possessif
-		"amie": ["Amie"]
+		# 7. Possessifs et pièges
+		"amie": ["Amie"],
+		# Mots MASCULINS finissant par 'e' (Masculin Exclusif)
+		"monde": ["Monde"],      
+		"probleme": ["Problème"],
+		"musee": ["Musée"],
+		"arbre": ["Arbre"],
+
+		# 8. Mots MASCULINS finissant par 'e' MAIS avec Exception FÉMININE
+		"prince": ["Prince / Princes | Princesse / Princesses"],
+		"tigre": ["Tigre / Tigres | Tigresse / Tigresses"],
+		"ane": ["Âne / Ânes | Ânesse / Ânesses"] # Le boss final (Voyelle + E + Exception)
 	})
 	
 	var grammar = TraceryFR.GrammarFR.new(rules)
@@ -79,7 +89,7 @@ func _init():
 		{"tag": "#foufou.s#",  "expect": "fous",     "desc": "Parsing: Irrégulier Masc Pluriel"},
 		{"tag": "#foufou.f#",  "expect": "folle",    "desc": "Parsing: Irrégulier Fem Singulier"},
 
-		# B. RÈGLES AUTO (Priorité 'f'(1) et 's'(2) testée implicitement)
+		# B. RÈGLES AUTO
 		{"tag": "#eau.s#",       "expect": "Châteaux",   "desc": "Auto-Pluriel: eau -> x"},
 		{"tag": "#al.s#",        "expect": "Chevaux",    "desc": "Auto-Pluriel: al -> aux"},
 		{"tag": "#souris.s#",    "expect": "Souris",     "desc": "Auto-Pluriel: s -> invariant"},
@@ -89,7 +99,7 @@ func _init():
 		{"tag": "#heureux.f#",   "expect": "Heureuse",   "desc": "Auto-Féminin: x -> se"},
 		{"tag": "#grec.f#",      "expect": "grecque",    "desc": "Féminin Exception"},
 
-		# C. ARTICLES DÉFINIS (Priorité 3)
+		# C. ARTICLES DÉFINIS
 		{"tag": "#rat.def#",     "expect": "le Rat",     "desc": "Def: Masc Consonne"},
 		{"tag": "#avion.def#",   "expect": "l'Avion",    "desc": "Def: Masc Voyelle"},
 		{"tag": "#souris.def#",  "expect": "la Souris",  "desc": "Def: Fem Consonne"},
@@ -98,10 +108,7 @@ func _init():
 		{"tag": "#hibou.def#",   "expect": "le Hibou",   "desc": "Def: H non marqué"},
 		{"tag": "#histoire.def#","expect": "l'Histoire", "desc": "Def: H Fem marqué (*)"},
 		{"tag": "#hache.def#",   "expect": "la Hache",   "desc": "Def: H Fem non marqué"},
-		
-		# Test critique de priorité : .s (2) s'exécute avant .def (3)
-		# Donc "Avion" devient "Avions" (s), puis "les Avions" (def)
-		{"tag": "#avion.s.def#", "expect": "les Avions", "desc": "Def: Pluriel bat Voyelle (Grâce à Priority Map)"},
+		{"tag": "#avion.s.def#", "expect": "les Avions", "desc": "Def: Pluriel bat Voyelle"},
 
 		# D. ARTICLES INDÉFINIS
 		{"tag": "#rat.indef#",    "expect": "un Rat",    "desc": "Indef: Masc"},
@@ -141,12 +148,12 @@ func _init():
 		{"tag": "#rat.s.dem#",  "expect": "ces Rats",    "desc": "Dem: Pluriel -> Ces"},
 
 		# I. POSSESSIFS
-		{"tag": "#rat.poss_s#",     "expect": "son Rat",      "desc": "Poss: Masc -> Son"},
-		{"tag": "#souris.poss_s#",  "expect": "sa Souris",    "desc": "Poss: Fem Consonne -> Sa"},
-		{"tag": "#image.poss_s#",   "expect": "son Image",    "desc": "Poss: Fem Voyelle -> Son (Euphonie)"},
-		{"tag": "#histoire.poss_m#","expect": "mon Histoire", "desc": "Poss: Fem H marqué (*) -> Son (Euphonie)"},
-		{"tag": "#hache.poss_s#",   "expect": "sa Hache",     "desc": "Poss: Fem H non marqué -> Sa (Pas d'euphonie)"},
-		{"tag": "#rat.s.poss_s#",   "expect": "ses Rats",     "desc": "Poss: Pluriel -> Ses"}
+		{"tag": "#rat.poss_s#",      "expect": "son Rat",      "desc": "Poss: Masc -> Son"},
+		{"tag": "#souris.poss_s#",   "expect": "sa Souris",    "desc": "Poss: Fem Consonne -> Sa"},
+		{"tag": "#image.poss_s#",    "expect": "son Image",    "desc": "Poss: Fem Voyelle -> Son (Euphonie)"},
+		{"tag": "#histoire.poss_m#", "expect": "mon Histoire", "desc": "Poss: Fem H marqué (*) -> Son (Euphonie)"},
+		{"tag": "#hache.poss_s#",    "expect": "sa Hache",     "desc": "Poss: Fem H non marqué -> Sa (Pas d'euphonie)"},
+		{"tag": "#rat.s.poss_s#",    "expect": "ses Rats",     "desc": "Poss: Pluriel -> Ses"}
 	]
 	
 	var stress_tests = [
@@ -175,37 +182,50 @@ func _init():
 		{"tag": "#frais.f#",       "expect": "fraîche",  "desc": "Adj: Fem Sing Irregular"},
 		
 		# --- M. ARTICLE CONFLICTS & PRIORITY ---
-		# Grâce à la priorité: .s (2) s'exécute avant .def (3).
-		# Donc "Oeil" -> "Yeux" -> "les Yeux".
 		{"tag": "#oeil.def#",      "expect": "l'Oeil",   "desc": "Def: Masc Voyelle"},
 		{"tag": "#oeil.s.def#",    "expect": "les Yeux", "desc": "Def: Plural Irregular overrides elision"},
-		
-		{"tag": "#hopital.def#",   "expect": "l'Hôpital","desc": "Def: Masc H Marqué"}, # L'étoile reste souvent dans la string interne, à vérifier selon ton implémentation de clean
+		{"tag": "#hopital.def#",   "expect": "l'Hôpital","desc": "Def: Masc H Marqué"},
 		{"tag": "#hopital.s.def#", "expect": "les Hôpitaux", "desc": "Def: Plural Irregular + H Marqué"},
-		
 		{"tag": "#heros.def#",     "expect": "le Héros", "desc": "Def: H Non Marqué (Consonne)"},
 		{"tag": "#heros.s.def#",   "expect": "les Héros","desc": "Def: H Non Marqué Plural"}, 
 		
-		# --- N. FORMATTING COMBOS (LE PLUS GROS CHANGEMENT DÛ À LA PRIORITY MAP) ---
-		# Puisque 'def'(3) est prioritaire sur 'capitalize'(>3), 'def' s'exécute TOUJOURS avant 'capitalize'.
-		# Donc on aura toujours "Le Rat" (L'article est capitalisé), jamais "le Rat".
-		
+		# --- N. FORMATTING COMBOS ---
 		{"tag": "#rat.def.capitalize#", "expect": "Le Rat", "desc": "Format: Def(3) then Cap(4) -> Le Rat"},
 		{"tag": "#rat.capitalize.def#", "expect": "Le Rat", "desc": "Format: Sorted to Def then Cap -> Le Rat"},
-		
 		{"tag": "#rat.capitalizeAll.def#", "expect": "LE RAT", "desc": "Format: Sorted to Def then CapAll -> LE RAT"},
 		{"tag": "#rat.def.capitalizeAll#", "expect": "LE RAT", "desc": "Format: Def then CapAll -> LE RAT"},
-		
-		# Ici, 'inQuotes' est >3, donc 'def'(3) passe avant.
 		{"tag": "#rat.inQuotes#",       "expect": "\"Rat\"", "desc": "Format: Quotes"},
 		{"tag": "#rat.def.inQuotes#",   "expect": "\"le Rat\"", "desc": "Format: Def(3) then Quotes(>3)"},
 		
 		# --- O. POSSESSIVE EDGE CASES ---
 		{"tag": "#amie.poss_s#",     "expect": "son Amie", "desc": "Poss: Fem starting with Vowel (Euphonie)"},
-		
-		# Héroïne est marqué * -> Donc Élision/Liaison autorisée (User Logic) -> Donc Euphonie
 		{"tag": "#heroine.poss_m#",  "expect": "mon Héroïne", "desc": "Poss: Fem H marqué (Euphonie)"},
 		{"tag": "#heroine.s.poss_m#", "expect": "mes Héroïnes", "desc": "Poss: Fem Plural H Marqué"},
+
+		# --- P. MASCULIN EXCLUSIF FINISSANT PAR 'E' (Les Pièges) ---
+		{"tag": "#monde.poss_m#",    "expect": "mon Monde",    "desc": "Poss_m: Masc 'e' -> Mon"},
+		{"tag": "#monde.poss_s#",    "expect": "son Monde",    "desc": "Poss_s: Masc 'e' -> Son"},
+		{"tag": "#arbre.poss_m#",    "expect": "mon Arbre",    "desc": "Poss_m: Masc Voyelle -> Mon"},
+
+		# --- Q. MASCULIN FINISSANT PAR 'E' + EXCEPTION FÉMININE ---
+		
+		# 1. Prince -> Princesse
+		{"tag": "#prince#",          "expect": "Prince",       "desc": "Base 'e': Masc reste Masc"},
+		{"tag": "#prince.f#",        "expect": "Princesse",    "desc": "Fem Excep: Utilise la règle, n'ajoute pas 'e'"},
+		{"tag": "#prince.poss_m#",   "expect": "mon Prince",   "desc": "Poss Masc 'e': Mon (pas ma)"},
+		{"tag": "#prince.f.poss_m#", "expect": "ma Princesse", "desc": "Poss Fem Excep: Ma (Consonne)"},
+		
+		# 2. Tigre -> Tigresse
+		{"tag": "#tigre#",           "expect": "Tigre",        "desc": "Base 'e' (Animal)"},
+		{"tag": "#tigre.f#",         "expect": "Tigresse",     "desc": "Fem Excep (Animal)"},
+		{"tag": "#tigre.poss_s#",    "expect": "son Tigre",    "desc": "Poss Masc 'e' (Animal) -> Son"},
+		{"tag": "#tigre.f.poss_s#",  "expect": "sa Tigresse",  "desc": "Poss Fem Excep (Animal) -> Sa"},
+
+		# 3. Âne -> Ânesse (Le Boss Final : Voyelle + E + Exception)
+		{"tag": "#ane#",             "expect": "Âne",          "desc": "Base 'e' Voyelle"},
+		{"tag": "#ane.f#",           "expect": "Ânesse",       "desc": "Fem Excep Voyelle"},
+		{"tag": "#ane.poss_m#",      "expect": "mon Âne",      "desc": "Poss Masc Voyelle -> Mon"},
+		{"tag": "#ane.f.poss_m#",    "expect": "mon Ânesse",   "desc": "Poss Fem Excep Voyelle -> Mon (Euphonie!)"},
 	]
 	
 	tests.append_array(stress_tests)
@@ -215,10 +235,6 @@ func _init():
 	
 	for t in tests:
 		var result = grammar.flatten(t["tag"])
-		
-		# Nettoyage des étoiles pour la comparaison finale si ton code ne le fait pas à la toute fin
-		# Mais je teste avec les étoiles si ton système les garde jusqu'au bout.
-		# Si ton système clean à la fin, retire les * dans les "expect".
 		
 		# Affichage Formaté
 		var padding = " ".repeat(45 - t["desc"].length()) if t["desc"].length() < 45 else " "

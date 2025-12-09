@@ -2,13 +2,24 @@
 {
   
   "origin": [
-	"#setPronouns##politesse.capitalize# #Relation.heroGender# [cible:#nom#] est parti vers #direction# #demande# C'est un #occupation# #fin de phrase#"
+	"#setEmotion##setPronouns#[cible:#name#][dir:#direction#]#histoire#"
   
  ],
  
+"histoire": [
+	"#politesse.capitalize# #Relation.heroGender.poss_m# #cible# #parti.heroGender# #dir# #demande.capitalize# C'est #occupation.indef.heroGender#, #fin de phrase#"
+  
+ ],
+
  "setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+	"setEmotion": [
+		"[cibleEmotion : Amical]",
+		"[cibleEmotion : Persuasif | Persuasive]",
+		"[cibleEmotion : Indimidant]"
 	],
 
  
@@ -16,16 +27,25 @@
 	"Bonjour étranger, j'ai un problème,",
 	"Salut l'vivant,",
 	"Qui t'es toi ? Aide moi,",
-	"Bienvenue, ça t'intéresserait un boulot pour quelques pièces ?"
+	"Bienvenue, ça t'intéresserait un boulot pour quelques pièces ?",
+	"Salut à toi médiateur,",
+	"Bonjour l'ami, tu pourrais venir en aide à une pauvre âme comme moi ?",
+	"Ah, enfin un médiateur ! J'ai cru que personne ne viendrait jamais."
+
+ ],
+
+"parti": [
+	"est parti vers | est partie vers",
+	"s'est barré vers | s'est barrée vers",
+	"s'est cassé vers | s'est cassée vers",
+	"s'en est allé vers | s'en est allée vers"
 
  ],
  
  "Relation": [
-	"!frère",
-	"soeur",
-	"^mère",
-	"!mari",
-	"^femme",
+	"!frère | soeur",
+	"!père | mère",
+	"mari | femme",
 	"Ami"
 
  ],
@@ -56,8 +76,6 @@
 	"zombie",
 	"squelette",
 	"humain",
-	"chien",
-	"bon chien",
 	"spectre"
  ],
 
@@ -76,15 +94,25 @@
 	"Qu'est ce que tu fais encore là ? Va bosser ! Hop hop hop !",
 	"Merci beaucoup de m'aider.",
 	"J'espère que tu sera à la hauteur...",
-	"Retrouve #Relation# je t'en supplie...",
-	"J'espère que tu trouveras mon bon à rien de #Relation#  | J'espère que tu trouveras ma bonne à rien de #Relation#"
+	"Retrouve #Relation.poss_m# je t'en supplie...",
+	"Retrouve #heroObj# et je te serais éternellement reconnaissant.",
+	"#cible# s'enfuie tout le temps, pourtant je lui fais pas de mal je crois ?"
  ],
 
   "demande": [
-	"Ramène le moi, tu veux ? Attention, il peut être intimidant.",
-	"Dis lui de revenir, il me manque !",
-	"Je sens qu'il est mort, mais je veux en être sûr.",
-	"Il m'a volé mon tibias ce con, ramène le moi."
+	"Ramène #heroObj# moi, tu veux ? #indication_émotion.capitalize",
+	"Dis lui de revenir, #heroSubj# me manque !",
+	"Je sens qu'#heroSubj# n'est plus de ce monde, mais je veux en être sûr.",
+	"#heroSubj# m'a volé mon tibias ce con, ramène le moi. #indication_émotion.capitalize#",
+	"#heroSubj# me doit des sous, dépèche toi sinon je pourrais pas payer le druide à temps.",
+	"#heroSubj# à fuit sans payer le service funéraire pour notre grand père, fais le revenir je t'en supplie.",
+	"Ramène #cible.heroGender.poss_m# je t'en supplie..."
+ ],
+
+"indication_émotion": [
+	"attention, #heroSubj# peut être #cibleEmotion# à outrance.",
+	"il a une personnalité plutôt #cibleEmotion.heroGender#, si jamais ça peut t'aider.",
+	"il est du genre #cibleEmotion#."
  ]
 
 }

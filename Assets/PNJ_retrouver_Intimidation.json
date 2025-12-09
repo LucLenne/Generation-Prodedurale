@@ -1,0 +1,38 @@
+
+{
+  
+  "origin": [
+	"#setPronouns# #histoire#"
+  
+ ],
+ 
+"histoire": [
+	"#politesse.capitalize# #raison#"
+  
+ ],
+
+ "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+],
+
+
+ 
+  "politesse": [
+	"T'es qui toi, sac à merde ? laisse moi tranquille.",
+	"Qu'est ce que tu veux avec ta tête de rat toi ?",
+	"Bonjour, je suis vraiment pas d'humeur à parler avec vous, me chauffez pas s'il vous plait."
+
+ ],
+
+"raison": [
+	"Quoi ? mais je m'en fout, laisse moi tranquille, je suis parti pour une raison moi...",
+	"Tu veux que je rentre ? Jamais de la vie!",
+	"Je sais bien qui vous envoi, je ne veux plus jamais revoir cette personne, maintenant, partez.",
+	"Maintenant, laisse moi tranquille.",
+	"Laisse moi seul maintenant."
+
+ ],
+
+
+}

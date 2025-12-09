@@ -1,0 +1,59 @@
+
+{
+  
+  "origin": [
+	"#setPronouns##histoire#"
+  
+ ],
+ 
+"histoire": [
+	"#politesse.capitalize# #raison# #conclusion#"
+  
+ ],
+
+ "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+],
+
+"adjectifs": [
+		"stupide",
+		"ignoble",
+		"immonde",
+		"dégoutant",
+		"pourri",
+		
+],
+
+"n_communs": [
+		"rat",
+		"trompette",
+		"gueule",
+		"cul",
+		"déféquement | merde",
+		"raclure"
+		
+],
+ 
+  "politesse": [
+	"Bon, écoute, face de #n_communs#",
+	"Ok, je t'explique,",
+	"Mange moi #n_communs.def#"
+
+ ],
+
+"raison": [
+	"tu vois tes dents ? Tu veux les voire de plus près ?",
+	"A tout moment tu peux mourrir sale #n_communs# #adjectifs#",
+	"Je peux mélanger ton corps dans pleins de sens différents si je veux.",
+	"Ta mère la "
+
+ ],
+
+"conclusion": [
+	"Donc fais ce qu'on te dis",
+	"Alors rentre, ce sera plus facile pour tout le monde "
+
+ ],
+
+}

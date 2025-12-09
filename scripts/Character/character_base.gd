@@ -137,6 +137,15 @@ func _add_point_behaviour(friendly = 0, persuasive = 0, intimidating = 0) -> voi
 	_persuasive = clamp(_persuasive + persuasive, 0,_behaviour_max_point)
 	_intimidating = clamp(_intimidating + intimidating, 0,_behaviour_max_point)
 
+func gain_xp(mood_type : int, amount : float = 0.5):
+	match mood_type:
+		0: _intimidating = min(_intimidating + amount, 20.0) 
+		1: _friendly = min(_friendly + amount, 20.0)         
+		2: _persuasive = min(_persuasive + amount, 20.0)     
+
+	print("XP Gagnée ! Nouvelles stats -> Intim: %.1f | Friend: %.1f | Persu: %.1f" % [_intimidating, _friendly, _persuasive])
+	
+	
 func item_in_inventory(item : CollectibleBase) -> bool:
 	return _inventory.has(item)
 

@@ -1,0 +1,179 @@
+[gd_scene load_steps=12 format=3 uid="uid://bfcmgquain0r4"]
+
+[ext_resource type="Script" path="res://scripts/Dialogue/dialogue_system_ui.gd" id="1_2eajr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 30.0
+content_margin_top = 20.0
+content_margin_right = 30.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_normal"]
+bg_color = Color(1, 0.321569, 0.321569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_pressed"]
+bg_color = Color(0.9, 0.221569, 0.221569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_hover"]
+bg_color = Color(1, 0.421569, 0.421569, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_normal"]
+bg_color = Color(0.992157, 0.796078, 0.431373, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_pressed"]
+bg_color = Color(0.892157, 0.696078, 0.331373, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_hover"]
+bg_color = Color(0.992157, 0.896078, 0.531373, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_normal"]
+bg_color = Color(0, 0.721569, 0.580392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_pressed"]
+bg_color = Color(0, 0.621569, 0.480392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_hover"]
+bg_color = Color(0.1, 0.821569, 0.680392, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="DialogueSystemUI" type="Control" node_paths=PackedStringArray("dialogue_text", "response_container", "dialogue_container", "click_button", "btn_intimidate", "btn_friendly", "btn_persuade")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2eajr")
+dialogue_text = NodePath("DialogueContainer/MarginContainer/DialogueText")
+response_container = NodePath("ResponseButtons")
+dialogue_container = NodePath("DialogueContainer")
+click_button = NodePath("DialogueContainer/ClickButton")
+btn_intimidate = NodePath("ResponseButtons/BtnIntimidate")
+btn_friendly = NodePath("ResponseButtons/BtnFriendly")
+btn_persuade = NodePath("ResponseButtons/BtnPersuade")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="DialogueContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = -328.0
+offset_right = -78.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueContainer"]
+layout_mode = 2
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
+bbcode_enabled = true
+text = "i love my job, i love my job,i love my job ,i love my job ,i love my job"
+
+[node name="ClickButton" type="Button" parent="DialogueContainer"]
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="ResponseButtons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 91.0
+offset_top = -77.0
+offset_right = -78.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 75
+alignment = 1
+
+[node name="BtnIntimidate" type="Button" parent="ResponseButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_intimidant_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_intimidant_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_intimidant_hover")
+text = "Je suis intimidant "
+
+[node name="BtnFriendly" type="Button" parent="ResponseButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.176471, 0.203922, 0.211765, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_amical_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_amical_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_amical_hover")
+text = "Je suis amical"
+
+[node name="BtnPersuade" type="Button" parent="ResponseButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_persuasif_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_persuasif_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_persuasif_hover")
+text = "Je suis persuasif"

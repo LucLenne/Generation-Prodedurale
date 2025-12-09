@@ -1,12 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://db5cfan2a3vjb"]
 
-[ext_resource type="PackedScene" path="res://scenes/generation/World.tscn" id="1_w2twt"]
+[ext_resource type="PackedScene" uid="uid://ba101fnwl5x8" path="res://scenes/generation/World.tscn" id="1_w2twt"]
 
 [node name="MainScene" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(175, -145)
-zoom = Vector2(2.25, 2.25)
 
 [node name="World" parent="." instance=ExtResource("1_w2twt")]
 position = Vector2(-1648, -1312)

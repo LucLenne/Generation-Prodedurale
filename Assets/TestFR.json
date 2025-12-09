@@ -1,0 +1,86 @@
+{
+	"origin": [
+		"#setPronouns##setOccupation#[hero:#nom#][home:#lieu#]#histoire1#"
+	],
+	"nom": [
+		"Chéri",
+		"Renard",
+		"Morgane",
+		"Jedoo",
+		"Brique",
+		"Ombre",
+		"Krox",
+		"Urga",
+		"Zelph"
+	],
+	"lieu": [
+		"^montagne",
+		"!petit village",
+		"^cité de cristal",
+		"^forêt sombre",
+		"château royal"
+	],
+	"animal": [
+		"chat",
+		"chien",
+		"renard",
+		"!poulpe"
+	],
+	"adjectif": [
+		"courageux",
+		"maladroit | maladroite",
+		"féroce",
+		"timide",
+		"malin | maligne",
+		"grognon"
+	],
+	"emotion": [
+		"fier",
+		"épuisé",
+		"terrifié",
+		"excité",
+		"confus"
+	],
+	"objet": [
+		"!anneau magique",
+		"^clé rouillée",
+		"^carte ancienne",
+		"^pièce d'or",
+		"^lettre mystérieuse"
+	],
+	"monstre": [
+		"dragon",
+		"ogre | ogresse",
+		"sorcier",
+		"gobelin",
+		"géant",
+		"!sphinx",
+		"*Héros déchu | *Héroïne déchue"
+	],
+	"statut_retour": [
+		"revenu | revenue"
+	],
+	"setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	"setOccupation": [
+		"[metier:boulanger | boulangère][action:a cuit un gâteau #adjectif#,a trouvé #objet.indef# dans la farine,a brûlé les biscuits,a inventé une recette de tarte #monstre.a#]",
+		"[metier:guerrier | guerrière][action:a combattu #monstre.indef#,a sauvé #home.def# d'#monstre.indef#,a perdu #objet.poss# au combat,a vaincu #monstre.def# #adjectif#]"
+	],
+	
+	
+	"histoire1": [
+		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
+	],
+	
+	"histoire2": [
+		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
+	],
+	
+	"histoire3": [
+		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
+	]
+	
+	
+}

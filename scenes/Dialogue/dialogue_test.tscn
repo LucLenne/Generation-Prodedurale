@@ -1,0 +1,37 @@
+[gd_scene load_steps=10 format=3 uid="uid://de803bokh0ieh"]
+
+[ext_resource type="Script" uid="uid://yr8c14qo708p" path="res://scripts/Dialogue/dialogue_system.gd" id="1_8rghh"]
+[ext_resource type="PackedScene" uid="uid://d1umgfern6hay" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="2_8rghh"]
+[ext_resource type="JSON" path="res://Assets/ExampleNPC.json" id="2_lksov"]
+[ext_resource type="JSON" path="res://Assets/ExampleMonster.json" id="3_cyii7"]
+[ext_resource type="Script" uid="uid://ckmui7cav8sp7" path="res://scripts/Character/player_controller.gd" id="5_cyii7"]
+[ext_resource type="Script" uid="uid://dwhtkltr0pm6f" path="res://scripts/Resource/movement_parameters.gd" id="6_n73t5"]
+
+[sub_resource type="Resource" id="Resource_11me4"]
+script = ExtResource("6_n73t5")
+metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
+
+[sub_resource type="Resource" id="Resource_fsfhq"]
+script = ExtResource("6_n73t5")
+metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyii7"]
+
+[node name="DialogueSystem" type="Node" node_paths=PackedStringArray("dialogue_ui", "player_controller")]
+script = ExtResource("1_8rghh")
+dialogue_ui = NodePath("DialogueSystemUI")
+npc_json_file = ExtResource("2_lksov")
+monster_json_file = ExtResource("3_cyii7")
+player_controller = NodePath("PlayerController")
+metadata/_custom_type_script = "uid://yr8c14qo708p"
+
+[node name="DialogueSystemUI" parent="." instance=ExtResource("2_8rghh")]
+
+[node name="PlayerController" type="CharacterBody2D" parent="."]
+script = ExtResource("5_cyii7")
+default_movement = SubResource("Resource_11me4")
+stunned_movemement = SubResource("Resource_fsfhq")
+metadata/_custom_type_script = "uid://ckmui7cav8sp7"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerController"]
+shape = SubResource("RectangleShape2D_cyii7")

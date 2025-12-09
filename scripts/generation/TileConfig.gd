@@ -1,7 +1,7 @@
 class_name TileConfig extends Node
 
 # Global Settings
-const SOURCE_ID = 1
+static var SOURCE_ID = 1
 const TILE_SIZE = 8
 
 # Basic tiles

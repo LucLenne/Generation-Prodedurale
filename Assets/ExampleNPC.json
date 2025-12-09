@@ -125,33 +125,33 @@
 	],
 	
 	"demande_intimidant":[
-		"Retrouve vite #relation.herogender.poss_m# #cible_nom#",
-		"Va vite chercher #relation.herogender.poss_m# #cible_nom#",
-		"Dépèche toi de retrouver #relation.herogender.poss_m# #cible_nom#",
-		"Faut que tu retrouves #relation.herogender.poss_m# #cible_nom#",
-		"#relation.herogender.poss_m# #cible_nom# a disparu, retrouve #heroObj#"
+		"Retrouve vite #rela.herogender.poss_m# #cible_nom#",
+		"Va vite chercher #rela.herogender.poss_m# #cible_nom#",
+		"Dépèche toi de retrouver #rela.herogender.poss_m# #cible_nom#",
+		"Faut que tu retrouves #rela.herogender.poss_m# #cible_nom#",
+		"#rela.herogender.poss_m# #cible_nom# a disparu, retrouve #heroObj#"
 		
 	],
 	
 	"demande_amical":[
-		"je t'en supplie, j'ai perdu #relation.herogender.poss_m#, #heroObj# se nomme #cible_nom#",
-		"retrouve #relation.herogender.poss_m# #cible_nom#",
-		"si tu me retrouves #relation.herogender.poss_m# #cible_nom# je te serais éternellement reconnaissant",
-		"retrouves #relation.herogender.poss_m# #cible_nom# s'il te plait",
-		"#cible_nom#, #relation.herogender.poss_m# a disparu, par pitié, retrouve #heroObj#",
+		"je t'en supplie, j'ai perdu #rela.herogender.poss_m#, #heroObj# se nomme #cible_nom#",
+		"retrouve #rela.herogender.poss_m# #cible_nom#",
+		"si tu me retrouves #rela.herogender.poss_m# #cible_nom# je te serais éternellement reconnaissant",
+		"retrouves #rela.herogender.poss_m# #cible_nom# s'il te plait",
+		"#cible_nom#, #rela.herogender.poss_m# a disparu, par pitié, retrouve #heroObj#",
 		
 	],
 	
 	"demande_persuasif":[
-		"si tu retrouves #cible_nom#, #relation.herogender.poss_m#, tu auras une récompense ",
-		"cela fait des jours que #relation.herogender.poss_m# #cible_nom# à disparu, je m'inquiète même si c'est #insulte.heroGender.indef#",
-		"tu es bien médiateur non ? Va chercher #relation.herogender.poss_m# #cible_nom#, c'est ton métier après tout.",
-		"tu dois me venir en aide, ton serment t'y oblige, retrouves #relation.herogender.poss_m# #cible_nom#",
-		"si tu retrouves #cible_nom#, #relation.herogender.poss_m# pour moi, je t'en devrais une"
+		"si tu retrouves #cible_nom#, #rela.herogender.poss_m#, tu auras une récompense ",
+		"cela fait des jours que #rela.herogender.poss_m# #cible_nom# à disparu, je m'inquiète même si c'est #insulte.heroGender.indef#",
+		"tu es bien médiateur non ? Va chercher #rela.herogender.poss_m# #cible_nom#, c'est ton métier après tout.",
+		"tu dois me venir en aide, ton serment t'y oblige, retrouves #rela.herogender.poss_m# #cible_nom#",
+		"si tu retrouves #cible_nom#, #rela.herogender.poss_m# pour moi, je t'en devrais une"
 		
 	],
 	
-	"Relation": [
+	"relation": [
 	"frère | soeur",
 	"père | mère",
 	"mari | femme",
@@ -197,7 +197,7 @@
 
 	"conclusion_amical": [
 	"#cible# s'enfuie tout le temps, pourtant je lui fais pas de mal je crois ?",
-	"retrouve #relation.poss_m# je t'en supplie...",
+	"retrouve #rela.poss_m# je t'en supplie...",
 	"je ne sais pas ce que je ferais sans #heroSubj#, ramène #heroObj# je t'en prie.",
 	"J'espère que tu sera à la hauteur...",
 	"reviens vite étranger, je te donnerais tout ce que j'ai si tu me #heroObj# ramène.",

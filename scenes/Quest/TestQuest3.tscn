@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=4 uid="uid://bnwlh8ttcxof8"]
 
-[ext_resource type="Script" uid="uid://2sb5nqntutp1" path="res://scripts/Quests/kill_quest.gd" id="1_setxr"]
+[ext_resource type="Script" uid="uid://cu86wqeauv4nh" path="res://scripts/Quests/talk_quest.gd" id="1_setxr"]
 [ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="2_evfcs"]
 
 [node name="FireCamp" type="Node2D"]

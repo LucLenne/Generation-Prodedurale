@@ -135,6 +135,12 @@ func generate_world():
 	# Spawn Entities (Player & NPCs)
 	spawner_gen.spawn_npcs(map_data, self)
 	player_instance = spawner_gen.spawn_player(map_data, self)
+
+	# --- Generate Quests for PNJs (After NPCs are placed) ---
+	if QuestManager.Instance:
+		for npc in npcs:
+			if npc is PNJ and npc.QuestGiverDialogueSystem != null:
+				QuestManager.Instance.spawn_quest_for_pnj(npc, self)
 	
 	setup_player_camera(player_instance)
 	
@@ -234,6 +240,43 @@ func get_random_zone_position(specific_zone = null, size: Vector2i = Vector2i(1,
 	var fallback_pos = Vector2(fallback_cell) * TileConfigScript.TILE_SIZE
 	register_reserved_area(fallback_pos, max(size.x, size.y) / 2 + 1)
 	return fallback_pos
+
+func get_position_in_direction(origin: Vector2, direction_str: String, distance: float, check_size: Vector2i = Vector2i(1,1)) -> Vector2:
+	if not map_data: return Vector2.INF
+
+	var dir_vec = Vector2.RIGHT
+	match direction_str.to_upper():
+		"NORD": dir_vec = Vector2.UP
+		"SUD": dir_vec = Vector2.DOWN
+		"EST": dir_vec = Vector2.RIGHT
+		"OUEST": dir_vec = Vector2.LEFT
+		_:
+			# Fallback or random if needed, but for now specific
+			printerr("WorldGenerator: Unknown direction '%s', defaulting to RIGHT" % direction_str)
+
+	# Calculate theoretical target
+	var target_pos = origin + (dir_vec * distance)
+	var target_cell = Vector2i(target_pos / TileConfigScript.TILE_SIZE)
+	
+	# Spiral search for valid spot near target
+	var search_radius = 5
+	for r in range(0, search_radius + 1):
+		for x in range(target_cell.x - r, target_cell.x + r + 1):
+			for y in range(target_cell.y - r, target_cell.y + r + 1):
+				var cell = Vector2i(x,y)
+				# Only check outer ring if r>0 to avoid re-checking
+				# (Optional optimization, but simple loop is fine for small radius)
+				
+				if _is_rect_safe(cell, check_size):
+					var world_pos = Vector2(cell) * TileConfigScript.TILE_SIZE
+					
+					# We should probably reserve this spot if found? 
+					# The user asked for a function that *finds* an appropriate place.
+					# Usually we want to reserve it to avoid double spawn.
+					register_reserved_area(world_pos, max(check_size.x, check_size.y) / 2 + 1)
+					return world_pos
+					
+	return Vector2.INF
 
 func get_random_building_door(size: Vector2i = Vector2i(1, 1)) -> Vector2:
 	if not map_data: return Vector2.ZERO

@@ -12,7 +12,8 @@ func setup(world_gen: Node2D) -> void:
 	_item = ManagerQuest.list_collectibles[rd]
 	var pnj_scene = ManagerQuest.list_pnj.pick_random()
 func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
-	if QuestManager.Instance.list_pnj.is_empty(): return false
+	if ManagerQuest.list_pnj.is_empty(): return false
+	var pnj_scene = ManagerQuest.list_pnj.pick_random()
 	
 	var origin_pos = Vector2.ZERO
 	if dialogue_ref and "pnj" in dialogue_ref and dialogue_ref.pnj:
@@ -20,17 +21,17 @@ func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) 
 	elif Player.Instance:
 		origin_pos = Player.Instance.global_position
 		
-	var spawn_pos = QuestManager.Instance.get_spawn_position_from_direction(direction, distance, origin_pos)
+	var spawn_pos = ManagerQuest.get_spawn_position_from_direction(direction, distance, origin_pos)
 	
-	_pnj = QuestManager.Instance.spawn_entity_in_world(pnj_scene, 0, 0, spawn_pos) as PNJ
+	_pnj = ManagerQuest.spawn_entity_in_world(pnj_scene, 0, 0, spawn_pos) as PNJ
 	if _pnj: _pnj.dialogue_ref = dialogue_ref
 	return _pnj != null
 
 func _spawn_fallback(dialogue_ref: Object) -> bool:
-	if QuestManager.Instance.list_pnj.is_empty(): return false
-	var scene = QuestManager.Instance.list_pnj.pick_random()
+	if ManagerQuest.list_pnj.is_empty(): return false
+	var scene = ManagerQuest.list_pnj.pick_random()
 	
-	_pnj = QuestManager.Instance.spawn_entity_in_world(scene) as PNJ
+	_pnj = ManagerQuest.spawn_entity_in_world(scene) as PNJ
 	if _pnj: _pnj.dialogue_ref = dialogue_ref
 	return _pnj != null
 

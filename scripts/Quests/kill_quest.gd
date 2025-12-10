@@ -17,11 +17,11 @@ func setup(world_gen: Node2D) -> void:
 	pass
 
 func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
-	if QuestManager.Instance.list_character_to_kill.is_empty():
+	if ManagerQuest.list_character_to_kill.is_empty():
 		printerr("KillQuest: No enemies to spawn!")
 		return false
 		
-	var target_scene = QuestManager.Instance.list_character_to_kill.pick_random()
+	var target_scene = ManagerQuest.list_character_to_kill.pick_random()
 	
 	var origin_pos = Vector2.ZERO
 	if dialogue_ref and "pnj" in dialogue_ref and dialogue_ref.pnj:
@@ -29,14 +29,11 @@ func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) 
 	elif Player.Instance:
 		origin_pos = Player.Instance.global_position
 		
-	var spawn_pos = QuestManager.Instance.get_spawn_position_from_direction(direction, distance, origin_pos)
+	var spawn_pos = ManagerQuest.get_spawn_position_from_direction(direction, distance, origin_pos)
 	
-	var spawn_pos = Vector2.INF
-	if world_gen.has_method("get_random_zone_position"):
-		spawn_pos = world_gen.get_random_zone_position()
+	# Removed fallback random zone logic to respect direction
 		
-	var spawned_obj = ManagerQuest.spawn_entity_in_world(target_scene, 200, 500, spawn_pos)
-	var spawned_obj = QuestManager.Instance.spawn_entity_in_world(target_scene, 0, 0, spawn_pos)
+	var spawned_obj = ManagerQuest.spawn_entity_in_world(target_scene, 0, 0, spawn_pos)
 	_target = spawned_obj as CharacterBase
 	
 	if _target:
@@ -48,11 +45,11 @@ func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) 
 		return false
 
 func _spawn_fallback(dialogue_ref: Object) -> bool:
-	if QuestManager.Instance.list_character_to_kill.is_empty(): return false
-	var scene = QuestManager.Instance.list_character_to_kill.pick_random()
+	if ManagerQuest.list_character_to_kill.is_empty(): return false
+	var scene = ManagerQuest.list_character_to_kill.pick_random()
 	
 	# Random spawn via ManagerQuest default behavior (around player/origin)
-	var spawned_obj = QuestManager.Instance.spawn_entity_in_world(scene)
+	var spawned_obj = ManagerQuest.spawn_entity_in_world(scene)
 	_target = spawned_obj as CharacterBase
 	if _target:
 		_target.dialogue_ref = dialogue_ref

@@ -196,7 +196,7 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
-		QuestManager.Instance.ActivateQuest(pnj)
+		ManagerQuest.ActivateQuest(pnj)
 	elif is_fighting_monster:
 		is_fighting_monster = false
 	elif is_second_chance:

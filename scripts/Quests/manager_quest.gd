@@ -17,7 +17,7 @@ var _pnj_in_quest : Array[PNJ]
 @export var entity_scale : Vector2 = Vector2.ONE
 
 
-var _typeQuest : Array[Script] = [CollectQuest,DeliveryQuest,ExploreQuest,KillQuest,TalkQuest]
+var _typeQuest : Array[Script] = [CollectQuest,DeliveryQuest,ExploreQuest,TalkQuest]
 var _activeQuest : Array[QuestBase]
 var _inactiveQuest : Array[QuestBase]
 var _successQuest : Array[QuestBase]

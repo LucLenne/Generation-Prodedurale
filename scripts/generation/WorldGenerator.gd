@@ -137,10 +137,10 @@ func generate_world():
 	player_instance = spawner_gen.spawn_player(map_data, self)
 
 	# --- Generate Quests for PNJs (After NPCs are placed) ---
-	if QuestManager.Instance:
+	if ManagerQuest:
 		for npc in npcs:
 			if npc is PNJ and npc.QuestGiverDialogueSystem != null:
-				QuestManager.Instance.spawn_quest_for_pnj(npc, self)
+				ManagerQuest.spawn_quest_for_pnj(npc, self)
 	
 	setup_player_camera(player_instance)
 	

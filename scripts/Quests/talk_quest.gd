@@ -5,7 +5,12 @@ var _pnj2 : CharacterBase
 
 func _init() -> void :
 	type = TYPE.TALK
-	title = "Tu dois réconcilier " + _pnj1._name + " et " + _pnj2.name + "."
+	
+func _update_title() -> void:
+	if _pnj1 and _pnj2:
+		title = "Tu dois réconcilier " + _pnj1.Name + " et " + _pnj2.Name + "."
+	else:
+		title = "Tu dois réconcilier deux personnes (Erreur de spawn)."
 
 func setup(world_gen: Node2D) -> void:
 	_pnj1 = ManagerQuest.GetPNJ(world_gen)
@@ -39,9 +44,11 @@ func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) 
 	if _pnj1: 
 		_pnj1.emotion = CharacterBase.EMOTION.ANGRY
 		_pnj1.dialogue_ref = dialogue_ref
+		_pnj1.quest_data = self.quest_data
 	if _pnj2: 
 		_pnj2.emotion = CharacterBase.EMOTION.ANGRY
 		_pnj2.dialogue_ref = dialogue_ref
+		_pnj2.quest_data = self.quest_data
 	
 	return _pnj1 != null and _pnj2 != null
 
@@ -57,13 +64,17 @@ func _spawn_fallback(dialogue_ref: Object) -> bool:
 	if _pnj1: 
 		_pnj1.emotion = CharacterBase.EMOTION.ANGRY
 		_pnj1.dialogue_ref = dialogue_ref
+		_pnj1.quest_data = self.quest_data
 	if _pnj2: 
 		_pnj2.emotion = CharacterBase.EMOTION.ANGRY
 		_pnj2.dialogue_ref = dialogue_ref
+		_pnj2.quest_data = self.quest_data
 	
 	return _pnj1 != null and _pnj2 != null
 
 func _process(_delta: float) -> void:
+	if not _pnj1 or not _pnj2: return
+
 	if(_pnj1.emotion != CharacterBase.EMOTION.ANGRY || _pnj2.emotion != CharacterBase.EMOTION.ANGRY):
 		_valid_quest()
 	if(_pnj1.is_dead || _pnj2.is_dead):

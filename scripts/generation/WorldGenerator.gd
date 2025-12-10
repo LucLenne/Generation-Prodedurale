@@ -129,18 +129,19 @@ func generate_world():
 	# Quests (Manager Spawn) - Spawning BEFORE structures to ensure priority (they reserve space first)
 	spawner_gen.spawn_manager_quest(self, self)
 
-	# Structures & Decorations
-	structure_gen.generate(map_data, self)
-	
-	# Spawn Entities (Player & NPCs)
+	# 1. Structures (Houses Only) - Creates Doors
+	structure_gen.place_buildings(map_data, self)
+
+	# 2. Spawn Entities (Player & NPCs) - Uses Doors
 	spawner_gen.spawn_npcs(map_data, self)
 	player_instance = spawner_gen.spawn_player(map_data, self)
 
-	# --- Generate Quests for PNJs (After NPCs are placed) ---
+	# 3. Generate Quests - Reserves Space
 	if ManagerQuest:
-		for npc in npcs:
-			if npc is PNJ and npc.QuestGiverDialogueSystem != null:
-				ManagerQuest.spawn_quest_for_pnj(npc, self)
+		ManagerQuest.generate_quests_for_world(npcs, self)
+
+	# 4. Decorations - Fills remaining space
+	structure_gen.place_decorations_global(map_data, self)
 	
 	setup_player_camera(player_instance)
 	

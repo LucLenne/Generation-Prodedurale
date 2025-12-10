@@ -7,6 +7,7 @@ var _state : STATE = STATE.ACTIVE
 var type : TYPE = TYPE.NONE
 var id : int
 @export var title : String
+var quest_data : Dictionary = {}
 
 @export var _amount_life_reward : int = 5
 

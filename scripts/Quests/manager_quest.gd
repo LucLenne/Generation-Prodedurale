@@ -74,6 +74,71 @@ func GetPNJ(world_gen: Node2D = null) -> PNJ:
 
 @export var quest_scenes : Array[PackedScene]
 
+var _quest_scenes_by_type: Dictionary = {}
+
+func _ready() -> void:
+	# Populate quest scenes by type for easy lookup
+	print("ManagerQuest: _ready called. Total quest_scenes assigned: ", quest_scenes.size())
+	for scene in quest_scenes:
+		var temp_instance = scene.instantiate()
+		if temp_instance is QuestBase:
+			var type = temp_instance.type
+			if not _quest_scenes_by_type.has(type):
+				_quest_scenes_by_type[type] = []
+			_quest_scenes_by_type[type].append(scene)
+			print("ManagerQuest: Registered quest scene for type ", type)
+		temp_instance.free()
+		
+func generate_quests_for_world(npcs: Array, world_gen: WorldGenerator) -> void:
+	print("ManagerQuest: Generating quests for world...")
+	var valid_pnjs: Array[PNJ] = []
+	for npc in npcs:
+		if npc is PNJ:
+			if npc.QuestGiverDialogueSystem != null:
+				valid_pnjs.append(npc)
+			else:
+				print("ManagerQuest Debug: NPC %s is PNJ but has NO DialogueSystem" % npc.name)
+			
+	if valid_pnjs.is_empty():
+		print("ManagerQuest: No valid PNJs found for quest generation. (Total NPCs checked: %d)" % npcs.size())
+		return
+		
+	if _quest_scenes_by_type.is_empty() and quest_scenes.is_empty():
+		printerr("ManagerQuest ERROR: No quest scenes loaded! Check inspector assignments on ManagerQuest.")
+		return
+		
+	valid_pnjs.shuffle()
+	var selected_pnjs = valid_pnjs.slice(0, min(_numberQuest, valid_pnjs.size()))
+	
+	print("ManagerQuest: Selected %d PNJs for quests." % selected_pnjs.size())
+	
+	for pnj in selected_pnjs:
+		# Trigger dialogue generation to define the quest
+		pnj.QuestGiverDialogueSystem.generate_new_quest()
+		
+		# Spawn the physical quest object based on the new data
+		spawn_quest_for_pnj(pnj, world_gen)
+
+func map_dialogue_type_to_quest_type(dialogue_type_enum) -> QuestBase.TYPE:
+	# DialogueSystem.QuestType {TALK, KILL, DELIVERY, EXPLORE, COLLECT}
+	# QuestBase.TYPE {COLLECT, KILL, EXPLORE, DELIVERY, TALK, NONE}
+	
+	# Assuming enums might not match int values exactly, we map by string name logic or strict switch if we knew values.
+	# Let's rely on string representation if possible, or manual mapping.
+	# Since DialogueSystem script is available, we can try to match logic.
+	
+	# DialogueSystem.QuestType keys:
+	# TALK=0, KILL=1, DELIVERY=2, EXPLORE=3, COLLECT=4 (Based on view)
+	
+	match dialogue_type_enum:
+		0: return QuestBase.TYPE.TALK
+		1: return QuestBase.TYPE.KILL
+		2: return QuestBase.TYPE.DELIVERY
+		3: return QuestBase.TYPE.EXPLORE
+		4: return QuestBase.TYPE.COLLECT
+	
+	return QuestBase.TYPE.NONE
+
 func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 	if quest_scenes.is_empty():
 		print("ManagerQuest: No quest scenes assigned.")
@@ -89,20 +154,36 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 	var dialogue_data = pnj.QuestGiverDialogueSystem.current_quest_data
 	var directory = "EST" # Default fallback
 	var distance = 100.0 # Default fixed distance for now
+	var quest_type_enum = 0 # Default TALK
 	
-	if dialogue_data.has("target_direction"):
+	if dialogue_data.has("target_direction") and dialogue_data["target_direction"] != "":
 		directory = dialogue_data["target_direction"]
-		print("ManagerQuest: Using direction '%s' from DialogueSystem" % directory)
-	else:
-		print("ManagerQuest: No target_direction in DialogueSystem, using default EST")
+	
+	if dialogue_data.has("quest_type"):
+		quest_type_enum = dialogue_data["quest_type"]
 		
+	var target_quest_type = map_dialogue_type_to_quest_type(quest_type_enum)
+	print("ManagerQuest: PNJ %s requests quest type %s (Dir: %s)" % [pnj.name, str(target_quest_type), directory])
+
 	# Fallback if direction comes back as "Nulle part" or empty from random gen
+	if directory == "Nulle part" or directory == "" or directory == "EST": # EST is default, but if we want random, we should check logic
+		# Actually, if it's "EST" because of default initialization, we might want to keep it?
+		# But the logs show (Dir: ) which matches ""
+		pass
+		
 	if directory == "Nulle part" or directory == "":
 		var fallback_dirs = ["NORD", "SUD", "EST", "OUEST"]
 		directory = fallback_dirs.pick_random()
-		print("ManagerQuest: Direction was invalid, picked random: ", directory)
+		print("ManagerQuest: Direction was invalid/empty, picked random: ", directory)
 
-	var scene = quest_scenes.pick_random()
+	# Pick scene based on type
+	var scene = null
+	if _quest_scenes_by_type.has(target_quest_type) and not _quest_scenes_by_type[target_quest_type].is_empty():
+		scene = _quest_scenes_by_type[target_quest_type].pick_random()
+	else:
+		print("ManagerQuest: No scene found for type ", target_quest_type, ". Picking random fallback.")
+		scene = quest_scenes.pick_random()
+		
 	if scene == null: return
 	
 	# Determine Quest Size (for safe spawning)
@@ -142,6 +223,20 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 	if instance is QuestBase:
 		_inactiveQuest.append(instance)
 		instance.setup(world_gen)
+		
+		# Pass Data
+		instance.quest_data = dialogue_data
+		
+		# Spawn Targets
+		if instance.has_method("force_spawn_target"):
+			instance.force_spawn_target(directory, distance, pnj.QuestGiverDialogueSystem)
+			
+		# Update Title (safely after targets exist)
+		if instance.has_method("_update_title"):
+			instance._update_title()
+		elif instance.has_method("_init_name"): # Support old KillQuest style
+			instance._init_name()
+		
 		pnj.assign_quest(instance)
 		print("ManagerQuest: Spawned quest for PNJ at ", instance.position)
 

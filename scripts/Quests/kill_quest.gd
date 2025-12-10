@@ -38,6 +38,7 @@ func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) 
 	
 	if _target:
 		_target.dialogue_ref = dialogue_ref
+		_target.quest_data = self.quest_data
 		print("KillQuest: Spawned target at ", spawn_pos, " (", direction, " ", distance, ")")
 		return true
 	else:
@@ -53,6 +54,7 @@ func _spawn_fallback(dialogue_ref: Object) -> bool:
 	_target = spawned_obj as CharacterBase
 	if _target:
 		_target.dialogue_ref = dialogue_ref
+		_target.quest_data = self.quest_data
 	return _target != null
 
 func _process(_delta: float) -> void:

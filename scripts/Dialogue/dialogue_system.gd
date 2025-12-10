@@ -77,8 +77,10 @@ func _ready():
 func generate_new_quest():
 	if !npc_json_file :
 		push_error("No Npc json file loaded")
+		return
 	if !monster_json_file :
 		push_error("No Monster json file loaded")
+		return
 		
 	is_intro = true
 	is_fighting_monster = false
@@ -240,8 +242,8 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
-		if QuestManager.Instance :
-				QuestManager.Instance.ActivateQuest(pnj)
+		if ManagerQuest :
+				ManagerQuest.ActivateQuest(pnj)
 	elif is_fighting_monster:
 		is_fighting_monster = false
 	elif is_second_chance:

@@ -10,7 +10,11 @@ func _init(count_range: Vector2i):
 	building_count_range = count_range
 
 func generate(data: MapData, parent_node: Node2D):
-	print("Populating zones...")
+	place_buildings(data, parent_node)
+	place_decorations_global(data, parent_node)
+
+func place_buildings(data: MapData, parent_node: Node2D):
+	print("Populating zones (Buildings)...")
 	for zone in data.zones:
 		var biome = data.get_biome_at(zone.center.x, zone.center.y)
 		var current_house_scenes: Array[PackedScene] = []
@@ -20,7 +24,7 @@ func generate(data: MapData, parent_node: Node2D):
 		var building_count = randi_range(building_count_range.x, building_count_range.y)
 		var placed_buildings: Array[Rect2i] = []
 		var building_doors: Array[Vector2i] = []
-		var occupied_cells = data.reserved_cells # Use global reference
+		var occupied_cells = data.reserved_cells # Global ref
 		
 		# Place Buildings
 		for i in range(building_count):
@@ -30,10 +34,7 @@ func generate(data: MapData, parent_node: Node2D):
 			while attempts < 100:
 				attempts += 1
 				var cell = zone.cells.pick_random()
-				
-				# Skip if existing path
-				if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH:
-					continue
+				if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH: continue
 					
 				var use_procedural = false
 				if biome: use_procedural = biome.use_procedural_buildings
@@ -50,19 +51,16 @@ func generate(data: MapData, parent_node: Node2D):
 								occupied_cells[Vector2i(x,y)] = true
 					break
 		
-		# Connect Doors to Paths
+		# Connect Doors
 		connect_doors_to_paths(data, zone, building_doors, occupied_cells)
 		
-		# Spawn NPCs near doors (Requires Spawner, let's just return locations or do it here?)
-		# To keep it cohesive, StructurePlacer focuses on structures. Spawning NPCS is EntitySpawner.
-		# However, we know where doors are here.
-		# I will emit a signal or return list of door positions?
-		# For now, let's assume EntitySpawner will handle random NPC spawning or we do it here if closely tied.
-		# The original code spawned NPCs immediately after placing buildings.
-		# Let's delegate NPC spawning to EntitySpawner, but we need to store door locations.
-		zone.set_meta("building_doors", building_doors) # Storing in metadata for EntitySpawner
-		
-		# Place Decorations
+		# Metadata for Spawner
+		zone.set_meta("building_doors", building_doors)
+
+func place_decorations_global(data: MapData, parent_node: Node2D):
+	print("Populating zones (Decorations)...")
+	for zone in data.zones:
+		var occupied_cells = data.reserved_cells
 		place_decorations(data, zone, occupied_cells, parent_node)
 
 func try_place_building_at(data: MapData, zone: Zone, pos: Vector2i, placed_buildings: Array[Rect2i], occupied_cells: Dictionary, parent: Node2D, available_scenes: Array[PackedScene], force_procedural: bool = false) -> Dictionary:

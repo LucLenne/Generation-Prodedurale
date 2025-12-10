@@ -5,7 +5,10 @@ var _item : CollectibleBase
 
 func _init() -> void :
 	type = TYPE.DELIVERY
-	title = "Tu dois donner" + _item.Name + ", à " + _pnj._name + "."
+	
+func _update_title() -> void:
+	if _item and _pnj:
+		title = "Tu dois donner " + _item.Name + ", à " + _pnj.Name + "."
 
 func setup(world_gen: Node2D) -> void:
 	var rd = randi_range(0, ManagerQuest.list_collectibles.size()) 
@@ -24,7 +27,9 @@ func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) 
 	var spawn_pos = ManagerQuest.get_spawn_position_from_direction(direction, distance, origin_pos)
 	
 	_pnj = ManagerQuest.spawn_entity_in_world(pnj_scene, 0, 0, spawn_pos) as PNJ
-	if _pnj: _pnj.dialogue_ref = dialogue_ref
+	if _pnj: 
+		_pnj.dialogue_ref = dialogue_ref
+		_pnj.quest_data = self.quest_data
 	return _pnj != null
 
 func _spawn_fallback(dialogue_ref: Object) -> bool:
@@ -32,10 +37,14 @@ func _spawn_fallback(dialogue_ref: Object) -> bool:
 	var scene = ManagerQuest.list_pnj.pick_random()
 	
 	_pnj = ManagerQuest.spawn_entity_in_world(scene) as PNJ
-	if _pnj: _pnj.dialogue_ref = dialogue_ref
+	if _pnj: 
+		_pnj.dialogue_ref = dialogue_ref
+		_pnj.quest_data = self.quest_data
 	return _pnj != null
 
 func _process(_delta: float) -> void:
+	if not _pnj or not _item: return
+	
 	if(_pnj.is_dead):
 		_fail_quest()
 	if(_pnj.item_in_inventory(_item)):

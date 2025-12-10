@@ -17,6 +17,14 @@ func interact():
 	pass
 	
 func _ready():
+	if not QuestGiverDialogueSystem:
+		for child in get_children():
+			if child is DialogueSystem:
+				QuestGiverDialogueSystem = child
+				break
+		if not QuestGiverDialogueSystem:
+			printerr("PNJ ", name, ": No DialogueSystem found (Export is empty and no child node found).")
+			
 	if not quest_indicator_label:
 		pass
 

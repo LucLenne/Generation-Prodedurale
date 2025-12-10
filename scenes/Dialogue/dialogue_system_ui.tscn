@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1umgfern6hay"]
+[gd_scene load_steps=12 format=3 uid="uid://bfcmgquain0r4"]
 
 [ext_resource type="Script" uid="uid://blqppoxo8mcic" path="res://scripts/Dialogue/dialogue_system_ui.gd" id="1_2eajr"]
 
@@ -97,6 +97,7 @@ btn_friendly = NodePath("ResponseButtons/BtnFriendly")
 btn_persuade = NodePath("ResponseButtons/BtnPersuade")
 
 [node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

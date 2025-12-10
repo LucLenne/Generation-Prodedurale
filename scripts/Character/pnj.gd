@@ -1,27 +1,44 @@
 class_name PNJ extends CharacterBase
 
 
-const SPEED = 0
-const JUMP_VELOCITY = 0
+@export var interact_prompt: String = "Appuyer sur [E] pour parler"
+@export var QuestGiverDialogueSystem : DialogueSystem
+
+var current_quest: QuestBase
+var has_active_quest: bool = false 
 
 func _update_state(delta : float):
 	pass
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+@onready var quest_indicator_label: Label = $QuestIndicatorLabel # Assurez-vous que le chemin du Node est correct, ici j'utilise @onready
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+func interact():
+	pass
+	
+func _ready():
+	if not quest_indicator_label:
+		pass
+
+
+func assign_quest(new_quest: QuestBase):
+	if new_quest:
+		current_quest = new_quest
+		has_active_quest = true
+		print("PNJ: Quête assignée : ", new_quest.name)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		print("PNJ: Tentative d'assigner une quête nulle.")
 
-	move_and_slide()
+
+
+func _physics_process(delta: float) -> void:
+	pass
+
+func _process(_delta: float) -> void:
+	if quest_indicator_label:
+		if (has_active_quest && current_quest.state == QuestBase.STATE.INACTIVE):
+			quest_indicator_label.text = "?"
+		elif (has_active_quest && current_quest.state == QuestBase.STATE.SUCCESS):
+			quest_indicator_label.text = "!"
+		else:
+			quest_indicator_label.text = ""

@@ -104,10 +104,13 @@ func carve_zone(data: MapData, zone: Zone, biome: BiomeResource):
 		var biome_at_cell = data.get_biome_at(cell.x, cell.y)
 		data.wall_layer.set_cell(cell, -1) # Remove tree
 		
-		if randf() < zone_dirt_ratio:
-			data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
+		if biome_at_cell:
+			if randf() < zone_dirt_ratio:
+				data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
+			else:
+				data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
 		else:
-			data.ground_layer.set_cell(cell, TileConfig.SOURCE_ID, biome_at_cell.ground_tile)
+			printerr("Warning: No biome found at zone cell ", cell)
 
 	# Outer Border Gaps
 	process_outer_border(data, zone, boundary_set, biome)
@@ -128,7 +131,8 @@ func process_outer_border(data: MapData, zone: Zone, boundary_set: Dictionary, b
 		if randf() > biome.border_tree_density:
 			data.wall_layer.set_cell(outer_cell, -1)
 			var biome_at_cell = data.get_biome_at(outer_cell.x, outer_cell.y)
-			data.ground_layer.set_cell(outer_cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
+			if biome_at_cell:
+				data.ground_layer.set_cell(outer_cell, TileConfig.SOURCE_ID, biome_at_cell.dirt_tile)
 
 func identify_entrances(zones: Array):
 	for zone in zones:
@@ -222,4 +226,29 @@ func grow_zone_organic(data: MapData, zone_id: int, seed: Vector2i, target_size:
 			var score = -dist + (noise_val * 5.0)
 			candidates[neighbor] = score
 			
+			candidates[neighbor] = score
+			
+	# Smoothing Pass (Cellular Automata - simple)
+	return _smooth_zone(zone)
+
+func _smooth_zone(zone: Zone) -> Zone:
+	var cells_set = {}
+	for c in zone.cells: cells_set[c] = true
+	
+	var new_cells = []
+	
+	# Erosion / Smoothing
+	for c in zone.cells:
+		var neighbors = 0
+		for dx in range(-1, 2):
+			for dy in range(-1, 2):
+				if dx == 0 and dy == 0: continue
+				if cells_set.has(c + Vector2i(dx, dy)):
+					neighbors += 1
+		
+		# Keep if enough neighbors (solid)
+		if neighbors >= 3:
+			new_cells.append(c)
+			
+	zone.cells = new_cells
 	return zone

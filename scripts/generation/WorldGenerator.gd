@@ -25,7 +25,6 @@ class_name WorldGenerator extends Node2D
 @export var npc_scene : PackedScene
 @export var player_scene : PackedScene
 @export var collision_scene : PackedScene
-@export var house_scenes : Array[PackedScene]
 @export var manager_quest_scene : PackedScene
 
 @export_group("Layers")
@@ -38,6 +37,7 @@ class_name WorldGenerator extends Node2D
 
 var map_data: MapData
 var npcs : Array = [] # Kept for compatibility / tracking
+var generated_objects : Array = []
 var player_instance : Node2D = null
 
 # --- Scripts ---
@@ -76,18 +76,26 @@ func _ready():
 	else:
 		printerr("Warning: No TileSet assigned to Ground Layer.")
 		
-	# Initialize MapData
-	map_data = MapDataScript.new(width, height, ground_layer, wall_layer, randi())
+
 	
 	print("Layers assigned. Starting generation...")
 	generate_world()
 
 func generate_world():
 	print("Starting World Generation (Modular)...")
+
+	# Initialize MapData for a fresh generation
+	map_data = MapDataScript.new(width, height, ground_layer, wall_layer, randi())
 	
 	# Cleanup
 	ground_layer.clear()
 	wall_layer.clear()
+	
+	for obj in generated_objects:
+		if is_instance_valid(obj):
+			obj.queue_free()
+	generated_objects.clear()
+	
 	for npc in npcs:
 		if is_instance_valid(npc): npc.queue_free()
 	npcs.clear()
@@ -100,7 +108,7 @@ func generate_world():
 	var river_gen = RiverGenScript.new()
 	var zone_gen = ZoneGenScript.new(zone_count_range, zone_size_range, min_zone_distance, entrance_count_range, zone_dirt_ratio)
 	var path_gen = PathGenScript.new(path_width, path_smoothness, path_edge_grass_ratio, path_edge_dirt_ratio)
-	var structure_gen = StructureGenScript.new(building_count_range, house_scenes)
+	var structure_gen = StructureGenScript.new(building_count_range)
 	var spawner_gen = SpawnerScript.new(player_scene, npc_scene, manager_quest_scene)
 	
 	# 2. Pipeline Execution
@@ -118,23 +126,80 @@ func generate_world():
 	zone_gen.generate_zones(map_data, zone_seeds)
 	path_gen.generate(map_data)
 	
+	# Quests (Manager Spawn) - Spawning BEFORE structures to ensure priority (they reserve space first)
+	spawner_gen.spawn_manager_quest(self, self)
+
 	# Structures & Decorations
 	structure_gen.generate(map_data, self)
-
-	# Quests (Manager Spawn) - Spawning after structures allow access to doors and collision avoidances
-	spawner_gen.spawn_manager_quest(self, self)
 	
 	# Spawn Entities (Player & NPCs)
 	spawner_gen.spawn_npcs(map_data, self)
 	player_instance = spawner_gen.spawn_player(map_data, self)
 	
+	setup_player_camera(player_instance)
+	
 	print("World Generation Complete.")
+
+@onready var world_camera : CameraManager = $Camera2D
+
+func setup_player_camera(player_node):
+	if not is_instance_valid(player_node): return
+	
+	# Ensure world camera is active and targeted
+	world_camera.enabled = true
+	world_camera.make_current()
+	world_camera.set_target(player_node)
+	world_camera.is_free_roam = false # Force follow mode start
+	
+	# Disable player's internal camera just in case
+	var p_cam = player_node.get_node_or_null("Camera2D")
+	if p_cam: p_cam.enabled = false
+
+	update_camera_limits(player_node.global_position)
+
+func update_camera_limits(pos: Vector2):
+	if not map_data: return
+	
+	var tile_pos = Vector2i(pos / TileConfigScript.TILE_SIZE)
+	var found_zone = null
+	
+	for zone in map_data.zones:
+		if zone.shape_bounds.has_point(tile_pos):
+			found_zone = zone
+			break
+	
+	if found_zone:
+		var limits = found_zone.shape_bounds
+		# Convert Rect2i (tiles) to Rect2 (pixels)
+		var pixel_limits = Rect2(
+			limits.position.x * TileConfigScript.TILE_SIZE,
+			limits.position.y * TileConfigScript.TILE_SIZE,
+			limits.size.x * TileConfigScript.TILE_SIZE,
+			limits.size.y * TileConfigScript.TILE_SIZE
+		)
+		world_camera.set_limits(pixel_limits)
+	else:
+		# Fallback: Map Limits
+		var map_rect = Rect2(0, 0, width * TileConfigScript.TILE_SIZE, height * TileConfigScript.TILE_SIZE)
+		world_camera.set_limits(map_rect)
+
+func toggle_camera():
+	if world_camera:
+		world_camera.toggle_mode()
+
+
+func _on_regenerate_button_pressed():
+	print("Regenerate button pressed. Regenerating world...")
+	generate_world()
 
 # --- Public API / Helpers (Preserved for Compatibility) ---
 
 # Helper called by EntitySpawner
 func register_npc(npc_node):
 	npcs.append(npc_node)
+
+func register_generated_object(node: Node):
+	generated_objects.append(node)
 
 func register_reserved_area(world_pos: Vector2, radius: int = 2) -> void:
 	var center_cell = Vector2i(world_pos / TileConfigScript.TILE_SIZE)
@@ -148,7 +213,7 @@ func get_random_zone() -> Zone: # Returns Zone object
 	if not map_data or map_data.zones.is_empty(): return null
 	return map_data.zones.pick_random()
 
-func get_random_zone_position(specific_zone = null) -> Vector2:
+func get_random_zone_position(specific_zone = null, size: Vector2i = Vector2i(1, 1)) -> Vector2:
 	var target_zone = specific_zone
 	if target_zone == null:
 		target_zone = get_random_zone()
@@ -159,18 +224,23 @@ func get_random_zone_position(specific_zone = null) -> Vector2:
 	# Attempt to find a valid spot (Not water, Not occupied, Area check)
 	for i in range(20):
 		var cell = target_zone.cells.pick_random()
-		if _is_area_safe(cell, 4): # Check 4 tile radius (9x9) for large quests
-			return Vector2(cell) * TileConfigScript.TILE_SIZE
+		if _is_rect_safe(cell, size):
+			var world_pos = Vector2(cell) * TileConfigScript.TILE_SIZE
+			register_reserved_area(world_pos, max(size.x, size.y) / 2 + 1)
+			return world_pos
 	
 	# Fallback
-	return Vector2(target_zone.cells.pick_random()) * TileConfigScript.TILE_SIZE
+	var fallback_cell = target_zone.cells.pick_random()
+	var fallback_pos = Vector2(fallback_cell) * TileConfigScript.TILE_SIZE
+	register_reserved_area(fallback_pos, max(size.x, size.y) / 2 + 1)
+	return fallback_pos
 
-func get_random_building_door() -> Vector2:
+func get_random_building_door(size: Vector2i = Vector2i(1, 1)) -> Vector2:
 	if not map_data: return Vector2.ZERO
 	
 	var valid_zones = map_data.zones.filter(func(z): return z.has_meta("building_doors") and not z.get_meta("building_doors").is_empty())
 	if valid_zones.is_empty(): 
-		return get_random_zone_position()
+		return get_random_zone_position(null, size)
 		
 	var zone = valid_zones.pick_random()
 	var doors = zone.get_meta("building_doors")
@@ -185,17 +255,29 @@ func get_random_building_door() -> Vector2:
 				var cell = Vector2i(x,y)
 				if map_data.reserved_cells.has(cell): continue
 				
-				# Check safety (no water, no trees) - Radius 3 allows for decent sized decorations
-				if _is_area_safe(cell, 3): 
-					return Vector2(cell) * TileConfigScript.TILE_SIZE
+				# Check safety (no water, no trees)
+				if _is_rect_safe(cell, size):
+					var world_pos = Vector2(cell) * TileConfigScript.TILE_SIZE
+					register_reserved_area(world_pos, max(size.x, size.y) / 2 + 1) 
+					return world_pos
 
-	return Vector2(door) * TileConfigScript.TILE_SIZE
+	var fallback_pos = Vector2(door) * TileConfigScript.TILE_SIZE
+	register_reserved_area(fallback_pos, max(size.x, size.y) / 2 + 1)
+	return fallback_pos
 
 func _is_area_safe(center: Vector2i, radius: int) -> bool:
+	return _is_rect_safe(center - Vector2i(radius, radius), Vector2i(radius * 2, radius * 2))
+
+func _is_rect_safe(top_left: Vector2i, size: Vector2i) -> bool:
 	if not map_data: return false
 	
-	for x in range(center.x - radius, center.x + radius + 1):
-		for y in range(center.y - radius, center.y + radius + 1):
+	# Safety buffer around the rect
+	var buffer = 1
+	var start = top_left - Vector2i(buffer, buffer)
+	var end = top_left + size + Vector2i(buffer, buffer)
+	
+	for x in range(start.x, end.x):
+		for y in range(start.y, end.y):
 			var c = Vector2i(x,y)
 			if not map_data.is_in_bounds(c.x, c.y): return false
 			

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://clsjugqie7jn8"]
+
+[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="1_bb6id"]
+[ext_resource type="Script" uid="uid://ddhvasyjl4bjy" path="res://interractable.gd" id="1_kkhnu"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_32krk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_32krk"]
+radius = 4.0
+
+[node name="Interractable" type="Sprite2D"]
+texture = SubResource("PlaceholderTexture2D_32krk")
+script = ExtResource("1_kkhnu")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_32krk")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -23.000002
+offset_top = -17.0
+offset_right = 89.0
+offset_bottom = 6.0
+scale = Vector2(0.39999998, 0.56)
+theme_override_fonts/font = ExtResource("1_bb6id")
+text = "Appuyez sur E"
+
+[connection signal="OnPlayerInterract" from="." to="." method="_on_on_player_interract"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

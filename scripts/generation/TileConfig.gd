@@ -12,6 +12,7 @@ const DOOR = Vector2i(2, 2)        # Porte
 const TREE = Vector2i(5, 5)        # Arbre
 const PATH = Vector2i(4, 4)        # Chemin terre
 const FLOOR = Vector2i(1, 1)       # Plancher bois
+const BRIDGE = Vector2i(11, 5)      # Pont (par défaut même que le sol)
 const SQUARE = Vector2i(4, 4)      # Pavé pierre pour la place
 const WATER_BASE = Vector2i(12, 8) # Eau pleine (fallback)
 
@@ -44,6 +45,25 @@ const RIVER_BITMASK_MAP = {
 
 	# --- LAC ISOLÉ (4 côtés terre) ---
 	15: Vector2i(12, 8)  # Petit trou d'eau -> Centre
+}
+
+const RIVER_MASK_NAMES = {
+	0: "center",
+	1: "border_top",
+	2: "border_right",
+	4: "border_bottom",
+	8: "border_left",
+	3: "corner_top_right",
+	6: "corner_bottom_right",
+	12: "corner_bottom_left",
+	9: "corner_top_left",
+	5: "canal_vertical",
+	10: "canal_horizontal",
+	7: "dead_end_left_open", # Land on T, R, B
+	11: "dead_end_right_open", # Land on T, B, L
+	13: "dead_end_bottom_open", # Land on T, L, R
+	14: "dead_end_top_open", # Land on B, L, R
+	15: "isolated"
 }
 
 static func get_river_tile(border_mask: int) -> Vector2i:

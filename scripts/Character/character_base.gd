@@ -2,8 +2,8 @@
 
 signal life_changed(current_life : int)
 
-enum ORIENTATION {FREE, DPAD_8, DPAD_4}
-enum STATE {IDLE, CHASE, ATTACKING, STUNNED, DEAD}
+enum ORIENTATION {FREE, DPAD_8, DPAD_4, FIXED}
+enum STATE {IDLE, CHASE, ATTACKING, STUNNED, DEAD, RETURN}
 enum BEHAVIOUR {FRIENDLY,INTIMIDATING,PERSUASIVE}
 enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 
@@ -14,6 +14,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 		life_changed.emit(life)
 		if(life <= 0):
 			is_dead = true
+			_set_state(STATE.DEAD)
 @export var invincibility_duration : float = 1.0
 @export var invincibility_blink_period : float = 0.2
 @export var dead_color : Color = Color.GRAY
@@ -39,6 +40,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export_group("Others")
 @export var _name : String = ""
 @export var emotion : EMOTION = EMOTION.NEUTRAL
+var dialogue_ref : Object = null
 
 # Life
 var _last_hit_time : float
@@ -85,7 +87,7 @@ func _physics_process(_delta: float) -> void:
 	if _direction.length() > 0.000001:
 		velocity += _direction * _current_movement.acceleration * get_physics_process_delta_time()
 		velocity = velocity.limit_length(_current_movement.speed_max)
-		if main_sprite:
+		if main_sprite and orientation != ORIENTATION.FIXED:
 			main_sprite.rotation = _compute_orientation_angle(_direction)
 	else:
 		## If direction length == 0, Apply friction
@@ -211,3 +213,11 @@ func _spawn_attack_scene() -> void:
 
 func _can_move() -> bool:
 	return _state == STATE.IDLE
+
+
+
+func take_damage(damage :int):
+	life -=damage
+
+func heal(heal: int):
+	life +=heal

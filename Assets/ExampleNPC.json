@@ -61,7 +61,8 @@
 		"sortez de chez moi s'il vous plait.",
 		"Mais c'était une négociation agréable.",
 		"La prochaine fois, faites votre travail",
-		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#"
+		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#",
+		"Je comprend mieux pourquoi tout le monde déteste les médiateur."
 		
 	],
 
@@ -74,7 +75,95 @@
 	"retour_echec_persuasif": [
 		"#retour_echec_persuasif_part1.capitalize# #retour_echec_persuasif_part2.capitalize#"
 	],
+	
+	
+	"retour_victoire_intimidant_part1": [
+		"Wow, wow, wow, okay ça va, ça va !",
+		"Nom d'#insulte.indef#, t'y va pas de main morte !",
+		"*gloups* okay, j'ai compris je la ferme.",
+		"Pas besoin d'être désagréable comme ça voyons.",
+		"C'est donc vrai ce qu'on dit sur les médiateurs...",
+		"Espèce de monstre!",
+		"Ah ouais, t'es violent toi"
+		
+	],
+	"retour_victoire_intimidant_part2": [
+		"c'est bon voilà ton argent, laisse moi tranquille je t'en supplie!",
+		"Tiens, voilà tes sous, étouffe toi avec.",
+		"Prend ton argent sale, mets le toi au fion !",
+		"Tiens ton argent, va rôtir en enfer toi et ta cupidité !",
+		"j'ai oublié qui tu devais aller chercher carrément.",
+		"Je vais mourrir de faim sans cet argent mais j'imagine que tu t'en fous...",
+		"Tu peux rester ici, je vais déménager de toutes façons."
+		
+	],
+	
+	"retour_victoire_amical_part1": [
+		"T'es une bonne personne vraiment.",
+		"ça fait du bien d'avoir une personne sincère sur qui compter.",
+		"Je sens ta sincérité, je sens que tu ne veux absolument me soutirer mon argent.",
+		"J'ai peut être perdu #rela.heroGender.indef#, mais j'ai gagné un ami.",
+		"*snif* merci de m'avoir rapporté la nouvelle, il reste donc des personnes honnêtes en ce monde..."
+		
+	],
+	
+	"retour_victoire_amical_part2": [
+		"C'est pas grand chose mais tiens, c'est tout ce que j'ai.",
+		"Ah tu dois déjà partir ? reviens me voir mon ami ! Ah ? ton argent? oui tiens bien sûr.",
+		"Je devais m'acheter des médicaments pour soigner ma malédiction mortelle infernale, mais tiens prend mon argent.",
+		"Et comme tu es mon meilleur ami qui me quittera jamais plus, tiens, mon argent.",
+		"Désolé de t'avoir imposé ce poid émotionnel, tiens, pour te récompenser."
+	],
+	
+	"retour_victoire_persuasif_part1": [
+		"Hummmm... tu as sans doute raison après tout...",
+		"De bien convainquants arguments dis donc !",
+		"J'ai rien compris mais ça sonnait bien.",
+		"ça sonnait bien, ça doit être vrai.",
+		"ça c'était bien parlé !",
+		"J'ai jamais entendu quelque chose d'aussi vrai, foi de #proprietaire#!"
+		
+	],
+	
+	"retour_victoire_persuasif_part2": [
+		"Qui à besoin d'#rela.heroGender.indef# de toutes façons ?",
+		"Voilà tout mon argent, c'est pas assez ? Tenez, voilà #objet.poss_m# en plus.",
+		"Tu sais quoi ? je suis convaincu, voilà toutes mes économies.",
+		"#rela.heroGender.poss_m# aurait été convaincu j'en suis sûr.",
+		"Si je pouvais vous donner ma jambe je le ferais ! Vous la voulez vraiment ?"
+		
+	],
+	
+	"retour_victoire_intimidant": [
+		"#retour_victoire_intimidant_part1.capitalize# #retour_victoire_intimidant_part2.capitalize#"
+	],
+	
+	"retour_victoire_amical": [
+		"#retour_victoire_amical_part1.capitalize# #retour_victoire_amical_part2.capitalize#"
+	],
+	
+	"retour_victoire_persuasif": [
+		"#retour_victoire_persuasif_part1.capitalize# #retour_victoire_persuasif_part2.capitalize#"
+	],
 
+	"seconde_chance_intimidant": [
+		"Déjà revenu ? Et sans #rela.heroGender.poss_m# ? J'espère que tu as une bonne explication.",
+		"Tu me dérange pendant mon raclage de peau morte quotidien ? J'espère que tu as de bonnes nouvelles.",
+		"Qu'est ce que tu fous là sans #rela.heroGender.poss_m#, tu veux que j'te démarre ?"
+	],
+	
+	"seconde_chance_amical": [
+		"Oh tiens salut ! tu es de retour ! Alors, comment ça s'est passé ?",
+		"Hey, coucou ! Oh, mais où est #rela.heroGender.poss_m# ?",
+		"Oh ! vous êtes revenu ! je pensais justement à #rela.heroGender.poss_m# et à comment j'étais content de le revoir sain et sauf !"
+	],
+
+	"seconde_chance_persuasif": [
+		"Ah! Déjà de retour ? La mission à été menée à bien ?",
+		"Hum... Je ne vois pas #rela.heroGender.poss_m#... J'espère que vous ne revenez pas bredouille en espérant me convaincre de vous payer quand même.",
+		"Bonjour, vous avez de bonnes nouvelles j'espère.",
+		"Qu'est ce que vous faites là tout seul ? où est #rela.heroGender.poss_m# ?"
+	],
 
 	"btn_intimidation": [" Il reviendra pas ton #rela#, payes moi quand même !", "Donne moi la tune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
 	"btn_amical": ["Vasy lâche une pièce ou deux steuplé !", "Je suis sincèrement désolé pour ta perte...", "-faire un câlin a #proprietaire#-", "-faire un bisous a #proprietaire#-", "Tu restes quand même mon meilleur ami ?", "Qui a besoin d'#rela.heroGender.indef# quand il à un meilleur ami comme moi ?", "Tu peux pleurer sur mon épaule si tu veux.", "Sa mort m'attriste autant que toi...", "#heroSubj# aurait sûrement voulu que tu me payes...", "Tu veux un câlin ? Je te le facture pas cher, promis." ],       

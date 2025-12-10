@@ -17,6 +17,13 @@ metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
 
 [node name="DialogueSystem2" type="Node"]
 script = ExtResource("1_r23gm")
+QuestTypeEnabeling = Dictionary[int, bool]({
+0: true,
+1: false,
+2: false,
+3: false,
+4: false
+})
 metadata/_custom_type_script = "uid://yr8c14qo708p"
 
 [node name="DialogueSystemUI" parent="." instance=ExtResource("4_8mjf6")]

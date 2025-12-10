@@ -1,6 +1,5 @@
 class_name QuestBase extends Node2D
 
-
 enum TYPE {COLLECT, KILL, EXPLORE, DELIVERY, TALK, NONE}
 enum STATE { INACTIVE ,ACTIVE,SUCCESS,FAIL}
 

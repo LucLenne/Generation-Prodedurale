@@ -1,8 +1,9 @@
-extends Node
+extends Node2D
 
+
+@onready var popup_position: Node2D = $PopupPosition
 
 @export var EpitaphJson : JSON
-@export var epitaphSystem : EpitaphSystem
 var EpitaphText : String
 
 func _ready():
@@ -16,14 +17,10 @@ func _ready():
 	EpitaphText = grammarFR.flatten("#origin#")
 	print("Phrase 1 : " + EpitaphText)
 	
-	
-
-	
 
 
 func _on_interractable_on_player_interract() -> void:
-	if !epitaphSystem :
-		push_error("EpitaphSystem is null")
-		return
-	epitaphSystem.show_epitaph_text(EpitaphText)
+	var lines = EpitaphText.split("&&")
+	PopupManager.start_dialog(popup_position.global_position, lines)
+	
 	

@@ -32,8 +32,8 @@ func _ready():
 	
 	_current_movement = default_movement
 	
-	# Camera setup is handled by WorldGenerator now, but we can ensure internal cam is off
-	$Camera2D.enabled = false
+	## Camera setup is handled by WorldGenerator now, but we can ensure internal cam is off
+	#$Camera2D.enabled = false
 
 func _process(delta: float) -> void:
 	super._process(delta) # Handles state updates

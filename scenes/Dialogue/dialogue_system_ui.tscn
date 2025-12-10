@@ -79,14 +79,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="DialogueSystemUI" type="Control" node_paths=PackedStringArray("dialogue_text", "response_container", "dialogue_container", "click_button", "btn_intimidate", "btn_friendly", "btn_persuade")]
-clip_contents = true
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="DialogueSystemUI" type="CanvasLayer" node_paths=PackedStringArray("dialogue_text", "response_container", "dialogue_container", "click_button", "btn_intimidate", "btn_friendly", "btn_persuade")]
 script = ExtResource("1_2eajr")
 dialogue_text = NodePath("DialogueContainer/MarginContainer/DialogueText")
 response_container = NodePath("ResponseButtons")
@@ -98,7 +91,6 @@ btn_persuade = NodePath("ResponseButtons/BtnPersuade")
 
 [node name="Background" type="ColorRect" parent="."]
 unique_name_in_owner = true
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,7 +99,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.3)
 
 [node name="DialogueContainer" type="PanelContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
@@ -135,7 +126,6 @@ focus_mode = 0
 flat = true
 
 [node name="ResponseButtons" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0

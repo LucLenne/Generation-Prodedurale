@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cdy5x6i4gnnsd"
-path="res://.godot/imported/Minecraft.ttf-984d9657360b3b21dd13cefd1f694ed8.fontdata"
+uid="uid://bsj5qrm4y2nek"
+path="res://.godot/imported/Minecraftia-Regular.ttf-97d368c535d3883934c5522711abfaf8.fontdata"
 
 [deps]
 
-source_file="res://scenes/sprites/Minecraft.ttf"
-dest_files=["res://.godot/imported/Minecraft.ttf-984d9657360b3b21dd13cefd1f694ed8.fontdata"]
+source_file="res://scenes/sprites/Minecraftia-Regular.ttf"
+dest_files=["res://.godot/imported/Minecraftia-Regular.ttf-97d368c535d3883934c5522711abfaf8.fontdata"]
 
 [params]
 
@@ -23,19 +23,14 @@ allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=0
+subpixel_positioning=4
 keep_rounding_remainders=true
-oversampling=1.0
+oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[{
-"chars": [],
-"glyphs": [],
-"name": "New Configuration",
-"size": Vector2i(16, 0)
-}]
+preload=[]
 language_support={}
 script_support={}
 opentype_features={}

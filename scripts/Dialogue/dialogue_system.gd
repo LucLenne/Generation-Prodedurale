@@ -75,11 +75,32 @@ func _ready():
 		generate_new_quest()
 						
 func generate_new_quest():
+	# Try to load JSON files if they're missing
+	if !npc_json_file or !monster_json_file:
+		load_random_json_files()
+	
+	# Still missing? Try a fallback direct load
+	if !npc_json_file:
+		var fallback_path = "res://Assets/NPCJson/TALK/ExampleNPC.json"
+		if ResourceLoader.exists(fallback_path):
+			npc_json_file = load(fallback_path)
+	
+	if !monster_json_file:
+		var monster_dir = DirAccess.open("res://Assets/MonsterJSON/")
+		if monster_dir:
+			monster_dir.list_dir_begin()
+			var file_name = monster_dir.get_next()
+			while file_name != "":
+				if not monster_dir.current_is_dir() and file_name.ends_with(".json"):
+					monster_json_file = load("res://Assets/MonsterJSON/" + file_name)
+					break
+				file_name = monster_dir.get_next()
+	
 	if !npc_json_file :
-		push_error("No Npc json file loaded")
+		push_error("No Npc json file loaded - even fallback failed!")
 		return
 	if !monster_json_file :
-		push_error("No Monster json file loaded")
+		push_error("No Monster json file loaded - even fallback failed!")
 		return
 		
 	is_intro = true
@@ -96,12 +117,17 @@ func generate_new_quest():
 	
 	grammar_npc.flatten("#setup_variables#")
 	
+	# Helper to get value from _save_data (handles both string and array)
+	var get_save_value = func(key: String, default_value: String) -> String:
+		var val = grammar_npc._save_data.get(key, default_value)
+		if val is Array and val.size() > 0:
+			return str(val[0])
+		return str(val)
 	
-	current_quest_data.target_mood = _string_to_mood_enum(grammar_npc._save_data.get("mood_monstre", ["FRIENDLY"])[0])
-	current_quest_data.target_type = grammar_npc._save_data.get("type_monstre", ["MonstreInconnu"])[0]
-	current_quest_data.target_direction = grammar_npc._save_data.get("direction", ["Nulle part"])[0]
-	
-	current_quest_data.owner_name = grammar_npc._save_data.get("proprietaire", ["Inconnu"])
+	current_quest_data.target_mood = _string_to_mood_enum(get_save_value.call("mood_monstre", "FRIENDLY"))
+	current_quest_data.target_type = get_save_value.call("type_monstre", "MonstreInconnu")
+	current_quest_data.target_direction = get_save_value.call("direction", "Nulle part")
+	current_quest_data.owner_name = get_save_value.call("proprietaire", "Inconnu")
 
 	grammar_monster._save_data["proprietaire"] = [current_quest_data.owner_name]
 

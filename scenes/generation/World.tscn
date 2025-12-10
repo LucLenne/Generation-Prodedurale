@@ -1,7 +1,7 @@
 [gd_scene load_steps=46 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
-[ext_resource type="Script" path="res://scripts/generation/CameraManager.gd" id="3_cam"]
+[ext_resource type="Script" uid="uid://b55vv14byrhfe" path="res://scripts/generation/CameraManager.gd" id="3_cam"]
 [ext_resource type="PackedScene" uid="uid://b8x4y201a3c4" path="res://scenes/Player.tscn" id="3_p6oac"]
 [ext_resource type="PackedScene" uid="uid://di4q2e3cdu5uq" path="res://scenes/generation/biome_collision.tscn" id="4_68qco"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="4_npc"]

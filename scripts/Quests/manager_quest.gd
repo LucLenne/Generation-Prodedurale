@@ -153,22 +153,18 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 	# Determine spawn parameters from Dialogue System
 	var dialogue_data = pnj.QuestGiverDialogueSystem.current_quest_data
 	var directory = "EST" # Default fallback
-	var distance = 100.0 # Default fixed distance for now
+	var distance = 200.0 # Distance in pixels for quest spawn
 	var quest_type_enum = 0 # Default TALK
 	
 	if dialogue_data.has("target_direction") and dialogue_data["target_direction"] != "":
-		directory = dialogue_data["target_direction"]
+		directory = dialogue_data["target_direction"].to_upper()
 	
 	if dialogue_data.has("quest_type"):
 		quest_type_enum = dialogue_data["quest_type"]
 		
 	var target_quest_type = map_dialogue_type_to_quest_type(quest_type_enum)
-	print("ManagerQuest: PNJ %s requests quest type %s (Dir: %s)" % [pnj.name, str(target_quest_type), directory])
 
-	# Fallback if direction comes back as "Nulle part" or empty from random gen
-	if directory == "Nulle part" or directory == "" or directory == "EST": # EST is default, but if we want random, we should check logic
-		# Actually, if it's "EST" because of default initialization, we might want to keep it?
-		# But the logs show (Dir: ) which matches ""
+	if directory == "Nulle part" or directory == "" or directory == "EST":
 		pass
 		
 	if directory == "Nulle part" or directory == "":
@@ -176,7 +172,6 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 		directory = fallback_dirs.pick_random()
 		print("ManagerQuest: Direction was invalid/empty, picked random: ", directory)
 
-	# Pick scene based on type
 	var scene = null
 	if _quest_scenes_by_type.has(target_quest_type) and not _quest_scenes_by_type[target_quest_type].is_empty():
 		scene = _quest_scenes_by_type[target_quest_type].pick_random()
@@ -186,10 +181,9 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 		
 	if scene == null: return
 	
-	# Determine Quest Size (for safe spawning)
 	var temp = scene.instantiate()
 	var quest_size = Vector2i(3,3)
-	var offset = Vector2i.ZERO # To center it or handle tilemap offset
+	var offset = Vector2i.ZERO
 	var tile_layer_node = temp.get_node_or_null("TileMapLayer")
 	if not tile_layer_node:
 		for child in temp.get_children():
@@ -224,10 +218,8 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 		_inactiveQuest.append(instance)
 		instance.setup(world_gen)
 		
-		# Pass Data
 		instance.quest_data = dialogue_data
 		
-		# Spawn Targets
 		if instance.has_method("force_spawn_target"):
 			instance.force_spawn_target(directory, distance, pnj.QuestGiverDialogueSystem)
 			

@@ -44,6 +44,7 @@ func generate(data: MapData):
 				data.wall_layer.set_cell(pos, TileConfig.SOURCE_ID, water)
 				data.ground_layer.set_cell(pos, TileConfig.SOURCE_ID, dirt) # Dirt under water
 				river_cells[pos] = true
+				data.reserved_cells[pos] = true # Block construction on river
 
 	# Autotiling
 	for cell in river_cells.keys():

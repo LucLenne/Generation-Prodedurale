@@ -84,7 +84,7 @@ func carve_path_between_zones(data: MapData, zone_a: Zone, zone_b: Zone):
 		var lerp_pos = Vector2(start).lerp(Vector2(end), t)
 		var direction = (Vector2(end) - Vector2(start)).normalized()
 		var perpendicular = Vector2(-direction.y, direction.x)
-		var deviation = data.noise.get_noise_2d(i * 100, zone_a.id * 50) * 15.0
+		var deviation = data.noise.get_noise_2d(i * 100, zone_a.id * 50) * 5.0
 		
 		var waypoint = Vector2i(lerp_pos + perpendicular * deviation)
 		waypoint.x = clamp(waypoint.x, 5, data.width - 5)
@@ -114,16 +114,12 @@ func carve_path_between_zones(data: MapData, zone_a: Zone, zone_b: Zone):
 	var processed_edge_cells = {}
 	for i in range(full_path.size()):
 		var point = full_path[i]
-		# Noise curve
-		var noise_offset_x = int(data.noise.get_noise_1d(i * 0.5) * 2.0)
-		var noise_offset_y = int(data.noise.get_noise_1d(i * 0.5 + 1000) * 2.0)
-		var curved_point = point + Vector2i(noise_offset_x, noise_offset_y)
-		
-		if not data.is_in_bounds(curved_point.x, curved_point.y):
-			curved_point = point
+		# Noise curve - Removed for cleaner paths
+		var curved_point = point
+
 			
 		# Carve
-		var local_width = path_width + int(data.noise.get_noise_2d(curved_point.x * 0.1, curved_point.y * 0.1) * 1.5)
+		var local_width = path_width + int(data.noise.get_noise_2d(curved_point.x * 0.2, curved_point.y * 0.2) * 1.0)
 		local_width = clamp(local_width, 1, path_width + 2)
 		
 		for dx in range(-local_width / 2, local_width / 2 + 1):
@@ -138,9 +134,9 @@ func carve_path_between_zones(data: MapData, zone_a: Zone, zone_b: Zone):
 						data.wall_layer.set_cell(cell, -1)
 						data.ground_layer.set_cell(cell, TileConfigScript.SOURCE_ID, biome.path_tile)
 
-		# Edge Transitions
-		for dx in range(-local_width / 2 - 2, local_width / 2 + 3):
-			for dy in range(-local_width / 2 - 2, local_width / 2 + 3):
+		# Edge Transitions - Simplified
+		for dx in range(-local_width / 2 - 1, local_width / 2 + 2):
+			for dy in range(-local_width / 2 - 1, local_width / 2 + 2):
 				if abs(dx) <= local_width/2 and abs(dy) <= local_width/2: continue
 				
 				var side_cell = curved_point + Vector2i(dx, dy)

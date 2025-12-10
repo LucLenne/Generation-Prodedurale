@@ -262,7 +262,17 @@ func _process(_delta: float) -> void:
 			DeleteQuestUI(quest.id)
 			_successQuest.append(quest)
 			_activeQuest.erase(quest)
-		if(quest._state == QuestBase.STATE.FAIL):
-			DeleteQuestUI(quest.id)
 			_failQuest.append(quest)
 			_activeQuest.erase(quest)
+
+func get_spawn_position_from_direction(direction: String, distance: float, origin_pos: Vector2) -> Vector2:
+	var dir_vec = Vector2.RIGHT # Default
+	match direction.to_upper():
+		"NORD": dir_vec = Vector2.UP
+		"SUD": dir_vec = Vector2.DOWN
+		"EST": dir_vec = Vector2.RIGHT
+		"OUEST": dir_vec = Vector2.LEFT
+		_:
+			printerr("QuestManager: Unknown direction '%s', defaulting to EST" % direction)
+	
+	return origin_pos + (dir_vec * distance)

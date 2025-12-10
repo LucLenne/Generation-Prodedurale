@@ -16,17 +16,35 @@ var player_controller : PlayerController
 @export var DC_MEDIUM = 10 
 @export var DC_HARD = 15 
 
-
+enum QuestType {TALK, KILL, DELIVERY, EXPLORE, COLLECT}
+@export var QuestTypeEnabeling : Dictionary[QuestType, bool]
 enum Mood { INTIMIDATING, FRIENDLY, PERSUASIVE }
 enum Directions { NORD, SUD, EST, OUEST }
 
-var current_quest_data = {
+@export var InitializeOnReady : bool
+
+@export var current_quest_data = {
+	"quest_type" : QuestType.TALK,
 	"target_type": "",
 	"target_direction": "",
 	"target_mood": Mood.INTIMIDATING,
 	"giver_mood": Mood.FRIENDLY,
 	"owner_name": ""
 }
+
+func is_current_quest_data_null() -> bool:
+	var temp_quest_data = {
+	"quest_type" : QuestType.TALK,
+	"target_type": "",
+	"target_direction": "",
+	"target_mood": Mood.INTIMIDATING,
+	"giver_mood": Mood.FRIENDLY,
+	"owner_name": ""
+	}
+	return current_quest_data == temp_quest_data
+	
+func  is_current_quest_data_valid() -> bool:
+	return !is_current_quest_data_null()
 
 
 var is_intro: bool = true
@@ -53,39 +71,15 @@ func _ready():
 		
 	load_random_json_files()
 	
-	generate_new_quest()
-	
-	
-
-func StartIntroDialogue():
-	var intro = get_quest_intro_text()
-	if dialogue_ui:
-		dialogue_ui.show_intro_dialogue(intro)
-		
-func StartMonsterDialogue():
-	is_fighting_monster = true
-	var monster_data = get_monster_dialogue()
-	if dialogue_ui:
-		dialogue_ui.show_interaction_dialogue(monster_data)
-		
-func StartSecondChanceDialogue():
-	is_second_chance = true
-	var second_chance = get_second_chance_dialogue()
-	if dialogue_ui :
-		dialogue_ui.show_interaction_dialogue(second_chance)
-		
-
-func StartReactionDialogue(text : String):
-	is_reaction = true
-	if dialogue_ui:
-		dialogue_ui.start_dialogue_sequence(text, false)
-			
-			
+	if InitializeOnReady :
+		generate_new_quest()
+						
 func generate_new_quest():
 	if !npc_json_file :
 		push_error("No Npc json file loaded")
 	if !monster_json_file :
 		push_error("No Monster json file loaded")
+		
 	is_intro = true
 	is_fighting_monster = false
 	is_reaction = false
@@ -131,6 +125,30 @@ func get_second_chance_dialogue() -> Dictionary:
 		"btn_persuade": grammar_npc.flatten("#btn_persuasion#")
 	}
 
+func StartIntroDialogue():
+	var intro = get_quest_intro_text()
+	if dialogue_ui:
+		dialogue_ui.show_intro_dialogue(intro)
+		
+func StartMonsterDialogue():
+	is_fighting_monster = true
+	var monster_data = get_monster_dialogue()
+	if dialogue_ui:
+		dialogue_ui.show_interaction_dialogue(monster_data)
+		
+func StartSecondChanceDialogue():
+	is_second_chance = true
+	var second_chance = get_second_chance_dialogue()
+	if dialogue_ui :
+		dialogue_ui.show_interaction_dialogue(second_chance)
+		
+
+func StartReactionDialogue(text : String):
+	is_reaction = true
+	if dialogue_ui:
+		dialogue_ui.start_dialogue_sequence(text, false)
+		
+
 func _string_to_mood_enum(mood_string : String) -> Mood:
 	match mood_string.to_upper():
 		"INTIMIDATING": return Mood.INTIMIDATING
@@ -148,6 +166,32 @@ func _get_mood_key(mood : Mood) -> String:
 		Mood.PERSUASIVE: return "persuasif"
 	return "amical"
 
+
+func _string_to_questType_enum(questType_string : String) -> QuestType :
+	match questType_string.to_upper():
+		"TALK": 
+			return QuestType.TALK
+		"KILL": 
+			return QuestType.KILL
+		"EXPLORE": 
+			return QuestType.EXPLORE
+		"DELIVERY" :
+			return QuestType.DELIVERY
+		"COLLECT" :
+			return QuestType.COLLECT
+	push_warning("Mood inconnu reçu de Tracery : " + questType_string + ". Fallback sur TALK.")
+	return QuestType.TALK
+	
+func _get_questType_key(questType : QuestType) -> String:
+	match questType:
+		QuestType.TALK: return "TALK"
+		QuestType.KILL: return "KILL"
+		QuestType.DELIVERY: return "DELIVERY"
+		QuestType.EXPLORE: return "EXPLORE"
+		QuestType.COLLECT : return "COLLECT"
+	return "TALK"
+	
+	
 func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 	var opponent_mood = current_quest_data.target_mood if target_is_monster else current_quest_data.giver_mood
 	
@@ -196,7 +240,8 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
-		QuestManager.Instance.ActivateQuest(pnj)
+		if QuestManager.Instance :
+				QuestManager.Instance.ActivateQuest(pnj)
 	elif is_fighting_monster:
 		is_fighting_monster = false
 	elif is_second_chance:
@@ -235,15 +280,36 @@ func _handle_post_reaction():
 		else:
 			pnj.current_quest._fail_quest()
 			print("Game Over! Quest Failed.")
+			
+func get_random_npcJsonFolder() -> String:
+	var enabled_types: Array[QuestType] = []
+	
+	for type in QuestType.values():
+		if QuestTypeEnabeling.get(type, false):
+			enabled_types.append(type)
+
+	if enabled_types.is_empty():
+		push_error("Aucun QuestType n'est activé dans le dictionnaire !")
+		return ""
+	
+	var random_quest_type = enabled_types.pick_random()
+	
+	return _get_questType_key(random_quest_type)
 
 func load_random_json_files():
-	var npc_files = _get_json_files_in_folder(NPC_FOLDER_PATH)
+	var randomNpcJsonFolder = get_random_npcJsonFolder()
+	if randomNpcJsonFolder.is_empty() :
+		return
+	current_quest_data.target_type = randomNpcJsonFolder
+	var npc_folder_path = NPC_FOLDER_PATH
+	npc_folder_path += randomNpcJsonFolder + "/"
+	var npc_files = _get_json_files_in_folder(npc_folder_path)
 	if npc_files.size() > 0:
 		var random_npc_path = npc_files.pick_random()
 		npc_json_file = load(random_npc_path)
 		print("Fichier PNJ chargé : " + random_npc_path)
 	else:
-		push_error("Aucun fichier JSON trouvé dans : " + NPC_FOLDER_PATH)
+		push_error("Aucun fichier JSON trouvé dans : " + npc_folder_path)
 
 	var monster_files = _get_json_files_in_folder(MONSTER_FOLDER_PATH)
 	if monster_files.size() > 0:

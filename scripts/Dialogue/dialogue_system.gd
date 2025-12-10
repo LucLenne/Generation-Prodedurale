@@ -2,6 +2,7 @@ class_name DialogueSystem extends Node
 
 var pnj : PNJ
 
+
 @export_group("Dialogue Files")
 @onready var dialogue_ui : DialogueSystemUI = %DialogueSystemUI
 var npc_json_file : JSON
@@ -337,3 +338,16 @@ func _get_json_files_in_folder(path: String) -> Array[String]:
 		push_error("Impossible d'ouvrir le dossier : " + path)
 	
 	return files
+
+
+func _on_interractable_on_player_interract() -> void:
+	if !pnj:
+		push_error("No PNJ assigned to DialogueSystem")
+		return
+	if !pnj.QuestGiverDialogueSystem : # c'est le donneur de quête
+		if is_intro :
+			StartIntroDialogue()
+		elif is_second_chance : # c'est l'objectif de la qupete (le monstre grrr) 
+			StartSecondChanceDialogue()
+	else :
+		pnj.QuestGiverDialogueSystem.StartMonsterDialogue()

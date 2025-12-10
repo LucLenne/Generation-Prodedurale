@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuce4ii08v1rv"]
+
+[ext_resource type="Script" uid="uid://d3v6selq7myvq" path="res://scenes/Dialogue/epitaphe_system.gd" id="1_vhjlv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 30.0
+content_margin_top = 20.0
+content_margin_right = 30.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+shadow_color = Color(0, 0, 0, 0.2)
+shadow_size = 10
+shadow_offset = Vector2(0, 5)
+
+[node name="EpitahpSystem" type="Control" node_paths=PackedStringArray("dialogue_text", "dialogue_container", "click_button")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vhjlv")
+dialogue_text = NodePath("DialogueContainer/MarginContainer/DialogueText")
+dialogue_container = NodePath("DialogueContainer")
+click_button = NodePath("DialogueContainer/ClickButton")
+
+[node name="Background" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="DialogueContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = -328.0
+offset_right = -78.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueContainer"]
+layout_mode = 2
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
+bbcode_enabled = true
+text = "i love my job, i love my job,i love my job ,i love my job ,i love my job"
+
+[node name="ClickButton" type="Button" parent="DialogueContainer"]
+layout_mode = 2
+focus_mode = 0
+flat = true

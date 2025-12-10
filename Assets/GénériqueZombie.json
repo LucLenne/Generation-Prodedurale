@@ -1,6 +1,6 @@
 {
   "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #phrase# #sujet.indef# , #conclusion#."
+	"#setPronouns##salutation.capitalize.heroGender# #phrase# #sujet.def# #conclusion#."
   ],
 
   "salutation": [
@@ -10,7 +10,7 @@
 	  "kestuveu toi ?",
 	  "...",
 	  "Ghrrrr... Argh... salutation",
-	  "hey! tu marches sur mon cerveau là !",
+	  "hey! tu marches sur mes tripes là !",
 	  "Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
 	  "J'suis pas encort mort... juste un peu vert.",
 	  "",
@@ -19,22 +19,25 @@
  
   "phrase": [
 		"avant de mourir j'étais",
-		"mon père me disait souvent d'éviter",
+		"#sujet.heroPoss# me disait souvent d'éviter",
 		"tu serait pas",
-		"je détèste les"
+		"je détèste",
+		"pourquoi j'suis"
 	],
   
   "sujet": [
-		"dechet de la société",
+		"déchets de la société",
 		"sale type",
 		"bon repas",
+		"type qui me doit de l'argent",
+		"mon père"
 	],
 	
   "conclusion": [
 		"ça m'a donné faim héhé",
-		"",
-		"",
-		"",
+		"c'est pour ça que tu devrait partir",
+		" ",
+		" ",
 	],
 	
   "setPronouns": [

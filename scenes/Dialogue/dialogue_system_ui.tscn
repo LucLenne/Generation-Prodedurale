@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1umgfern6hay"]
+[gd_scene load_steps=16 format=3 uid="uid://d1umgfern6hay"]
 
 [ext_resource type="Script" uid="uid://blqppoxo8mcic" path="res://scripts/Dialogue/dialogue_system_ui.gd" id="1_2eajr"]
+[ext_resource type="Texture2D" uid="uid://ur38u1xmu53g" path="res://sprites/UI/UI_Final.png" id="2_t5me1"]
 [ext_resource type="Texture2D" uid="uid://cj3evuh4yj5v5" path="res://sprites/UI/UI .png" id="2_y4yf4"]
 [ext_resource type="Theme" uid="uid://cbulb23b3lvjm" path="res://resources/Assets dialogue/DialogueUI.tres" id="3_jcnxi"]
 
 [sub_resource type="Theme" id="Theme_jcnxi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t5me1"]
-texture = ExtResource("2_y4yf4")
-region_rect = Rect2(40, 8, 16, 8)
+texture = ExtResource("2_t5me1")
+region_rect = Rect2(64, 16, 32, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4yf4"]
 texture = ExtResource("2_y4yf4")

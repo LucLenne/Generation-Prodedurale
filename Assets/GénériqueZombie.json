@@ -1,6 +1,6 @@
 {
   "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #phrase# #sujet.def# #conclusion#."
+	"#setPronouns##salutation.capitalize.heroGender# #phrase# #sujet.indef# #optionnel# #conclusion#."
   ],
 
   "salutation": [
@@ -13,16 +13,17 @@
 	  "hey! tu marches sur mes tripes là !",
 	  "Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
 	  "J'suis pas encort mort... juste un peu vert.",
-	  "",
+	  "j'suis vraiment pas d'humeur !",
 	
   ],
  
   "phrase": [
 		"avant de mourir j'étais",
-		"#sujet.heroPoss# me disait souvent d'éviter",
+		"mon père me disait souvent d'éviter",
 		"tu serait pas",
 		"je détèste",
-		"pourquoi j'suis"
+		"tu ressemble au",
+		"j'aime pas quand #sujet.indef# se comporte comme",
 	],
   
   "sujet": [
@@ -30,13 +31,36 @@
 		"sale type",
 		"bon repas",
 		"type qui me doit de l'argent",
-		"mon père"
+		"#sujet.heroPoss# père",
+		"#sujet.indef# inconnu",
+		"personne connu",
+		"chat",
+		"mère",
+		"terre",
+		"boyaux", 
+		"cadavre",
+	],
+	
+	"optionnel":[
+		"de ma mère",
+		"de mon père",
+		"en prison",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
 	],
 	
   "conclusion": [
-		"ça m'a donné faim héhé",
+		"ça donne faim héhé",
 		"c'est pour ça que tu devrait partir",
-		" ",
+		"donc casse toi !",
+		"mais les gardes m'ont chassés",
+		"c'est pour ça que ça sens mauvais",
+		"c'est dégeulasse",
+		"... Arhhhg",
 		" ",
 	],
 	

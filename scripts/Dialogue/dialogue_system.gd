@@ -28,9 +28,10 @@ var current_quest_data = {
 	"owner_name": ""
 }
 
-var is_fighting_monster: bool = false
-var is_intro: bool = true
 
+var is_intro: bool = true
+var is_fighting_monster: bool = false
+var is_second_chance : bool = false
 var is_reaction: bool = false
 
 var grammar_npc : TraceryFR.GrammarFR
@@ -54,11 +55,37 @@ func _ready():
 	
 	generate_new_quest()
 	
+	
+
+func StartIntroDialogue():
 	var intro = get_quest_intro_text()
 	if dialogue_ui:
 		dialogue_ui.show_intro_dialogue(intro)
+		
+func StartMonsterDialogue():
+	is_fighting_monster = true
+	var monster_data = get_monster_dialogue()
+	if dialogue_ui:
+		dialogue_ui.show_interaction_dialogue(monster_data)
+		
+func StartSecondChanceDialogue():
+	is_second_chance = true
+	var second_chance = get_second_chance_dialogue()
+	if dialogue_ui :
+		dialogue_ui.show_interaction_dialogue(second_chance)
+		
 
+func StartReactionDialogue(text : String):
+	is_reaction = true
+	if dialogue_ui:
+		dialogue_ui.start_dialogue_sequence(text, false)
+			
+			
 func generate_new_quest():
+	if !npc_json_file :
+		push_error("No Npc json file loaded")
+	if !monster_json_file :
+		push_error("No Monster json file loaded")
 	is_intro = true
 	is_fighting_monster = false
 	is_reaction = false
@@ -81,7 +108,6 @@ func generate_new_quest():
 	current_quest_data.owner_name = grammar_npc._save_data.get("proprietaire", ["Inconnu"])
 
 	grammar_monster._save_data["proprietaire"] = [current_quest_data.owner_name]
-
 
 func get_quest_intro_text() -> String:
 	var mood_key = _get_mood_key(current_quest_data.target_mood)
@@ -171,19 +197,14 @@ func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
 		QuestManager.Instance.ActivateQuest(pnj)
-		await get_tree().create_timer(2.0).timeout
-		
-		is_fighting_monster = true
-		var monster_data = get_monster_dialogue()
-		if dialogue_ui:
-			dialogue_ui.show_interaction_dialogue(monster_data)
-			
-			
+	elif is_fighting_monster:
+		is_fighting_monster = false
+	elif is_second_chance:
+		is_second_chance = false
 	elif is_reaction:
 		is_reaction = false
-		pass 
 		
-		_handle_post_reaction()
+	_handle_post_reaction()
 
 var _last_success : bool = false
 
@@ -192,7 +213,6 @@ func _on_player_answered(mood: Mood):
 	
 	var reaction_text = ""
 	
-	
 	var active_grammar = grammar_monster if is_fighting_monster else grammar_npc
 	
 	if _last_success:
@@ -200,26 +220,18 @@ func _on_player_answered(mood: Mood):
 	else:
 		reaction_text = active_grammar.flatten("#reaction_echec#")
 
-	is_reaction = true
-	if dialogue_ui:
-		dialogue_ui.start_dialogue_sequence(reaction_text, false) # False = Just reading, then close
+	StartReactionDialogue(reaction_text)
+	
 
 
 func _handle_post_reaction():
 	if _last_success:
 		pnj.current_quest.valid_quest()
 		print("Quest Won!")
-		
 	else:
 		if is_fighting_monster:
 			print("Failed! Returning to NPC...")
 			is_fighting_monster = false 
-			
-			await get_tree().create_timer(1.0).timeout
-			
-			var npc_data = get_second_chance_dialogue()
-			if dialogue_ui:
-				dialogue_ui.show_interaction_dialogue(npc_data)
 		else:
 			pnj.current_quest._fail_quest()
 			print("Game Over! Quest Failed.")

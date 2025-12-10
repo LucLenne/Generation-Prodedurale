@@ -18,21 +18,68 @@
 	"intro_quete_persuasif": [
 		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif#"
 	],
+	
+	"retour_echec_intimidant_part1": [
+		"Non mais tu te prends pour qui ?",
+		"Tu crois que tu me fais peur sale #insulte# ?",
+		"Venir me menacer chez moi ? t'as du culot,",
+		"Je suis vraiment très intéressé par ce que tu me dis."
+		
+	],
+	"retour_echec_intimidant_part2": [
+		"Dégage de là avant que j't'assome!",
+		"maintenant casses toi.",
+		"Venir me menacer chez moi ? t'as du culot,",
+		"Je suis vraiment très intéressé par ce que tu me dis."
+		
+	],
+	
+	"retour_echec_amical_part1": [
+		"Je t'arrêtes tout de suite, je te connais pas moi.",
+		"*snif* merci d'être là pour moi.",
+		"Enfait c'est #rela.heroGender.poss_m# qui avait mon argent.",
+		"Tu est vraiment un bon ami."
+		
+	],
+	"retour_echec_amical_part2": [
+		"Ducoup on est d'accord que je te payes pas ?",
+		"sors de chez moi s'il te plait.",
+		"Je me sens mal de pas te donner même une petite pièce, mais c'est comme ça.",
+		"je peux te donner #objet.indef# si tu veux."
+		
+	],
+	
+	"retour_echec_persuasif_part1": [
+		"Arrêtez d'essayer de me convaincre.",
+		"J'ai pas compris ce que vous m'avez dit...",
+		"Enfait j'ai pas d'argent, désolé hihihi",
+		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#"
+		
+	],
+	"retour_echec_persuasif_part2": [
+		"Aller au revoir.",
+		"sortez de chez moi s'il vous plait.",
+		"Mais c'était une négociation agréable.",
+		"La prochaine fois, faites votre travail",
+		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#"
+		
+	],
 
 	"retour_echec_intimidant": [
-		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
+		"#retour_echec_intimidant_part1.capitalize# #retour_echec_intimidant_part2.capitalize#"
 	],
 	"retour_echec_amical": [
-		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
+		"#retour_echec_amical_part1.capitalize# #retour_echec_amical_part2.capitalize#"
 	],
 	"retour_echec_persuasif": [
-		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
+		"#retour_echec_persuasif_part1.capitalize# #retour_echec_persuasif_part2.capitalize#"
 	],
 
 
-	"btn_intimidation": [" Il reviendra pas ton #rela#, payes moi quand même !"],
-	"btn_amical": ["(Calme) On peut t'aider..."],
-	"btn_persuasion": ["(Négo) Soyons logiques..."],
+	"btn_intimidation": [" Il reviendra pas ton #rela#, payes moi quand même !", "Donne moi la tune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
+	"btn_amical": ["Vasy lâche une pièce ou deux steuplé !", "Je suis sincèrement désolé pour ta perte...", "-faire un câlin a #proprietaire#-", "-faire un bisous a #proprietaire#-", "Tu restes quand même mon meilleur ami ?", "Qui a besoin d'#rela.heroGender.indef# quand il à un meilleur ami comme moi ?", "Tu peux pleurer sur mon épaule si tu veux.", "Sa mort m'attriste autant que toi...", "#heroSubj# aurait sûrement voulu que tu me payes...", "Tu veux un câlin ? Je te le facture pas cher, promis." ],       
+	"btn_persuasion": ["J'ai réussi à ramener un de ses doigts si tu veux.", "Ecoutez, les torts sont partagés dans cette histoire.", "Tu n'avais qu'à y aller toi même.", "#heroSubj.capitalize# est bien plus heureux là où #heroSubj# est", "C'est si important que ça #rela.heronGender.indef#?", "Roooh c'est bon, t'en n'avais pas vraiment besoin.", "arrête de râler, c'est pas comme si on avait qu'#rela.heroGender.indef# dans sa vie.", "J'ai enterré son cadavre ! Le service funéraire aurait pris 4 fois plus !", "#heroSubj.capitalize# m'a dit de te dire de me payer."],
+
 
 	"nom": [
 		"Gérard",
@@ -51,7 +98,15 @@
 		"Patrick",
 		"Bob",
 		"Lindo",
-		
+		"Gunther",
+		"Ivon",
+		"Babette",
+		"Ghaston",
+		"Zohra",
+		"Simon",
+		"Victor",
+		"Vladimir",
+		"Quentinx"
 		
 	],
 	
@@ -77,7 +132,8 @@
 	"Fapabien",
 	"Hugore",
 	"Ibérith",
-	"Gertrude"
+	"Gertrude",
+	"Tchernobog"
 
 	 ],
 
@@ -156,12 +212,13 @@
 	],
 	
 	"relation": [
-	"frère | soeur",
-	"père | mère",
+	"!frère | soeur",
+	"!père | mère",
 	"mari | femme",
-	"pote",
+	"!pote",
 	"cousin | cousine",
-	"grand père | grand mère"
+	"!grand père | grand mère",
+	"fils | fille"
 
  	],
 	

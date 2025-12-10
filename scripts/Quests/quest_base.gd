@@ -9,8 +9,6 @@ var type : TYPE = TYPE.NONE
 var id : int
 @export var title : String
 
-@export var _amount_life_reward : int = 5
-
 func _valid_quest() -> void:
 	_state = STATE.SUCCESS
 	_give_reward()
@@ -20,7 +18,8 @@ func _fail_quest()-> void:
 
 
 func _give_reward()-> void:
-	pass
+	Player.Instance.life += Player.Instance.life_to_add
+	
 
 func setup(world_gen: Node2D) -> void:
 	pass

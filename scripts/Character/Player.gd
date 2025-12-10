@@ -38,13 +38,13 @@ func _ready():
 	_current_movement = default_movement
 	
 	# Camera setup is handled by WorldGenerator now, but we can ensure internal cam is off
-	$Camera2D.enabled = false
+	#$Camera2D.enabled = false
 
 func _process(delta: float) -> void:
 	super._process(delta) # Handles state updates
 	_loose_life(delta)
 	if(Input.is_action_just_pressed("open_inventory")):
-		QuestBookUi.visible = !QuestBookUi.Instance.visible
+		QuestBookUi.visible = !QuestBookUi.visible
 
 func _physics_process(delta):
 	# Map Input to _direction for CharacterBase

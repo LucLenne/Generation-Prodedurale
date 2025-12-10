@@ -29,5 +29,4 @@ theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DialogueSystem" parent="." node_paths=PackedStringArray("pnj") instance=ExtResource("4_uakhv")]
-pnj = NodePath("..")
+[node name="DialogueSystem" parent="." instance=ExtResource("4_uakhv")]

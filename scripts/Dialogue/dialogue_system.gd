@@ -170,7 +170,7 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 func _on_dialogue_closed():
 	if is_intro:
 		is_intro = false
-		QuestManager.Instance.ActivateQuest(pnj)
+		ManagerQuest.ActivateQuest(pnj)
 		await get_tree().create_timer(2.0).timeout
 		
 		is_fighting_monster = true

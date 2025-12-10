@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 	super._process(delta) # Handles state updates
 	
 	if(Input.is_action_pressed("open_inventory")):
-		QuestBookUI.Instance.visible = !QuestBookUI.Instance.visible
+		QuestBookUi.visible = !QuestBookUi.Instance.visible
 
 func _physics_process(delta):
 	# Map Input to _direction for CharacterBase

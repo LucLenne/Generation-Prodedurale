@@ -260,3 +260,10 @@ func _process(_delta: float) -> void:
 			DeleteQuestUI(quest.id)
 			_failQuest.append(quest)
 			_activeQuest.erase(quest)
+
+func GetQuest(type : QuestBase.TYPE) -> QuestBase:
+	for quest in _inactiveQuest:
+		if(quest.type == type):
+			return quest
+	print("no quest " + str(type) + " exist.")
+	return

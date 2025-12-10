@@ -38,7 +38,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export var _behaviour_max_point : int = 20
 
 @export_group("Others")
-@export var _name : String = ""
+@export var Name : String = "no name"
 @export var emotion : EMOTION = EMOTION.NEUTRAL
 
 # Life

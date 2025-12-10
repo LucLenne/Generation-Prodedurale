@@ -2,9 +2,10 @@ class_name KillQuest extends QuestBase
 
 var _target : CharacterBase
 
-func _init() -> void :
+func _init():
 	type = TYPE.KILL
-	title = "Tu dois tuer" + _target._name + "."
+	
+
 
 func setup(world_gen: Node2D) -> void:
 	var target_scene = null
@@ -34,3 +35,10 @@ func _process(_delta: float) -> void:
 	
 	if(_target.is_dead):
 		_valid_quest()
+
+	
+func _init_name() -> void:
+	if(_target != null):
+			title = "Tu dois tuer" + _target.Name + "."
+	else:
+		printerr("target is null in  kill quest")

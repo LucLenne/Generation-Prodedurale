@@ -1,10 +1,10 @@
 {
 	"introIntimidation": [
-		"#donneurquete# ? je ne veut pas le voir ",
-		"#donneurquete# s'inquiète pour moi ?",
-		"dit a #donneurquete# d'aller se faire voir",
+		"#propriétaire# ? je ne veut pas le voir ",
+		"#propriétaire# s'inquiète pour moi ?",
+		"dit a #propriétaire# d'aller se faire voir",
 		"#donneurquete# ? jamais entendu parlé. ",
-		"j'men fou de #donneurquete#",
+		"j'men fou de #propriétaire#",
 		
 	],
 	
@@ -21,14 +21,58 @@
 		"dégage avant que je te bouffe",
 		"ya aucun arrangement possible"
 	],
+	"introAmical": [
+		"#propriétaire# ? ",
+		"#propriétaire# se fais du soucis ?",
+		"c'est #propriétaire# qui t'envoie ?",
+		"oh ! #propriétaire# ?",
+		"",
+		
+	],
 	
+	"suiteAmical": [
+		"comme c'est mignon !",
+		"oooh, je voulais pas lui faire de la peine.",
+		"ça me touche !",
+		"content de savoir qu'il pense a moi."
+	],
+	
+	"finAmical": [
+		"mais j'ai encore des choses a faire ici.",
+		"malheureusement je ne pense pas revenir.",
+		"je suis plutôt bien ici, je pense que je vais rester",
+		"dit lui que je reviendrait plus tard"
+	],
 
+	"introPersuasif": [
+		"hmm, #propriétaire# ? je vois. ",
+		"tu vien défendre les interêts de #propriétaire# ?",
+		"je comprend tout a fait la requête de #propriétaire# mais",
+		"oui, ton client, #propriétaire#.",
+		
+	],
+	
+	"suitePersuasif": [
+		"j'aimerai rester ici un moment.",
+		"je ne compte pas revenir de si tôt.",
+		"j'ai des choses importantes a régler",
+		"j'ai d'autres choses a faire."
+	],
+	
+	"finPersuasif": [
+		"tu pourrais lui mentir pour moi ?",
+		"on peut trouver un arrangement pour que tu me laisse tranquille",
+		"après tout ce ne sont pas t'es affaires n'est-ce-pas ?",
+		"je ne pense pas que tu ai le droit de me demander ça"
+	],
+	
 	
 	"zombish": [
 		"...",
 		"grrr",
 		"ah...",
 		"..burp...",
+		" gaaah...",
 		"",
 		"",
 		"",
@@ -46,7 +90,7 @@
 		"#zombish# #introAmical# #zombish# #suiteAmical# #finAmical# #zombish#"
 	],
 	"replique_persuasif": [
-		"Attendez.&&Selon l'article 12, #proprietaire# ne peut pas m'expulser en hiver.&&Je propose un deal : je protège la maison de #proprietaire# en échange du gîte.&&Soyons civilisés.&&#proprietaire# n'utilise même pas ce grenier !"
+		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
 	"reaction_victoire": [
 		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."

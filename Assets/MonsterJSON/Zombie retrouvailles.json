@@ -1,0 +1,68 @@
+{
+	"introIntimidation": [
+		"#donneurquete# ? je ne veut pas le voir ",
+		"#donneurquete# s'inquiète pour moi ?",
+		"dit a #donneurquete# d'aller se faire voir",
+		"#donneurquete# ? jamais entendu parlé. ",
+		"j'men fou de #donneurquete#",
+		
+	],
+	
+	"suiteIntimidation": [
+		"je vais rester ici",
+		"je ne veut pas le voir",
+		"j'irais nul part ailleur",
+		"si il veut me voir qu'il vienne"
+	],
+	
+	"finIntimidation": [
+		"et tu vas rien faire dutout !",
+		"j'en ai rien a faire de ton avis",
+		"dégage avant que je te bouffe",
+		"ya aucun arrangement possible"
+	],
+	
+
+	
+	"zombish": [
+		"...",
+		"grrr",
+		"ah...",
+		"..burp...",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+	],
+	
+	
+	"replique_intimidation": [
+		"#zombish# #introIntimidation# #zombish# #suiteIntimidation# #finIntimidation# #zombish#"
+	],
+	
+	"replique_amical": [
+		"#zombish# #introAmical# #zombish# #suiteAmical# #finAmical# #zombish#"
+	],
+	"replique_persuasif": [
+		"Attendez.&&Selon l'article 12, #proprietaire# ne peut pas m'expulser en hiver.&&Je propose un deal : je protège la maison de #proprietaire# en échange du gîte.&&Soyons civilisés.&&#proprietaire# n'utilise même pas ce grenier !"
+	],
+	"reaction_victoire": [
+		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+	],
+	"reaction_echec": [
+		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+	],
+	"btn_intimidation": [
+		"(Force)Sors d'ici tout de suite !"
+	],
+	"btn_amical": [
+		"(Calme) Tout va bien se passer, viens."
+	],
+	"btn_persuasion": [
+		"(Négo) Tu n'as légalement aucun droit ici."
+		
+		
+	]
+}

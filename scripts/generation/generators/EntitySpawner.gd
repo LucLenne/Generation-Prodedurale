@@ -17,6 +17,8 @@ func spawn_manager_quest(parent: Node2D, world_gen_node: Node2D):
 			print("Instantiating ManagerQuest...")
 			var instance = manager_quest_scene.instantiate()
 			parent.add_child(instance)
+			if parent.has_method("register_generated_object"):
+				parent.register_generated_object(instance)
 			
 	if ManagerQuest:
 		# Call setup or spawn_quests

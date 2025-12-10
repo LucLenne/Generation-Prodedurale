@@ -107,7 +107,7 @@ class ModifiersFR extends RefCounted:
 			return false
 		if not _has_GenderException_Seperator(word).is_empty() :
 			return false
-		return _has_female_marker(word) or word.ends_with("e")
+		return _has_female_marker(word)
 			
 	static func _is_plural(word : String) -> bool:
 		return _has_marker(word, "$")

@@ -11,6 +11,10 @@ func _update_state(delta : float):
 
 @onready var quest_indicator_label: Label = $QuestIndicatorLabel # Assurez-vous que le chemin du Node est correct, ici j'utilise @onready
 
+
+func interact():
+	pass
+	
 func _ready():
 	if not quest_indicator_label:
 		pass

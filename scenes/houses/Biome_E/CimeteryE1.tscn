@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=4 uid="uid://bv6pquo3hj3xi"]
+
+[ext_resource type="Script" uid="uid://c6snvejm4imbs" path="res://scripts/House.gd" id="1_q5xaf"]
+[ext_resource type="TileSet" uid="uid://2rmp57x3ojmi" path="res://sprites/Tilemap/biomeq_tile_set.tres" id="2_bqekp"]
+
+[node name="SimpleHouse" type="Node2D"]
+script = ExtResource("1_q5xaf")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD9//z/AAABAAEAAAD+//z/AAAXAAUAAAD///z/AAAGAAcAAAAAAPz/AAAGAAcAAAD9////AAAWAAQAAAD+////AAAWAAQAAAD/////AAAWAAQAAAAAAP//AAAWAAQAAAABAP//AAAXAAcAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAABAP7/AAABAAEAAAAAAP7/AAAWAAQAAAD///7/AAAWAAcAAAD+//7/AAAWAAYAAAD9//3/AAABAAEAAAD+//3/AAABAAEAAAD///3/AAABAAEAAAAAAP3/AAAWAAQAAAABAP3/AAAWAAcAAAD8//7/AAABAAEAAAD9//7/AAAXAAcAAAACAP3/AAAXAAQAAAD+//v/AAABAAEAAAD//wAAAAAXAAQAAAAAAAAAAAAWAAQAAAABAAAAAAAWAAQAAAD8////AAAXAAQAAAD+/wAAAAAWAAcAAAABAPz/AAABAAEAAAAAAPv/AAABAAEAAAD///v/AAABAAEAAAD//wEAAAANAAUAAAAAAAEAAAAWAAQAAAABAAEAAAABAAEAAAACAAAAAAAXAAUAAAABAPv/AAAWAAUAAAD8//3/AAABAAEAAAA=")
+tile_set = ExtResource("2_bqekp")

@@ -1,0 +1,127 @@
+[gd_scene load_steps=39 format=3 uid="uid://db5cfan2a3vjb"]
+
+[ext_resource type="PackedScene" uid="uid://ba101fnwl5x8" path="res://scenes/generation/World.tscn" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="2_6p3nn"]
+[ext_resource type="Script" path="res://scripts/generation/DecorationItem.gd" id="3_k67gn"]
+[ext_resource type="PackedScene" uid="uid://c85lwwlt3138q" path="res://scenes/houses/Biome_P/SimpleHouseP2.tscn" id="4_k3g67"]
+[ext_resource type="PackedScene" uid="uid://djspu8srsty1o" path="res://scenes/houses/Biome_P/SimpleHouseP1.tscn" id="5_4bgka"]
+[ext_resource type="PackedScene" uid="uid://grqjca3hilx8" path="res://scenes/houses/Biome_P/MediumHouseP2.tscn" id="6_02d50"]
+[ext_resource type="PackedScene" uid="uid://cekv5rwqf8jch" path="res://scenes/houses/Biome_P/MediumHouseP1.tscn" id="7_pgk25"]
+[ext_resource type="PackedScene" uid="uid://csqdexv7wfpte" path="res://scenes/houses/Biome_P/LargeHouseP2.tscn" id="8_kkokr"]
+[ext_resource type="PackedScene" uid="uid://cm1olipppcd2f" path="res://scenes/houses/Biome_H/SimpleHouseH2.tscn" id="9_lhwp2"]
+[ext_resource type="PackedScene" uid="uid://b22mpsy6oblbr" path="res://scenes/houses/Biome_H/SimpleHouseH1.tscn" id="10_l40q6"]
+[ext_resource type="PackedScene" uid="uid://i3d1vpborfnj" path="res://scenes/houses/Biome_H/MediumHouseH2.tscn" id="11_iav3h"]
+[ext_resource type="PackedScene" uid="uid://dxcoofb0dn8wh" path="res://scenes/houses/Biome_H/MediumHouseH1.tscn" id="12_womr8"]
+[ext_resource type="PackedScene" uid="uid://b0bj3vkfkp6j0" path="res://scenes/houses/Biome_H/LargeHouseH2.tscn" id="13_onjth"]
+[ext_resource type="PackedScene" uid="uid://cmx76xdcgs8km" path="res://scenes/houses/Biome_H/LargeHouseH1.tscn" id="14_xa0eo"]
+[ext_resource type="PackedScene" uid="uid://clb5mcl1s1fiq" path="res://scenes/houses/Biome_E/SimpleHouseE2.tscn" id="15_3mjum"]
+[ext_resource type="PackedScene" uid="uid://2dfbhspmi2of" path="res://scenes/houses/Biome_E/SimpleHouseE1.tscn" id="16_p27gv"]
+[ext_resource type="PackedScene" uid="uid://cmnc1jf062qt1" path="res://scenes/houses/Biome_E/MediumHouseE2.tscn" id="17_cn4eu"]
+[ext_resource type="PackedScene" uid="uid://bs1jef4wosqmg" path="res://scenes/houses/Biome_E/MediumHouseE1.tscn" id="18_0wyf6"]
+[ext_resource type="PackedScene" uid="uid://3j42bq68yi33" path="res://scenes/houses/Biome_E/LargeHouseE2.tscn" id="19_xp01v"]
+[ext_resource type="PackedScene" uid="uid://dyy6psq0sron0" path="res://scenes/houses/Biome_E/LargeHouseE1.tscn" id="20_jix7a"]
+[ext_resource type="PackedScene" uid="uid://d1dyhih44c23y" path="res://scenes/houses/Biome_A/SimpleHouseA2.tscn" id="21_segjr"]
+[ext_resource type="PackedScene" uid="uid://bvukuh4m1u2kk" path="res://scenes/houses/Biome_A/SimpleHouseA1.tscn" id="22_beobj"]
+[ext_resource type="PackedScene" uid="uid://tcspuygap45t" path="res://scenes/houses/Biome_A/MediumHouseA2.tscn" id="23_267kh"]
+[ext_resource type="PackedScene" uid="uid://73oaom2aybru" path="res://scenes/houses/Biome_A/MediumHouseA1.tscn" id="24_86meh"]
+[ext_resource type="PackedScene" uid="uid://kkfio6wg0g4p" path="res://scenes/houses/Biome_A/LargeHouseA2.tscn" id="25_duuju"]
+[ext_resource type="PackedScene" uid="uid://3as6m3kyw63a" path="res://scenes/houses/Biome_A/LargeHouseA1.tscn" id="26_8dxha"]
+
+[sub_resource type="Resource" id="Resource_v4eo4"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(8, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_doppt"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(9, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_j4epa"]
+resource_local_to_scene = true
+script = ExtResource("2_6p3nn")
+biome_name = "Forest(spring)"
+zone_shape = 1
+border_tree_density = 0.045
+decorations = Array[ExtResource("3_k67gn")]([SubResource("Resource_v4eo4"), SubResource("Resource_doppt")])
+house_scenes = Array[PackedScene]([ExtResource("4_k3g67"), ExtResource("5_4bgka"), ExtResource("6_02d50"), ExtResource("7_pgk25"), ExtResource("8_kkokr"), ExtResource("8_kkokr")])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_u7oxn"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(14, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_q1gux"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(15, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_5gwx6"]
+script = ExtResource("2_6p3nn")
+biome_name = "Forest(winter)"
+zone_shape = 1
+border_tree_density = 0.024
+ground_tile = Vector2i(15, 10)
+wall_tile = Vector2i(15, 11)
+path_tile = Vector2i(14, 10)
+decorations = Array[ExtResource("3_k67gn")]([SubResource("Resource_u7oxn"), SubResource("Resource_q1gux")])
+house_scenes = Array[PackedScene]([ExtResource("9_lhwp2"), ExtResource("10_l40q6"), ExtResource("11_iav3h"), ExtResource("12_womr8"), ExtResource("13_onjth"), ExtResource("14_xa0eo")])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_rgbw1"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(22, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_c2a15"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(23, 7)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_ikso6"]
+script = ExtResource("2_6p3nn")
+biome_name = "Forest(summer)"
+zone_shape = 1
+ground_tile = Vector2i(23, 4)
+wall_tile = Vector2i(23, 5)
+path_tile = Vector2i(22, 4)
+decorations = Array[ExtResource("3_k67gn")]([SubResource("Resource_rgbw1"), SubResource("Resource_c2a15")])
+house_scenes = Array[PackedScene]([ExtResource("15_3mjum"), ExtResource("16_p27gv"), ExtResource("17_cn4eu"), ExtResource("18_0wyf6"), ExtResource("19_xp01v"), ExtResource("20_jix7a")])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[sub_resource type="Resource" id="Resource_m00mv"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(12, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_dcb0m"]
+script = ExtResource("3_k67gn")
+atlas_coords = Vector2i(13, 13)
+density = 0.01
+metadata/_custom_type_script = "uid://v1fnj4abka1u"
+
+[sub_resource type="Resource" id="Resource_cg1mt"]
+script = ExtResource("2_6p3nn")
+biome_name = "Forest(Autumn)"
+zone_shape = 1
+border_tree_density = 1.0
+ground_tile = Vector2i(13, 10)
+wall_tile = Vector2i(13, 11)
+path_tile = Vector2i(12, 10)
+decorations = Array[ExtResource("3_k67gn")]([SubResource("Resource_m00mv"), SubResource("Resource_dcb0m")])
+house_scenes = Array[PackedScene]([ExtResource("21_segjr"), ExtResource("22_beobj"), ExtResource("23_267kh"), ExtResource("24_86meh"), ExtResource("25_duuju"), ExtResource("26_8dxha")])
+metadata/_custom_type_script = "uid://c27v73t3q056k"
+
+[node name="MainScene" type="Node2D"]
+
+[node name="World" parent="." instance=ExtResource("1_w2twt")]
+position = Vector2(-1648, -1312)
+available_biomes = Array[ExtResource("2_6p3nn")]([SubResource("Resource_j4epa"), SubResource("Resource_5gwx6"), SubResource("Resource_ikso6"), SubResource("Resource_cg1mt")])

@@ -11,9 +11,12 @@ func _update_state(delta : float):
 
 @onready var quest_indicator_label: Label = $QuestIndicatorLabel # Assurez-vous que le chemin du Node est correct, ici j'utilise @onready
 
+
+func interact():
+	pass
+	
 func _ready():
 	if not quest_indicator_label:
-		
 		pass
 
 
@@ -25,17 +28,6 @@ func assign_quest(new_quest: QuestBase):
 	else:
 		print("PNJ: Tentative d'assigner une quête nulle.")
 
-
-func interact():
-	if current_quest:
-		print("PNJ: Dialogue démarré pour la quête : ", current_quest.name)
-
-		if (current_quest.state == QuestBase.STATE.ACTIVE):
-			QuestManager.Instance.activate_quest(current_quest.id)
-		elif (current_quest.state == QuestBase.STATE.SUCCESS):
-			QuestManager.Instance.complete_quest(current_quest.id)
-			has_active_quest = false
-			current_quest = null
 
 
 func _physics_process(delta: float) -> void:

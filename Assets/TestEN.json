@@ -1,0 +1,60 @@
+{
+	"origin": [
+		"#setPronouns##setOccupation#[hero:#name#][home:#place#]#story#"
+	],
+	"name": [
+		"Cheri", "Fox", "Morgana", "Jedoo", "Brick", "Shadow", "Krox", "Urga", "Zelph"
+	],
+	"place": [
+		"the Misty Mountains",
+		"a tiny village",
+		"the Crystal City",
+		"a dark forest",
+		"the Royal Castle"
+	],
+	
+	"animal": [
+		"cat",
+		"dog",
+		"fox",
+		"octopus"
+	],
+	
+	"adjective": [
+		"brave",
+		"clumsy",
+		"fierce",
+		"shy",
+		"clever",
+		"grumpy"
+	],
+	"emotion": [
+		"proud",
+		"exhausted",
+		"terrified",
+		"excited",
+		"confused"
+	],
+	"item": [
+		"magic ring",
+		"rusty key",
+		"ancient map",
+		"golden coin",
+		"mysterious letter"
+	],
+	"monster": [
+		"dragon", "ogre", "witch", "wizard", "goblin", "golem", "giant", "sphinx", "warlord"
+	],
+	"setPronouns": [
+		"[heroThey:they][heroThem:them][heroTheir:their][heroTheirs:theirs]",
+		"[heroThey:she][heroThem:her][heroTheir:her][heroTheirs:hers]",
+		"[heroThey:he][heroThem:him][heroTheir:his][heroTheirs:his]"
+	],
+	"setOccupation": [
+		"[occupation:baker][didStuff:baked a #adjective# cake,found #item.a# in the flour,burnt the cookies,invented a recipe for #monster# pie]",
+		"[occupation:warrior][didStuff:fought #monster.a#,saved #home# from #monster.a#,lost #heroTheir# #item# in battle,defeated the #adjective# #monster#]"
+	],
+	"story": [
+		"This is the legend of #hero.capitalize#, a #adjective# #occupation# from #home#. One day, #heroThey# #didStuff#. Feeling #emotion#, #heroThey# #didStuff#. Finally, #heroThey# returned to #home# with #item.a#."
+	]
+}

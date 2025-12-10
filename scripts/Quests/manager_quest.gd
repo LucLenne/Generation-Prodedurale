@@ -247,13 +247,13 @@ func spawn_quests_in_world(world_gen: WorldGenerator) -> void:
 func DeleteQuestUI(id : int):
 	QuestBookUI.Instance.delete_quest(id)
 
-func ActivateQuest(id : int):
-	for quest in _inactiveQuest:
-		if quest.id == id:
-			_inactiveQuest.erase(quest)
-			_activeQuest.append(quest)
-			QuestBookUI.Instance._create_quest(str(quest.type),quest.id)
-			return
+func ActivateQuest(pnj : PNJ):
+	var quest = pnj.current_quest
+	if quest._state == QuestBase.STATE.INACTIVE:
+		_inactiveQuest.erase(quest)
+		_activeQuest.append(quest)
+		QuestBookUI.Instance._create_quest(str(quest.type),quest.id)
+		return
 	print("quest not inactive")
 
 func _process(_delta: float) -> void:

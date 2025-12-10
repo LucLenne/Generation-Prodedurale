@@ -1,11 +1,21 @@
-class_name Player extends CharacterBase
+class_name Player extends PlayerController
 static var Instance : Player
 
 var _quest_book_ui = preload("res://scripts/UI/quest_book_ui.gd")
 
+func _enter_tree():
+	if Instance != null:
+		push_warning("Attention : Deux Player existent en même temps !")
+		queue_free()
+		return
+	Instance = self
+
+func _exit_tree():
+	if Instance == self:
+		Instance = null
+		
 func _ready():
 	super._ready()
-	Instance = self
 	
 	# Assign main sprite for rotation logic in base class
 	main_sprite = $Sprite2D

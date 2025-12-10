@@ -1,11 +1,33 @@
 {
-	"replique_intimidant": [
-		"Je vais pas bouger de chez #propriétaire#, plutôt mourir"
+	"origin": [
+		"#zombish# #intro# #zombish# #raison# #zombish#"
 	],
 	
 		"intro": [
-		"Je vais pas bouger de chez #propriétaire#"
-		"Si #propriétaire "
+		"Je vais pas bouger de chez #propriétaire#",
+		"Si #propriétaire# veut que je parte qu'il viennent lui même !",
+		"c'est qui cet enfoiré de #propriétaire# ?"
+		"#propriétaire# ? jamais entendu parlé. "
+	],
+	
+	"raison": [
+		"je reste et tu vas rien faire dutout !",
+		"j'en ai rien a faire de ton avis",
+		"dégage avant que je te bouffe",
+		"si "
+	],
+	
+		"zombish": [
+		"...",
+		"grrr",
+		"ah...",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
 	],
 	
 	"replique_amical": [

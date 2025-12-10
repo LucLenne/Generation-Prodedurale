@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmfvd66vurgsg" path="res://scripts/TestGDTraceryJSONFR&EN.gd" id="1_dm38y"]
 [ext_resource type="JSON" path="res://Assets/TestEN.json" id="2_5e8ay"]
-[ext_resource type="JSON" path="res://Assets/GénériqueZombie.json" id="3_dm38y"]
+[ext_resource type="JSON" path="res://Assets/MonsterJSON/Zombie quêtes.json" id="3_dm38y"]
 
 [node name="TestJSONTraceryNode" type="Node"]
 script = ExtResource("1_dm38y")

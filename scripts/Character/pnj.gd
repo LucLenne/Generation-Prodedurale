@@ -28,6 +28,8 @@ func assign_quest(new_quest: QuestBase):
 	else:
 		print("PNJ: Tentative d'assigner une quête nulle.")
 
+
+
 func _physics_process(delta: float) -> void:
 	pass
 

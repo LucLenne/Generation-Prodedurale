@@ -4,9 +4,9 @@ var _biome : String
 
 func _init() -> void :
 	type = TYPE.EXPLORE
-	var rd = randi_range(0, ManagerQuest.list_biomes.size())
-	_biome = ManagerQuest.list_biomes[rd]
-	title = "Tu dois découvrir le biome " + _biome + "."
+	var rd = randi_range(0, QuestManager.Instance.list_biomes.size())
+	_biome = QuestManager.Instance.list_biomes[rd]
+
 
 
 func _process(_delta: float) -> void:

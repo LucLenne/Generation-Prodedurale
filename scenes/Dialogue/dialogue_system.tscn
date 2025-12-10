@@ -1,8 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b25rh11q4bvoj"]
+[gd_scene load_steps=8 format=3 uid="uid://b25rh11q4bvoj"]
 
 [ext_resource type="Script" uid="uid://yr8c14qo708p" path="res://scripts/Dialogue/dialogue_system.gd" id="1_r23gm"]
-[ext_resource type="JSON" path="res://Assets/NPCJson/ExampleNPC.json" id="2_crh8w"]
-[ext_resource type="JSON" path="res://Assets/MonsterJSON/ExampleMonster.json" id="3_8710v"]
 [ext_resource type="PackedScene" uid="uid://bfcmgquain0r4" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="4_8mjf6"]
 [ext_resource type="Script" uid="uid://ckmui7cav8sp7" path="res://scripts/Character/player_controller.gd" id="5_2mtlc"]
 [ext_resource type="Script" uid="uid://dwhtkltr0pm6f" path="res://scripts/Resource/movement_parameters.gd" id="6_07esm"]
@@ -17,14 +15,12 @@ metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyii7"]
 
-[node name="DialogueSystem2" type="Node" node_paths=PackedStringArray("player_controller")]
+[node name="DialogueSystem2" type="Node"]
 script = ExtResource("1_r23gm")
-npc_json_file = ExtResource("2_crh8w")
-monster_json_file = ExtResource("3_8710v")
-player_controller = NodePath("PlayerController")
 metadata/_custom_type_script = "uid://yr8c14qo708p"
 
 [node name="DialogueSystemUI" parent="." instance=ExtResource("4_8mjf6")]
+unique_name_in_owner = true
 
 [node name="PlayerController" type="CharacterBody2D" parent="."]
 script = ExtResource("5_2mtlc")

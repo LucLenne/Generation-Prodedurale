@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dgfig18kthiid" path="res://icon.svg" id="1_0nwrp"]
 [ext_resource type="Script" uid="uid://ddke70j6sspmq" path="res://scripts/UI/quest_ui.gd" id="1_nj0mn"]
-[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://sprites/Minecraft.ttf" id="2_gx4yl"]
+[ext_resource type="FontFile" path="res://sprites/Minecraft.ttf" id="2_gx4yl"]
 
 [node name="quest_ui" type="Control"]
 layout_mode = 3

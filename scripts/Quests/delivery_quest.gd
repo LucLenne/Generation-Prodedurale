@@ -5,16 +5,14 @@ var _item : CollectibleBase
 
 func _init() -> void :
 	type = TYPE.DELIVERY
+	title = "Tu dois donner" + _item.Name + ", à " + _pnj._name + "."
 
 func setup(world_gen: Node2D) -> void:
-	var rd = randi_range(0, QuestManager.Instance.list_collectibles.size()) 
-	_item = QuestManager.Instance.list_collectibles[rd]
-	# Defer spawning of PNJ
-
+	var rd = randi_range(0, ManagerQuest.list_collectibles.size()) 
+	_item = ManagerQuest.list_collectibles[rd]
+	var pnj_scene = ManagerQuest.list_pnj.pick_random()
 func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
 	if QuestManager.Instance.list_pnj.is_empty(): return false
-	
-	var pnj_scene = QuestManager.Instance.list_pnj.pick_random()
 	
 	var origin_pos = Vector2.ZERO
 	if dialogue_ref and "pnj" in dialogue_ref and dialogue_ref.pnj:

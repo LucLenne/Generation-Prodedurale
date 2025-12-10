@@ -1,5 +1,4 @@
 class_name QuestManager extends Node
-static var Instance : QuestManager
 
 const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 
@@ -12,11 +11,6 @@ const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 @export var list_pnj : Array[PackedScene]
 var _pnj_in_quest : Array[PNJ]
 
-func _enter_tree() -> void:
-	if Instance == null:
-		Instance = self
-	else:
-		queue_free()
 
 @export_group("Talk")
 @export var max_dist_pnj : float = 50
@@ -152,14 +146,14 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 		print("ManagerQuest: Spawned quest for PNJ at ", instance.position)
 
 func DeleteQuestUI(id : int):
-	QuestBookUI.Instance.delete_quest(id)
+	QuestBookUi.delete_quest(id)
 
 func ActivateQuest(pnj : PNJ):
 	var quest = pnj.current_quest
 	if quest._state == QuestBase.STATE.INACTIVE:
 		_inactiveQuest.erase(quest)
 		_activeQuest.append(quest)
-		QuestBookUI.Instance._create_quest(str(quest.type),quest.id)
+		QuestBookUi._create_quest(quest.title,quest.id)
 		return
 	print("quest not inactive")
 
@@ -171,6 +165,13 @@ func _process(_delta: float) -> void:
 			_activeQuest.erase(quest)
 			_failQuest.append(quest)
 			_activeQuest.erase(quest)
+
+func GetQuest(type : QuestBase.TYPE) -> QuestBase:
+	for quest in _inactiveQuest:
+		if(quest.type == type):
+			return quest
+	print("no quest " + str(type) + " exist.")
+	return
 
 
 func get_spawn_position_from_direction(direction: String, distance: float, origin_pos: Vector2) -> Vector2:

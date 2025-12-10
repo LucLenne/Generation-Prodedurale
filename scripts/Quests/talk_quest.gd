@@ -5,9 +5,13 @@ var _pnj2 : CharacterBase
 
 func _init() -> void :
 	type = TYPE.TALK
+	title = "Tu dois réconcilier " + _pnj1._name + " et " + _pnj2.name + "."
 
 func setup(world_gen: Node2D) -> void:
-	pass
+	_pnj1 = ManagerQuest.GetPNJ(world_gen)
+	_pnj2 = ManagerQuest.GetPNJ(world_gen)
+	if _pnj1: _pnj1.emotion = CharacterBase.EMOTION.ANGRY
+	if _pnj2: _pnj2.emotion = CharacterBase.EMOTION.ANGRY
 
 func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
 	# Keep original logic if possible, or adapt.

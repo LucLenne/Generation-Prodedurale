@@ -17,8 +17,10 @@ var _pnj : Array[PNJ]
 var _pnj_in_quest : Array[PNJ]
 
 func _ready() -> void:
-	_generate_quests()
+	await get_tree().process_frame
 	_init_list_npc()
+	_generate_quests()
+
 func _process(delta: float) -> void:
 	for quest in _activeQuest:
 		quest._process(delta)
@@ -27,7 +29,6 @@ func ActiveQuest(quest : QuestBase):
 	if _inactiveQuest.has(quest):
 		_inactiveQuest.erase(quest)
 		_activeQuest.append(quest)
-		quest.init()
 		_create_quest_ui(quest)
 func SuccessQuest(quest : QuestBase):
 	if _activeQuest.has(quest):
@@ -46,6 +47,7 @@ func GetQuest(type : QuestBase.TYPE) -> QuestBase:
 	print("no quest " + str(type) + " exist.")
 	return
 func GetPNJ() -> PNJ:
+	print(_pnj.size())
 	var pnj = _pnj.pick_random()
 	_pnj.erase(pnj)
 	_pnj_in_quest.append(pnj)
@@ -62,6 +64,7 @@ func _generate_quests() -> void :
 		var quest_script = _typeQuest.pick_random()
 		var quest = quest_script.new()
 		quest.id = i
+		quest.init()
 		_inactiveQuest.append(quest)
 func _create_quest_ui(quest : QuestBase):
 	QuestBookUi.create_quest(quest.title,quest.id)
@@ -72,6 +75,7 @@ func _init_list_npc():
 	for child in current_scene.get_children():
 		if child is PNJ:
 			_pnj.append(child)
+
 func _pos_dir(dir : DialogueSystem.Directions) -> Vector3:
 	match dir:
 		DialogueSystem.Directions.NORD:

@@ -55,9 +55,9 @@
 	
 	"finAmical": [
 		"mais j'ai encore des choses a faire ici.",
-		"malheureusement je ne pense pas revenir.",
+		"malheureusement je ne pense pas revenir, je doit... #squelettememoire#",
 		"je suis plutôt bien ici, je pense que je vais rester",
-		"dit lui que je reviendrait plus tard"
+		"dit lui que je reviendrait plus tard parceque je doit... #squelettememoire#"
 	],
 
 	"introPersuasif": [
@@ -73,7 +73,8 @@
 		"j'aimerai rester ici un moment.",
 		"je ne compte pas revenir de si tôt.",
 		"j'ai des choses importantes a régler",
-		"j'ai d'autres choses a faire."
+		"j'ai d'autres choses a faire. Même si je me souviens plus quoi",
+		"Je ne peut pas revenir, je dois... #squelettememoire#"
 	],
 	
 	"finPersuasif": [
@@ -81,6 +82,13 @@
 		"on peut trouver un arrangement pour que tu me laisse tranquille ?",
 		"après tout ce ne sont pas t'es affaires n'est-ce-pas ?",
 		"je ne pense pas que tu ai le droit de me demander ça"
+	],
+	
+	"squelettememoire": [
+		"je ne sais plus vraiment quoi mais ça vas me revenir",
+		"aaaah je l'ai sur le bout de la langue",
+		"Mince ! j'ai oublié",
+		"je sais plus... bon tant pis"
 	],
 	
 	
@@ -106,24 +114,24 @@
 		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
 	"retour_victoire_persuasif": [
-		"okay, tu m'as convaincu, je retourne chez #proprietaire#", "tu sais bien parler toi !&& j'accepte "
+		"okay, tu m'as convaincu, je retourne chez #proprietaire#... c'est qui déja ?", "tu sais bien parler toi !&& j'accepte "
 	],
 	"retour_victoire_intimidant": [
 		"D'accord... pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
 	],
 	
 	"retour_victoire_amical": [
-		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord&& j'ai hâte de revoir #proprietaire# !"
+		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord&& j'ai hâte de revoir... #squelettememoire# !"
 	],
 	
 	"retour_echec_persuasif": [
-		"je comprends tes arguments, mais c'est non."
+		"je comprends tes arguments, mais c'est non.", "je ne peut pas accepter, je doit... #squelettememoire#"
 	],
 	"retour_echec_intimidant": [
 		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
 	],
 	"retour_echec_amical": [
-		"c'est vraiment très gentil mais non merci."
+		"c'est vraiment très gentil mais non merci.", "désolé, je suis tellement heureux ici, il ya... #squelettememoire#"
 	],
 	"btn_intimidation": [
 		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi."

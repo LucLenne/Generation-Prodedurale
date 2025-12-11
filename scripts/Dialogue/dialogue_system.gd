@@ -1,7 +1,7 @@
 class_name DialogueSystem extends Node
 
 
-@onready var pnj: PNJ = $".."
+@onready var pnj: PNJ = $"..."
 var targetInterractable : Interractable
 
 
@@ -67,8 +67,7 @@ var grammar_monster : TraceryFR.GrammarFR
 func _ready():
 	if InitializeOnReady :
 		generate_new_quest()
-		
-						
+
 func generate_new_quest():
 	player_controller = Player.Instance
 	if !player_controller:
@@ -256,8 +255,7 @@ func _on_dialogue_closed(questGiver : PNJ):
 		is_intro = false
 		interractable.showLabel = false
 		targetInterractable.showLabel = true
-		if QuestManager.Instance :
-				QuestManager.Instance.ActivateQuest(pnj)
+		ManagerQuest.ActiveQuest(pnj.current_quest)
 			
 			
 

@@ -16,6 +16,5 @@ func _on_reload_button_pressed() -> void:
 	# Clean Sweep: Explicitly set singletons to null to avoid "Instance already exists" errors
 	DialogueSystemUI.instance = null
 	Player.Instance = null
-	QuestManager.Instance = null
 	PopupManager.reset_dialog()
 	get_tree().reload_current_scene()

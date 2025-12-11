@@ -22,6 +22,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export var is_dead : bool = false
 
 @export_group("Movement")
+@export var is_static_character : bool = true ## Si vrai, le personnage ne peut pas bouger (ni par lui-même, ni poussé).
 @export var default_movement : MovementParameters
 @export var stunned_movement : MovementParameters
 
@@ -69,6 +70,9 @@ var _room #: Room
 
 
 func _ready() -> void:
+	# Force le mode Top-Down pour éviter que la physique ne considère les collisions comme Sol/Plafond
+	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	
 	if default_movement == null:
 		printerr("CharacterBase: 'default_movement' is missing on ", name, "! Assign a MovementParameters resource.")
 		# Fallback to avoid crash, though behavior will be weird (no speed)
@@ -85,7 +89,10 @@ func _physics_process(_delta: float) -> void:
 		velocity = _knockback_value
 		_has_to_apply_knockback = false
 
-	if _direction.length() > 0.000001:
+	# IMMOBILISATION TOTALE (Sauf Knockback)
+	if is_static_character:
+		velocity = Vector2.ZERO
+	elif _direction.length() > 0.000001:
 		# INSTANT MOVEMENT (Fixed Velocity)
 		velocity = _direction * _current_movement.speed_max
 		

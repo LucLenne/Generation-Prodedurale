@@ -2,6 +2,9 @@ extends CharacterBase
 class_name PlayerController
 
 func _ready() -> void:
+	# Le joueur DOIT pouvoir bouger
+	is_static_character = false
+	
 	randomize()
 	_friendly = randi_range(5, 10)
 	_intimidating = randi_range(5, 10)

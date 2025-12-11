@@ -147,6 +147,9 @@ func generate_world():
 	# Configure la caméra
 	_setup_player_camera(player_instance)
 	
+	# Génération des Collisions (Car le TileSet n'a pas de physique)
+	_generate_collisions()
+	
 	print("World Generation Complete.")
 
 
@@ -167,6 +170,52 @@ func _cleanup_world():
 	
 	if is_instance_valid(player_instance):
 		player_instance.queue_free()
+
+
+## Génère les collisions physiques pour les murs et l'eau
+func _generate_collisions():
+	print("Generating procedural collisions...")
+	var collision_parent = Node2D.new()
+	collision_parent.name = "GeneratedCollisions"
+	add_child(collision_parent)
+	register_generated_object(collision_parent)
+	
+	var shape = RectangleShape2D.new()
+	shape.size = Vector2(TileConfigScript.TILE_SIZE, TileConfigScript.TILE_SIZE)
+	
+	# Optimisation : On réutilise la même shape resource (attention si on change la taille plus tard)
+	# Mais pour des milliers d'objets, c'est mieux que new() à chaque fois ? 
+	# Godot partage les ressources par défaut si on load, mais ici on new().
+	# Ce n'est pas grave, RectangleShape2D est léger.
+	
+	var half_size = Vector2(TileConfigScript.TILE_SIZE, TileConfigScript.TILE_SIZE) / 2.0
+	
+	for x in range(width):
+		for y in range(height):
+			var cell = Vector2i(x, y)
+			var need_collision = false
+			
+			# 1. Vérifie le Wall Layer (Murs, Arbres, Obstacles)
+			if wall_layer.get_cell_source_id(cell) != -1:
+				need_collision = true
+			
+			# 2. Vérifie le Ground Layer (Eau)
+			if !need_collision:
+				var ground_tile = ground_layer.get_cell_atlas_coords(cell)
+				# On suppose que l'eau est bloquante
+				if TileConfigScript.is_water(ground_tile):
+					need_collision = true
+			
+			if need_collision:
+				var sb = StaticBody2D.new()
+				var col = CollisionShape2D.new()
+				col.shape = shape
+				sb.add_child(col)
+				
+				# Positionnement : Centre de la tile
+				sb.position = Vector2(x, y) * TileConfigScript.TILE_SIZE + half_size
+				
+				collision_parent.add_child(sb)
 
 
 # =============================================================================

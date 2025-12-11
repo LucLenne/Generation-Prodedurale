@@ -108,8 +108,9 @@ func SpawnPNJ(dir : DialogueSystem.Directions, Name : String, questGiver : PNJ) 
 				DialogueSystem.Directions.SUD: dir_str = "SUD"
 				DialogueSystem.Directions.OUEST: dir_str = "OUEST"
 			
-			# Distance arbitraire (ex: 200 pixels)
-			target_pos = _world_gen_ref.get_position_in_direction(questGiver.position, dir_str, 200.0)
+			# Distance ajustée pour correspondre aux markers du PNJ (~50px)
+			# On met 60.0 pour avoir une petite marge, et le script essaiera des distances proches si bloqué.
+			target_pos = _world_gen_ref.get_position_in_direction(questGiver.position, dir_str, 60.0)
 		else:
 			# Fallback sur la méthode interne du PNJ
 			target_pos = questGiver._get_direction_position(dir)

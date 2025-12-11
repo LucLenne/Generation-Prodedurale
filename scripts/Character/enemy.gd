@@ -43,21 +43,27 @@ func _update_state(delta : float) -> void:
 				_detect_target()
 			
 		STATE.CHASE:
-			if is_instance_valid(target):
-				var dist = global_position.distance_to(target.global_position)
-				if global_position.distance_to(start_position) > chase_limit_distance:
-					target = null
-					_set_state(STATE.RETURN)
-				elif dist <= attack_distance:
-					_start_attack()
-				elif dist > detection_radius * 2.0: # Abandon chase if too far
-					target = null
-					_set_state(STATE.IDLE)
-				else:
-					_direction = (target.global_position - global_position).normalized()
-			else:
+			# Modification radicale : On désactive le Chase
+			_direction = Vector2.ZERO
+			_set_state(STATE.IDLE)
+			return
+			
+			# Code original désactivé pour empêcher tout suivi
+			#if is_instance_valid(target):
+				#var dist = global_position.distance_to(target.global_position)
+				#if global_position.distance_to(start_position) > chase_limit_distance:
+					#target = null
+					#_set_state(STATE.RETURN)
+				#elif dist <= attack_distance:
+					#_start_attack()
+				#elif dist > detection_radius * 2.0: # Abandon chase if too far
+					#target = null
+					#_set_state(STATE.IDLE)
+				#else:
+					#_direction = (target.global_position - global_position).normalized()
+			#else:
 				# Target lost or dead
-				_set_state(STATE.IDLE)
+				#_set_state(STATE.IDLE)
 		
 		STATE.RETURN:
 			var dist = global_position.distance_to(start_position)

@@ -1,4 +1,5 @@
-class_name QuestBookUI extends CanvasLayer
+class_name QuestBookUI extends Control
+static var Instance : QuestBookUI
 
 var _quest_ui = preload("res://scripts/UI/quest_ui.gd")
 @onready var left = $LeftPage

@@ -6,7 +6,6 @@ enum STATE { INACTIVE ,ACTIVE,SUCCESS,FAIL}
 var _state : STATE = STATE.ACTIVE
 var type : TYPE = TYPE.NONE
 var id : int
-@export var title : String
 
 @export var _amount_life_reward : int = 5
 
@@ -16,7 +15,6 @@ func _valid_quest() -> void:
 	
 func _fail_quest()-> void:
 	_state = STATE.FAIL
-
 
 func _give_reward()-> void:
 	pass

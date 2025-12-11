@@ -1,43 +1,40 @@
 {
   "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
+	"#setPronouns##salutation.capitalize.heroGender# #zombish# #text# #conclusion#."
   ],
 
   "salutation": [
 	  "Salut l'humain",
-	  "Booooonjour… mortel…",
-	  "Oooh… qui trouble mon repos ?",
+	  "Bon...jour",
+	  "mmh, tu peux ramasser ma côte ?",
 	  "kestuveu toi ?",
 	  "...",
-	  "Je te vois… même dans l’obscurité…",
-	  "Un visiteur ? Depuis tant de lunes…",
-	  "Je te salue, voyageur du monde des vivants.",
-	  "J'suis pas encort mort...",
+	  "clic... cluc... salutation",
+	  "hey! tu marches sur mon femur là !",
+	  "Gloupgloup... Laisses moi boire en paix étrangé !",
+	  "J'suis pas encort totalement mort...",
 	  "j'suis vraiment pas d'humeur !",
-	"Je te salue, voyageur du monde des vivants.",
 	
   ],
  
   "phrase1": [
-		"Tu me déranges dans mon repos éternel…",
+		"tu me dérange,",
 		"vas-t-en,",
-		"Laisse-moi errer en paix…",
+		"tu me veux quoi,",
 		"dégage",
-		"Pourquoi es-tu ici… quitte ce lieu…",
-		"Tu oses troubler mon sommeil… pour quoi faire ?",
-		"Retourne d’où tu viens…",
+		"je bois là",
+		"j'ai perdu une côte,",
+		"je trouve plus mon pouce,",
+		"laisse moi je cherche mon pied gauche,",
 	],
   
   "sujet1": [
 		"déchets de la société",
 		"sale type",
-		"misérable intrus",
-		"pauvre mortel",
-		"créature de chair",
-		"impertinent visiteur",
-		"errant sans but", 
-		"tas de chair",
-		"cervelle tiède",
+		"sale moche",
+		"pauvre type",
+		"bon à rien",
+		"timbré",
 	],
 	
 	"phrase2": [
@@ -46,18 +43,23 @@
 		"tu serait pas",
 		"je détèste les",
 		"tu ressemble à",
-		"On me prenait pour",
+		"tu aurais pas un os pour moi,",
 		"j'aime pas quand #sujet.indef# se comporte comme",
+		"t'aurais pas vu une mains droite trainé,",
+		"y'a trop"
 	],
   
   	"sujet2": [
 		"déchet de la société",
 		"sale type",
+		"bon repas",
 		"type qui me doit de l'argent",
 		"#sujet.indef# inconnu",
 		"personne connu",
 		"chat",
 		"mère",
+		"terre",
+		"charpentier", 
 		"cadavre",
 	],
 	
@@ -80,23 +82,22 @@
 	
 	"zombish": [
 		"...",
-		"vshhh",
-		"Chhhh…",
-		"Oooooooh…",
-		" Huuuuu…",
-		"Ffffsssh…",
-		"Swiiiiiip…",
-		"Krrrr…",
+		"cluck",
+		"ah...",
+		"..skluc...",
+		" tlic...",
+		"..cluckclik...",
+		"..clkclk..",
 	],
 	
   "conclusion": [
-		"ça donne faim héhé",
+		"ça donne soif héhé",
 		"c'est pour ça que tu devrait partir",
 		"donc casse toi !",
 		"mais les gardes m'ont chassés",
-		"c'est pour ça que tu sens un souffle sur ta nuque",
-		"ca me répugne",
-		"... ouhhhhhhhh",
+		"c'est pour ça que y a des troues",
+		"c'est dégeulasse",
+		"...y a trop de courant d'air ici",
 		" ",
 	],
 	

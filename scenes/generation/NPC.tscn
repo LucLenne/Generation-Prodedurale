@@ -31,6 +31,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DialogueSystem" parent="." instance=ExtResource("4_uakhv")]
+QuestTypeEnabeling = Dictionary[int, bool]({
+0: true,
+1: false,
+3: false
+})
 
 [node name="Interractable" parent="." instance=ExtResource("5_uakhv")]
 

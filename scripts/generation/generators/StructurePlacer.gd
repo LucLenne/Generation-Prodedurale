@@ -5,14 +5,17 @@ class_name StructurePlacer extends RefCounted
 const HouseGenScript = preload("res://scripts/generation/HouseGenerator.gd")
 const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 const TombstoneScene = preload("res://scenes/Tombstone/Tombstone.tscn")
+const NPCWithoutDialogueScene = preload("res://scenes/Tombstone/NPCWithoutDialogue.tscn")
 
 var building_count_range: Vector2i
 var tombstone_count_range: Vector2i
+var npc_without_dialogue_count_range: Vector2i
 
 
-func _init(count_range: Vector2i, tombstone_range: Vector2i = Vector2i(5, 15)):
+func _init(count_range: Vector2i, tombstone_range: Vector2i = Vector2i(5, 15), npc_wd_range: Vector2i = Vector2i(3, 10)):
 	building_count_range = count_range
 	tombstone_count_range = tombstone_range
+	npc_without_dialogue_count_range = npc_wd_range
 
 
 ## Place tous les éléments (bâtiments puis décorations).
@@ -659,3 +662,38 @@ func _is_tombstone_cell_valid(data: MapData, cell: Vector2i) -> bool:
 				return false
 	
 	return true
+
+
+# =============================================================================
+# NPC SANS DIALOGUE
+# =============================================================================
+
+## Place des NPC sans dialogue aléatoirement sur la carte.
+func place_npcs_without_dialogue(data: MapData, parent: Node2D):
+	print("Populating world (NPCs Without Dialogue)...")
+	
+	var count = randi_range(npc_without_dialogue_count_range.x, npc_without_dialogue_count_range.y)
+	var placed_count = 0
+	
+	for i in range(count):
+		for attempt in range(50):
+			var x = randi_range(15, data.width - 15)
+			var y = randi_range(15, data.height - 15)
+			var cell = Vector2i(x, y)
+			
+			# Réutilise la même validation que pour les tombes
+			if not _is_tombstone_cell_valid(data, cell):
+				continue
+			
+			var npc = NPCWithoutDialogueScene.instantiate()
+			npc.position = Vector2(cell) * TileConfigScript.TILE_SIZE
+			parent.add_child(npc)
+			
+			if parent.has_method("register_generated_object"):
+				parent.register_generated_object(npc)
+			
+			data.reserved_cells[cell] = true
+			placed_count += 1
+			break
+	
+	print("Placed %d NPCs without dialogue on the map." % placed_count)

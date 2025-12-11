@@ -1,13 +1,13 @@
 class_name TalkQuest extends QuestBase
 
-var _pnj1 : CharacterBase
+var _pnj1 : NPC
 var _pnj2 : CharacterBase
 
-func _init() -> void :
+func init() -> void :
 	type = TYPE.TALK
 	title = "Tu dois réconcilier " + _pnj1.Name + " et " + _pnj2.Name + "."
+	_pnj1.create_dialogue()
 
-	
 
 #func setup(world_gen: Node2D) -> void:
 	#_pnj1 = ManagerQuest.GetPNJ(world_gen)

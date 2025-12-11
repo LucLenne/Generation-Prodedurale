@@ -3,7 +3,7 @@ class_name DeliveryQuest extends QuestBase
 var _pnj : PNJ
 var _item : CollectibleBase
 
-func _init() -> void :
+func init() -> void :
 	type = TYPE.DELIVERY
 	title = "Tu dois donner" + _item.Name + ", à " + _pnj.Name + "."
 

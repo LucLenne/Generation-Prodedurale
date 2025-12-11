@@ -2,9 +2,10 @@ class_name KillQuest extends QuestBase
 
 var _target : CharacterBase
 
-func _init():
+func init():
 	type = TYPE.KILL
 	title = "Tu dois tuer" + _target.Name + "."
+
 #func setup(world_gen: Node2D) -> void:
 	#var target_scene = null
 	#if not ManagerQuest.list_character_to_kill.is_empty():

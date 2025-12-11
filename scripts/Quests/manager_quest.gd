@@ -25,7 +25,7 @@ func ActiveQuest(quest : QuestBase):
 	if _inactiveQuest.has(quest):
 		_inactiveQuest.erase(quest)
 		_activeQuest.append(quest)
-		quest._init()
+		quest.init()
 		_create_quest_ui(quest)
 func SuccessQuest(quest : QuestBase):
 	if _activeQuest.has(quest):

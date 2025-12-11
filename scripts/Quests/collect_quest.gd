@@ -2,7 +2,7 @@ class_name CollectQuest extends QuestBase
 
 var _item : CollectibleBase
 
-func _init() -> void :
+func init() -> void :
 	type = TYPE.COLLECT
 	title = "Collect this object " + _item.Name
 	var rd = randi_range(0, ManagerQuest.list_collectibles.size())

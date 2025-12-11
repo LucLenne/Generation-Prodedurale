@@ -18,7 +18,7 @@ func _fail_quest()-> void:
 	_state = STATE.FAIL
 func _give_reward()-> void:
 	Player.Instance.life += Player.Instance.life_to_add
-func _init() -> void:
+func init() -> void:
 	pass
 func _process(_delta: float):
 	pass

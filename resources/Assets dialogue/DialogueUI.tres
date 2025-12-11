@@ -1,6 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=4 uid="uid://cbulb23b3lvjm"]
-
-[ext_resource type="Texture2D" uid="uid://cj3evuh4yj5v5" path="res://sprites/UI/UI .png" id="1_74kl6"]
+[gd_resource type="Theme" load_steps=9 format=4 uid="uid://cbulb23b3lvjm"]
 
 [sub_resource type="Image" id="Image_j0y6h"]
 data = {
@@ -1044,7 +1042,6 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xak6d"]
-texture = ExtResource("1_74kl6")
 
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)

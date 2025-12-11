@@ -31,9 +31,9 @@ func _ready():
 	# Setup default movement if not assigned in Inspector
 	if default_movement == null:
 		default_movement = MovementParameters.new()
-		default_movement.speed_max = 400.0 # Much faster
-		default_movement.acceleration = 2500.0 # Very snappy
-		default_movement.friction = 2000.0
+		default_movement.speed_max = 400.0 
+		default_movement.acceleration = 20000.0 # Instant acceleration (No drift)
+		default_movement.friction = 20000.0     # Instant stop
 	
 	_current_movement = default_movement
 	

@@ -41,6 +41,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export var Name : String = "no name"
 @export var emotion : EMOTION = EMOTION.NEUTRAL
 var dialogue_ref : Object = null
+var quest_data : Dictionary = {}
 
 # Life
 var _last_hit_time : float
@@ -85,17 +86,15 @@ func _physics_process(_delta: float) -> void:
 		_has_to_apply_knockback = false
 
 	if _direction.length() > 0.000001:
-		velocity += _direction * _current_movement.acceleration * get_physics_process_delta_time()
-		velocity = velocity.limit_length(_current_movement.speed_max)
+		# INSTANT MOVEMENT (Fixed Velocity)
+		velocity = _direction * _current_movement.speed_max
+		
 		if main_sprite and orientation != ORIENTATION.FIXED:
 			main_sprite.rotation = _compute_orientation_angle(_direction)
-	elif _current_movement != null:
-		## If direction length == 0, Apply friction
-		var friction_length = _current_movement.friction * get_physics_process_delta_time()
-		if velocity.length() > friction_length:
-			velocity -= velocity.normalized() * friction_length
-		else:
-			velocity = Vector2.ZERO
+	else:
+		# INSTANT STOP
+		velocity = Vector2.ZERO
+	
 	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision : KinematicCollision2D = get_slide_collision(i)

@@ -1,45 +1,40 @@
 {
-  "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
-  ],
-
-  "salutation": [
-	  "Salut l'humain",
-	  "Booooonjour… mortel…",
-	  "Oooh… qui trouble mon repos ?",
-	  "kestuveu toi ?",
-	  "...",
-	  "Je te vois… même dans l’obscurité…",
-	  "Un visiteur ? Depuis tant de lunes…",
-	  "Je te salue, voyageur du monde des vivants.",
-	  "J'suis pas encort mort...",
-	  "j'suis vraiment pas d'humeur !",
-	"Je te salue, voyageur du monde des vivants.",
-	
-  ],
- 
-  "phrase1": [
+	"origin": [
+		"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
+	],
+	"salutation": [
+		"Salut l'humain",
+		"Booooonjour… mortel…",
+		"Oooh… qui trouble mon repos ?",
+		"kestuveu toi ?",
+		"...",
+		"Je te vois… même dans l’obscurité…",
+		"Un visiteur ? Depuis tant de lunes…",
+		"Je te salue, voyageur du monde des vivants.",
+		"J'suis pas encort mort...",
+		"j'suis vraiment pas d'humeur !",
+		"Je te salue, voyageur du monde des vivants."
+	],
+	"phrase1": [
 		"Tu me déranges dans mon repos éternel…",
 		"vas-t-en,",
 		"Laisse-moi errer en paix…",
 		"dégage",
 		"Pourquoi es-tu ici… quitte ce lieu…",
 		"Tu oses troubler mon sommeil… pour quoi faire ?",
-		"Retourne d’où tu viens…",
+		"Retourne d’où tu viens…"
 	],
-  
-  "sujet1": [
+	"sujet1": [
 		"déchets de la société",
 		"sale type",
 		"misérable intrus",
 		"pauvre mortel",
 		"créature de chair",
 		"impertinent visiteur",
-		"errant sans but", 
+		"errant sans but",
 		"tas de chair",
-		"cervelle tiède",
+		"cervelle tiède"
 	],
-	
 	"phrase2": [
 		"avant de mourir j'étais",
 		"mon père me disait souvent d'éviter",
@@ -47,10 +42,9 @@
 		"je détèste les",
 		"tu ressemble à",
 		"On me prenait pour",
-		"j'aime pas quand #sujet.indef# se comporte comme",
+		"j'aime pas quand #sujet.indef# se comporte comme"
 	],
-  
-  	"sujet2": [
+	"sujet2": [
 		"déchet de la société",
 		"sale type",
 		"type qui me doit de l'argent",
@@ -58,15 +52,13 @@
 		"personne connu",
 		"chat",
 		"mère",
-		"cadavre",
+		"cadavre"
 	],
-	
-	"text":[
+	"text": [
 		"#phrase1# #sujet1.indef#",
-		"#phrase2# #sujet2.indef#",
+		"#phrase2# #sujet2.indef#"
 	],
-	
-	"optionnel":[
+	"optionnel": [
 		"de ma mère",
 		"de mon père",
 		"en prison",
@@ -75,9 +67,8 @@
 		" ",
 		" ",
 		" ",
-		" ",
+		" "
 	],
-	
 	"zombish": [
 		"...",
 		"vshhh",
@@ -86,10 +77,9 @@
 		" Huuuuu…",
 		"Ffffsssh…",
 		"Swiiiiiip…",
-		"Krrrr…",
+		"Krrrr…"
 	],
-	
-  "conclusion": [
+	"conclusion": [
 		"ça donne faim héhé",
 		"c'est pour ça que tu devrait partir",
 		"donc casse toi !",
@@ -97,16 +87,10 @@
 		"c'est pour ça que tu sens un souffle sur ta nuque",
 		"ca me répugne",
 		"... ouhhhhhhhh",
-		" ",
+		" "
 	],
-	
-  "setPronouns": [
+	"setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
-	],
-	
-  
-		
-	
-  
+	]
 }

@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"#setPronouns#[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
+		"#setPronouns#[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation#] "
 	],
 	
 	"choix_humeur": [
@@ -165,7 +165,7 @@
 		"Qu'est ce que vous faites là tout seul ? où est #rela.heroGender.poss_m# ?"
 	],
 
-	"btn_intimidation": [" Il reviendra pas ton #rela#, payes moi quand même !", "Donne moi la tune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
+	"btn_intimidation": [" #heroSubj# reviendra pas #cible_nom#, payes moi quand même !", "Donne moi la tune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
 	"btn_amical": ["Vasy lâche une pièce ou deux steuplé !", "Je suis sincèrement désolé pour ta perte...", "-faire un câlin a #proprietaire#-", "-faire un bisous a #proprietaire#-", "Tu restes quand même mon meilleur ami ?", "Qui a besoin d'#rela.heroGender.indef# quand il à un meilleur ami comme moi ?", "Tu peux pleurer sur mon épaule si tu veux.", "Sa mort m'attriste autant que toi...", "#heroSubj# aurait sûrement voulu que tu me payes...", "Tu veux un câlin ? Je te le facture pas cher, promis." ],       
 	"btn_persuasion": ["J'ai réussi à ramener un de ses doigts si tu veux.", "Ecoutez, les torts sont partagés dans cette histoire.", "Tu n'avais qu'à y aller toi même.", "#heroSubj.capitalize# est bien plus heureux là où #heroSubj# est", "C'est si important que ça #rela.heronGender.indef#?", "Roooh c'est bon, t'en n'avais pas vraiment besoin.", "arrête de râler, c'est pas comme si on avait qu'#rela.heroGender.indef# dans sa vie.", "J'ai enterré son cadavre ! Le service funéraire aurait pris 4 fois plus !", "#heroSubj.capitalize# m'a dit de te dire de me payer."],
 

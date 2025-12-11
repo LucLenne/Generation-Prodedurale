@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfqdo6qcdnunq"]
+[gd_scene load_steps=5 format=3 uid="uid://cbvkmpw8q1ios"]
 
 [ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="1_0ykhv"]
-[ext_resource type="Script" uid="uid://cn0nb22u4phqs" path="res://scenes/main_menu.gd" id="1_2wh52"]
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_2wh52"]
 [ext_resource type="PackedScene" uid="uid://dy8e51dnea48x" path="res://scenes/ButtonMenu.tscn" id="1_yqorp"]
-[ext_resource type="PackedScene" uid="uid://2i7imvprbpwm" path="res://scenes/test_scene.tscn" id="2_ow34m"]
+[ext_resource type="PackedScene" uid="uid://ba101fnwl5x8" path="res://scenes/generation/World.tscn" id="2_ow34m"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_2wh52")

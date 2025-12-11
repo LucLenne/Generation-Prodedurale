@@ -147,8 +147,8 @@ func generate_world():
 	# Configure la caméra
 	_setup_player_camera(player_instance)
 	
-	# Génération des Collisions (Désactivé suite aux problèmes de blocage)
-	# _generate_collisions()
+	# Génération des Collisions
+	_generate_collisions()
 	
 	print("World Generation Complete.")
 
@@ -169,6 +169,7 @@ func _cleanup_world():
 	npcs.clear()
 	
 	if is_instance_valid(player_instance):
+		remove_child(player_instance) # Force _exit_tree immediately to clear Singleton
 		player_instance.queue_free()
 
 

@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="Procedural"
-run/main_scene="uid://ba101fnwl5x8"
+run/main_scene="uid://cbvkmpw8q1ios"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PopupManager="*res://scripts/Tombstone/PopupManager.gd"
-ManagerQuest="*res://scenes/Quest/test/ManagerQuest.tscn"
 QuestBookUi="*res://scenes/ui/quest_book_ui.tscn"
 LifePlayerUi="*res://scenes/ui/life_player_ui.tscn"
+ManagerQuest="*res://scenes/Quest/test/ManagerQuest.tscn"
+PopupManager="*res://scripts/Tombstone/PopupManager.gd"
 
 [display]
 

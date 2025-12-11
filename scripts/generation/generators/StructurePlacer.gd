@@ -160,6 +160,9 @@ func _place_scene_building(data: MapData, zone: Zone, pos: Vector2i, placed: Arr
 		parent.register_generated_object(instance)
 	zone.buildings.append(instance)
 	
+	# Génère les collisions pour le bâtiment instancié
+	_add_collision_to_building(instance)
+	
 	result.success = true
 	result.rect = building_rect
 	result.door = pos + (local_door - offset)
@@ -696,4 +699,36 @@ func place_npcs_without_dialogue(data: MapData, parent: Node2D):
 			placed_count += 1
 			break
 	
+
 	print("Placed %d NPCs without dialogue on the map." % placed_count)
+
+
+## Ajoute des collisions physiques aux tuiles de murs d'un bâtiment
+func _add_collision_to_building(building_node: Node2D):
+	var tile_layer = _find_tile_layer(building_node)
+	if not tile_layer:
+		return
+
+	# Crée un conteneur pour les collisions
+	var static_body = StaticBody2D.new()
+	static_body.name = "GeneratedCollision"
+	building_node.add_child(static_body)
+	
+	var shape = RectangleShape2D.new()
+	shape.size = Vector2(TileConfigScript.TILE_SIZE, TileConfigScript.TILE_SIZE)
+	
+	for cell in tile_layer.get_used_cells():
+		var atlas_coords = tile_layer.get_cell_atlas_coords(cell)
+		
+		# On ne met pas de collision sur le SOL ni sur la porte (gérée par ailleurs)
+		if atlas_coords == TileConfigScript.FLOOR: continue
+		if atlas_coords == TileConfigScript.GRASS: continue
+		if atlas_coords == TileConfigScript.DIRT: continue
+		if TileConfigScript.is_door(atlas_coords): continue
+		
+		# Sinon (Mur, Meuble, Toit...), on ajoute une collision
+		var col = CollisionShape2D.new()
+		col.shape = shape
+		# Centrer la collision sur la tuile (coordonnées locales au TileMapLayer)
+		col.position = tile_layer.map_to_local(cell)
+		static_body.add_child(col)

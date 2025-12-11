@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvkmpw8q1ios"]
+[gd_scene load_steps=4 format=3 uid="uid://cfqdo6qcdnunq"]
 
 [ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="1_0ykhv"]
+[ext_resource type="Script" uid="uid://cn0nb22u4phqs" path="res://scenes/main_menu.gd" id="1_2wh52"]
 [ext_resource type="PackedScene" uid="uid://dy8e51dnea48x" path="res://scenes/ButtonMenu.tscn" id="1_yqorp"]
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_2wh52")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -42,7 +44,7 @@ grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_0ykhv")
 text = "Base Organique Randomisée Dans un Espace Ludique"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MainMenu" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -57,15 +59,46 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PlayBtn" parent="VBoxContainer" instance=ExtResource("1_yqorp")]
+[node name="PlayBtn" parent="MainMenu" instance=ExtResource("1_yqorp")]
 layout_mode = 2
 text = "JOUER"
 
-[node name="CreditBtn" parent="VBoxContainer" instance=ExtResource("1_yqorp")]
+[node name="CreditBtn" parent="MainMenu" instance=ExtResource("1_yqorp")]
 layout_mode = 2
 text = "CRÉDITS
 "
 
-[node name="QuitBtn" parent="VBoxContainer" instance=ExtResource("1_yqorp")]
+[node name="QuitBtn" parent="MainMenu" instance=ExtResource("1_yqorp")]
 layout_mode = 2
 text = "QUITTER"
+
+[node name="Credits" type="Label" parent="."]
+visible = false
+offset_left = 371.0
+offset_top = 274.0
+offset_right = 789.79004
+offset_bottom = 505.0
+text = "Game Programming :
+Shahine BENTHANANE
+Luc LENNE
+Pierre LAMARE
+
+Game Design :
+Paul DEMOSTHENE
+Adrian PARMENTIER-RIDGWAY
+Daphné GUERIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackToMenuBtn" parent="Credits" instance=ExtResource("1_yqorp")]
+layout_mode = 0
+offset_left = -349.0
+offset_top = 295.0
+offset_right = -149.0
+offset_bottom = 355.0
+text = "RETOUR MENU"
+
+[connection signal="pressed" from="MainMenu/PlayBtn" to="." method="_on_play_btn_pressed"]
+[connection signal="pressed" from="MainMenu/CreditBtn" to="." method="_on_credit_btn_pressed"]
+[connection signal="pressed" from="MainMenu/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="Credits/BackToMenuBtn" to="." method="_on_back_to_menu_btn_pressed"]

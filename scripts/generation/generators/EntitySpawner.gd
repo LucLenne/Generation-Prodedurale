@@ -20,11 +20,8 @@ func spawn_manager_quest(parent: Node2D, world_gen_node: Node2D):
 			if parent.has_method("register_generated_object"):
 				parent.register_generated_object(instance)
 			
-	if ManagerQuest:
-		# Call setup or spawn_quests
-		# The original code called spawn_quests_in_world(self)
-		# We should pass the WorldGenerator instance (which proxies needed info)
-		ManagerQuest.spawn_quests_in_world(world_gen_node)
+	if QuestManager.Instance:
+		QuestManager.Instance.spawn_quests_in_world(world_gen_node)
 	else:
 		print("Failed to initialize ManagerQuest.")
 

@@ -40,6 +40,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export_group("Others")
 @export var Name : String = "no name"
 @export var emotion : EMOTION = EMOTION.NEUTRAL
+var dialogue_ref : Object = null
 
 # Life
 var _last_hit_time : float

@@ -8,12 +8,29 @@
 	"replique_persuasif": [
 		"Attendez.&&Selon l'article 12, #proprietaire# ne peut pas m'expulser en hiver.&&Je propose un deal : je protège la maison de #proprietaire# en échange du gîte.&&Soyons civilisés.&&#proprietaire# n'utilise même pas ce grenier !"
 	],
-	"reaction_victoire": [
-		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+	
+	"retour_victoire_intimidant": [
+		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
 	],
-	"reaction_echec": [
-		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+	"retour_victoire_amical": [
+		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
 	],
+	"retour_victoire_persuasif": [
+		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
+	],
+	
+	"retour_echec_intimidant": [
+		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
+	],
+
+	"retour_echec_amical": [
+		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
+	],
+	"retour_echec_persuasif": [
+		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
+	],
+	
+	
 	"btn_intimidation": [
 		"(Force)Sors d'ici tout de suite !"
 	],

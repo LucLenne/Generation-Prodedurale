@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://0p75vujhhefy"]
+
+[ext_resource type="Script" uid="uid://cesl8hf6m7ebn" path="res://scripts/EpitaphReader.gd" id="1_7p1cb"]
+[ext_resource type="PackedScene" uid="uid://clsjugqie7jn8" path="res://Interractable.tscn" id="1_elb05"]
+[ext_resource type="JSON" path="res://Assets/TestFR.json" id="2_uieon"]
+[ext_resource type="Texture2D" uid="uid://c8d1ngodj36in" path="res://scenes/sprites/Tiles/Colored/tile_0002.png" id="4_vgdj4"]
+
+[node name="Tombstone" type="Node2D"]
+script = ExtResource("1_7p1cb")
+EpitaphJson = ExtResource("2_uieon")
+
+[node name="Interractable" parent="." instance=ExtResource("1_elb05")]
+texture = ExtResource("4_vgdj4")
+
+[node name="PopupPosition" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[connection signal="OnPlayerInterract" from="Interractable" to="." method="_on_interractable_on_player_interract"]

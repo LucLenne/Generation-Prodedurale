@@ -283,7 +283,7 @@
 	],
 	
 	"demande_amical":[
-		"je t'en supplie, j'ai perdu #rela.heroGender.poss_m#, #heroObj# se nomme #cible_nom#",
+		"je t'en supplie, j'ai perdu #rela.heroGender.poss_m#, #heroSubj# se nomme #cible_nom#",
 		"retrouve #rela.heroGender.poss_m# #cible_nom#",
 		"si tu me retrouves #rela.heroGender.poss_m# #cible_nom# je te serais éternellement reconnaissant",
 		"retrouve #rela.heroGender.poss_m# #cible_nom# s'il te plait",
@@ -301,13 +301,13 @@
 	],
 	
 	"relation": [
-	"!frère | soeur",
-	"!père | mère",
-	"!mari | femme",
-	"!pote",
-	"!cousin | cousine",
-	"!grand père | grand mère",
-	"!fils | fille"
+	"frère | soeur",
+	"père | mère",
+	"mari | femme",
+	"pote",
+	"cousin | cousine",
+	"grand père | grand mère",
+	"fils | fille"
 
  	],
 	

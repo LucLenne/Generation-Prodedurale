@@ -4,36 +4,37 @@ extends Node2D
 @onready var popup_position: Node2D = $PopupPosition
 @onready var interractable: Interractable = $Interractable
 
-const EPITAPH_FOLDER_PATH = "res://Assets/Epitaph/"
+const QUOTE_FOLDER_PATH = "res://Assets/Quotes/"
 
 
-@export var EpitaphJson : JSON
-var EpitaphText : String
+@export var QuoteJson : JSON
+var QuoteText : String
+
+var GrammarQuote : TraceryFR.GrammarFR
 
 func _ready():
 	interractable.showLabel = true
 	load_random_json_files()
 	
-	var rulesFR = EpitaphJson.data
-	var grammarFR = TraceryFR.GrammarFR.new(rulesFR)
-
-	grammarFR.add_modifiers(TraceryFR.UniversalModifiersFR.get_modifiers())
-	EpitaphText = grammarFR.flatten("#origin#")
+	var rulesFR = QuoteJson.data
+	GrammarQuote = TraceryFR.GrammarFR.new(rulesFR)
+	GrammarQuote.add_modifiers(TraceryFR.UniversalModifiersFR.get_modifiers())
 	
 
 func _on_interractable_on_player_interract() -> void:
-	var lines = EpitaphText.split("&&")
+	QuoteText = GrammarQuote.flatten("#origin#")
+	var lines = QuoteText.split("&&")
 	PopupManager.start_dialog(popup_position.global_position, lines)
 	
 
 func load_random_json_files():
-	var epitaph_files = _get_json_files_in_folder(EPITAPH_FOLDER_PATH)
+	var epitaph_files = _get_json_files_in_folder(QUOTE_FOLDER_PATH)
 	if epitaph_files.size() > 0:
 		var random_epitaph_file = epitaph_files.pick_random()
-		EpitaphJson = load(random_epitaph_file)
+		QuoteJson = load(random_epitaph_file)
 		print("Fichier Epitah chargé : " + random_epitaph_file)
 	else:
-		push_error("Aucun fichier JSON trouvé dans : " + EPITAPH_FOLDER_PATH)
+		push_error("Aucun fichier JSON trouvé dans : " + QUOTE_FOLDER_PATH)
 
 
 func _get_json_files_in_folder(path: String) -> Array[String]:

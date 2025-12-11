@@ -37,12 +37,12 @@ func _enter_tree():
 func _exit_tree():
 	if instance == self:
 		instance = null
-		
+
 
 func _ready():
+
 	visible = false
 	response_container.visible = false
-	
 	btn_intimidate.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.INTIMIDATING))
 	btn_friendly.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.FRIENDLY))
 	btn_persuade.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.PERSUASIVE))
@@ -130,3 +130,23 @@ func _start_typing_effect():
 func _on_typing_finished():
 	is_typing = false
 	dialogue_text.visible_ratio = 1.0
+	
+func reset_ui() -> void:
+	if current_tween:
+		current_tween.kill()
+		current_tween = null
+	
+	text_queue.clear()
+	
+	is_typing = false
+	is_interaction_mode = false
+	
+
+	dialogue_text.text = ""
+	dialogue_text.visible_ratio = 1.0
+	response_container.visible = false
+	visible = false
+	
+	QuestGiver = null
+	
+	print("Dialogue UI : Reset forcé complet.")

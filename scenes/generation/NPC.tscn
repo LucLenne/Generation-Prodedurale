@@ -40,3 +40,5 @@ QuestTypeEnabeling = Dictionary[int, bool]({
 [node name="Interractable" parent="." instance=ExtResource("5_uakhv")]
 
 [connection signal="OnPlayerInterract" from="Interractable" to="DialogueSystem" method="_on_interractable_on_player_interract"]
+
+[editable path="Interractable"]

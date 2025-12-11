@@ -1,6 +1,5 @@
 class_name CollectibleBase extends Node
 
-var Name : String = ""
 
 func on_collect() -> void:
 	pass

@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dafag2j5ylgha"]
+[gd_scene load_steps=6 format=3 uid="uid://t7ejye8cdncd"]
 
-[ext_resource type="Script" uid="uid://s7rwojc6w4te" path="res://scripts/UI/life_player_ui.gd" id="1_aetms"]
+[ext_resource type="Script" path="res://scripts/UI/life_player_ui.gd" id="1_aetms"]
 [ext_resource type="Texture2D" uid="uid://coomnanjg4knk" path="res://scenes/sprites/placeholder.png" id="1_fpavo"]
-[ext_resource type="Texture2D" uid="uid://b05sq5d5ukqij" path="res://scenes/sprites/heart.png" id="2_l3ryr"]
+[ext_resource type="Texture2D" uid="uid://d1jvocug6cb8" path="res://sprites/UI/UI.png" id="3_8ojf5"]
 [ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="3_aetms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbaqa"]
+atlas = ExtResource("3_8ojf5")
+region = Rect2(40, 0, 8, 8)
 
 [node name="LifePlayerUi" type="CanvasLayer"]
 script = ExtResource("1_aetms")
@@ -23,7 +27,7 @@ anchor_top = 0.0061728396
 anchor_right = 0.9965278
 anchor_bottom = 0.06790123
 grow_horizontal = 0
-texture = ExtResource("2_l3ryr")
+texture = SubResource("AtlasTexture_qbaqa")
 
 [node name="number_life" type="Label" parent="."]
 anchors_preset = -1

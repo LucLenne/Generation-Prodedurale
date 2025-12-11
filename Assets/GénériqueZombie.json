@@ -1,0 +1,130 @@
+{
+  "origin": [
+	"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
+  ],
+
+  "salutation": [
+	"Salut l'humain.",
+	"grrrr... tiens, b'jour.",
+	"miam t'as l'air apétissant.",
+	"kestuveu toi ?",
+	"...",
+	"Ghrrrr... Argh... salutations.",
+	"hey! tu marches sur mes tripes là !",
+	"Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
+	"J'suis pas encort mort...",
+	"j'suis vraiment pas d'humeur !",
+	"Hein? Maman ? c'est toi ? ",
+	"Euuuuuuuuh...PAaaAApillOoOoOn !!",
+	"B'jour, moi zombie, toi?",
+	"-Le zombie vous regarde fixement en bavant abondement-",
+	"Hep, t'aurais pas vu #objet.indef# ? c'était sensé être mon repas."
+	
+  ],
+ 
+  "phrase1": [
+	"tu me déranges.",
+	"vas-t-en sale humain vivant.",
+	"tu me veux quoi ?",
+	"dégages.",
+	"tu vois pas que je mange la ?",
+	"OooOoh ! tu dois avoir un cerveau délicieux !",
+	"en ce moment j'oublie des choses... je me rappel plus de mes parents.",
+	"BoOooOnjoUuuUrrrr... Bleuuuurgh !!! *tousse* *tousse* ouf, désolé pour ça.",
+	""
+	],
+  
+  "sujet": [
+		"!déchet de la société",
+		"!sale type",
+		"bon repas",
+		"chat",
+		"^mère",
+		"!caillou",
+		"!boyau", 
+		"!cadavre",
+		"^personne connue",
+		"!type qui me doit de l'argent",
+		""
+	],
+	
+	"objet": [
+		"!cerveau",
+		"!fleur",
+		"^bague de fiançaille",
+		"!chat",
+		"!paysan",
+		"!caillou",
+		"!boyau", 
+		"!cadavre",
+		"!rat mort",
+		"!bout de métal",
+		"^corde de pendu",
+		"!oeil",
+		"!gros caca",
+		"!bout de bois",
+		"!pied",
+		"^courgette",
+		"^pomme de pin",
+		"^poubelle"
+	],
+	
+	"phrase2": [
+		"avant de mourir j'étais",
+		"mon père me disait souvent d'éviter",
+		"tu serait pas",
+		"je détèste les",
+		"tu ressembles à #sujet.indef#",
+		"j'aime pas quand #sujet.indef# se comporte comme #sujet.indef#"
+	],
+	
+	"text":[
+		"#phrase1#",
+		"#phrase2#",
+	],
+	
+	"optionnel":[
+		"de ma mère",
+		"de mon père",
+		"en prison",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+	],
+	
+	"zombish": [
+		"...",
+		"grrr",
+		"ah...",
+		"..burp...",
+		" gaaah...",
+		"..argh...",
+		"..reuuu..",
+		"..rrrr..",
+		"...CEEEEEEEERVEAUUUUUUU..."
+	],
+	
+  "conclusion": [
+		"ça donne faim héhé",
+		"c'est pour ça que tu devrait partir",
+		"donc casse toi !",
+		"mais les gardes m'ont chassés",
+		"c'est pour ça que ça sens mauvais",
+		"c'est dégeulasse",
+		"... Arhhhg",
+		""
+	],
+	
+  "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:.f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+  
+		
+	
+  
+}

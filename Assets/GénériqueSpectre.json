@@ -1,63 +1,64 @@
 {
-  "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #zombish# #text# #conclusion#."
-  ],
-
-  "salutation": [
-	  "Salut l'humain",
-	  "Bon..jour... mortel..",
-	  "Oooh... qui trouble mon repos ?",
-	  "kestuveu toi ?",
-	  "...",
-	  "Je te vois… même dans l’obscurité…",
-	  "Ahhh ! Tu as de la chair sur tes os !",
-	  "J'suis pas encort mort...",
-	  "j'suis vraiment pas d'humeur !",
-	"Je te salue, voyageur du monde des vivants.",
-	"He ! Fais pas de vieux os ici.",
-	"Oh, un sac de pièce détaché",
-	
-  ],
- 
-  "phrase1": [
+	"origin": [
+		"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
+	],
+	"salutation": [
+		"Salut l'humain",
+		"Booooonjour… mortel…",
+		"Oooh… qui trouble mon repos ?",
+		"kestuveu toi ?",
+		"...",
+		"Je te vois… même dans l’obscurité…",
+		"Un visiteur ? Depuis tant de lunes…",
+		"Je te salue, voyageur du monde des vivants.",
+		"J'suis pas encort mort...",
+		"j'suis vraiment pas d'humeur !",
+		"Je te salue, voyageur du monde des vivants."
+	],
+	"phrase1": [
 		"Tu me déranges dans mon repos éternel…",
-		"Vas-t-en,",
-		"Laisse-moi errer en paix...",
-		"Dégage",
-		"PTu me veux quoi sac à chair.",
-		"Un pas de plus et tu marche sur mon bras !",
-		"Retourne d’où tu viens...",
+		"vas-t-en,",
+		"Laisse-moi errer en paix…",
+		"dégage",
+		"Pourquoi es-tu ici… quitte ce lieu…",
+		"Tu oses troubler mon sommeil… pour quoi faire ?",
+		"Retourne d’où tu viens…"
 	],
-  
-  "sujet1": [
-		"!déchets de la société",
-		"s!ale type",
-		"!misérable intrus",
-		"!pauvre mortel",
-		"^créature de chair",
-		"!impertinent visiteur",
-		"!errant sans but", 
-		"!tas de chair",
-		"^cervelle tiède",
+	"sujet1": [
+		"déchets de la société",
+		"sale type",
+		"misérable intrus",
+		"pauvre mortel",
+		"créature de chair",
+		"impertinent visiteur",
+		"errant sans but",
+		"tas de chair",
+		"cervelle tiède"
 	],
-	
 	"phrase2": [
-		"avant de mourir j'étais #sujet.indef#",
-		"mon père me disait souvent d'éviter #sujet.indef#",
-		"tu serait pas #sujet.indef#",
-		"je détèste les #sujet.s#",
-		"tu ressemble à #sujet.indef#",
-		"On me prenait pour #sujet.indef#",
-		"j'aime pas quand #sujet.indef# se comporte comme #sujet.indef#",
+		"avant de mourir j'étais",
+		"mon père me disait souvent d'éviter",
+		"tu serait pas",
+		"je détèste les",
+		"tu ressemble à",
+		"On me prenait pour",
+		"j'aime pas quand #sujet.indef# se comporte comme"
 	],
- 
-	
-	"text":[
-		"#phrase1#",
-		"#phrase2#" ,
+	"sujet2": [
+		"déchet de la société",
+		"sale type",
+		"type qui me doit de l'argent",
+		"#sujet.indef# inconnu",
+		"personne connu",
+		"chat",
+		"mère",
+		"cadavre"
 	],
-	
-	"optionnel":[
+	"text": [
+		"#phrase1# #sujet1.indef#",
+		"#phrase2# #sujet2.indef#"
+	],
+	"optionnel": [
 		"de ma mère",
 		"de mon père",
 		"en prison",
@@ -66,9 +67,8 @@
 		" ",
 		" ",
 		" ",
-		" ",
+		" "
 	],
-	
 	"zombish": [
 		"...",
 		"vshhh",
@@ -77,26 +77,20 @@
 		" Huuuuu…",
 		"Ffffsssh…",
 		"Swiiiiiip…",
-		"Krrrr…",
+		"Krrrr…"
 	],
-	
-  "conclusion": [
-		"ça me donne envie de dormir.",
-		"c'est pour ça que tu devrait partir.",
+	"conclusion": [
+		"ça donne faim héhé",
+		"c'est pour ça que tu devrait partir",
 		"donc casse toi !",
-		"c'est pour ça que tu sens un souffle sur ta nuque.",
-		"ca me répugne.",
-		"... ouhhhhhhhh !",
-		" ",
+		"mais les gardes m'ont chassés",
+		"c'est pour ça que tu sens un souffle sur ta nuque",
+		"ca me répugne",
+		"... ouhhhhhhhh",
+		" "
 	],
-	
-  "setPronouns": [
+	"setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
-	],
-	
-  
-		
-	
-  
+	]
 }

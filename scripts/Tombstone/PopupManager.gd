@@ -53,4 +53,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 			
 		_show_text_box()
+		
+func reset_dialog() -> void:
+	if text_box != null and is_instance_valid(text_box):
+		text_box.queue_free()
+		text_box = null
+
+	is_dialog_active = false
+	can_advance_line = false
+	current_line_index = 0
+	dialog_lines.clear()
+
 	

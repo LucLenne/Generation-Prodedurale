@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://2i7imvprbpwm"]
+[gd_scene load_steps=8 format=3 uid="uid://2i7imvprbpwm"]
 
 [ext_resource type="Script" uid="uid://6e7guym14skf" path="res://scenes/test_scene.gd" id="1_7ddre"]
 [ext_resource type="PackedScene" uid="uid://0p75vujhhefy" path="res://scenes/Tombstone/Tombstone.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://ttl1qa1b0t4f" path="res://scenes/character/player.tscn" id="2_nd71p"]
-[ext_resource type="JSON" path="res://Assets/Epitaphe.json" id="3_3qnke"]
+[ext_resource type="JSON" path="res://Assets/Epitaph/Epitaphe.json" id="3_3qnke"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="3_nd71p"]
 [ext_resource type="PackedScene" uid="uid://bfcmgquain0r4" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="5_qjeyg"]
+[ext_resource type="PackedScene" path="res://scenes/Tombstone/NPCWithoutDialogue.tscn" id="6_3qnke"]
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_7ddre")
@@ -23,4 +24,16 @@ position = Vector2(419, 235)
 [node name="Monstre" parent="." instance=ExtResource("3_nd71p")]
 position = Vector2(550, 140)
 
+[node name="NPCWithoutDialogue" parent="." instance=ExtResource("6_3qnke")]
+position = Vector2(222, 199)
+
 [node name="DialogueSystemUI" parent="." instance=ExtResource("5_qjeyg")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ReloadButton" type="Button" parent="CanvasLayer"]
+offset_right = 111.0
+offset_bottom = 31.0
+text = "Reload Scene"
+
+[connection signal="pressed" from="CanvasLayer/ReloadButton" to="." method="_on_reload_button_pressed"]

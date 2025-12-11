@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"#setPronouns#[proprietaire:#nom#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
+		"#setPronouns#[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
 	],
 	
 	"choix_humeur": [
@@ -10,27 +10,27 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"#politesse_intimidant# #jmapl#.&&#demande_intimidant#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def#.&&#conclusion_intimidant#"
+		"#politesse_intimidant# #jmapl#.&&#demande_intimidant.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_intimidant.capitalize#"
 	],
 	"intro_quete_amical": [
-		"#heroSubj##heroSubj##heroSubj##heroSubj##rela##rela##rela##rela##politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.indef#.&&#heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_amical#"
+		"#politesse_Amical# #jmapl#.&&#demande_amical.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_amical.capitalize#"
 	],
 	"intro_quete_persuasif": [
-		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif#"
+		"#politesse_persuasif# #jmapl#.&&#demande_persuasif.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif.capitalize#"
 	],
 	
 	"retour_echec_intimidant_part1": [
 		"Non mais tu te prends pour qui ?",
 		"Tu crois que tu me fais peur sale #insulte# ?",
-		"Venir me menacer chez moi ? t'as du culot,",
-		"Je suis vraiment très intéressé par ce que tu me dis."
+		"Venir me menacer chez moi ? t'as du culot.",
+		"Ta grand mère non ?"
 		
 	],
 	"retour_echec_intimidant_part2": [
 		"Dégage de là avant que j't'assome!",
 		"maintenant casses toi.",
 		"Venir me menacer chez moi ? t'as du culot,",
-		"Je suis vraiment très intéressé par ce que tu me dis."
+		"Aller casse toi #insulte# de #insulte"
 		
 	],
 	
@@ -66,28 +66,6 @@
 		
 	],
 
-
-	"seconde_chance_intimidant": [
-		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
-	],
-	"seconde_chance_amical": [
-		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
-	],
-	
-	"seconde_chance_persuasif": [
-		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
-	],
-	
-	"retour_victoire_intimidant": [
-		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
-	],
-	"retour_victoire_amical": [
-		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
-	],
-	"retour_victoire_persuasif": [
-		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
-	],
-	
 	"retour_echec_intimidant": [
 		"#retour_echec_intimidant_part1.capitalize# #retour_echec_intimidant_part2.capitalize#"
 	],
@@ -221,7 +199,7 @@
 		
 	],
 	
-	"cible_nom": [
+	"nom_de_cible": [
 	"Lolane",
 	"Miskina",
 	"Braché",
@@ -270,8 +248,8 @@
 	
 	"politesse_Amical" :[
 		"Salut à toi médiateur.",
-		"Bonjour l'ami, tu pourrais venir en aide à une pauvre âme comme moi? ",
-		"Ah, enfin un médiateur ! J'ai cru que personne ne viendrait jamais. "
+		"Bonjour l'ami, tu pourrais venir en aide à une pauvre âme comme moi?",
+		"Ah, enfin un médiateur ! J'ai cru que personne ne viendrait jamais."
 	],
 	
 	"politesse_persuasif" :[
@@ -286,7 +264,7 @@
 		"Je me présente, je suis #proprietaire#",
 		"Je me prénome #proprietaire#",
 		"Tu peux m'appeler #proprietaire#",
-		"Moi c'est #proprietaire#,&& mais mes amis m'appelent pas souvent",
+		"Moi c'est #proprietaire#.&&, mais mes amis m'appelent pas souvent",
 		"Ma mère m'a nommé #proprietaire# mais je préfère qu'on m'appel mon seigneur",
 		"",
 		"",
@@ -325,11 +303,11 @@
 	"relation": [
 	"!frère | soeur",
 	"!père | mère",
-	"mari | femme",
+	"!mari | femme",
 	"!pote",
-	"cousin | cousine",
+	"!cousin | cousine",
 	"!grand père | grand mère",
-	"fils | fille"
+	"!fils | fille"
 
  	],
 	
@@ -341,16 +319,20 @@
  	],
 	
 	"complement_parti": [
-	"c'est là bas que notre famille est enterrée",
-	"#heroSubj# a fuit car #heroSubj# doit de l'argent au service funéraire",
-	"je ne sais pas ce qu'#heroSubj# pense trouver là bas, #heroSubj# n'y à rien nulle part dans ces bois..",
-	"#heroSubj# veut retrouver #objet.poss_s#, mais c'est moi qui l'ai vendu pour payer l'impôt du Druide",
-	"#heroSubj# a perdu #objet.indef# vers là bas quand on y habitait",
-	"je n'en peux plus, #heroSubj# part toujours comme ça depuis qu'#heroSubj# est mort",
-	"#heroSubj# a oublié sa jambe en plus, #heroSubj# va pas arrêter de se casser la gueule",
-	"#heroSubj# m'a volé #objet.indef# en plus ce con",
-	"c'est pas tant que je l'aime, mais #heroSubj# fait bien la cuisine",
-	"#heroSubj# est parti en déblatèrant des inepties sur le druide, alors que tout le monde sait qu'il veut notre bien",
+	",c'est là bas que notre famille est enterrée",
+	",#heroSubj# a fuit car #heroSubj# doit de l'argent au service funéraire",
+	",je ne sais pas ce qu'#heroSubj# pense trouver là bas, #heroSubj# n'y à rien nulle part dans ces bois..",
+	",#heroSubj# veut retrouver #objet.poss_s#, mais c'est moi qui l'ai vendu pour payer l'impôt du Druide",
+	",#heroSubj# a perdu #objet.indef# vers là bas quand on y habitait",
+	",je n'en peux plus, #heroSubj# part toujours comme ça depuis qu'#heroSubj# est mort",
+	",#heroSubj# a oublié sa jambe en plus, #heroSubj# va pas arrêter de se casser la gueule",
+	",#heroSubj# m'a volé #objet.indef# en plus ce con",
+	",c'est pas tant que je l'aime, mais #heroSubj# fait bien la cuisine",
+	",#heroSubj# est parti en déblatèrant des inepties sur le druide, alors que tout le monde sait qu'il veut notre bien",
+	"",
+	"",
+	"",
+	"",
 	"",
 	"",
 	"",

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://8qck043hkixv"]
+
+[ext_resource type="Script" uid="uid://cspepo0k8pvuf" path="res://scripts/QuoteReader.gd" id="1_calqn"]
+[ext_resource type="PackedScene" uid="uid://clsjugqie7jn8" path="res://Interractable.tscn" id="3_syra6"]
+[ext_resource type="Texture2D" uid="uid://cxg0ijjq68r28" path="res://scenes/sprites/Tiles/Colored/tile_0004.png" id="4_go2m5"]
+
+[node name="NPCWithoutDialogue" type="Node2D"]
+script = ExtResource("1_calqn")
+
+[node name="Interractable" parent="." instance=ExtResource("3_syra6")]
+texture = ExtResource("4_go2m5")
+
+[node name="PopupPosition" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[connection signal="OnPlayerInterract" from="Interractable" to="." method="_on_interractable_on_player_interract"]

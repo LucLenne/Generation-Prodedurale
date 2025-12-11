@@ -5,40 +5,38 @@
 
   "salutation": [
 	  "Salut l'humain",
-	  "Bon..jour... mortel..",
-	  "Oooh... qui trouble mon repos ?",
+	  "Bon...jour",
+	  "mmh passe moi une côte",
 	  "kestuveu toi ?",
 	  "...",
-	  "Je te vois… même dans l’obscurité…",
-	  "Ahhh ! Tu as de la chair sur tes os !",
+	  "clic... cluc... salutation",
+	  "hey! tu marches sur mon femur là !",
+	  "Gloupgloup !! Laisse moi boire en paix étrangé !",
 	  "J'suis pas encort mort...",
 	  "j'suis vraiment pas d'humeur !",
-	"Je te salue, voyageur du monde des vivants.",
-	"He ! Fais pas de vieux os ici.",
-	"Oh, un sac de pièce détaché",
 	
   ],
  
   "phrase1": [
-		"Tu me déranges dans mon repos éternel…",
+		"Tu me dérange,",
 		"Vas-t-en,",
-		"Laisse-moi errer en paix...",
+		"Tu me veux quoi,",
 		"Dégage",
-		"PTu me veux quoi sac à chair.",
-		"Un pas de plus et tu marche sur mon bras !",
-		"Retourne d’où tu viens...",
+		"Je bois la,",
+		"J'ai perdu une côte,",
+		"Je trouve plus mon pouce,",
+		"laisse moi je cherche mon pied gauche,",
+		"Touche pas à ma bouteille,"
 	],
   
   "sujet1": [
 		"!déchets de la société",
-		"s!ale type",
-		"!misérable intrus",
-		"!pauvre mortel",
-		"^créature de chair",
-		"!impertinent visiteur",
-		"!errant sans but", 
-		"!tas de chair",
-		"^cervelle tiède",
+		"!sale type",
+		"!sale moche",
+		"!pauvre type",
+		"!bon à rien",
+		"!timbré",
+		"!sac de chair",
 	],
 	
 	"phrase2": [
@@ -47,14 +45,16 @@
 		"tu serait pas #sujet.indef#",
 		"je détèste les #sujet.s#",
 		"tu ressemble à #sujet.indef#",
-		"On me prenait pour #sujet.indef#",
+		"tu aurais pas un os pour moi, #sujet.indef#",
 		"j'aime pas quand #sujet.indef# se comporte comme #sujet.indef#",
+		"t'aurais pas vu une mains droite trainé, #sujet.indef#",
+		"y'a trop de #sujet.indef#"
 	],
- 
+  
 	
 	"text":[
 		"#phrase1#",
-		"#phrase2#" ,
+		"#phrase2#",
 	],
 	
 	"optionnel":[
@@ -71,22 +71,22 @@
 	
 	"zombish": [
 		"...",
-		"vshhh",
-		"Chhhh…",
-		"Oooooooh…",
-		" Huuuuu…",
-		"Ffffsssh…",
-		"Swiiiiiip…",
-		"Krrrr…",
+		"cluck",
+		"ah...",
+		"..skluc...",
+		" tlic...",
+		"..cluckclik...",
+		"..clkclk..",
 	],
 	
   "conclusion": [
-		"ça me donne envie de dormir.",
+		"ça donne soif héhé",
 		"c'est pour ça que tu devrait partir.",
 		"donc casse toi !",
-		"c'est pour ça que tu sens un souffle sur ta nuque.",
-		"ca me répugne.",
-		"... ouhhhhhhhh !",
+		"laisse moi me ronger l'os tranquille.",
+		"c'est pour ça que y a des troues",
+		"c'est dégeulasse",
+		"...y a trop de courant d'air ici...",
 		" ",
 	],
 	

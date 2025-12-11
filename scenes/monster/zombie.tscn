@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp0ip2l7pe7la"]
+[gd_scene load_steps=6 format=3 uid="uid://cp0ip2l7pe7la"]
 
-[ext_resource type="Texture2D" uid="uid://bq0tfjf1nkply" path="res://sprites/Tiles/Colored/tile_0011.png" id="2_6sfld"]
+[ext_resource type="Texture2D" uid="uid://bq0tfjf1nkply" path="res://scenes/sprites/Tiles/Colored/tile_0011.png" id="2_6sfld"]
 [ext_resource type="Script" uid="uid://cix4cblp0xpg8" path="res://scripts/Character/Zombie.gd" id="3_b2nck"]
 [ext_resource type="Script" uid="uid://dwhtkltr0pm6f" path="res://scripts/Resource/movement_parameters.gd" id="4_move"]
 

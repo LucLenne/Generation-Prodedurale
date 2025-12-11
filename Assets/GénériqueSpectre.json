@@ -1,6 +1,6 @@
 {
   "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
+	"#setPronouns##salutation.capitalize.heroGender# #zombish# #text# #conclusion#."
   ],
 
   "salutation": [

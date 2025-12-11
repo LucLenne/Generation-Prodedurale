@@ -1,40 +1,56 @@
 {
+ 	"origin": [
+	"#setPronouns#"
+	],
+	
+	"setup_variables": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+		],
+	
+
 	"introIntimidation": [
-		"#proprietaire# ? je ne veux pas le voir ",
+		"#proprietaire# ? je ne veux pas #heroObj# voir",
 		"#proprietaire# s'inquiète pour moi ?",
 		"dit à #proprietaire# d'aller se faire voir",
 		"#proprietaire# ? Jamais entendu parlé. ",
 		"j'm'en fous de #proprietaire#",
+		"#proprietaire# ? j'me souvenais même pas de son existence",
+		"qui ça ?&& aaaaa oui #proprietaire#"
+		
 		
 	],
+
 	
 	"suiteIntimidation": [
 		"je vais rester ici",
-		"je ne veut pas le voir",
+		"je ne veut pas #heroObj# voir",
 		"j'irais nul part ailleurs",
-		"si il veut me voir qu'il vienne"
+		"si #heroSubj# veut me voir qu'#heroSubj# vienne",
+		"j'ai oublié mon propre nom, alors le sien..."
 	],
 	
 	"finIntimidation": [
 		"et tu vas rien faire du tout !",
 		"j'en ai rien a faire de ton avis",
 		"dégages avant que je te bouffe",
-		"ya aucun arrangement possible"
+		"ya aucun arrangement possible",
+		"maintenant laisse moi boire et casse toi !"
 	],
 	"introAmical": [
-		"#proprietaire# ? ",
+		"#proprietaire# ? mince j'ai oublié de le prévenir !",
 		"#proprietaire# se fais du soucis ?",
 		"c'est #proprietaire# qui t'envoie ?",
 		"oh ! #proprietaire# ?",
-		"",
+		"tu viens de la part de #proprietaire# ? super !",
+		"qui ça ?&& aaaaa oui #proprietaire# !"
 		
 	],
-	
 	"suiteAmical": [
 		"comme c'est mignon !",
 		"oooh, je voulais pas lui faire de la peine.",
 		"ça me touche !",
-		"content de savoir qu'il pense a moi."
+		"content de savoir qu'#heroSubj# pense a moi."
 	],
 	
 	"finAmical": [
@@ -49,6 +65,7 @@
 		"tu vien défendre les interêts de #proprietaire# ?",
 		"je comprend tout a fait la requête de #proprietaire# mais",
 		"oui, ton client, #proprietaire#.",
+		"qui ça ?&& aaaaa oui #proprietaire# !"
 		
 	],
 	
@@ -61,7 +78,7 @@
 	
 	"finPersuasif": [
 		"tu pourrais lui mentir pour moi ?",
-		"on peut trouver un arrangement pour que tu me laisse tranquille",
+		"on peut trouver un arrangement pour que tu me laisse tranquille ?",
 		"après tout ce ne sont pas t'es affaires n'est-ce-pas ?",
 		"je ne pense pas que tu ai le droit de me demander ça"
 	],
@@ -69,15 +86,12 @@
 	
 	"zombish": [
 		"...",
-		"cluck",
+		"*cluck*",
 		"ah...",
-		"..skluc...",
-		" tlic...",
-		"..cluckclik...",
-		"..clkclk..",
-		"",
-		"",
-		"",
+		"..*skluc*...",
+		"*tlic*...",
+		"..*cluckclik*...",
+		"..*clkclk*..",
 	],
 	
 	
@@ -99,7 +113,7 @@
 	],
 	
 	"retour_victoire_amical": [
-		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord, j'ai hâte de revoir #proprietaire# !"
+		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord&& j'ai hâte de revoir #proprietaire# !"
 	],
 	
 	"retour_echec_persuasif": [
@@ -118,7 +132,7 @@
 		"#proprietaire# tient vraiment à toi, reviens.", "Tu traverses une tempête émotionnelle, et c'est O.K"
 	],
 	"btn_persuasion": [
-		"selon l'article 27 du code du service funéraire, tu dois rentrer", "#proprietaire# te payera grassement si tu reviens."
+		"selon l'article 27 du code du service funéraire tu dois rentrer", "#proprietaire# te payera grassement si tu reviens."
 		
 		
 	]

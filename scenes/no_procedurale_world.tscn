@@ -15,24 +15,8 @@ tile_set = ExtResource("1_3h33s")
 
 [node name="Player" parent="." instance=ExtResource("1_uisny")]
 position = Vector2(527, 314)
-life_to_add = null
-life_to_loose = null
-timer_damage = null
-life = null
-invincibility_duration = null
-invincibility_blink_period = null
-dead_color = null
-is_dead = null
 default_movement = ExtResource("3_gigtr")
 stunned_movemement = ExtResource("4_loppu")
-attack_cooldown = null
-orientation = null
-_friendly = null
-_intimidating = null
-_persuasive = null
-_behaviour_max_point = null
-Name = null
-emotion = null
 
 [node name="PNJ" parent="." instance=ExtResource("5_loppu")]
 position = Vector2(494, 332)

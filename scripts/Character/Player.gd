@@ -38,8 +38,8 @@ func _ready():
 func _process(delta: float) -> void:
 	super._process(delta) # Handles state updates
 	
-	if(Input.is_action_pressed("open_inventory")):
-		QuestBookUI.visible = !QuestBookUI.visible
+	if(Input.is_action_just_pressed("open_inventory")):
+		QuestBookUi.visible = !QuestBookUi.visible
 
 func _physics_process(delta):
 	# Map Input to _direction for CharacterBase

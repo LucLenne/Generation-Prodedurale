@@ -31,18 +31,26 @@ func _ready() -> void:
 		if quest_icon.texture == null and quest_icon_texture:
 			quest_icon.texture = quest_icon_texture
 	else:
-		# Création dynamique (Fallback Automatique)
+		# Création dynamique (Fallback Automatique pour Zombies/Squelettes qui n'ont pas la scène PNJ mise à jour)
+		quest_icon = Sprite2D.new()
+		quest_icon.name = "QuestIcon"
+		add_child(quest_icon)
+		
+		quest_icon.position = quest_icon_offset
+		quest_icon.visible = false
+		quest_icon.scale = Vector2(0.3, 0.3)
+		quest_icon.z_index = 10
+		
 		if quest_icon_texture:
-			quest_icon = Sprite2D.new()
-			quest_icon.name = "QuestIcon" # Nommage pour cohérence
 			quest_icon.texture = quest_icon_texture
-			quest_icon.position = quest_icon_offset
-			quest_icon.visible = false
-			quest_icon.scale = Vector2(0.3, 0.3)
-			quest_icon.z_index = 10 
-			add_child(quest_icon)
 		else:
-			printerr("PNJ: Quest Icon texture missing and no QuestIcon node found.")
+			# Création d'une texture Placeholder (Carré Rouge) si l'image n'est pas trouvée
+			var placeholder = PlaceholderTexture2D.new()
+			placeholder.size = Vector2(32, 64)
+			quest_icon.texture = placeholder
+			quest_icon.modulate = Color.RED
+			# On ne spam pas d'erreur, juste un warning unique si possible, mais ici c'est par instance
+			# printerr("PNJ: Quest Icon texture missing, using placeholder.")
 
 func _process(delta: float) -> void:
 	super._process(delta)

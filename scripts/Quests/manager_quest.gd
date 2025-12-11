@@ -86,7 +86,7 @@ func generate_quests_for_world(npcs_list: Array, world_gen: Node2D) -> void:
 	print("Generated %d quests." % _inactiveQuest.size())
 
 
-func SpawnPNJ(dir : DialogueSystem.Directions, Name : String, questGiver : PNJ) -> PNJ:
+func SpawnPNJ(dir : DialogueSystem.Directions, p_name : String, questGiver : PNJ) -> PNJ:
 	var scene_pnj : PackedScene = _type_ennemies.pick_random() 
 	var pnj = scene_pnj.instantiate()
 	
@@ -110,13 +110,13 @@ func SpawnPNJ(dir : DialogueSystem.Directions, Name : String, questGiver : PNJ) 
 			
 			# Distance ajustée pour correspondre aux markers du PNJ (~50px)
 			# On met 60.0 pour avoir une petite marge, et le script essaiera des distances proches si bloqué.
-			target_pos = _world_gen_ref.get_position_in_direction(questGiver.position, dir_str, 60.0)
+			target_pos = _world_gen_ref.get_position_in_direction(questGiver.global_position, dir_str, 60.0)
 		else:
 			# Fallback sur la méthode interne du PNJ
 			target_pos = questGiver._get_direction_position(dir)
 			
 		pnj.position = target_pos
-		pnj.Name = Name
+		pnj.character_name = p_name
 		
 		# Enregistre le PNJ généré dans le WorldGenerator si possible
 		if _world_gen_ref and _world_gen_ref.has_method("register_generated_object"):

@@ -147,8 +147,8 @@ func generate_world():
 	# Configure la caméra
 	_setup_player_camera(player_instance)
 	
-	# Génération des Collisions (Car le TileSet n'a pas de physique)
-	_generate_collisions()
+	# Génération des Collisions (Désactivé suite aux problèmes de blocage)
+	# _generate_collisions()
 	
 	print("World Generation Complete.")
 

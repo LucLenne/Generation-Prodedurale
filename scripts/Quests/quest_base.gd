@@ -18,12 +18,11 @@ func _fail_quest()-> void:
 	_state = STATE.FAIL
 	
 func _give_reward()-> void:
-	Player.Instance.life += Player.Instance.life_to_add
+	if Player.Instance:
+		Player.Instance.heal(1) # Ajoute 1 PV en récompense
 	
 func init() -> void:
 	pass
-
-
 
 
 #func setup(_world_gen: Node2D) -> void:

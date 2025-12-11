@@ -39,7 +39,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export var _behaviour_max_point : int = 20
 
 @export_group("Others")
-@export var _name : String = ""
+@export var character_name : String = "no name"
 @export var emotion : EMOTION = EMOTION.NEUTRAL
 var dialogue_ref : Object = null
 var quest_data : Dictionary = {}
@@ -74,9 +74,12 @@ func _ready() -> void:
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	
 	if default_movement == null:
-		printerr("CharacterBase: 'default_movement' is missing on ", name, "! Assign a MovementParameters resource.")
-		# Fallback to avoid crash, though behavior will be weird (no speed)
+		push_warning("CharacterBase: 'default_movement' is missing on " + name + "! Using default fallback values.")
+		# Fallback to avoid crash
 		default_movement = MovementParameters.new()
+		default_movement.speed_max = 60.0 # Reasonable default
+		default_movement.acceleration = 300.0
+		default_movement.friction = 800.0
 		
 	_current_movement = default_movement
 

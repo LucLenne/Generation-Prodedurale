@@ -17,6 +17,7 @@ class_name WorldGenerator extends Node2D
 @export_group("Détails des Zones")
 @export var entrance_count_range: Vector2i = Vector2i(1, 4)
 @export var building_count_range: Vector2i = Vector2i(2, 8)
+@export var tombstone_count_range: Vector2i = Vector2i(5, 15) ## Nombre de tombes à spawner globalement
 @export_range(0.0, 1.0, 0.05) var zone_dirt_ratio: float = 0.4
 
 @export_group("Chemins")
@@ -69,7 +70,7 @@ func _ready():
 	
 	# Scènes par défaut
 	if npc_scene == null:
-		npc_scene = preload("res://scenes/generation/NPC.tscn")
+		npc_scene = preload("res://scenes/generation/PNJ.tscn")
 	if player_scene == null:
 		player_scene = preload("res://scenes/Player.tscn")
 	
@@ -107,7 +108,7 @@ func generate_world():
 	var river_gen = RiverGenScript.new()
 	var zone_gen = ZoneGenScript.new(zone_count_range, zone_size_range, min_zone_distance, entrance_count_range, zone_dirt_ratio)
 	var path_gen = PathGenScript.new(path_width, path_smoothness, path_edge_grass_ratio, path_edge_dirt_ratio)
-	var structure_gen = StructureGenScript.new(building_count_range)
+	var structure_gen = StructureGenScript.new(building_count_range, tombstone_count_range)
 	var spawner_gen = SpawnerScript.new(player_scene, npc_scene, manager_quest_scene)
 	
 	# Pipeline de génération
@@ -132,6 +133,9 @@ func generate_world():
 	
 	# Décorations
 	structure_gen.place_decorations_global(map_data, self)
+	
+	# Tombes (aléatoires sur la map)
+	structure_gen.place_tombstones(map_data, self)
 	
 	# Bordures de Map (Arbres obligatoires)
 	structure_gen.place_map_borders(map_data)

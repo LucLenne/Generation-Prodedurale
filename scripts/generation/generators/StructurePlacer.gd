@@ -4,12 +4,15 @@ class_name StructurePlacer extends RefCounted
 
 const HouseGenScript = preload("res://scripts/generation/HouseGenerator.gd")
 const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
+const TombstoneScene = preload("res://scenes/Tombstone/Tombstone.tscn")
 
 var building_count_range: Vector2i
+var tombstone_count_range: Vector2i
 
 
-func _init(count_range: Vector2i):
+func _init(count_range: Vector2i, tombstone_range: Vector2i = Vector2i(5, 15)):
 	building_count_range = count_range
+	tombstone_count_range = tombstone_range
 
 
 ## Place tous les éléments (bâtiments puis décorations).
@@ -586,3 +589,73 @@ func _place_decoration_tiles(data: MapData, zone: Zone, biome: BiomeResource, pa
 			if roll < acc:
 				data.wall_layer.set_cell(cell, TileConfigScript.SOURCE_ID, deco.atlas_coords)
 				break
+
+
+# =============================================================================
+# TOMBES / TOMBSTONES
+# =============================================================================
+
+## Place des tombes aléatoirement sur la carte.
+func place_tombstones(data: MapData, parent: Node2D):
+	print("Populating world (Tombstones)...")
+	
+	var count = randi_range(tombstone_count_range.x, tombstone_count_range.y)
+	var placed_count = 0
+	
+	# Essaie de placer le nombre désiré de tombes
+	for i in range(count):
+		for attempt in range(50):  # 50 tentatives par tombe
+			# Sélectionne une position aléatoire sur la carte
+			var x = randi_range(15, data.width - 15)
+			var y = randi_range(15, data.height - 15)
+			var cell = Vector2i(x, y)
+			
+			# Vérifie si la cellule est valide
+			if not _is_tombstone_cell_valid(data, cell):
+				continue
+			
+			# Place la tombe
+			var tombstone = TombstoneScene.instantiate()
+			tombstone.position = Vector2(cell) * TileConfigScript.TILE_SIZE
+			parent.add_child(tombstone)
+			
+			if parent.has_method("register_generated_object"):
+				parent.register_generated_object(tombstone)
+			
+			# Marque la cellule comme réservée
+			data.reserved_cells[cell] = true
+			placed_count += 1
+			break
+	
+	print("Placed %d tombstones on the map." % placed_count)
+
+
+## Vérifie si une cellule est valide pour placer une tombe.
+func _is_tombstone_cell_valid(data: MapData, cell: Vector2i) -> bool:
+	if not data.is_in_bounds(cell.x, cell.y):
+		return false
+	
+	# Cellule déjà réservée
+	if data.reserved_cells.has(cell):
+		return false
+	
+	# Vérifie le mur layer (doit être vide)
+	if data.wall_layer.get_cell_source_id(cell) != -1:
+		return false
+	
+	# Vérifie si c'est une tuile de chemin (évite de bloquer les routes)
+	var ground = data.ground_layer.get_cell_atlas_coords(cell)
+	if TileConfigScript.PATH_VARIANTS.has(ground):
+		return false
+	if ground == TileConfigScript.PATH:
+		return false
+	
+	# Vérifie que c'est bien de l'herbe ou de la terre
+	var biome = data.get_biome_at(cell.x, cell.y)
+	if biome:
+		if ground != biome.ground_tile and ground != biome.dirt_tile:
+			# Vérifie les variantes de grass/dirt
+			if not TileConfigScript.GRASS_VARIANTS.has(ground) and not TileConfigScript.DIRT_VARIANTS.has(ground):
+				return false
+	
+	return true

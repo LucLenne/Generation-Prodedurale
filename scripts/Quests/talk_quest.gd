@@ -5,14 +5,13 @@ var enemy : PNJ
 
 func init() -> void :
 	type = TYPE.TALK
-	title = "Tu dois réconcilier " + pnj.Name + " et " + enemy.Name + "."
 	pnj.create_dialogue()
 	pnj = ManagerQuest.Getpnj()
 	enemy = ManagerQuest.Getpnj()
-	var quest_data = pnj._dialogue_system.current_quest_data
 	enemy.QuestGiverDialogueSystem = pnj._dialogue_system
-	ManagerQuest.Spawn_PNJ(quest_data["target_direction"])
-	
+	var quest_data = pnj._dialogue_system.current_quest_data
+	ManagerQuest.Spawn_PNJ(quest_data["target_direction"],quest_data["owner_name"])
+	title = "Tu dois réconcilier " + pnj.Name + " et " + enemy.Name + "."
 #func setup(world_gen: Node2D) -> void:
 	#pnj = ManagerQuest.GetPNJ(world_gen)
 	#enemy = ManagerQuest.GetPNJ(world_gen)
@@ -22,6 +21,3 @@ func init() -> void :
 func _process(_delta: float):
 	if(pnj.is_dead || enemy.is_dead):
 		_fail_quest()
-
-	
-	

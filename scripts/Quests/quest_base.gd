@@ -19,20 +19,21 @@ func _give_reward()-> void:
 	Player.Instance.life += Player.Instance.life_to_add
 func init() -> void:
 	pass
-func _process(_delta: float):
-	pass
 
-func setup(_world_gen: Node2D) -> void:
-	pass
 
-func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
-	return false
 
-func force_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
-	if try_spawn_target(direction, distance, dialogue_ref):
-		return true
-	print("QuestBase: Specific spawn failed, attempting fallback spawn...")
-	return _spawn_fallback(dialogue_ref)
 
-func _spawn_fallback(dialogue_ref: Object) -> bool:
-	return false
+#func setup(_world_gen: Node2D) -> void:
+	#pass
+
+#func try_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
+	#return false
+#
+#func force_spawn_target(direction: String, distance: float, dialogue_ref: Object) -> bool:
+	#if try_spawn_target(direction, distance, dialogue_ref):
+		#return true
+	#print("QuestBase: Specific spawn failed, attempting fallback spawn...")
+	#return _spawn_fallback(dialogue_ref)
+#
+#func _spawn_fallback(dialogue_ref: Object) -> bool:
+	#return false

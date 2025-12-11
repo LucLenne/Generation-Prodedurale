@@ -6,7 +6,6 @@ var current_quest: QuestBase
 var has_active_quest: bool = false 
 
 
-@onready var _dialogue_system : DialogueSystem = $DialogueSystem
 @onready var quest_indicator_label: Label = $QuestIndicatorLabel # Assurez-vous que le chemin du Node est correct, ici j'utilise @onready
 
 func _update_state(_delta : float):
@@ -19,5 +18,4 @@ func _ready():
 		pass
 
 func create_dialogue():
-	if _dialogue_system is DialogueSystem:
-		_dialogue_system.generate_new_quest()
+	QuestGiverDialogueSystem.generate_new_quest()

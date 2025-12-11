@@ -65,8 +65,7 @@ var grammar_monster : TraceryFR.GrammarFR
 func _ready():
 	if InitializeOnReady :
 		generate_new_quest()
-		
-						
+
 func generate_new_quest():
 	player_controller = Player.Instance
 	if !player_controller:

@@ -4,7 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://bgp7le7djm5ni" path="res://scenes/monster/skeleton.tscn" id="2_5enu4"]
 [ext_resource type="PackedScene" uid="uid://bn0tpbonr0m81" path="res://scenes/character/zombie.tscn" id="3_vx4fm"]
 
-[node name="ManagerQuest" type="Node"]
+[node name="ManagerQuest" type="Node" node_paths=PackedStringArray("_directions")]
 script = ExtResource("1_mq789")
 list_biomes = Array[String](["Forest(spring)", "Forest(winter)", "Forest(summer)", "Forest(Autumn)"])
 _type_ennemies = Array[PackedScene]([ExtResource("2_5enu4"), ExtResource("3_vx4fm")])
+_directions = [NodePath("North"), NodePath("East"), NodePath("South"), NodePath("West")]
+
+[node name="North" type="Marker2D" parent="."]
+position = Vector2(0, -200)
+
+[node name="East" type="Marker2D" parent="."]
+position = Vector2(200, 0)
+
+[node name="South" type="Marker2D" parent="."]
+position = Vector2(0, 200)
+
+[node name="West" type="Marker2D" parent="."]
+position = Vector2(-200, 0)

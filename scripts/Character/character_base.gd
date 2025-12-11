@@ -23,7 +23,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 
 @export_group("Movement")
 @export var default_movement : MovementParameters
-@export var stunned_movemement : MovementParameters
+@export var stunned_movement : MovementParameters
 
 @export_group("Attack")
 @export var attack_scene : PackedScene
@@ -64,7 +64,7 @@ var _is_blinking : bool
 # Dungeon position
 var _room #: Room
 
-@onready var main_sprite : Sprite2D = $"BodySprite"
+@onready var main_sprite : Sprite2D = $"Sprite2D"
 
 
 func _ready() -> void:

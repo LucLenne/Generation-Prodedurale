@@ -1,12 +1,12 @@
 class_name DialogueSystem extends Node
 
 
-@onready var pnj: PNJ = $"..."
+@onready var pnj: PNJ = $".."
 var targetInterractable : Interractable
 
 
 @export_group("Dialogue Files")
-@onready var dialogue_ui : DialogueSystemUI = %DialogueSystemUI
+var dialogue_ui : DialogueSystemUI
 var npc_json_file : JSON
 var monster_json_file : JSON
 
@@ -75,6 +75,7 @@ func generate_new_quest():
 	
 	if !dialogue_ui:
 		dialogue_ui = DialogueSystemUI.instance
+		
 	load_random_json_files()
 	if !npc_json_file :
 		push_error("No Npc json file loaded")
@@ -290,6 +291,15 @@ func _on_interractable_on_player_interract() -> void:
 			print("MonsterDialogue")
 			pnj.QuestGiverDialogueSystem.StartMonsterDialogue()
 
+func _string_to_direction_enum(direction_string : String) -> Directions:
+	match direction_string.to_upper():
+		"NORD": return Directions.NORD
+		"SUD": return Directions.SUD
+		"EST": return Directions.EST
+		"OUEST": return Directions.OUEST
+	
+	push_warning("Direction inconnu reçu de Tracery : " + direction_string + ". Fallback sur OUEST.")
+	return Directions.OUEST
 		
 func _string_to_mood_enum(mood_string : String) -> Mood:
 	match mood_string.to_upper():

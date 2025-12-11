@@ -1,12 +1,20 @@
-[gd_scene load_steps=6 format=4 uid="uid://ckjoxeefrknf0"]
+[gd_scene load_steps=9 format=4 uid="uid://ckjoxeefrknf0"]
 
 [ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="1_3h33s"]
 [ext_resource type="PackedScene" uid="uid://ttl1qa1b0t4f" path="res://scenes/character/player.tscn" id="1_uisny"]
 [ext_resource type="Resource" uid="uid://b3nexs1nbtrff" path="res://resources/Character/player_default_movement.tres" id="3_gigtr"]
 [ext_resource type="Resource" uid="uid://132vux808d1f" path="res://resources/Character/player_stunned_movement.tres" id="4_loppu"]
-[ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="5_loppu"]
+[ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/PNJ.tscn" id="5_loppu"]
+[ext_resource type="Script" uid="uid://dwhtkltr0pm6f" path="res://scripts/Resource/movement_parameters.gd" id="6_nvm2g"]
+[ext_resource type="PackedScene" uid="uid://bfcmgquain0r4" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="7_61t4g"]
+
+[sub_resource type="Resource" id="Resource_61t4g"]
+script = ExtResource("6_nvm2g")
+metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
 
 [node name="NoProceduraleWorld" type="Node2D"]
+
+[node name="DialogueSystemUI" parent="." instance=ExtResource("7_61t4g")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(123, -31)
@@ -15,36 +23,25 @@ tile_set = ExtResource("1_3h33s")
 
 [node name="Player" parent="." instance=ExtResource("1_uisny")]
 position = Vector2(527, 314)
-life_to_add = null
-life_to_loose = null
-timer_damage = null
-life = null
-invincibility_duration = null
-invincibility_blink_period = null
-dead_color = null
-is_dead = null
 default_movement = ExtResource("3_gigtr")
-stunned_movemement = ExtResource("4_loppu")
-attack_cooldown = null
-orientation = null
-_friendly = null
-_intimidating = null
-_persuasive = null
-_behaviour_max_point = null
-Name = null
-emotion = null
+stunned_movement = ExtResource("4_loppu")
 
 [node name="PNJ" parent="." instance=ExtResource("5_loppu")]
 position = Vector2(505, 357)
+default_movement = SubResource("Resource_61t4g")
 
 [node name="PNJ2" parent="." instance=ExtResource("5_loppu")]
 position = Vector2(438, 370)
+default_movement = SubResource("Resource_61t4g")
 
 [node name="PNJ3" parent="." instance=ExtResource("5_loppu")]
 position = Vector2(569, 387)
+default_movement = SubResource("Resource_61t4g")
 
 [node name="PNJ4" parent="." instance=ExtResource("5_loppu")]
 position = Vector2(594, 321)
+default_movement = SubResource("Resource_61t4g")
 
 [node name="PNJ5" parent="." instance=ExtResource("5_loppu")]
 position = Vector2(477, 297)
+default_movement = SubResource("Resource_61t4g")

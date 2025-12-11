@@ -12,11 +12,14 @@ func _valid_quest() -> void:
 	ManagerQuest.SuccessQuest(self)
 	_state = STATE.SUCCESS
 	_give_reward()
+	
 func _fail_quest()-> void:
 	ManagerQuest.FailQuest(self)
 	_state = STATE.FAIL
+	
 func _give_reward()-> void:
 	Player.Instance.life += Player.Instance.life_to_add
+	
 func init() -> void:
 	pass
 

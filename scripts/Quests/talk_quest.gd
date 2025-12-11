@@ -6,13 +6,24 @@ var enemy : PNJ
 func init() -> void :
 	type = TYPE.TALK
 	pnj = ManagerQuest.GetPNJ()
-	enemy = ManagerQuest.GetPNJ()
+	if !pnj :
+		push_warning("PNJ is null, Quest can't be created")
+		ManagerQuest._delete_quest_UI(id)
+		return
 	pnj.create_dialogue()
+	
+
+	var quest_data = pnj.dialogue_system.current_quest_data
+	var Direction = pnj.dialogue_system._string_to_direction_enum(quest_data["target_direction"])
+	
+	enemy = ManagerQuest.SpawnPNJ(Direction, quest_data["target_name"])
 	pnj.dialogue_system.targetInterractable = enemy.get_node("Interractable")
-	enemy.QuestGiverDialogueSystem = pnj.dialogue_system
-	var quest_data = pnj._dialogue_system.current_quest_data
-	ManagerQuest.Spawn_PNJ(quest_data["target_direction"],quest_data["owner_name"])
+	
+	var QuestGiverDialogueSystem: DialogueSystem = pnj.dialogue_system
+	enemy.QuestGiverDialogueSystem = QuestGiverDialogueSystem
+	
 	title = "Tu dois réconcilier " + pnj.Name + " et " + enemy.Name + "."
+	print(title)
 #func setup(world_gen: Node2D) -> void:
 	#pnj = ManagerQuest.GetPNJ(world_gen)
 	#enemy = ManagerQuest.GetPNJ(world_gen)

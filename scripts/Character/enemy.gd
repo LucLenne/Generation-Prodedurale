@@ -1,4 +1,4 @@
-class_name Enemy extends CharacterBase
+class_name Enemy extends PNJ
 
 @export_group("AI")
 @export var is_hostile : bool = false

@@ -40,6 +40,7 @@ func _exit_tree():
 
 
 func _ready():
+
 	visible = false
 	response_container.visible = false
 	btn_intimidate.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.INTIMIDATING))

@@ -186,7 +186,7 @@
 		"#action.heroGender# le jour de ses 5 ans",
 		"#état.heroGender# une bonne fois pour toutes",
 		"si vous trouvez cette tombe vide, merci de vous adresser aux services funéraire dans les plus brefs délais",
-		"#action.heroGender# par un médiateur maccabre qu'il avait refusé de payer",
+		"#action.heroGender# par un médiateur maccabre qu'#heroSubj# avait refusé de payer",
 		"son absence de foi a sans doute condamné son âme aux limbes",
 		"s'est ôté la vie",
 		"#heroSubj# ne connaissait personne d'encore en vie",

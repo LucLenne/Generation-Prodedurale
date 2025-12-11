@@ -10,13 +10,13 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"#politesse_intimidant# #jmapl#.&&#demande_intimidant.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_intimidant.capitalize#"
+		"#politesse_intimidant# #jmapl#&&#demande_intimidant.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_intimidant.capitalize#"
 	],
 	"intro_quete_amical": [
-		"#politesse_Amical# #jmapl#.&&#demande_amical.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_amical.capitalize#"
+		"#politesse_Amical# #jmapl#&&#demande_amical.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_amical.capitalize#"
 	],
 	"intro_quete_persuasif": [
-		"#politesse_persuasif# #jmapl#.&&#demande_persuasif.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif.capitalize#"
+		"#politesse_persuasif# #jmapl#&&#demande_persuasif.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_persuasif.capitalize#"
 	],
 	
 	"retour_echec_intimidant_part1": [
@@ -259,13 +259,13 @@
 	],
 	
 	"jmapl" :[
-		"Moi c'est #proprietaire#",
-		"Mon nom est #proprietaire#",
-		"Je me présente, je suis #proprietaire#",
-		"Je me prénome #proprietaire#",
-		"Tu peux m'appeler #proprietaire#",
-		"Moi c'est #proprietaire#.&&, mais mes amis m'appelent pas souvent",
-		"Ma mère m'a nommé #proprietaire# mais je préfère qu'on m'appel mon seigneur",
+		"Moi c'est #proprietaire#.",
+		"Mon nom est #proprietaire#.",
+		"Je me présente, je suis #proprietaire#.",
+		"Je me prénome #proprietaire#.",
+		"Tu peux m'appeler #proprietaire#.",
+		"Moi c'est #proprietaire#, mais mes amis m'appellent pas souvent.",
+		"Ma mère m'a nommé #proprietaire# mais je préfère qu'on m'appel mon seigneur.",
 		"",
 		"",
 		"",
@@ -353,8 +353,8 @@
 
 	"conclusion_amical": [
 	"#cible_nom# s'enfuit tout le temps, pourtant je lui fais pas de mal je crois ?",
-	"retrouve #rela.herogender.poss_m# je t'en supplie...",
-	"je ne sais pas ce que je ferais sans #heroSubj#, ramène #heroObj# je t'en prie.",
+	"retrouve #rela.heroGender.poss_m# je t'en supplie...",
+	"je ne sais pas ce que je ferais sans #rela#, ramène #heroObj# je t'en prie.",
 	"J'espère que tu sera à la hauteur...",
 	"reviens vite étranger, je te donnerais tout ce que j'ai si tu me #heroObj# ramène.",
 	"si tu meurs en chemin, je jure que je te retrouverais pour enterrer ton corps, un jour ou l'autre quand je passerais par là.",
@@ -364,7 +364,7 @@
 	"conclusion_persuasif": [
 	"#cible_nom# me doit beaucoup d'argent, ramène #heroObj# vite.",
 	"fais vite, tu sais aller vite non ? Un grand gaillard comme toi.",
-	"et si tu reviens très vite, je te donnerais peut être #objet.indef.poss_m#, mais il y à de grandes chances que non.",
+	"et si tu reviens très vite, je te donnerais peut être #objet.poss_m#, mais il y à de grandes chances que non.",
 	"que le druide te protège sur ta route étranger.",
 	
  	],

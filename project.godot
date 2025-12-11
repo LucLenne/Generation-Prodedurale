@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ManagerQuest="*res://Scenes/Quest/ManagerQuest.tscn"
 QuestBookUi="*res://Scenes/ui/quest_book_ui.tscn"
+PopupManager="*res://scripts/Tombstone/PopupManager.gd"
 
 [dotnet]
 

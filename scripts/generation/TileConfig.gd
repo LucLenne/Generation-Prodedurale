@@ -29,6 +29,33 @@ const DOOR_VARIANTS = [
 	Vector2i(10, 11),
 ]
 
+# --- Variantes de sol (Pour la validation) ---
+const GRASS_VARIANTS = [
+	GRASS,
+	Vector2i(23, 4),
+	Vector2i(13, 10),
+	Vector2i(15, 10)
+] # Ajoutez ici d'autres variantes d'herbe si nécessaire
+const DIRT_VARIANTS = [DIRT]   # Ajoutez ici d'autres variantes de terre si nécessaire
+
+# --- Variantes à exclure explicitement (Safety Check) ---
+const TREE_VARIANTS = [
+	TREE,
+	Vector2i(14, 11),
+	Vector2i(15, 11),
+	Vector2i(12, 11),
+	Vector2i(13, 11),
+	Vector2i(23, 5),
+	Vector2i(22, 5),
+	]
+const PATH_VARIANTS = [
+	PATH,
+	Vector2i(12, 10),
+	Vector2i(14, 10),
+	Vector2i(22, 4),
+	]
+const WATER_VARIANTS = [WATER_BASE]
+
 
 ## Vérifie si les coordonnées correspondent à une porte.
 static func is_door(coords: Vector2i) -> bool:

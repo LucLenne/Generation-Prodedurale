@@ -242,6 +242,20 @@ func register_reserved_area(world_pos: Vector2, radius: int = 2):
 				map_data.reserved_cells[Vector2i(x, y)] = true
 
 
+## Enregistre les cellules occupées par une quête spawnée.
+## cells_local: Array de Vector2i en coordonnées locales (relatives à la scène)
+## world_position: Position monde de la quête (en pixels)
+## offset: Offset du TileMapLayer (en tiles)
+func register_quest_cells(world_position: Vector2, cells_local: Array, offset: Vector2i = Vector2i.ZERO):
+	if not map_data:
+		return
+	var base_cell = Vector2i(world_position / TileConfigScript.TILE_SIZE)
+	for cell in cells_local:
+		var world_cell = base_cell + (cell as Vector2i) - offset
+		map_data.reserved_cells[world_cell] = true
+	print("WorldGenerator: Registered %d quest cells at base %s" % [cells_local.size(), base_cell])
+
+
 ## Retourne une zone aléatoire.
 func get_random_zone() -> Zone:
 	if not map_data or map_data.zones.is_empty():
@@ -394,20 +408,44 @@ func _is_rect_safe(top_left: Vector2i, size: Vector2i) -> bool:
 			if not map_data.is_in_bounds(c.x, c.y):
 				return false
 			
-			# Vérifie si la cellule est réservée (bâtiment)
+			# Vérifie si la cellule est réservée (bâtiment, rivière)
 			if map_data.reserved_cells.has(c):
 				return false
 			
-			# Vérifie l'eau
-			if TileConfigScript.is_water(wall_layer.get_cell_atlas_coords(c)):
+			var biome = map_data.get_biome_at(c.x, c.y)
+			if not biome:
 				return false
 			
-			# Vérifie s'il y a un mur/arbre
-			if wall_layer.get_cell_source_id(c) != -1:
+			# 0. Safety Check: Vérification explicite des tuiles interdites
+			var wall_safety = map_data.wall_layer.get_cell_atlas_coords(c)
+			if TileConfigScript.TREE_VARIANTS.has(wall_safety): return false
+			if TileConfigScript.WATER_VARIANTS.has(wall_safety): return false
+			
+			var ground_safety = map_data.ground_layer.get_cell_atlas_coords(c)
+			if TileConfigScript.PATH_VARIANTS.has(ground_safety): return false
+			
+			# 1. Vérifie WALL LAYER (Doit être vide: ni arbre, ni eau, ni mur)
+			if map_data.wall_layer.get_cell_source_id(c) != -1:
+				return false
+				
+			# 2. Vérifie GROUND LAYER (Doit être sol naturel: herbe ou terre)
+			var ground = map_data.ground_layer.get_cell_atlas_coords(c)
+			if not _is_valid_ground(ground, biome):
 				return false
 			
-			# Vérifie si c'est un chemin (évite de bloquer les chemins)
-			if ground_layer.get_cell_atlas_coords(c) == TileConfigScript.PATH:
-				return false
-	
 	return true
+
+
+## Vérifie si une tuile de sol est valide (base ou variante).
+## Dupliqué de StructurePlacer pour indépendance (ou à déplacer dans un utilitaire statique)
+func _is_valid_ground(tile: Vector2i, biome: BiomeResource) -> bool:
+	if tile == biome.ground_tile: return true
+	if tile == biome.dirt_tile: return true
+	
+	if biome.ground_tile == TileConfigScript.GRASS:
+		if TileConfigScript.GRASS_VARIANTS.has(tile): return true
+		
+	if biome.dirt_tile == TileConfigScript.DIRT:
+		if TileConfigScript.DIRT_VARIANTS.has(tile): return true
+		
+	return false

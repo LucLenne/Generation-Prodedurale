@@ -191,52 +191,78 @@ func _place_procedural_building(data: MapData, zone: Zone, pos: Vector2i, placed
 
 ## Valide le placement d'un bâtiment.
 func _validate_placement(data: MapData, zone: Zone, cells: Array[Vector2i], placed: Array[Rect2i], rect: Rect2i) -> bool:
-	# Vérifie chaque cellule
-	for cell in cells:
-		if not _is_cell_valid(data, zone, cell):
-			return false
+	# 1. Verification stricte des limites du rectangle entier
+	const EDGE_BUFFER = 15
+	if rect.position.x < EDGE_BUFFER or rect.end.x >= data.width - EDGE_BUFFER:
+		return false
+	if rect.position.y < EDGE_BUFFER or rect.end.y >= data.height - EDGE_BUFFER:
+		return false
 	
 	# Vérifie collision avec autres bâtiments
 	for other in placed:
 		if rect.grow(3).intersects(other):
 			return false
+			
+	# Vérifie CHAQUE cellule du rectangle (Rect Validation)
+	# On s'assure que tout l'espace du bâtiment (y compris trous/jardins) est valide et sans obstacles
+	for x in range(rect.position.x, rect.end.x):
+		for y in range(rect.position.y, rect.end.y):
+			var cell = Vector2i(x, y)
+			if not _is_cell_valid(data, zone, cell):
+				return false
 	
 	return true
 
 
 ## Vérifie si une cellule est valide pour un bâtiment.
 func _is_cell_valid(data: MapData, zone: Zone, cell: Vector2i) -> bool:
-	# Buffer de sécurité autour de la carte (15 tuiles pour les gros bâtiments)
-	const EDGE_BUFFER = 15
-	if cell.x < EDGE_BUFFER or cell.x >= data.width - EDGE_BUFFER:
-		return false
-	if cell.y < EDGE_BUFFER or cell.y >= data.height - EDGE_BUFFER:
-		return false
-	
 	if not data.is_in_bounds(cell.x, cell.y):
 		return false
 	if not zone.is_point_inside(cell):
 		return false
 	if data.reserved_cells.has(cell):
 		return false
-	if data.ground_layer.get_cell_atlas_coords(cell) == TileConfigScript.PATH:
+	
+	var biome = data.get_biome_at(cell.x, cell.y)
+	if not biome:
 		return false
 	
-	# Vérification eau améliorée
-	var wall_coords = data.wall_layer.get_cell_atlas_coords(cell)
-	if TileConfigScript.is_water(wall_coords):
+	# 0. Safety Check: Vérification explicite des tuiles interdites
+	# (Au cas où l'allowlist serait trop permissive ou incomplète)
+	var wall_safety = data.wall_layer.get_cell_atlas_coords(cell)
+	if TileConfigScript.TREE_VARIANTS.has(wall_safety): return false
+	if TileConfigScript.WATER_VARIANTS.has(wall_safety): return false
+	
+	var ground_safety = data.ground_layer.get_cell_atlas_coords(cell)
+	if TileConfigScript.PATH_VARIANTS.has(ground_safety): return false
+	
+	# 1. Vérifie WALL LAYER (Doit être vide: ni arbre, ni eau, ni mur)
+	if data.wall_layer.get_cell_source_id(cell) != -1:
 		return false
-	
-	# Vérifie aussi les cellules voisines pour l'eau (buffer)
-	for dx in range(-1, 2):
-		for dy in range(-1, 2):
-			var neighbor = cell + Vector2i(dx, dy)
-			if data.is_in_bounds(neighbor.x, neighbor.y):
-				var neighbor_coords = data.wall_layer.get_cell_atlas_coords(neighbor)
-				if TileConfigScript.is_water(neighbor_coords):
-					return false
-	
+		
+	# 2. Vérifie GROUND LAYER (Doit être sol naturel: herbe ou terre)
+	var ground = data.ground_layer.get_cell_atlas_coords(cell)
+	if not _is_valid_ground(ground, biome):
+		return false
+		
 	return true
+
+
+## Vérifie si une tuile de sol est valide (base ou variante).
+func _is_valid_ground(tile: Vector2i, biome: BiomeResource) -> bool:
+	# Vérifie les bases du biome
+	if tile == biome.ground_tile: return true
+	if tile == biome.dirt_tile: return true
+	
+	# Vérifie les variantes globales si elles correspondent au type du biome
+	# (Si l'herbe du biome est l'herbe standard, alors on accepte toutes les variantes d'herbe standard)
+	if biome.ground_tile == TileConfigScript.GRASS:
+		if TileConfigScript.GRASS_VARIANTS.has(tile): return true
+		
+	if biome.dirt_tile == TileConfigScript.DIRT:
+		if TileConfigScript.DIRT_VARIANTS.has(tile): return true
+		
+	return false
 
 
 ## Trouve le TileMapLayer dans une scène.

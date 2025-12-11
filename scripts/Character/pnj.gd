@@ -1,7 +1,5 @@
 class_name PNJ extends CharacterBase
 
-
-@export var interact_prompt: String = "Appuyer sur [E] pour parler"
 @export var QuestGiverDialogueSystem : DialogueSystem
 
 var current_quest: QuestBase

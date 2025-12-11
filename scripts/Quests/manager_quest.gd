@@ -181,9 +181,12 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 		
 	if scene == null: return
 	
+	# Analyse la scène pour obtenir sa taille et ses cellules
 	var temp = scene.instantiate()
-	var quest_size = Vector2i(3,3)
+	var quest_size = Vector2i(3, 3)
 	var offset = Vector2i.ZERO
+	var actual_cells: Array[Vector2i] = []
+	
 	var tile_layer_node = temp.get_node_or_null("TileMapLayer")
 	if not tile_layer_node:
 		for child in temp.get_children():
@@ -196,9 +199,19 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 		if rect.has_area():
 			quest_size = rect.size
 			offset = rect.position
+			# Récupère TOUTES les cellules utilisées
+			for cell in tile_layer_node.get_used_cells():
+				actual_cells.append(cell)
+	
+	# Si pas de cellules trouvées, génère un rectangle basé sur la taille
+	if actual_cells.is_empty():
+		for x in range(quest_size.x):
+			for y in range(quest_size.y):
+				actual_cells.append(Vector2i(x, y) + offset)
+	
 	temp.free()
 
-	# Find Position
+	# Find Position avec la vraie taille
 	var valid_pos = world_gen.get_position_in_direction(pnj.global_position, directory, distance, quest_size)
 	
 	if valid_pos == Vector2.INF:
@@ -212,6 +225,10 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 	world_gen.add_child(instance)
 	if world_gen.has_method("register_generated_object"):
 		world_gen.register_generated_object(instance)
+	
+	# Enregistre les cellules occupées pour éviter les superpositions
+	if world_gen.has_method("register_quest_cells"):
+		world_gen.register_quest_cells(instance.position, actual_cells, offset)
 		
 	# Assign to PNJ
 	if instance is QuestBase:
@@ -230,7 +247,7 @@ func spawn_quest_for_pnj(pnj: PNJ, world_gen: WorldGenerator) -> void:
 			instance._init_name()
 		
 		pnj.assign_quest(instance)
-		print("ManagerQuest: Spawned quest for PNJ at ", instance.position)
+		print("ManagerQuest: Spawned quest for PNJ at ", instance.position, " with ", actual_cells.size(), " cells reserved")
 
 func DeleteQuestUI(id : int):
 	QuestBookUi.delete_quest(id)

@@ -34,6 +34,21 @@ theme_override_fonts/font = ExtResource("2_7fx3w")
 theme_override_font_sizes/font_size = 50
 text = "Quest"
 
+[node name="title_Stats" type="Label" parent="Book"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5407986
+anchor_top = 0.17283951
+anchor_right = 0.6707986
+anchor_bottom = 0.25154322
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7fx3w")
+theme_override_font_sizes/font_size = 50
+text = "Stats"
+metadata/_edit_use_anchors_ = true
+
 [node name="LeftPage" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -46,6 +61,25 @@ anchor_bottom = 0.85
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.55
-anchor_top = 0.28
+anchor_top = 0.30709878
 anchor_right = 0.8
 anchor_bottom = 0.8
+metadata/_edit_use_anchors_ = true
+
+[node name="Friendly" type="Label" parent="RightPage"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7fx3w")
+theme_override_font_sizes/font_size = 30
+
+[node name="Intimidating" type="Label" parent="RightPage"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7fx3w")
+theme_override_font_sizes/font_size = 30
+
+[node name="Persuasive" type="Label" parent="RightPage"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_7fx3w")
+theme_override_font_sizes/font_size = 30

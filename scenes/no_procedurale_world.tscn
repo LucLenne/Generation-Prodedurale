@@ -1,11 +1,12 @@
 [gd_scene load_steps=7 format=4 uid="uid://ckjoxeefrknf0"]
 
-[ext_resource type="TileSet" uid="uid://b0xluy0k58v7e" path="res://resources/tilesets/colored_tileset.tres" id="1_3h33s"]
+[ext_resource type="TileSet" path="res://resources/tilesets/colored_tileset.tres" id="1_3h33s"]
 [ext_resource type="PackedScene" uid="uid://ttl1qa1b0t4f" path="res://scenes/character/player.tscn" id="1_uisny"]
 [ext_resource type="Resource" uid="uid://b3nexs1nbtrff" path="res://resources/Character/player_default_movement.tres" id="3_gigtr"]
 [ext_resource type="Resource" uid="uid://132vux808d1f" path="res://resources/Character/player_stunned_movement.tres" id="4_loppu"]
 [ext_resource type="PackedScene" uid="uid://cdsnltt23q77t" path="res://scenes/generation/PNJ.tscn" id="6_nvm2g"]
 [ext_resource type="PackedScene" uid="uid://bfcmgquain0r4" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="7_61t4g"]
+
 
 [node name="NoProceduraleWorld" type="Node2D"]
 

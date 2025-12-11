@@ -1,0 +1,113 @@
+{
+  "origin": [
+	"#setPronouns##salutation.capitalize.heroGender# #zombish# #text# #conclusion#."
+  ],
+
+  "salutation": [
+	  "Salut l'humain",
+	  "Bon...jour",
+	  "mmh, tu peux ramasser ma côte ?",
+	  "kestuveu toi ?",
+	  "...",
+	  "clic... cluc... salutation",
+	  "hey! tu marches sur mon femur là !",
+	  "Gloupgloup... Laisses moi boire en paix étrangé !",
+	  "J'suis pas encort totalement mort...",
+	  "j'suis vraiment pas d'humeur !",
+	
+  ],
+ 
+  "phrase1": [
+		"tu me dérange,",
+		"vas-t-en,",
+		"tu me veux quoi,",
+		"dégage",
+		"je bois là",
+		"j'ai perdu une côte,",
+		"je trouve plus mon pouce,",
+		"laisse moi je cherche mon pied gauche,",
+	],
+  
+  "sujet1": [
+		"déchets de la société",
+		"sale type",
+		"sale moche",
+		"pauvre type",
+		"bon à rien",
+		"timbré",
+	],
+	
+	"phrase2": [
+		"avant de mourir j'étais",
+		"mon père me disait souvent d'éviter",
+		"tu serait pas",
+		"je détèste les",
+		"tu ressemble à",
+		"tu aurais pas un os pour moi,",
+		"j'aime pas quand #sujet.indef# se comporte comme",
+		"t'aurais pas vu une mains droite trainé,",
+		"y'a trop"
+	],
+  
+  	"sujet2": [
+		"déchet de la société",
+		"sale type",
+		"bon repas",
+		"type qui me doit de l'argent",
+		"#sujet.indef# inconnu",
+		"personne connu",
+		"chat",
+		"mère",
+		"terre",
+		"charpentier", 
+		"cadavre",
+	],
+	
+	"text":[
+		"#phrase1# #sujet1.indef#",
+		"#phrase2# #sujet2.indef#",
+	],
+	
+	"optionnel":[
+		"de ma mère",
+		"de mon père",
+		"en prison",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+	],
+	
+	"zombish": [
+		"...",
+		"cluck",
+		"ah...",
+		"..skluc...",
+		" tlic...",
+		"..cluckclik...",
+		"..clkclk..",
+	],
+	
+  "conclusion": [
+		"ça donne soif héhé",
+		"c'est pour ça que tu devrait partir",
+		"donc casse toi !",
+		"mais les gardes m'ont chassés",
+		"c'est pour ça que y a des troues",
+		"c'est dégeulasse",
+		"...y a trop de courant d'air ici",
+		" ",
+	],
+	
+  "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+  
+		
+	
+  
+}

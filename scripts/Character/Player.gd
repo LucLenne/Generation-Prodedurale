@@ -2,11 +2,6 @@ class_name Player extends PlayerController
 static var Instance : Player
 
 var _quest_book_ui = preload("res://scripts/UI/quest_book_ui.gd")
-@export var life_to_add : int = 1
-@export var life_to_loose : int = 1
-@export var timer_damage : int = 15
-
-var time_left : float = timer_damage
 
 func _enter_tree():
 	if Instance != null:
@@ -21,7 +16,7 @@ func _exit_tree():
 		
 func _ready():
 	super._ready()
-	life = 20
+	
 	# Assign main sprite for rotation logic in base class
 	main_sprite = $Sprite2D
 	
@@ -42,9 +37,9 @@ func _ready():
 
 func _process(delta: float) -> void:
 	super._process(delta) # Handles state updates
-	_loose_life(delta)
-	if(Input.is_action_just_pressed("open_inventory")):
-		QuestBookUi.visible = !QuestBookUi.visible
+	
+	if(Input.is_action_pressed("open_inventory")):
+		QuestBookUI.visible = !QuestBookUI.visible
 
 func _physics_process(delta):
 	# Map Input to _direction for CharacterBase
@@ -76,7 +71,7 @@ func _physics_process(delta):
 	else:
 		_c_pressed = false
 
-func _update_state(_delta : float):
+func _update_state(delta : float):
 	# Logic specific to player state?
 	# For now, just keep it simple or delegate to base
 	pass
@@ -92,10 +87,3 @@ func detect_biome():
 			if biome.biome_name != current_biome_name:
 				current_biome_name = biome.biome_name
 				print("Entered Biome: ", current_biome_name)
-
-
-func _loose_life(delta : float):
-	time_left -= delta
-	if time_left <= 0:
-		time_left = timer_damage
-		life -= life_to_loose

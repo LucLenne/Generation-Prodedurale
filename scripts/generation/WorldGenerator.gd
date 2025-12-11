@@ -133,6 +133,9 @@ func generate_world():
 	# Décorations
 	structure_gen.place_decorations_global(map_data, self)
 	
+	# Bordures de Map (Arbres obligatoires)
+	structure_gen.place_map_borders(map_data)
+	
 	# Configure la caméra
 	_setup_player_camera(player_instance)
 	
@@ -181,30 +184,50 @@ func _setup_player_camera(player: Node2D):
 
 
 ## Met à jour les limites de la caméra selon la zone actuelle.
+@export var map_divisions: Vector2i = Vector2i(4, 4) # Découpage de la map (ex: 4 colonnes, 4 lignes d'écrans)
+
 func update_camera_limits(pos: Vector2):
 	if not map_data:
 		return
+		
+	# 1. Calcul de la taille de la map en pixels
+	var full_w_px = width * TileConfigScript.TILE_SIZE
+	var full_h_px = height * TileConfigScript.TILE_SIZE
 	
-	var tile_pos = Vector2i(pos / TileConfigScript.TILE_SIZE)
-	var found_zone = null
+	# 2. Calcul de la taille d'un écran (Chunk)
+	# Empêche la division par zéro
+	var div_x = max(1, map_divisions.x)
+	var div_y = max(1, map_divisions.y)
 	
-	for zone in map_data.zones:
-		if zone.shape_bounds.has_point(tile_pos):
-			found_zone = zone
-			break
+	var screen_w_px = float(full_w_px) / div_x
+	var screen_h_px = float(full_h_px) / div_y
 	
-	if found_zone:
-		var limits = found_zone.shape_bounds
-		var pixel_limits = Rect2(
-			limits.position.x * TileConfigScript.TILE_SIZE,
-			limits.position.y * TileConfigScript.TILE_SIZE,
-			limits.size.x * TileConfigScript.TILE_SIZE,
-			limits.size.y * TileConfigScript.TILE_SIZE
-		)
-		world_camera.set_limits(pixel_limits)
-	else:
-		var map_rect = Rect2(0, 0, width * TileConfigScript.TILE_SIZE, height * TileConfigScript.TILE_SIZE)
-		world_camera.set_limits(map_rect)
+	# 3. Calcul de l'index de la grille
+	# IMPORTANT : Clamp l'index pour rester dans les divisions valides [0, div - 1]
+	# Si le joueur sort de la map, la caméra reste sur la dernière case valide.
+	var grid_x = clamp(floor(pos.x / screen_w_px), 0, div_x - 1)
+	var grid_y = clamp(floor(pos.y / screen_h_px), 0, div_y - 1)
+	
+	# 4. Limites
+	var new_limits = Rect2(
+		grid_x * screen_w_px,
+		grid_y * screen_h_px,
+		screen_w_px,
+		screen_h_px
+	)
+	
+	# Clamp (Sécurité, même si mathématiquement ça devrait tomber juste)
+	var map_limit_rect = Rect2(0, 0, full_w_px, full_h_px)
+	new_limits = new_limits.intersection(map_limit_rect)
+	
+	# Safety Shrink: Contract limits by 2 pixels to avoid any floating point "peeking" outside
+	new_limits = new_limits.grow(-2)
+	
+	if world_camera:
+		# Define limits
+		world_camera.set_limits(new_limits)
+		# Define STATIC center target for the camera (Zelda-style)
+		world_camera.forced_center = new_limits.get_center()
 
 
 ## Bascule le mode de la caméra.

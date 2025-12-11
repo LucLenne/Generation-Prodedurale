@@ -264,6 +264,32 @@ func _is_valid_ground(tile: Vector2i, biome: BiomeResource) -> bool:
 		
 	return false
 
+## Place des bordures d'arbres tout autour de la map.
+func place_map_borders(data: MapData):
+	print("StructurePlacer: Placing Map Borders...")
+	var w = data.width
+	var h = data.height
+	
+	var border_cells = []
+	
+	# Haut et Bas
+	for x in range(w):
+		border_cells.append(Vector2i(x, 0))
+		border_cells.append(Vector2i(x, h - 1))
+		
+	# Gauche et Droite
+	for y in range(1, h - 1): # On évite les coins déjà faits
+		border_cells.append(Vector2i(0, y))
+		border_cells.append(Vector2i(w - 1, y))
+		
+	for cell in border_cells:
+		# Force Grass underneath
+		data.ground_layer.set_cell(cell, TileConfigScript.SOURCE_ID, TileConfigScript.GRASS)
+		# Place Tree Wall
+		data.wall_layer.set_cell(cell, TileConfigScript.SOURCE_ID, TileConfigScript.TREE)
+		# Mark reserved to ensure nothing else spawns here (though it's post-gen usually)
+		data.reserved_cells[cell] = true
+
 
 ## Trouve le TileMapLayer dans une scène.
 func _find_tile_layer(node: Node) -> Node:

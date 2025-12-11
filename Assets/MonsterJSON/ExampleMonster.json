@@ -1,6 +1,7 @@
 {
 	"replique_intimidant": [
 		"C'EST CHEZ MOI ICI !&&#proprietaire# N'A RIEN À FAIRE LÀ !&&DÉGAGE ! JE SUIS #type_monstre.def.maj# LE PLUS FORT DU MONDE !&&JE NE BOUGERAI PAS ! #proprietaire# DEVRA ME PASSER SUR LE CORPS !"
+		
 	],
 	"replique_amical": [
 		"Snif... Je me sens si bien chez #proprietaire#...&&Pourquoi personne ne m'aime ?&&Je ne voulais pas faire peur à #proprietaire#...&&Je voulais juste un ami...&&C'est froid dehors... Chez #proprietaire#, c'est chaud... Laisse-moi rester..."
@@ -39,5 +40,7 @@
 	],
 	"btn_persuasion": [
 		"(Négo) Tu n'as légalement aucun droit ici."
+		
+		
 	]
 }

@@ -1,9 +1,9 @@
 {
- 	"origin": [
+ 	"setup_variables": [
 	"#setPronouns#"
 	],
 	
-	"setup_variables": [
+	"setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
 		],
@@ -11,64 +11,68 @@
 
 	"introIntimidation": [
 		"#proprietaire# ? je ne veux pas #heroObj# voir",
-		"#proprietaire# s'inquiète pour moi ?",
-		"dit à #proprietaire# d'aller se faire voir",
+		"#proprietaire# s'inquiète pour moi ? Tu parles #zombish# il veut juste récupérer son argent.",
+		"dit à #proprietaire# d'aller se faire voir #zombish#",
 		"#proprietaire# ? Jamais entendu parlé. ",
 		"j'm'en fous de #proprietaire#",
 		"#proprietaire# ? j'me souvenais même pas de son existence",
-		"qui ça ?&& aaaaa oui #proprietaire#"
+		"qui ça ?&& aaaaa oui #proprietaire#",
+		"Mais c'est quoi mon nom ?! #squelettememoire.capitalize#, #squelettememoire#, qu'est ce que t'as à me regarder toi ?! #zombish#"
 		
 		
 	],
-
-	
 	"suiteIntimidation": [
-		"je vais rester ici",
-		"je ne veut pas #heroObj# voir",
-		"j'irais nul part ailleurs",
-		"si #heroSubj# veut me voir qu'#heroSubj# vienne",
-		"j'ai oublié mon propre nom, alors le sien..."
+		"je vais rester ici.",
+		"je ne veux pas #heroObj# voir.",
+		"j'irais nulle part.",
+		"si #heroSubj# veut me voir qu'#heroSubj# vienne.",
+		"j'ai oublié mon propre nom, alors le sien...",
+		"Dégage avant que je te mettes un coup de cubitus!"
 	],
-	
 	"finIntimidation": [
 		"et tu vas rien faire du tout !",
 		"j'en ai rien a faire de ton avis",
 		"dégages avant que je te bouffe",
 		"ya aucun arrangement possible",
-		"maintenant laisse moi boire et casse toi !"
+		"maintenant laisse moi me lustrer les os !",
+		"et enlève ton pied de mon #objet# !"
 	],
+	
+	
 	"introAmical": [
 		"#proprietaire# ? mince j'ai oublié de le prévenir !",
 		"#proprietaire# se fais du soucis ?",
 		"c'est #proprietaire# qui t'envoie ?",
-		"oh ! #proprietaire# ?",
+		"oh ! #proprietaire# ? Son nom me dit vaguement quelque chose...",
 		"tu viens de la part de #proprietaire# ? super !",
-		"qui ça ?&& aaaaa oui #proprietaire# !"
+		"qui ça ?&& aaaaa oui #proprietaire# !",
+		"AAAAAAH LE SERVICE FUNERAIRE !!!&& Ah non, ouf tu es juste un vagabond sale, j'ai eu peur.&&#propriétaire.capitalize# t'as demandé de me retrouver ?"
 		
 	],
 	"suiteAmical": [
 		"comme c'est mignon !",
 		"oooh, je voulais pas lui faire de la peine.",
 		"ça me touche !",
-		"content de savoir qu'#heroSubj# pense a moi."
+		"content de savoir qu'#heroSubj# pense a moi.",
+		"il n'y a pas de quoi s'inquiéter, vraiment."
 	],
-	
 	"finAmical": [
 		"mais j'ai encore des choses a faire ici.",
-		"malheureusement je ne pense pas revenir, je doit... #squelettememoire#",
+		"malheureusement je ne pense pas revenir,&& je doit... #squelettememoire#",
 		"je suis plutôt bien ici, je pense que je vais rester",
-		"dit lui que je reviendrait plus tard parceque je doit... #squelettememoire#"
+		"dit lui que je reviendrait plus tard parceque je doit... #squelettememoire#",
+		"je ne peux pas revenir tout de suite par contre, je dois trouver #objet.indef#,&& à moins que ce soit #objet.indef# que je cherche ?",
 	],
+
 
 	"introPersuasif": [
 		"hmm, #proprietaire# ? je vois. ",
-		"tu vien défendre les interêts de #proprietaire# ?",
+		"tu viens défendre les interêts de #proprietaire# ?",
 		"je comprend tout a fait la requête de #proprietaire# mais",
 		"oui, ton client, #proprietaire#.",
-		"qui ça ?&& aaaaa oui #proprietaire# !"
+		"qui ça ?&& Aaaaah oui #proprietaire# !"
 		
 	],
-	
 	"suitePersuasif": [
 		"j'aimerai rester ici un moment.",
 		"je ne compte pas revenir de si tôt.",
@@ -76,30 +80,36 @@
 		"j'ai d'autres choses a faire. Même si je me souviens plus quoi",
 		"Je ne peut pas revenir, je dois... #squelettememoire#"
 	],
-	
 	"finPersuasif": [
 		"tu pourrais lui mentir pour moi ?",
 		"on peut trouver un arrangement pour que tu me laisse tranquille ?",
-		"après tout ce ne sont pas t'es affaires n'est-ce-pas ?",
-		"je ne pense pas que tu ai le droit de me demander ça"
+		"après tout, ce ne sont pas t'es affaires n'est-ce-pas ?",
+		"je ne pense pas que tu ais le droit de me demander ça."
 	],
 	
 	"squelettememoire": [
-		"je ne sais plus vraiment quoi mais ça vas me revenir",
-		"aaaah je l'ai sur le bout de la langue",
-		"Mince ! j'ai oublié",
-		"je sais plus... bon tant pis"
+		"... Je ne sais plus vraiment quoi mais ça vas me revenir",
+		"... Aaaah je l'ai sur le bout de la langue",
+		"... Mince ! j'ai oublié",
+		"... Je sais plus... bon tant pis",
+		"... Tu saurais pas où j'ai mis mon bras droit par hasard ?"
 	],
 	
 	
 	"zombish": [
 		"...",
 		"*cluck*",
-		"ah...",
+		"euuuuuh...",
 		"..*skluc*...",
 		"*tlic*...",
 		"..*cluckclik*...",
 		"..*clkclk*..",
+		"mmmmmmmh....",
+		"",
+		"",
+		"",
+		"",
+		""
 	],
 	
 	
@@ -114,14 +124,19 @@
 		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
 	"retour_victoire_persuasif": [
-		"okay, tu m'as convaincu, je retourne chez #proprietaire#... c'est qui déja ?", "tu sais bien parler toi !&& j'accepte "
+		"okay, tu m'as convaincu, je retourne chez #proprietaire#... c'est qui déjà ?", "tu sais bien parler #zombish# toi !&& j'accepte"
 	],
 	"retour_victoire_intimidant": [
-		"D'accord... pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
+		"D'accord... pas besoin d'être aussi violent", 
+		"okay j'y retourne mais pitié ne me fait pas de mal",
+		"-Le squelette part en courant en direction de la maison de #proprietaire#-&&-Il laisse tomber #objet.indef# dans sa course effrénée-",
+		"d'accord, d'accord, j'ai compris, j'y retourne, t'es pire que les prêtres du service funéraire toi."
 	],
 	
 	"retour_victoire_amical": [
-		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord&& j'ai hâte de revoir... #squelettememoire# !"
+		"D'accord, je rentre, mais c'est bien parce que t'as l'air sympa.", 
+		"d'accord&& j'ai hâte de revoir... #squelettememoire# !",
+		"Tu penses vraiment ? Ça me réchauffe le coeur que je n'ai pas!&&Je vais rentrer alors."
 	],
 	
 	"retour_echec_persuasif": [
@@ -134,14 +149,34 @@
 		"c'est vraiment très gentil mais non merci.", "désolé, je suis tellement heureux ici, il ya... #squelettememoire#"
 	],
 	"btn_intimidation": [
-		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi."
+		"Tu vas venir avec moi tout de suite !", 
+		"ta gueule ! suis moi.", 
+		"Suis moi si tu veux pas servir d'engrais.", 
+		"J'vais te briser les os, j'vais boire ton... euh, juste les os.", 
+		"Retourne chez #propriétaire# ou il va t'arriver des bricoles."
 	],
 	"btn_amical": [
-		"#proprietaire# tient vraiment à toi, reviens.", "Tu traverses une tempête émotionnelle, et c'est O.K"
+		"#proprietaire# tient vraiment à toi, reviens.", 
+		"Tu traverses une tempête émotionnelle, et c'est O.K",
+		"Un beau squelette comme toi ne devrait pas rester seul !"
 	],
 	"btn_persuasion": [
-		"selon l'article 27 du code du service funéraire tu dois rentrer", "#proprietaire# te payera grassement si tu reviens."
+		"selon l'article 27 du code du service funéraire tu dois rentrer", 
+		"#proprietaire.capitalize# te payera grassement si tu reviens.", 
+		"Etre avec ses proches donne un joli teint aux os tu sais ?", 
+		""
 		
 		
+	],
+	
+	"Objet": [
+		"!radius",
+		"!cubitus",
+		"!os iliaque",
+		"^amphore",
+		"^jarre",
+		"jambon",
+		""
 	]
+	
 }

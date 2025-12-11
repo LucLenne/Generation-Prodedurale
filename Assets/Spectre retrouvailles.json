@@ -1,9 +1,9 @@
 {
- 	"origin": [
+ 	"setup_variables": [
 	"#setPronouns#"
 	],
 	
-	"setup_variables": [
+	"setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
 		],

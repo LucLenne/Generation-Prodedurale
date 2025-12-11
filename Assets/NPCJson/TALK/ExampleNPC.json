@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"#setPronouns#[proprietaire:#nom#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
+		"#setPronouns#[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
 	],
 	
 	"choix_humeur": [
@@ -10,19 +10,19 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"#politesse_intimidant# #jmapl#.&&#demande_intimidant#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_intimidant#"
+		"#politesse_intimidant# #jmapl#.&&#demande_intimidant.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_intimidant.capitalize#"
 	],
 	"intro_quete_amical": [
-		"#politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.indef#.&&#heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_amical#"
+		"#politesse_Amical# #jmapl#.&&#demande_amical.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_amical.capitalize#"
 	],
 	"intro_quete_persuasif": [
-		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif#"
+		"#politesse_persuasif# #jmapl#.&&#demande_persuasif.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif.capitalize#"
 	],
 	
 	"retour_echec_intimidant_part1": [
 		"Non mais tu te prends pour qui ?",
 		"Tu crois que tu me fais peur sale #insulte# ?",
-		"Venir me menacer chez moi ? t'as du culot,",
+		"Venir me menacer chez moi ? t'as du culot.",
 		"Ta grand mère non ?"
 		
 	],
@@ -199,7 +199,7 @@
 		
 	],
 	
-	"cible_nom": [
+	"nom_de_cible": [
 	"Lolane",
 	"Miskina",
 	"Braché",
@@ -248,8 +248,8 @@
 	
 	"politesse_Amical" :[
 		"Salut à toi médiateur.",
-		"Bonjour l'ami, tu pourrais venir en aide à une pauvre âme comme moi? ",
-		"Ah, enfin un médiateur ! J'ai cru que personne ne viendrait jamais. "
+		"Bonjour l'ami, tu pourrais venir en aide à une pauvre âme comme moi?",
+		"Ah, enfin un médiateur ! J'ai cru que personne ne viendrait jamais."
 	],
 	
 	"politesse_persuasif" :[
@@ -303,11 +303,11 @@
 	"relation": [
 	"!frère | soeur",
 	"!père | mère",
-	"mari | femme",
+	"!mari | femme",
 	"!pote",
-	"cousin | cousine",
+	"!cousin | cousine",
 	"!grand père | grand mère",
-	"fils | fille"
+	"!fils | fille"
 
  	],
 	

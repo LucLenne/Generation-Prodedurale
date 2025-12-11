@@ -37,11 +37,12 @@ func _enter_tree():
 func _exit_tree():
 	if instance == self:
 		instance = null
-
+		
 
 func _ready():
 	visible = false
 	response_container.visible = false
+	
 	btn_intimidate.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.INTIMIDATING))
 	btn_friendly.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.FRIENDLY))
 	btn_persuade.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.PERSUASIVE))

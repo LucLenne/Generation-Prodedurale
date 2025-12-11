@@ -2,7 +2,7 @@ class_name ExploreQuest extends QuestBase
 
 var _biome : String
 
-func init() -> void :
+func _init() -> void :
 	type = TYPE.EXPLORE
 	var rd = randi_range(0, QuestManager.Instance.list_biomes.size())
 	_biome = QuestManager.Instance.list_biomes[rd]

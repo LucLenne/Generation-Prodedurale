@@ -6,7 +6,7 @@
   "salutation": [
 	"Salut l'humain.",
 	"grrrr... tiens, b'jour.",
-	"miam t'a l'air apétissant.",
+	"miam t'as l'air apétissant.",
 	"kestuveu toi ?",
 	"...",
 	"Ghrrrr... Argh... salutations.",
@@ -17,17 +17,21 @@
 	"Hein? Maman ? c'est toi ? ",
 	"Euuuuuuuuh...PAaaAApillOoOoOn !!",
 	"B'jour, moi zombie, toi?",
-	"-Le zombie vous regarde fixement en bavant abondement-"
+	"-Le zombie vous regarde fixement en bavant abondement-",
+	"Hep, t'aurais pas vu #objet.indef# ? c'était sensé être mon repas."
 	
   ],
  
   "phrase1": [
-	"tu me déranges,",
-	"vas-t-en sale humain vivant",
-	"tu me veux quoi?",
-	"dégage",
-	"tu vois pas que je mange la?",
-	"OooOoh ! tu dois avoir un cerveau délicieux !"
+	"tu me déranges.",
+	"vas-t-en sale humain vivant.",
+	"tu me veux quoi ?",
+	"dégages.",
+	"tu vois pas que je mange la ?",
+	"OooOoh ! tu dois avoir un cerveau délicieux !",
+	"en ce moment j'oublie des choses... je me rappel plus de mes parents.",
+	"BoOooOnjoUuuUrrrr... Bleuuuurgh !!! *tousse* *tousse* ouf, désolé pour ça.",
+	""
 	],
   
   "sujet": [
@@ -39,9 +43,30 @@
 		"!caillou",
 		"!boyau", 
 		"!cadavre",
-		"personne connue",
-		"type qui me doit de l'argent",
+		"^personne connue",
+		"!type qui me doit de l'argent",
 		""
+	],
+	
+	"objet": [
+		"!cerveau",
+		"!fleur",
+		"^bague de fiançaille",
+		"!chat",
+		"!paysan",
+		"!caillou",
+		"!boyau", 
+		"!cadavre",
+		"!rat mort",
+		"!bout de métal",
+		"^corde de pendu",
+		"!oeil",
+		"!gros caca",
+		"!bout de bois",
+		"!pied",
+		"^courgette",
+		"^pomme de pin",
+		"^poubelle"
 	],
 	
 	"phrase2": [
@@ -62,12 +87,12 @@
 		"de ma mère",
 		"de mon père",
 		"en prison",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
 	],
 	
 	"zombish": [
@@ -90,11 +115,11 @@
 		"c'est pour ça que ça sens mauvais",
 		"c'est dégeulasse",
 		"... Arhhhg",
-		" "
+		""
 	],
 	
   "setPronouns": [
-		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:.f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
 	],
 	

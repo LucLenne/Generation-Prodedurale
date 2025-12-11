@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsuw0j1jai11u"]
+[gd_scene load_steps=3 format=3 uid="uid://bsuw0j1jai11u"]
 
-[ext_resource type="Texture2D" uid="uid://e5lmradr80yg" path="res://scenes/sprites/BOUQINvitfait.png" id="1_7fx3w"]
-[ext_resource type="Script" uid="uid://bvjh17e0oi4ok" path="res://scripts/UI/quest_book_ui.gd" id="1_hoc61"]
-[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="2_7fx3w"]
+[ext_resource type="Texture2D" uid="uid://e5lmradr80yg" path="res://sprites/BOUQINvitfait.png" id="1_7fx3w"]
+[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://sprites/Minecraft.ttf" id="2_7fx3w"]
 
-[node name="quest_book_ui" type="CanvasLayer"]
-script = ExtResource("1_hoc61")
+[node name="quest_book_ui" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Book" type="TextureRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,22 +34,8 @@ theme_override_fonts/font = ExtResource("2_7fx3w")
 theme_override_font_sizes/font_size = 50
 text = "Quest"
 
-[node name="title_stats" type="Label" parent="Book"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5407986
-anchor_top = 0.17438272
-anchor_right = 0.8125
-anchor_bottom = 0.25617284
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_7fx3w")
-theme_override_font_sizes/font_size = 50
-text = "Stats"
-metadata/_edit_use_anchors_ = true
-
 [node name="LeftPage" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.25
@@ -53,26 +43,9 @@ anchor_right = 0.45
 anchor_bottom = 0.85
 
 [node name="RightPage" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.55
-anchor_top = 0.3
+anchor_top = 0.28
 anchor_right = 0.8
 anchor_bottom = 0.8
-
-[node name="Friendly" type="Label" parent="RightPage"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_7fx3w")
-theme_override_font_sizes/font_size = 30
-
-[node name="Initimidating" type="Label" parent="RightPage"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_7fx3w")
-theme_override_font_sizes/font_size = 30
-
-[node name="Persuasive" type="Label" parent="RightPage"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_7fx3w")
-theme_override_font_sizes/font_size = 30

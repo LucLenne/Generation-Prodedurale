@@ -2,6 +2,8 @@ class_name DialogueSystem extends Node
 
 
 @onready var pnj: PNJ = $".."
+var targetInterractable : Interractable
+
 
 @export_group("Dialogue Files")
 @onready var dialogue_ui : DialogueSystemUI = %DialogueSystemUI
@@ -21,6 +23,8 @@ enum QuestType {TALK, KILL, DELIVERY, EXPLORE, COLLECT}
 @export var QuestTypeEnabeling : Dictionary[QuestType, bool]
 enum Mood { INTIMIDATING, FRIENDLY, PERSUASIVE }
 enum Directions { NORD, SUD, EST, OUEST }
+@onready var interractable: Interractable  = $"../Interractable"
+
 
 @export var InitializeOnReady : bool
 
@@ -48,6 +52,7 @@ func  is_current_quest_data_valid() -> bool:
 	return !is_current_quest_data_null()
 
 
+var has_quest = false
 var is_intro: bool = true
 var is_fighting_monster: bool = false
 var is_second_chance : bool = false
@@ -107,7 +112,8 @@ func generate_new_quest():
 	grammar_monster._save_data["proprietaire"] = [current_quest_data.owner_name]
 	grammar_monster._save_data["type_monstre"] = [current_quest_data.target_type]
 	
-	
+	has_quest = true
+	interractable.showLabel = true
 	
 	
 
@@ -214,16 +220,19 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 func _on_dialogue_closed(questGiver : PNJ):
 	if questGiver != pnj :
 		return
-		
 	if is_reaction:
 		is_reaction = false
 		if is_fighting_monster:
 			is_fighting_monster = false
+			targetInterractable.showLabel = false
 			if _last_success:
 				if pnj and pnj.current_quest:
 					pnj.current_quest.valid_quest()
+					quest_ended = true
 			else:
 				is_second_chance = true
+				interractable.showLabel = true
+			
 				
 		elif is_second_chance:
 			if _last_success:
@@ -236,11 +245,14 @@ func _on_dialogue_closed(questGiver : PNJ):
 					pnj.current_quest._fail_quest()
 					quest_ended = true
 				is_second_chance = false 
+			interractable.showLabel = false
 				
 	elif is_intro:
 		is_intro = false
-		if ManagerQuest :
-				ManagerQuest.ActivateQuest(pnj)
+		interractable.showLabel = false
+		targetInterractable.showLabel = true
+		if QuestManager.Instance :
+				QuestManager.Instance.ActivateQuest(pnj)
 			
 			
 
@@ -260,15 +272,21 @@ func _on_interractable_on_player_interract() -> void:
 		push_error("No PNJ assigned to DialogueSystem")
 		return
 	if !pnj.QuestGiverDialogueSystem : # c'est le donneur de quête
+		if not has_quest :
+			return
 		if is_intro and not quest_ended :
 			print("intro")
 			StartIntroDialogue()
 		elif is_second_chance :
 			print("seconde chance")
 			StartSecondChanceDialogue()
-	elif not pnj.QuestGiverDialogueSystem.quest_ended:
-		print("MonsterDialogue")
-		pnj.QuestGiverDialogueSystem.StartMonsterDialogue()
+	else: # c'est le monstre.
+		if ( not pnj.QuestGiverDialogueSystem.quest_ended 
+		and not pnj.QuestGiverDialogueSystem.is_intro
+		and not pnj.QuestGiverDialogueSystem.is_second_chance): 
+			print("MonsterDialogue")
+			pnj.QuestGiverDialogueSystem.StartMonsterDialogue()
+
 		
 func _string_to_mood_enum(mood_string : String) -> Mood:
 	match mood_string.to_upper():

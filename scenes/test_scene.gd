@@ -6,10 +6,6 @@ extends Node2D
 func _ready() -> void:
 	var dialogueSystem : DialogueSystem = donneur_de_quête.get_node("DialogueSystem")
 	dialogueSystem.generate_new_quest()
+	dialogueSystem.targetInterractable = monstre.get_node("Interractable")
 	monstre.QuestGiverDialogueSystem = dialogueSystem
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	

@@ -13,12 +13,12 @@ var current_quest : QuestBase
 
 func _get_direction_position(direction : DialogueSystem.Directions) -> Vector2 :
 	match direction:
-		DialogueSystem.Directions.NORD: return north.position
-		DialogueSystem.Directions.EST : return east.position
-		DialogueSystem.Directions.SUD : return south.position
-		DialogueSystem.Directions.OUEST : return west.position
+		DialogueSystem.Directions.NORD: return north.global_position
+		DialogueSystem.Directions.EST : return east.global_position
+		DialogueSystem.Directions.SUD : return south.global_position
+		DialogueSystem.Directions.OUEST : return west.global_position
 	push_warning("No directions match with " + str(direction) + "Fallback on NORD")
-	return north.position
+	return north.global_position
 
 func _update_state(_delta : float):
 	pass

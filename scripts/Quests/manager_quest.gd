@@ -29,7 +29,7 @@ func ActiveQuest(quest : QuestBase):
 		_inactiveQuest.erase(quest)
 		_activeQuest.append(quest)
 		_create_quest_ui(quest)
-		
+
 func SuccessQuest(quest : QuestBase):
 	if _activeQuest.has(quest):
 		_activeQuest.erase(quest)
@@ -64,11 +64,12 @@ func GetPNJ() -> PNJ:
 func SpawnPNJ(dir : DialogueSystem.Directions, Name : String, questGiver : PNJ) -> PNJ:
 	var scene_pnj : PackedScene = _type_ennemies.pick_random() 
 	var pnj = scene_pnj.instantiate()
+	get_tree().root.add_child(pnj)
 	if pnj is PNJ:
 		pnj.position = questGiver._get_direction_position(dir)
 		pnj.Name = Name
 		return pnj
-	return 
+	return
 
 func _generate_quests() -> void :
 	for i in range(_numberQuest):
@@ -77,8 +78,7 @@ func _generate_quests() -> void :
 		quest.id = i
 		quest.init()
 		_inactiveQuest.append(quest)
-		
-		
+
 func _create_quest_ui(quest : QuestBase):
 	QuestBookUi.create_quest(quest.title,quest.id)
 	

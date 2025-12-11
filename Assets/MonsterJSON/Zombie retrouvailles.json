@@ -93,25 +93,24 @@
 		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
 	"retour_victoire_persuasif": [
-		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+		"okay, tu m'a convaincu, je retourne chez #proprietaire#", "tu sais bien parler toi !&& j'accepte "
 	],
-	
 	"retour_victoire_intimidant": [
-		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+		"D'accord, D'accord pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
 	],
 	
 	"retour_victoire_amical": [
-		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+		"D'accord, mais c'est bien parceque t'a l'air sympa.", "d'accord, j'ai hate de revoir #proprietaire# !"
 	],
 	
 	"retour_echec_persuasif": [
-		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+		"je comprend t'es arguments, mais c'est non."
 	],
 	"retour_echec_intimidant": [
 		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
 	],
 	"retour_echec_amical": [
-		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+		"c'est vraiment très gentil mais non merci."
 	],
 	"btn_intimidation": [
 		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi"
@@ -120,7 +119,7 @@
 		"#proprietaire# tien vraiment a toi, reviens.", "Tu traversse une tempête emotionelle, et c'est O.K"
 	],
 	"btn_persuasion": [
-		"(Négo) Tu n'as légalement aucun droit ici."
+		"selon l'article 27 du code du service funéraire, tu doit rentrer", "#proprietaire# te payera grassement si tu vien revien"
 		
 		
 	]

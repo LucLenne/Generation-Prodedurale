@@ -198,44 +198,20 @@ func update_camera_limits(pos: Vector2):
 	if not map_data:
 		return
 		
-	# 1. Calcul de la taille de la map en pixels
+	# 1. Calcul de la taille TOTALE de la map en pixels
 	var full_w_px = width * TileConfigScript.TILE_SIZE
 	var full_h_px = height * TileConfigScript.TILE_SIZE
 	
-	# 2. Calcul de la taille d'un écran (Chunk)
-	# Empêche la division par zéro
-	var div_x = max(1, map_divisions.x)
-	var div_y = max(1, map_divisions.y)
-	
-	var screen_w_px = float(full_w_px) / div_x
-	var screen_h_px = float(full_h_px) / div_y
-	
-	# 3. Calcul de l'index de la grille
-	# IMPORTANT : Clamp l'index pour rester dans les divisions valides [0, div - 1]
-	# Si le joueur sort de la map, la caméra reste sur la dernière case valide.
-	var grid_x = clamp(floor(pos.x / screen_w_px), 0, div_x - 1)
-	var grid_y = clamp(floor(pos.y / screen_h_px), 0, div_y - 1)
-	
-	# 4. Limites
-	var new_limits = Rect2(
-		grid_x * screen_w_px,
-		grid_y * screen_h_px,
-		screen_w_px,
-		screen_h_px
-	)
-	
-	# Clamp (Sécurité, même si mathématiquement ça devrait tomber juste)
+	# 2. Définition des limites globales (plus de grille / chunks)
 	var map_limit_rect = Rect2(0, 0, full_w_px, full_h_px)
-	new_limits = new_limits.intersection(map_limit_rect)
 	
-	# Safety Shrink: Contract limits by 2 pixels to avoid any floating point "peeking" outside
-	new_limits = new_limits.grow(-2)
-	
+	# Apply limits
 	if world_camera:
-		# Define limits
-		world_camera.set_limits(new_limits)
-		# Define STATIC center target for the camera (Zelda-style)
-		world_camera.forced_center = new_limits.get_center()
+		world_camera.set_limits(map_limit_rect)
+		# IMPORTANT: On désactive le centrage forcé pour permettre le suivi (Follow Mode)
+		world_camera.forced_center = null
+		
+	print("Camera limits updated to full map: ", map_limit_rect)
 
 
 ## Bascule le mode de la caméra.

@@ -61,15 +61,72 @@ func GetPNJ() -> PNJ:
 	return pnj
 	
 	
+var _world_gen_ref: Node2D = null
+
+func generate_quests_for_world(npcs_list: Array, world_gen: Node2D) -> void:
+	print("Generating quests for procedural world...")
+	_world_gen_ref = world_gen
+	
+	# Reset state
+	_activeQuest.clear()
+	_inactiveQuest.clear()
+	_successQuest.clear()
+	_failQuest.clear()
+	_pnj.clear()
+	_pnj_in_quest.clear()
+	
+	# Register NPCs
+	for npc in npcs_list:
+		if npc is PNJ:
+			_pnj.append(npc)
+			
+	print("Registered %d NPCs for quests." % _pnj.size())
+	
+	_generate_quests()
+	print("Generated %d quests." % _inactiveQuest.size())
+
+
 func SpawnPNJ(dir : DialogueSystem.Directions, Name : String, questGiver : PNJ) -> PNJ:
 	var scene_pnj : PackedScene = _type_ennemies.pick_random() 
 	var pnj = scene_pnj.instantiate()
-	get_tree().root.add_child(pnj)
+	
+	# Utilise le parent du questGiver (devrait être WorldGenerator ou StructurePlacer root)
+	if questGiver.get_parent():
+		questGiver.get_parent().add_child(pnj)
+	else:
+		get_tree().root.add_child(pnj)
+		
 	if pnj is PNJ:
-		pnj.position = questGiver._get_direction_position(dir)
+		var target_pos = Vector2.ZERO
+		
+		# Utilise WorldGenerator si disponible pour trouver une position valide
+		if _world_gen_ref and _world_gen_ref.has_method("get_position_in_direction"):
+			var dir_str = "SUD" # Default
+			match dir:
+				DialogueSystem.Directions.NORD: dir_str = "NORD"
+				DialogueSystem.Directions.EST: dir_str = "EST"
+				DialogueSystem.Directions.SUD: dir_str = "SUD"
+				DialogueSystem.Directions.OUEST: dir_str = "OUEST"
+			
+			# Distance arbitraire (ex: 200 pixels)
+			target_pos = _world_gen_ref.get_position_in_direction(questGiver.position, dir_str, 200.0)
+		else:
+			# Fallback sur la méthode interne du PNJ
+			target_pos = questGiver._get_direction_position(dir)
+			
+		pnj.position = target_pos
 		pnj.Name = Name
+		
+		# Enregistre le PNJ généré dans le WorldGenerator si possible
+		if _world_gen_ref and _world_gen_ref.has_method("register_generated_object"):
+			_world_gen_ref.register_generated_object(pnj)
+			
+		# Réserve la zone si possible
+		if _world_gen_ref and _world_gen_ref.has_method("register_reserved_area"):
+			_world_gen_ref.register_reserved_area(pnj.position, 2)
+			
 		return pnj
-	return
+	return null
 
 func _generate_quests() -> void :
 	for i in range(_numberQuest):

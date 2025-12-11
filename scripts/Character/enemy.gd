@@ -20,13 +20,15 @@ func _process(delta: float) -> void:
 	super(delta)
 
 # Surcharge de apply_hit pour réagir aux attaques (Neutral -> Hostile)
+# Surcharge de apply_hit pour réagir aux attaques (Neutral -> Hostile)
 func apply_hit(attack : Attack) -> void:
 	super.apply_hit(attack)
 	if _state != STATE.DEAD and attack != null and attack.attack_owner is Player:
 		if !is_hostile:
 			is_hostile = true
 		target = attack.attack_owner
-		_set_state(STATE.CHASE)
+		# Modification : On ne passe plus en CHASE automatiquement
+		# _set_state(STATE.CHASE)
 
 func _update_state(delta : float) -> void:
 	if _state != STATE.ATTACKING:
@@ -82,6 +84,9 @@ func _update_state(delta : float) -> void:
 			pass
 
 func _detect_target() -> void:
+	# Modification : Désactivation de la détection pour empêcher le suivi
+	return
+	
 	if Player.Instance:
 		var dist = global_position.distance_to(Player.Instance.global_position)
 		if dist <= detection_radius:

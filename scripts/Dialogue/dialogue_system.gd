@@ -34,7 +34,8 @@ enum Directions { NORD, SUD, EST, OUEST }
 	"target_direction": "",
 	"target_mood": Mood.INTIMIDATING,
 	"giver_mood": Mood.FRIENDLY,
-	"owner_name": ""
+	"owner_name": "",
+	"target_name" : ""
 }
 
 func is_current_quest_data_null() -> bool:
@@ -44,7 +45,8 @@ func is_current_quest_data_null() -> bool:
 	"target_direction": "",
 	"target_mood": Mood.INTIMIDATING,
 	"giver_mood": Mood.FRIENDLY,
-	"owner_name": ""
+	"owner_name": "",
+	"target_name" : ""
 	}
 	return current_quest_data == temp_quest_data
 	
@@ -107,9 +109,12 @@ func generate_new_quest():
 	current_quest_data.target_direction = grammar_npc._save_data.get("direction", ["Nulle part"])
 	
 	current_quest_data.owner_name = grammar_npc._save_data.get("proprietaire", ["Inconnu"])
+	
+	current_quest_data.target_name = grammar_npc._save_data.get("cible_nom", ["Karim"])
 
 	grammar_monster._save_data["proprietaire"] = [current_quest_data.owner_name]
 	grammar_monster._save_data["type_monstre"] = [current_quest_data.target_type]
+	grammar_monster._save_data["cible_nom"] = [current_quest_data.target_name]
 	
 	has_quest = true
 	interractable.showLabel = true

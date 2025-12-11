@@ -1,8 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsuw0j1jai11u"]
+[gd_scene load_steps=8 format=3 uid="uid://bsuw0j1jai11u"]
 
 [ext_resource type="Texture2D" uid="uid://e5lmradr80yg" path="res://scenes/sprites/BOUQINvitfait.png" id="1_7fx3w"]
 [ext_resource type="Script" uid="uid://bvjh17e0oi4ok" path="res://scripts/UI/quest_book_ui.gd" id="1_hoc61"]
 [ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="2_7fx3w"]
+[ext_resource type="Texture2D" uid="uid://d1jvocug6cb8" path="res://sprites/UI/UI.png" id="4_awoh1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj71e"]
+atlas = ExtResource("4_awoh1")
+region = Rect2(80, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02oq1"]
+atlas = ExtResource("4_awoh1")
+region = Rect2(80, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckmsn"]
+atlas = ExtResource("4_awoh1")
+region = Rect2(88, 0, 8, 8)
 
 [node name="quest_book_ui" type="CanvasLayer"]
 script = ExtResource("1_hoc61")
@@ -76,3 +89,25 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_7fx3w")
 theme_override_font_sizes/font_size = 30
+
+[node name="IconFriendly" type="TextureRect" parent="."]
+offset_left = 892.0
+offset_top = 192.0
+offset_right = 932.0
+offset_bottom = 232.0
+texture = SubResource("AtlasTexture_oj71e")
+
+[node name="IconIntimidating" type="TextureRect" parent="."]
+offset_left = 892.0
+offset_top = 244.0
+offset_right = 932.0
+offset_bottom = 284.0
+texture = SubResource("AtlasTexture_02oq1")
+
+[node name="IconPersuasive" type="TextureRect" parent="."]
+offset_left = 892.0
+offset_top = 295.0
+offset_right = 932.0
+offset_bottom = 335.0
+texture = SubResource("AtlasTexture_ckmsn")
+flip_v = true

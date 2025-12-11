@@ -1,7 +1,7 @@
 class_name DialogueSystem extends Node
 
-var pnj : PNJ
 
+@onready var pnj: PNJ = $".."
 
 @export_group("Dialogue Files")
 @onready var dialogue_ui : DialogueSystemUI = %DialogueSystemUI
@@ -52,37 +52,38 @@ var is_intro: bool = true
 var is_fighting_monster: bool = false
 var is_second_chance : bool = false
 var is_reaction: bool = false
+var quest_ended = false
 
 var grammar_npc : TraceryFR.GrammarFR
 var grammar_monster : TraceryFR.GrammarFR
 
 func _ready():
+	if InitializeOnReady :
+		generate_new_quest()
+		
+						
+func generate_new_quest():
 	player_controller = Player.Instance
 	if !player_controller:
 		push_error("Aucun Player présent dans la scène")
 	
 	if !dialogue_ui:
 		dialogue_ui = DialogueSystemUI.instance
-	
+	load_random_json_files()
+	if !npc_json_file :
+		push_error("No Npc json file loaded")
+	if !monster_json_file :
+		push_error("No Monster json file loaded")
+		
 	if dialogue_ui:
 		dialogue_ui.dialogue_closed.connect(_on_dialogue_closed)
 		dialogue_ui.player_answered.connect(_on_player_answered)
 	else:
 		push_error("Aucun Dialogue System UI présent dans la scène")
 		
-	load_random_json_files()
-	
-	if InitializeOnReady :
-		generate_new_quest()
-						
-func generate_new_quest():
-	if !npc_json_file :
-		push_error("No Npc json file loaded")
-	if !monster_json_file :
-		push_error("No Monster json file loaded")
-		
 	is_intro = true
 	is_fighting_monster = false
+	is_second_chance = false
 	is_reaction = false
 	
 	grammar_npc = TraceryFR.GrammarFR.new(npc_json_file.data)
@@ -95,14 +96,20 @@ func generate_new_quest():
 	
 	grammar_npc.flatten("#setup_variables#")
 	
-	
-	current_quest_data.target_mood = _string_to_mood_enum(grammar_npc._save_data.get("mood_monstre", ["FRIENDLY"])[0])
-	current_quest_data.target_type = grammar_npc._save_data.get("type_monstre", ["MonstreInconnu"])[0]
-	current_quest_data.target_direction = grammar_npc._save_data.get("direction", ["Nulle part"])[0]
+	current_quest_data.target_mood = _string_to_mood_enum(grammar_npc._save_data.get("mood_monstre", ["FRIENDLY"]))
+
+	current_quest_data.target_type = grammar_npc._save_data.get("type_monstre", ["MonstreInconnu"])
+
+	current_quest_data.target_direction = grammar_npc._save_data.get("direction", ["Nulle part"])
 	
 	current_quest_data.owner_name = grammar_npc._save_data.get("proprietaire", ["Inconnu"])
 
 	grammar_monster._save_data["proprietaire"] = [current_quest_data.owner_name]
+	grammar_monster._save_data["type_monstre"] = [current_quest_data.target_type]
+	
+	
+	
+	
 
 func get_quest_intro_text() -> String:
 	var mood_key = _get_mood_key(current_quest_data.target_mood)
@@ -120,16 +127,24 @@ func get_monster_dialogue() -> Dictionary:
 func get_second_chance_dialogue() -> Dictionary:
 	var mood_key = _get_mood_key(current_quest_data.giver_mood)
 	return {
-		"text": grammar_npc.flatten("#retour_echec_" + mood_key + "#"),
+		"text": grammar_npc.flatten("#seconde_chance_" + mood_key + "#"),
 		"btn_intimidate": grammar_npc.flatten("#btn_intimidation#"),
 		"btn_friendly": grammar_npc.flatten("#btn_amical#"),
 		"btn_persuade": grammar_npc.flatten("#btn_persuasion#")
 	}
+func get_retour_dialogue(mood : Mood, is_succes : bool) -> String:
+	#var mood_key = _get_mood_key(current_quest_data.giver_mood) # si on veut que la reaction soit celon le mood de l'interlocuteur
+	var mood_key = _get_mood_key(mood) #si on veut que la reaction se fasse en fonction de la réponse du joueur.
+	var echec_or_victory_str = "echec" if not is_succes else "victoire"
+	var active_grammar : TraceryFR.GrammarFR = grammar_monster if is_fighting_monster else grammar_npc
+	print("#retour_" + echec_or_victory_str + "_" + mood_key + "#")
+	return active_grammar.flatten("#retour_" + echec_or_victory_str + "_" + mood_key + "#")
 
 func StartIntroDialogue():
 	var intro = get_quest_intro_text()
 	if dialogue_ui:
-		dialogue_ui.show_intro_dialogue(intro)
+		dialogue_ui._initNewDialog(pnj)
+		dialogue_ui.show_non_interractive_dialogue(intro)
 		
 func StartMonsterDialogue():
 	is_fighting_monster = true
@@ -144,54 +159,12 @@ func StartSecondChanceDialogue():
 		dialogue_ui.show_interaction_dialogue(second_chance)
 		
 
-func StartReactionDialogue(text : String):
+func StartReactionDialogue(mood : Mood, is_success : bool):
 	is_reaction = true
+	var retourDialogue = get_retour_dialogue(mood, is_success)
 	if dialogue_ui:
-		dialogue_ui.start_dialogue_sequence(text, false)
-		
-
-func _string_to_mood_enum(mood_string : String) -> Mood:
-	match mood_string.to_upper():
-		"INTIMIDATING": return Mood.INTIMIDATING
-		"FRIENDLY": return Mood.FRIENDLY
-		"PERSUASIVE": return Mood.PERSUASIVE
-	
-	push_warning("Mood inconnu reçu de Tracery : " + mood_string + ". Fallback sur FRIENDLY.")
-	return Mood.FRIENDLY
-	
-	
-func _get_mood_key(mood : Mood) -> String:
-	match mood:
-		Mood.INTIMIDATING: return "intimidant"
-		Mood.FRIENDLY: return "amical"
-		Mood.PERSUASIVE: return "persuasif"
-	return "amical"
-
-
-func _string_to_questType_enum(questType_string : String) -> QuestType :
-	match questType_string.to_upper():
-		"TALK": 
-			return QuestType.TALK
-		"KILL": 
-			return QuestType.KILL
-		"EXPLORE": 
-			return QuestType.EXPLORE
-		"DELIVERY" :
-			return QuestType.DELIVERY
-		"COLLECT" :
-			return QuestType.COLLECT
-	push_warning("Mood inconnu reçu de Tracery : " + questType_string + ". Fallback sur TALK.")
-	return QuestType.TALK
-	
-func _get_questType_key(questType : QuestType) -> String:
-	match questType:
-		QuestType.TALK: return "TALK"
-		QuestType.KILL: return "KILL"
-		QuestType.DELIVERY: return "DELIVERY"
-		QuestType.EXPLORE: return "EXPLORE"
-		QuestType.COLLECT : return "COLLECT"
-	return "TALK"
-	
+		dialogue_ui.show_non_interractive_dialogue(retourDialogue)
+			
 	
 func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 	var opponent_mood = current_quest_data.target_mood if target_is_monster else current_quest_data.giver_mood
@@ -238,50 +211,107 @@ func check_success(player_choice : Mood, target_is_monster : bool) -> bool:
 
 	return final_score >= difficulty
 
-func _on_dialogue_closed():
-	if is_intro:
+func _on_dialogue_closed(questGiver : PNJ):
+	if questGiver != pnj :
+		return
+		
+	if is_reaction:
+		is_reaction = false
+		if is_fighting_monster:
+			is_fighting_monster = false
+			if _last_success:
+				if pnj and pnj.current_quest:
+					pnj.current_quest.valid_quest()
+			else:
+				is_second_chance = true
+				
+		elif is_second_chance:
+			if _last_success:
+				if pnj and pnj.current_quest:
+					pnj.current_quest.valid_quest()
+					quest_ended = true
+				is_second_chance = false
+			else:
+				if pnj and pnj.current_quest:
+					pnj.current_quest._fail_quest()
+					quest_ended = true
+				is_second_chance = false 
+				
+	elif is_intro:
 		is_intro = false
 		if QuestManager.Instance :
 				QuestManager.Instance.ActivateQuest(pnj)
-	elif is_fighting_monster:
-		is_fighting_monster = false
-	elif is_second_chance:
-		is_second_chance = false
-	elif is_reaction:
-		is_reaction = false
-		
-	_handle_post_reaction()
+			
+			
 
 var _last_success : bool = false
 
-func _on_player_answered(mood: Mood):
+func _on_player_answered(mood: Mood, questGiver : PNJ):
+	if questGiver != pnj :
+		return
+	print("_on_player_answered")
 	_last_success = check_success(mood, is_fighting_monster)
-	
-	var reaction_text = ""
-	
-	var active_grammar = grammar_monster if is_fighting_monster else grammar_npc
-	
-	if _last_success:
-		reaction_text = active_grammar.flatten("#reaction_victoire#")
-	else:
-		reaction_text = active_grammar.flatten("#reaction_echec#")
-
-	StartReactionDialogue(reaction_text)
-	
+	StartReactionDialogue(mood, _last_success)
 
 
-func _handle_post_reaction():
-	if _last_success:
-		pnj.current_quest.valid_quest()
-		print("Quest Won!")
-	else:
-		if is_fighting_monster:
-			print("Failed! Returning to NPC...")
-			is_fighting_monster = false 
-		else:
-			pnj.current_quest._fail_quest()
-			print("Game Over! Quest Failed.")
-			
+func _on_interractable_on_player_interract() -> void:
+	if !pnj:
+		print("MonsterDialogue")
+		push_error("No PNJ assigned to DialogueSystem")
+		return
+	if !pnj.QuestGiverDialogueSystem : # c'est le donneur de quête
+		if is_intro and not quest_ended :
+			print("intro")
+			StartIntroDialogue()
+		elif is_second_chance :
+			print("seconde chance")
+			StartSecondChanceDialogue()
+	elif not pnj.QuestGiverDialogueSystem.quest_ended:
+		print("MonsterDialogue")
+		pnj.QuestGiverDialogueSystem.StartMonsterDialogue()
+		
+func _string_to_mood_enum(mood_string : String) -> Mood:
+	match mood_string.to_upper():
+		"INTIMIDATING": return Mood.INTIMIDATING
+		"FRIENDLY": return Mood.FRIENDLY
+		"PERSUASIVE": return Mood.PERSUASIVE
+	
+	push_warning("Mood inconnu reçu de Tracery : " + mood_string + ". Fallback sur FRIENDLY.")
+	return Mood.FRIENDLY
+	
+	
+func _get_mood_key(mood : Mood) -> String:
+	match mood:
+		Mood.INTIMIDATING: return "intimidant"
+		Mood.FRIENDLY: return "amical"
+		Mood.PERSUASIVE: return "persuasif"
+	return "amical"
+
+
+func _string_to_questType_enum(questType_string : String) -> QuestType :
+	match questType_string.to_upper():
+		"TALK": 
+			return QuestType.TALK
+		"KILL": 
+			return QuestType.KILL
+		"EXPLORE": 
+			return QuestType.EXPLORE
+		"DELIVERY" :
+			return QuestType.DELIVERY
+		"COLLECT" :
+			return QuestType.COLLECT
+	push_warning("Mood inconnu reçu de Tracery : " + questType_string + ". Fallback sur TALK.")
+	return QuestType.TALK
+	
+func _get_questType_key(questType : QuestType) -> String:
+	match questType:
+		QuestType.TALK: return "TALK"
+		QuestType.KILL: return "KILL"
+		QuestType.DELIVERY: return "DELIVERY"
+		QuestType.EXPLORE: return "EXPLORE"
+		QuestType.COLLECT : return "COLLECT"
+	return "TALK"
+		
 func get_random_npcJsonFolder() -> String:
 	var enabled_types: Array[QuestType] = []
 	
@@ -338,16 +368,3 @@ func _get_json_files_in_folder(path: String) -> Array[String]:
 		push_error("Impossible d'ouvrir le dossier : " + path)
 	
 	return files
-
-
-func _on_interractable_on_player_interract() -> void:
-	if !pnj:
-		push_error("No PNJ assigned to DialogueSystem")
-		return
-	if !pnj.QuestGiverDialogueSystem : # c'est le donneur de quête
-		if is_intro :
-			StartIntroDialogue()
-		elif is_second_chance : # c'est l'objectif de la qupete (le monstre grrr) 
-			StartSecondChanceDialogue()
-	else :
-		pnj.QuestGiverDialogueSystem.StartMonsterDialogue()

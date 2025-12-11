@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cdy5x6i4gnnsd"
-path="res://.godot/imported/Minecraft.ttf-984d9657360b3b21dd13cefd1f694ed8.fontdata"
+uid="uid://dtue2or5s7gwg"
+path="res://.godot/imported/m3x6.ttf-011b41f25f2ec42b4e1775a2c8e76c1e.fontdata"
 
 [deps]
 
-source_file="res://scenes/sprites/Minecraft.ttf"
-dest_files=["res://.godot/imported/Minecraft.ttf-984d9657360b3b21dd13cefd1f694ed8.fontdata"]
+source_file="res://resources/m3x6.ttf"
+dest_files=["res://.godot/imported/m3x6.ttf-011b41f25f2ec42b4e1775a2c8e76c1e.fontdata"]
 
 [params]
 
@@ -23,9 +23,9 @@ allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=0
+subpixel_positioning=4
 keep_rounding_remainders=true
-oversampling=1.0
+oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
@@ -34,7 +34,8 @@ preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0)
+"size": Vector2i(16, 0),
+&"variation_embolden": 0.0
 }]
 language_support={}
 script_support={}

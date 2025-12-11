@@ -71,16 +71,7 @@
 	
 	
 	"histoire1": [
-		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
+		"Ceci est la légende de #hero#, && #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#.&& Un jour, #heroSubj# #action#. && Se sentant #emotion.heroGender#, && #heroSubj# #action#. && Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
 	],
-	
-	"histoire2": [
-		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
-	],
-	
-	"histoire3": [
-		"Ceci est la légende de #hero#, #metier.heroGender.indef# #adjectif.heroGender# venant #home.partIndef#. Un jour, #heroSubj# #action#. Se sentant #emotion.heroGender#, #heroSubj# #action#. Finalement, #heroSubj# est #statut_retour.heroGender# #home.a# avec #objet.indef#."
-	]
-	
 	
 }

@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"#setPronouns#[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation#] "
+		"#setPronouns#[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre.heroGender#][mood_monstre:#choix_humeur#][direction:#dir#][rela:#relation.heroGender#] "
 	],
 	
 	"choix_humeur": [
@@ -10,13 +10,13 @@
 	],
 	
 	"intro_quete_intimidant": [
-		"#politesse_intimidant# #jmapl#&&#demande_intimidant.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_intimidant.capitalize#"
+		"#politesse_intimidant# #jmapl#&&#demande_intimidant.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_intimidant.capitalize#"
 	],
 	"intro_quete_amical": [
-		"#politesse_Amical# #jmapl#&&#demande_amical.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_amical.capitalize#"
+		"#politesse_Amical# #jmapl#&&#demande_amical.capitalize#. C'est #type_monstre.heroGender.indef#.&&#heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_amical.capitalize#"
 	],
 	"intro_quete_persuasif": [
-		"#politesse_persuasif# #jmapl#&&#demande_persuasif.capitalize#. C'est #type_monstre.indef#.&& #heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_persuasif.capitalize#"
+		"#politesse_persuasif# #jmapl#&&#demande_persuasif.capitalize#. C'est #type_monstre.indef#.&&#heroSubj.capitalize# #parti.heroGender# #direction.def# #complement_parti#.&&#conclusion_persuasif.capitalize#"
 	],
 	
 	"retour_echec_intimidant_part1": [
@@ -37,8 +37,8 @@
 	"retour_echec_amical_part1": [
 		"Je t'arrêtes tout de suite, je te connais pas moi.",
 		"*snif* merci d'être là pour moi.",
-		"Enfait c'est #rela.heroGender.poss_m# qui avait mon argent.",
-		"Tu est vraiment un bon ami."
+		"Enfait c'est #heroPoss_m# #rela.heroGender# qui avait mon argent.",
+		"Tu es vraiment un bon ami."
 		
 	],
 	"retour_echec_amical_part2": [
@@ -53,7 +53,7 @@
 		"Arrêtez d'essayer de me convaincre.",
 		"J'ai pas compris ce que vous m'avez dit...",
 		"Enfait j'ai pas d'argent, désolé hihihi",
-		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#"
+		"Pas de paiement tant que je ne vois pas #heroPoss_m# #rela.heroGender#"
 		
 	],
 	"retour_echec_persuasif_part2": [
@@ -61,7 +61,7 @@
 		"sortez de chez moi s'il vous plait.",
 		"Mais c'était une négociation agréable.",
 		"La prochaine fois, faites votre travail",
-		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#",
+		"Pas de paiement tant que je ne vois pas #heroPoss_m# #rela.heroGender#",
 		"Je comprend mieux pourquoi tout le monde déteste les médiateur."
 		
 	],
@@ -129,7 +129,7 @@
 		"Qui à besoin d'#rela.heroGender.indef# de toutes façons ?",
 		"Voilà tout mon argent, c'est pas assez ? Tenez, voilà #objet.poss_m# en plus.",
 		"Tu sais quoi ? je suis convaincu, voilà toutes mes économies.",
-		"#rela.heroGender.poss_m# aurait été convaincu j'en suis sûr.",
+		"#heroPoss_m# #rela.heroGender# aurait été convaincu j'en suis sûr.",
 		"Si je pouvais vous donner ma jambe je le ferais ! Vous la voulez vraiment ?"
 		
 	],
@@ -147,25 +147,25 @@
 	],
 
 	"seconde_chance_intimidant": [
-		"Déjà revenu ? Et sans #rela.heroGender.poss_m# ? J'espère que tu as une bonne explication.",
-		"Tu me dérange pendant mon raclage de peau morte quotidien ? J'espère que tu as de bonnes nouvelles.",
-		"Qu'est ce que tu fous là sans #rela.heroGender.poss_m#, tu veux que j'te démarre ?"
+		"Déjà revenu ? Et sans #heroPoss_m# #rela.heroGender# ? J'espère que tu as une bonne explication.",
+		"Tu me déranges pendant mon raclage de peau morte quotidien ? J'espère que tu as de bonnes nouvelles.",
+		"Qu'est ce que tu fous là sans #heroPoss_m# #rela.heroGender#, tu veux que j'te démarre ?"
 	],
 	
 	"seconde_chance_amical": [
 		"Oh tiens salut ! tu es de retour ! Alors, comment ça s'est passé ?",
-		"Hey, coucou ! Oh, mais où est #rela.heroGender.poss_m# ?",
-		"Oh ! vous êtes revenu ! je pensais justement à #rela.heroGender.poss_m# et à comment j'étais content de le revoir sain et sauf !"
+		"Hey, coucou ! Oh, mais où est #heroPoss_m# #rela.heroGender# ?",
+		"Oh ! vous êtes revenu ! je pensais justement à #heroPoss_m# #rela.heroGender# et à comment j'étais content de le revoir sain et sauf !"
 	],
 
 	"seconde_chance_persuasif": [
 		"Ah! Déjà de retour ? La mission à été menée à bien ?",
-		"Hum... Je ne vois pas #rela.heroGender.poss_m#... J'espère que vous ne revenez pas bredouille en espérant me convaincre de vous payer quand même.",
+		"Hum... Je ne vois pas #heroPoss_m# #rela.heroGender#... J'espère que vous ne revenez pas bredouille en espérant me convaincre de vous payer quand même.",
 		"Bonjour, vous avez de bonnes nouvelles j'espère.",
-		"Qu'est ce que vous faites là tout seul ? où est #rela.heroGender.poss_m# ?"
+		"Qu'est ce que vous faites là tout seul ? où est #heroPoss_m# #rela.heroGender# ?"
 	],
 
-	"btn_intimidation": [" #heroSubj# reviendra pas #cible_nom#, payes moi quand même !", "Donne moi la tune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
+	"btn_intimidation": ["#heroSubj# reviendra pas #cible_nom#, payes moi quand même !", "Donne moi la thune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
 	"btn_amical": ["Vasy lâche une pièce ou deux steuplé !", "Je suis sincèrement désolé pour ta perte...", "-faire un câlin a #proprietaire#-", "-faire un bisous a #proprietaire#-", "Tu restes quand même mon meilleur ami ?", "Qui a besoin d'#rela.heroGender.indef# quand il à un meilleur ami comme moi ?", "Tu peux pleurer sur mon épaule si tu veux.", "Sa mort m'attriste autant que toi...", "#heroSubj# aurait sûrement voulu que tu me payes...", "Tu veux un câlin ? Je te le facture pas cher, promis." ],       
 	"btn_persuasion": ["J'ai réussi à ramener un de ses doigts si tu veux.", "Ecoutez, les torts sont partagés dans cette histoire.", "Tu n'avais qu'à y aller toi même.", "#heroSubj.capitalize# est bien plus heureux là où #heroSubj# est", "C'est si important que ça #rela.heronGender.indef#?", "Roooh c'est bon, t'en n'avais pas vraiment besoin.", "arrête de râler, c'est pas comme si on avait qu'#rela.heroGender.indef# dans sa vie.", "J'ai enterré son cadavre ! Le service funéraire aurait pris 4 fois plus !", "#heroSubj.capitalize# m'a dit de te dire de me payer."],
 
@@ -233,8 +233,8 @@
 	],
 	
 	 "setPronouns": [
-		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
-		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroPoss_m:ma][heroGender:f]",
+        "[heroSubj:il][heroObj:le][heroPoss:son][heroPoss_m:mon][heroGender:]"
 	],
 	
 	"politesse_intimidant" :[
@@ -274,29 +274,29 @@
 	],
 	
 	"demande_intimidant":[
-		"retrouve vite #rela.heroGender.poss_m# #cible_nom#",
-		"va vite chercher #rela.heroGender.poss_m# #cible_nom#",
-		"dépèche toi de retrouver #rela.heroGender.poss_m# #cible_nom#",
-		"faut que tu retrouves #rela.heroGender.poss_m# #cible_nom#",
-		"#rela.heroGender.poss_m# #cible_nom# a disparu, retrouve #heroObj#"
+		"retrouve vite #heroPoss_m# #rela.heroGender.hero# #cible_nom#",
+		"va vite chercher #heroPoss_m# #rela.heroGender# #cible_nom#",
+		"dépèche toi de retrouver #heroPoss_m# #rela.heroGender# #cible_nom#",
+		"faut que tu retrouves #heroPoss_m# #rela.heroGender# #cible_nom#",
+		"#heroPoss_m# #rela.heroGender# #cible_nom# a disparu, retrouve #heroObj#"
 		
 	],
 	
 	"demande_amical":[
-		"je t'en supplie, j'ai perdu #rela.heroGender.poss_m#, #heroSubj# se nomme #cible_nom#",
-		"retrouve #rela.heroGender.poss_m# #cible_nom#",
-		"si tu me retrouves #rela.heroGender.poss_m# #cible_nom# je te serais éternellement reconnaissant",
-		"retrouve #rela.heroGender.poss_m# #cible_nom# s'il te plait",
-		"#cible_nom#, #rela.heroGender.poss_m# a disparu, par pitié, retrouve #heroObj#",
+		"je t'en supplie, j'ai perdu #heroPoss_m# #rela.heroGender#, #heroSubj# se nomme #cible_nom#",
+		"retrouve #heroPoss_m# #rela.heroGender# #cible_nom#",
+		"si tu me retrouves #heroPoss_m# #rela.heroGender# #cible_nom# je te serais éternellement reconnaissant",
+		"retrouve #heroPoss_m# #rela.heroGender# #cible_nom# s'il te plait",
+		"#cible_nom#, #heroPoss_m# #rela.heroGender# a disparu, par pitié, retrouve #heroObj#",
 		
 	],
 	
 	"demande_persuasif":[
-		"si tu retrouves #cible_nom#, #rela.heroGender.poss_m#, tu auras une récompense ",
-		"cela fait des jours que #rela.heroGender.poss_m# #cible_nom# à disparu, je m'inquiète même si c'est #insulte.heroGender.indef#",
-		"tu es bien médiateur non ? Va chercher #rela.heroGender.poss_m# #cible_nom#, c'est ton métier après tout.",
-		"tu dois me venir en aide, ton serment t'y oblige, retrouves #rela.heroGender.poss_m# #cible_nom#",
-		"si tu retrouves #cible_nom#, #rela.heroGender.poss_m# pour moi, je t'en devrais une"
+		"si tu retrouves #cible_nom#, #heroPoss_m# #rela.heroGender#, tu auras une récompense ",
+		"cela fait des jours que #heroPoss_m# #rela.heroGender# #cible_nom# à disparu, je m'inquiète même si c'est #insulte.heroGender.indef#",
+		"tu es bien médiateur non ? Va chercher #heroPoss_m# #rela.heroGender# #cible_nom#, c'est ton métier après tout.",
+		"tu dois me venir en aide, ton serment t'y oblige, retrouves #heroPoss_m# #rela.heroGender# #cible_nom#",
+		"si tu retrouves #cible_nom#, #heroPoss_m# #rela.heroGender# pour moi, je t'en devrais une"
 		
 	],
 	
@@ -319,9 +319,9 @@
  	],
 	
 	"complement_parti": [
-	",c'est là bas que notre famille est enterrée",
+	", c'est là bas que notre famille est enterrée",
 	",#heroSubj# a fuit car #heroSubj# doit de l'argent au service funéraire",
-	",je ne sais pas ce qu'#heroSubj# pense trouver là bas, #heroSubj# n'y à rien nulle part dans ces bois..",
+	",je ne sais pas ce qu'#heroSubj# pense trouver là bas, il n'y à rien nulle part dans ces bois..",
 	",#heroSubj# veut retrouver #objet.poss_s#, mais c'est moi qui l'ai vendu pour payer l'impôt du Druide",
 	",#heroSubj# a perdu #objet.indef# vers là bas quand on y habitait",
 	",je n'en peux plus, #heroSubj# part toujours comme ça depuis qu'#heroSubj# est mort",
@@ -343,20 +343,20 @@
 	"aller, bouge toi ! ",
 	"reviens vite et avec des bonnes nouvelles !",
 	"qu'est ce que tu fais encore là ? Va bosser ! Hop hop hop !",
-	"j'espère que tu sera à la hauteur...",
+	"j'espère que tu seras à la hauteur...",
 	"Qu'est ce que t'attend ? tu veux un bisous ? Aller bouge ! ",
 	"#heroSubj# verra ce que ça fait de me quitter comme ça.",
 	"#heroSubj# va pas en revenir de la beigne qu'il prendra quand tu me l'auras ramené.",
-	"j'en reviens pas qu'#heroSubj soit parti... sale #insulte# #insulte.partindef# #insulte.partindef#",
-	"et si t'essaie de me la mettre à l'envers, j'ai un #objet# et j'hésiterais pas à m'en servir"
+	"j'en reviens pas qu'#heroSubj# soit parti... sale #insulte# #insulte.partindef# #insulte.partindef#",
+	"et si t'essaies de me la mettre à l'envers, j'ai un #objet# et j'hésiterais pas à m'en servir"
  	],
 
 	"conclusion_amical": [
 	"#cible_nom# s'enfuit tout le temps, pourtant je lui fais pas de mal je crois ?",
-	"retrouve #rela.heroGender.poss_m# je t'en supplie...",
-	"je ne sais pas ce que je ferais sans #rela#, ramène #heroObj# je t'en prie.",
-	"J'espère que tu sera à la hauteur...",
-	"reviens vite étranger, je te donnerais tout ce que j'ai si tu me #heroObj# ramène.",
+	"retrouve #heroPoss_m# #rela.heroGender# je t'en supplie...",
+	"je ne sais pas ce que je ferais sans #rela.heroGender#, ramène #heroObj# je t'en prie.",
+	"J'espère que tu seras à la hauteur...",
+	"reviens vite étranger, je te donnerais tout ce que j'ai si tu me #heroObj# ramènes.",
 	"si tu meurs en chemin, je jure que je te retrouverais pour enterrer ton corps, un jour ou l'autre quand je passerais par là.",
 	""
  	],
@@ -397,8 +397,8 @@
 	"con",
 	"^merde",
 	"^giclure",
-	"pigeon",
-	"foutriquet",
+	"!pigeon",
+	"!foutriquet",
 	"^chair pourrie",
 	"^sangsue",
 	"suc gastrique"

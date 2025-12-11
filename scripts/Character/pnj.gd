@@ -19,3 +19,6 @@ func _ready():
 
 func create_dialogue():
 	QuestGiverDialogueSystem.generate_new_quest()
+
+func active_quest():
+	QuestGiverDialogueSystem.active

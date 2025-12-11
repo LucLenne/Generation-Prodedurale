@@ -1,7 +1,7 @@
 class_name DialogueSystem extends Node
 
 
-@onready var pnj: PNJ = $".."
+@onready var pnj: PNJ = $"..."
 var targetInterractable : Interractable
 
 
@@ -255,8 +255,7 @@ func _on_dialogue_closed(questGiver : PNJ):
 		is_intro = false
 		interractable.showLabel = false
 		targetInterractable.showLabel = true
-		if QuestManager.Instance :
-				QuestManager.Instance.ActivateQuest(pnj)
+		ManagerQuest.ActiveQuest(pnj.current_quest)
 			
 			
 

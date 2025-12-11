@@ -130,3 +130,23 @@ func _start_typing_effect():
 func _on_typing_finished():
 	is_typing = false
 	dialogue_text.visible_ratio = 1.0
+	
+func reset_ui() -> void:
+	if current_tween:
+		current_tween.kill()
+		current_tween = null
+	
+	text_queue.clear()
+	
+	is_typing = false
+	is_interaction_mode = false
+	
+
+	dialogue_text.text = ""
+	dialogue_text.visible_ratio = 1.0
+	response_container.visible = false
+	visible = false
+	
+	QuestGiver = null
+	
+	print("Dialogue UI : Reset forcé complet.")

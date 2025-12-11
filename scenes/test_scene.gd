@@ -9,3 +9,13 @@ func _ready() -> void:
 	dialogueSystem.targetInterractable = monstre.get_node("Interractable")
 	monstre.QuestGiverDialogueSystem = dialogueSystem
 	
+
+
+func _on_reload_button_pressed() -> void:
+	DialogueSystemUI.instance.reset_ui()
+	# Clean Sweep: Explicitly set singletons to null to avoid "Instance already exists" errors
+	DialogueSystemUI.instance = null
+	Player.Instance = null
+	QuestManager.Instance = null
+	PopupManager.reset_dialog()
+	get_tree().reload_current_scene()

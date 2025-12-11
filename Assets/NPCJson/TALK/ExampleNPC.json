@@ -1,6 +1,6 @@
 {
 	"setup_variables": [
-		"[proprietaire:#nom#][type_monstre:#monstre#][mood_monstre:#choix_humeur#][direction:#dir#]"
+		"[proprietaire:#nom#][cible_nom:#nom_de_cible#][type_monstre:#monstre#][mood_monstre:#choix_humeur#][direction:#dir#]"
 	],
 	
 	"choix_humeur": [
@@ -62,6 +62,35 @@
 		"Arthur",
 		"^Hélène"
 	],
+	
+	"nom_de_cible": [
+	"Lolane",
+	"Miskina",
+	"Braché",
+	"Sapin",
+	"Brolone",
+	"Judas",
+	"Salazar",
+	"Terrange",
+	"Sophin",
+	"Médor",
+	"Rascale",
+	"Petfor",
+	"Suçin",
+	"Pélerine",
+	"Malazar",
+	"Arthur",
+	"Jean-guy",
+	"Marlouf",
+	"Fapabien",
+	"Hugore",
+	"Ibérith",
+	"Gertrude",
+    "Tchernobog"
+
+	 ],
+	
+	
 	"monstre": [
 		"zombie",
 		"^banshee",

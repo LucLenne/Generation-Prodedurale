@@ -1,0 +1,137 @@
+{
+ 	"origin": [
+	"#setPronouns#"
+	],
+	
+	"setup_variables": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+		],
+	
+
+	"introIntimidation": [
+		"#proprietaire# ? je ne veux pas #heroObj# voir ",
+		"#proprietaire# s'inquiète pour moi ?",
+		"dit à #proprietaire# d'aller se faire voir",
+		"#proprietaire# ? Jamais entendu parlé. ",
+		"j'm'en fous de #proprietaire#"
+		
+	],
+
+	
+	"suiteIntimidation": [
+		"je vais rester ici",
+		"je ne veut pas #heroObj# voir",
+		"j'irais nul part ailleurs",
+		"si #heroSubj# veut me voir qu'#heroSubj# vienne"
+	],
+	
+	"finIntimidation": [
+		"et tu vas rien faire du tout !",
+		"j'en ai rien a faire de ton avis",
+		"dégages avant que je te bouffe",
+		"ya aucun arrangement possible"
+	],
+	"introAmical": [
+		"#proprietaire# ? ",
+		"#proprietaire# se fais du soucis ?",
+		"c'est #proprietaire# qui t'envoie ?",
+		"oh ! #proprietaire# ?",
+		"tu viens de la part de #proprietaire# ? super !"
+		
+	],
+	
+	"suiteAmical": [
+		"comme c'est mignon !",
+		"oooh, je voulais pas lui faire de la peine.",
+		"ça me touche !",
+		"content de savoir qu'#heroSubj# pense a moi."
+	],
+	
+	"finAmical": [
+		"mais j'ai encore des choses a faire ici.",
+		"malheureusement je ne pense pas revenir.",
+		"je suis plutôt bien ici, je pense que je vais rester",
+		"dit lui que je reviendrait plus tard"
+	],
+
+	"introPersuasif": [
+		"hmm, #proprietaire# ? je vois. ",
+		"tu vien défendre les interêts de #proprietaire# ?",
+		"je comprend tout a fait la requête de #proprietaire# mais",
+		"oui, ton client, #proprietaire#."
+		
+	],
+	
+	"suitePersuasif": [
+		"j'aimerai rester ici un moment.",
+		"je ne compte pas revenir de si tôt.",
+		"j'ai des choses importantes a régler",
+		"j'ai d'autres choses a faire."
+	],
+	
+	"finPersuasif": [
+		"tu pourrais lui mentir pour moi ?",
+		"on peut trouver un arrangement pour que tu me laisse tranquille ?",
+		"après tout ce ne sont pas t'es affaires n'est-ce-pas ?",
+		"je ne pense pas que tu ai le droit de me demander ça"
+	],
+	
+	
+	"zombish": [
+		"...",
+		"boooo",
+		"ah...",
+		"...",
+		"vshhh",
+		"Chhhh…",
+		"Oooooooh…",
+		" Huuuuu…",
+		"Ffffsssh…",
+		"Swiiiiiip…",
+		"Krrrr…",
+	],
+	
+	
+	"replique_intimidant": [
+		"#zombish# #introIntimidation# #zombish# #suiteIntimidation# #finIntimidation# #zombish#"
+	],
+	
+	"replique_amical": [
+		"#zombish# #introAmical# #zombish# #suiteAmical# #finAmical# #zombish#"
+	],
+	"replique_persuasif": [
+		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
+	],
+	"retour_victoire_persuasif": [
+		"okay, tu m'as convaincu, je retourne chez #proprietaire#", "tu sais bien parler toi !&& j'accepte "
+	],
+	"retour_victoire_intimidant": [
+		"D'accord... pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
+	],
+	
+	"retour_victoire_amical": [
+		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord&& j'ai hâte de revoir #proprietaire# !"
+	],
+	
+	"retour_echec_persuasif": [
+		"je comprends tes arguments, mais c'est non."
+	],
+	"retour_echec_intimidant": [
+		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+	],
+	"retour_echec_amical": [
+		"c'est vraiment très gentil mais non merci."
+	],
+	"btn_intimidation": [
+		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi."
+	],
+	"btn_amical": [
+		"#proprietaire# tient vraiment à toi, reviens.", "Tu traverses une tempête émotionnelle, et c'est O.K"
+	],
+	"btn_persuasion": [
+		"selon l'article 27 du code du service funéraire tu dois rentrer", "#proprietaire# te payera grassement si tu reviens."
+		
+		
+	]
+}

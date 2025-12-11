@@ -18,6 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 PopupManager="*res://scripts/Tombstone/PopupManager.gd"
+QuestBookUi="*res://Scenes/ui/quest_book_ui.tscn"
+LifePlayerUi="*res://scenes/ui/life_player_ui.tscn"
+ManagerQuest="*res://scenes/Quest/test/ManagerQuest.tscn"
 
 [display]
 

@@ -1,9 +1,9 @@
 {
- 	"origin": [
+ 	"setup_variables": [
 	"#setPronouns#"
 	],
 	
-	"setup_variables": [
+	"setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
 		],
@@ -12,9 +12,9 @@
 	"introIntimidation": [
 		"#proprietaire# ? je ne veux pas #heroObj# voir ",
 		"#proprietaire# s'inquiète pour moi ?",
-		"dit à #proprietaire# d'aller se faire voir",
-		"#proprietaire# ? Jamais entendu parlé. ",
-		"j'm'en fous de #proprietaire#"
+		"dit à #proprietaire# d'aller se faire manger.",
+		"#proprietaire# ? Jamais entendu parlé.",
+		"j'm'en fous de #proprietaire#, il pue."
 		
 	],
 
@@ -84,8 +84,8 @@
 		"ah...",
 		"..burp...",
 		" gaaah...",
-		"CERVEAUUUUUU...",
-		"",
+		"...CERVEAUUUUUU...",
+		"..raAaAhr...",
 		"",
 		"",
 		"",
@@ -104,34 +104,63 @@
 		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
 	"retour_victoire_persuasif": [
-		"okay, tu m'as convaincu, je retourne chez #proprietaire#", "tu sais bien parler toi !&& j'accepte "
+		"okay, tu m'as convaincu, je retourne chez #proprietaire#", 
+		"tu sais bien parler toi !&& j'accepte "
 	],
 	"retour_victoire_intimidant": [
-		"D'accord... pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
+		"D'accord, d'accord, me frappe pas tu va faire tomber mes #objet.s#.", 
+		"okay j'y retourne mais pitié ne me fait pas de mal.",
+		"Ohlala, j'suis ptet mort mais je veux pas re-mourrir moi #zombish#."
 	],
 	
 	"retour_victoire_amical": [
-		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord&& j'ai hâte de revoir #proprietaire# !"
+		"D'accord, mais c'est bien parce que t'as l'air sympa. #zombish#",
+		"d'accord&& j'ai hâte de revoir #proprietaire# !",
+		"Beurg... ok je rentre alors, laisse moi juste ramasser mes #objet.s# avant.",
+		"#zombish# T'as bien raison mon copain, j'vais voir #proprietaire# et #zombish# j'vais lui faire un gros câlin!"
 	],
 	
 	"retour_echec_persuasif": [
-		"je comprends tes arguments, mais c'est non."
+		"je comprends pas ce que tu dis mais je suis d'acc... &&#zombish# euuuh non, je suis pas d'accord en fait, j'y retourne pas.",
+		"je comprend que tu as des intérêts dans cette histoire, mais je m'en bat les boyaux.",
+		"#zombish# ce que tu as dis m'a tellement pas convaincu que je suis en train de me transformer en vrai zombie débile !!! AAAAAAARgggGGGGGgGHHH!"
 	],
 	"retour_echec_intimidant": [
-		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+		"Hahaha ! T'es con!&&Dégage avant que je ne m'énerve vraiment !",
+		"HAHAHAHAHA ! Oups, j'ai tellement ri que j'en ai fait tombé #objet.poss_m#",
+		"#propriétaire peut aller se faire voir, #zombish# et toi avec !#"
 	],
 	"retour_echec_amical": [
 		"c'est vraiment très gentil mais non merci."
 	],
 	"btn_intimidation": [
-		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi."
+		"Tu vas venir avec moi tout de suite !", 
+		"ta gueule ! suis moi.",
+		"Ramasse tes tripes et suis moi!"
 	],
 	"btn_amical": [
-		"#proprietaire# tient vraiment à toi, reviens.", "Tu traverses une tempête émotionnelle, et c'est O.K"
+		"#proprietaire# tient vraiment à toi, reviens.", 
+		"Tu traverses une tempête émotionnelle, et c'est O.K",
+		"Qui pourra t'aider à remettre",
+		"écoute, tu lui manques vraiment..."
 	],
 	"btn_persuasion": [
-		"selon l'article 27 du code du service funéraire tu dois rentrer", "#proprietaire# te payera grassement si tu reviens."
-		
+		"selon l'article 27 du code du service funéraire tu dois rentrer", 
+		"#proprietaire# te payera grassement si tu reviens.",
+		"Je veux bien te donner #objet.indef# si tu me suis"
+	],
+	
+	"Objet": [
+		"!cerveau",
+		"!boyau",
+		"!oeil",
+		"!pied",
+		"^jambe",
+		"!jambon",
+		"!main",
+		"^fleur",
+		"^dent",
+		""
 		
 	]
 }

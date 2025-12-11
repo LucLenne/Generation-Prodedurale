@@ -2,17 +2,19 @@ class_name QuestManager extends Node
 
 
 @export_group("Génération")
-@export var _numberQuest : int = 5
+@export var _numberQuest : int = 2
 @export var list_collectibles : Array[CollectibleBase]
 @export var list_biomes : Array[String]
+@export var _type_ennemies : Array[PackedScene]
 
-var _typeQuest : Array[Script] = [CollectQuest,DeliveryQuest,ExploreQuest,KillQuest,TalkQuest]
+var _typeQuest : Array[Script] = [TalkQuest]
 var _activeQuest : Array[QuestBase]
 var _inactiveQuest : Array[QuestBase]
 var _successQuest : Array[QuestBase]
 var _failQuest : Array[QuestBase]
-var _pnj : Array[NPC]
-var _pnj_in_quest : Array[NPC]
+var _pnj : Array[PNJ]
+var _pnj_in_quest : Array[PNJ]
+var _ennemies : Array[PackedScene]
 
 func _ready() -> void:
 	_generate_quests()
@@ -43,12 +45,15 @@ func GetQuest(type : QuestBase.TYPE) -> QuestBase:
 			return quest
 	print("no quest " + str(type) + " exist.")
 	return
-func GetPNJ() -> NPC:
+func GetPNJ() -> PNJ:
 	var pnj = _pnj.pick_random()
 	_pnj.erase(pnj)
 	_pnj_in_quest.append(pnj)
 	return pnj
-
+func SpawnPNJ(dir : DialogueSystem.Directions):
+	var scene_pnj : PackedScene = _type_ennemies.pick_random() 
+	var pnj = scene_pnj.instantiate()
+	
 func _generate_quests() -> void :
 	for i in range(_numberQuest):
 		var quest_script = _typeQuest.pick_random()
@@ -62,5 +67,5 @@ func _delete_quest_UI(id : int):
 func _init_list_npc():
 	var current_scene = get_tree().current_scene
 	for child in current_scene.get_children():
-		if child is NPC:
+		if child is PNJ:
 			_pnj.append(child)

@@ -1,24 +1,27 @@
 class_name TalkQuest extends QuestBase
 
-var _pnj1 : NPC
-var _pnj2 : CharacterBase
+var pnj : PNJ
+var enemy : PNJ
 
 func init() -> void :
 	type = TYPE.TALK
-	title = "Tu dois réconcilier " + _pnj1.Name + " et " + _pnj2.Name + "."
-	_pnj1.create_dialogue()
-
-
+	title = "Tu dois réconcilier " + pnj.Name + " et " + enemy.Name + "."
+	pnj.create_dialogue()
+	pnj = ManagerQuest.Getpnj()
+	enemy = ManagerQuest.Getpnj()
+	var quest_data = pnj._dialogue_system.current_quest_data
+	enemy.QuestGiverDialogueSystem = pnj._dialogue_system
+	ManagerQuest.Spawn_PNJ(quest_data["target_direction"])
+	
 #func setup(world_gen: Node2D) -> void:
-	#_pnj1 = ManagerQuest.GetPNJ(world_gen)
-	#_pnj2 = ManagerQuest.GetPNJ(world_gen)
-	#if _pnj1: _pnj1.emotion = CharacterBase.EMOTION.ANGRY
-	#if _pnj2: _pnj2.emotion = CharacterBase.EMOTION.ANGRY
+	#pnj = ManagerQuest.GetPNJ(world_gen)
+	#enemy = ManagerQuest.GetPNJ(world_gen)
+	#if pnj: pnj.emotion = CharacterBase.EMOTION.ANGRY
+	#if enemy: enemy.emotion = CharacterBase.EMOTION.ANGRY
 
 func _process(_delta: float):
-	if(_pnj1.is_dead || _pnj2.is_dead):
+	if(pnj.is_dead || enemy.is_dead):
 		_fail_quest()
 
-func _init_talk_quest():
-	_pnj1 = ManagerQuest.GetNPC()
-	_pnj2 = ManagerQuest.GetNPC()
+	
+	

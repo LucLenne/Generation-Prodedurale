@@ -239,8 +239,8 @@ func _on_dialogue_closed(questGiver : PNJ):
 				
 	elif is_intro:
 		is_intro = false
-		if QuestManager.Instance :
-				QuestManager.Instance.ActivateQuest(pnj)
+		if ManagerQuest :
+				ManagerQuest.ActivateQuest(pnj)
 			
 			
 

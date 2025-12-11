@@ -4,36 +4,44 @@
   ],
 
   "salutation": [
-	  "Salut l'humain",
-	  "grrrr... bonjour",
-	  "miam t'a l'air apétissant",
-	  "kestuveu toi ?",
-	  "...",
-	  "Ghrrrr... Argh... salutation",
-	  "hey! tu marches sur mes tripes là !",
-	  "Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
-	  "J'suis pas encort mort...",
-	  "j'suis vraiment pas d'humeur !",
+	"Salut l'humain.",
+	"grrrr... tiens, b'jour.",
+	"miam t'a l'air apétissant.",
+	"kestuveu toi ?",
+	"...",
+	"Ghrrrr... Argh... salutations.",
+	"hey! tu marches sur mes tripes là !",
+	"Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
+	"J'suis pas encort mort...",
+	"j'suis vraiment pas d'humeur !",
+	"Hein? Maman ? c'est toi ? ",
+	"Euuuuuuuuh...PAaaAApillOoOoOn !!",
+	"B'jour, moi zombie, toi?",
+	"-Le zombie vous regarde fixement en bavant abondement-"
 	
   ],
  
   "phrase1": [
-		"tu me dérange,",
-		"vas-t-en,",
-		"tu me veux quoi,",
-		"dégage",
-		"je mange la,",
+	"tu me déranges,",
+	"vas-t-en sale humain vivant",
+	"tu me veux quoi?",
+	"dégage",
+	"tu vois pas que je mange la?",
+	"OooOoh ! tu dois avoir un cerveau délicieux !"
 	],
   
-  "sujet1": [
-		"déchets de la société",
-		"sale type",
+  "sujet": [
+		"!déchet de la société",
+		"!sale type",
 		"bon repas",
 		"chat",
-		"mère",
-		"terre",
-		"boyaux", 
-		"cadavre",
+		"^mère",
+		"!caillou",
+		"!boyau", 
+		"!cadavre",
+		"personne connue",
+		"type qui me doit de l'argent",
+		""
 	],
 	
 	"phrase2": [
@@ -41,27 +49,13 @@
 		"mon père me disait souvent d'éviter",
 		"tu serait pas",
 		"je détèste les",
-		"tu ressemble à",
-		"j'aime pas quand #sujet.indef# se comporte comme",
-	],
-  
-  	"sujet2": [
-		"déchet de la société",
-		"sale type",
-		"bon repas",
-		"type qui me doit de l'argent",
-		"#sujet.indef# inconnu",
-		"personne connu",
-		"chat",
-		"mère",
-		"terre",
-		"boyaux", 
-		"cadavre",
+		"tu ressembles à #sujet.indef#",
+		"j'aime pas quand #sujet.indef# se comporte comme #sujet.indef#"
 	],
 	
 	"text":[
-		"#phrase1# #sujet1.indef#",
-		"#phrase2# #sujet2.indef#",
+		"#phrase1#",
+		"#phrase2#",
 	],
 	
 	"optionnel":[
@@ -85,6 +79,7 @@
 		"..argh...",
 		"..reuuu..",
 		"..rrrr..",
+		"...CEEEEEEEERVEAUUUUUUU..."
 	],
 	
   "conclusion": [
@@ -95,7 +90,7 @@
 		"c'est pour ça que ça sens mauvais",
 		"c'est dégeulasse",
 		"... Arhhhg",
-		" ",
+		" "
 	],
 	
   "setPronouns": [

@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cuce4ii08v1rv"]
 
 [ext_resource type="Script" uid="uid://d3v6selq7myvq" path="res://scripts/Tombstone/epitaphe_system.gd" id="1_15l1k"]
-[ext_resource type="Texture2D" uid="uid://d16glphbdsfp8" path="res://scenes/sprites/Tilemap/colored_tilemap.png" id="2_cxlyk"]
+[ext_resource type="Texture2D" uid="uid://ur38u1xmu53g" path="res://sprites/UI/UI_Final.png" id="2_15l1k"]
 [ext_resource type="FontFile" uid="uid://bsj5qrm4y2nek" path="res://scenes/sprites/Minecraftia-Regular.ttf" id="3_15l1k"]
 
 [node name="EpitahpSystem" type="MarginContainer"]
 clip_contents = true
 offset_left = 2.0
 offset_top = 1.0
-offset_right = 44.0
+offset_right = 40.0
 offset_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -16,12 +16,12 @@ script = ExtResource("1_15l1k")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_cxlyk")
-region_rect = Rect2(134, 27, 9, 8)
-patch_margin_left = 2
+texture = ExtResource("2_15l1k")
+region_rect = Rect2(64, 16, 32, 16)
+patch_margin_left = 1
 patch_margin_top = 1
 patch_margin_right = 1
-patch_margin_bottom = 2
+patch_margin_bottom = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

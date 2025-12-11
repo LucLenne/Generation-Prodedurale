@@ -3,12 +3,12 @@
 [ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="1_g4jo0"]
 [ext_resource type="PackedScene" uid="uid://dy8e51dnea48x" path="res://scenes/ButtonMenu.tscn" id="1_jvnd5"]
 [ext_resource type="Script" uid="uid://dtd182omkk5sf" path="res://scenes/pause_menu.gd" id="1_komsw"]
-[ext_resource type="PackedScene" uid="uid://cfqdo6qcdnunq" path="res://scenes/MainMenu.tscn" id="2_5w6ei"]
+
 
 [node name="PauseMenu" type="CanvasLayer"]
 visible = false
 script = ExtResource("1_komsw")
-menu_scene = ExtResource("2_5w6ei")
+
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cesl8hf6m7ebn" path="res://scripts/EpitaphReader.gd" id="1_7p1cb"]
 [ext_resource type="PackedScene" uid="uid://clsjugqie7jn8" path="res://Interractable.tscn" id="1_elb05"]
-[ext_resource type="JSON" path="res://Assets/Epitaph/TestFR.json" id="2_uieon"]
+[ext_resource type="JSON" path="res://Assets/Epitaph/Epitaphe.json" id="2_uieon"]
 [ext_resource type="Texture2D" uid="uid://c8d1ngodj36in" path="res://scenes/sprites/Tiles/Colored/tile_0002.png" id="4_vgdj4"]
 
 [node name="Tombstone" type="Node2D"]

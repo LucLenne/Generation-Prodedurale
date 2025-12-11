@@ -2,10 +2,13 @@ class_name CollectQuest extends QuestBase
 
 var _item : CollectibleBase
 
-func _init() -> void :
+func init() -> void :
 	type = TYPE.COLLECT
-	var rd = randi_range(0, QuestManager.Instance.list_collectibles.size()) 
-	_item = QuestManager.Instance.list_collectibles[rd]
+	title = "Collect this object " + _item.Name
+	var rd = randi_range(0, ManagerQuest.list_collectibles.size())
+	if  ManagerQuest.list_collectibles[rd] != null:
+		_item = ManagerQuest.list_collectibles[rd]
+	
 
 func _process(_delta: float) -> void:
 	if(Player.Instance.item_in_inventory(_item)):

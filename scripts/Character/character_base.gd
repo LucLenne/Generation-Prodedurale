@@ -38,7 +38,7 @@ enum EMOTION {ANGRY,HAPPY,NEUTRAL,SAD}
 @export var _behaviour_max_point : int = 20
 
 @export_group("Others")
-@export var _name : String = ""
+@export var Name : String = "no name"
 @export var emotion : EMOTION = EMOTION.NEUTRAL
 var dialogue_ref : Object = null
 
@@ -89,7 +89,7 @@ func _physics_process(_delta: float) -> void:
 		velocity = velocity.limit_length(_current_movement.speed_max)
 		if main_sprite and orientation != ORIENTATION.FIXED:
 			main_sprite.rotation = _compute_orientation_angle(_direction)
-	else:
+	elif _current_movement != null:
 		## If direction length == 0, Apply friction
 		var friction_length = _current_movement.friction * get_physics_process_delta_time()
 		if velocity.length() > friction_length:

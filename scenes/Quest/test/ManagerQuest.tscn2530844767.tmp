@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dovl2tbyrw1d"]
+
+[ext_resource type="Script" uid="uid://48twraillamx" path="res://scripts/Quests/manager_quest.gd" id="1_mq789"]
+
+[node name="ManagerQuest" type="Node"]
+script = ExtResource("1_mq789")
+list_biomes = Array[String](["Forest(spring)", "Forest(winter)", "Forest(summer)", "Forest(Autumn)"])

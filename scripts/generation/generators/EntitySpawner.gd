@@ -12,7 +12,7 @@ func _init(p_scene: PackedScene, n_scene: PackedScene, mq_scene: PackedScene):
 	manager_quest_scene = mq_scene
 
 func spawn_manager_quest(parent: Node2D, world_gen_node: Node2D):
-	if QuestManager.Instance == null:
+	if ManagerQuest == null:
 		if manager_quest_scene:
 			print("Instantiating ManagerQuest...")
 			var instance = manager_quest_scene.instantiate()

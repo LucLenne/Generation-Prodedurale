@@ -1,0 +1,102 @@
+{
+  "origin": [
+	"#setPronouns##salutation.capitalize.heroGender# #zombish# #text# #conclusion#."
+  ],
+
+  "salutation": [
+	  "Salut l'humain",
+	  "Bon...jour",
+	  "mmh passe moi une côte",
+	  "kestuveu toi ?",
+	  "...",
+	  "clic... cluc... salutation",
+	  "hey! tu marches sur mon femur là !",
+	  "Gloupgloup !! Laisse moi boire en paix étrangé !",
+	  "J'suis pas encort mort...",
+	  "j'suis vraiment pas d'humeur !",
+	
+  ],
+ 
+  "phrase1": [
+		"Tu me dérange,",
+		"Vas-t-en,",
+		"Tu me veux quoi,",
+		"Dégage",
+		"Je bois la,",
+		"J'ai perdu une côte,",
+		"Je trouve plus mon pouce,",
+		"laisse moi je cherche mon pied gauche,",
+		"Touche pas à ma bouteille,"
+	],
+  
+  "sujet1": [
+		"!déchets de la société",
+		"!sale type",
+		"!sale moche",
+		"!pauvre type",
+		"!bon à rien",
+		"!timbré",
+		"!sac de chair",
+	],
+	
+	"phrase2": [
+		"avant de mourir j'étais #sujet.indef#",
+		"mon père me disait souvent d'éviter #sujet.indef#",
+		"tu serait pas #sujet.indef#",
+		"je détèste les #sujet.s#",
+		"tu ressemble à #sujet.indef#",
+		"tu aurais pas un os pour moi, #sujet.indef#",
+		"j'aime pas quand #sujet.indef# se comporte comme #sujet.indef#",
+		"t'aurais pas vu une mains droite trainé, #sujet.indef#",
+		"y'a trop de #sujet.indef#"
+	],
+  
+	
+	"text":[
+		"#phrase1#",
+		"#phrase2#",
+	],
+	
+	"optionnel":[
+		"de ma mère",
+		"de mon père",
+		"en prison",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+	],
+	
+	"zombish": [
+		"...",
+		"cluck",
+		"ah...",
+		"..skluc...",
+		" tlic...",
+		"..cluckclik...",
+		"..clkclk..",
+	],
+	
+  "conclusion": [
+		"ça donne soif héhé",
+		"c'est pour ça que tu devrait partir.",
+		"donc casse toi !",
+		"laisse moi me ronger l'os tranquille.",
+		"c'est pour ça que y a des troues",
+		"c'est dégeulasse",
+		"...y a trop de courant d'air ici...",
+		" ",
+	],
+	
+  "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+  
+		
+	
+  
+}

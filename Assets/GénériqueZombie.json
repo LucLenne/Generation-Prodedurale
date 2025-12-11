@@ -1,0 +1,122 @@
+{
+  "origin": [
+	"#setPronouns##salutation.capitalize.heroGender# #phrase# #sujet.indef# #conclusion#."
+  ],
+
+  "salutation": [
+	  "Salut l'humain",
+	  "grrrr... bonjour",
+	  "miam t'a l'air apétissant",
+	  "kestuveu toi ?",
+	  "...",
+	  "Ghrrrr... Argh... salutation",
+	  "hey! tu marches sur mes tripes là !",
+	  "Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
+	  "J'suis pas encort mort...",
+	  "j'suis vraiment pas d'humeur !",
+	
+  ],
+ 
+  "phrase": [
+		"avant de mourir j'étais",
+		"mon père me disait souvent d'éviter",
+		"tu serait pas",
+		"je détèste",
+		"tu ressemble au",
+		"j'aime pas quand #sujet.indef# se comporte comme",
+	],
+  
+  "sujet": [
+		"déchets de la société",
+		"sale type",
+		"bon repas",
+		"type qui me doit de l'argent",
+		"#sujet.heroPoss# père",
+		"#sujet.indef# inconnu",
+		"personne connu",
+		"chat",
+		"mère",
+		"terre",
+		"boyaux", 
+		"cadavre",
+	],
+	
+	"optionnel":[
+		"de ma mère",
+		"de mon père",
+		"en prison",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+		" ",
+	],
+	
+  "conclusion": [
+		"ça donne faim héhé",
+		"c'est pour ça que tu devrait partir",
+		"donc casse toi !",
+		"mais les gardes m'ont chassés",
+		"c'est pour ça que ça sens mauvais",
+		"c'est dégeulasse",
+		"... Arhhhg",
+		" ",
+	],
+	
+  "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+  "épitaphe": [
+		"#état.heroGender# de faim",
+		"#état.heroGender# de flemme",
+		"#action.heroGender# par sa propre mère",
+		"#état.heroGender# je sais plus comment",
+		"#action.heroGender# dans la fleur de l'âge",
+		"#état.heroGender# à un âge avancé de sa belle mort",
+		"#état.heroGender# triste et solitaire",
+		"son corps fut zombifié, décomposé, enterré",
+		"#action.heroGender# par un ami",
+		"criminel endurci, dieu ait son âme | criminelle endurcie, dieu ait son âme",
+		"enfant du boucher du village",
+		"#état.heroGender# dans le désespoir et la folie",
+		"#action.heroGender# lentement par de viles zombies",
+		"#action.heroGender# pour trahison",
+		"#action.heroGender# dans son sommeil",
+		"ne nous embêtera plus",
+		"au revoir vieil ami",
+		"chut ! mieux vaut ne pas #heroObj# réveiller",
+		"#action.heroGender# injustement par de terribles monstres",
+		"gros démon parti trop tard",
+		"petit ange parti trop tôt",
+		"faites qu'#heroSubj# y reste cette fois ci..",
+		"#état.heroGender# d'épectase",
+		"#heroSubj# ira en enfer à coup sûr",
+		"peut être sera-t-#heroSubj# plus à sa place dans la terre",
+		"#état.heroGender# d'avoir trop pleuré",
+		"#action.heroGender# pour motif inconnu",
+		"#action.heroGender# puis #action.heroGender# et enfin #action.heroGender#",
+		"#action.heroGender# en place publique",
+		"la famille est priée de venir payer la mise en bière au plus vite",
+		"#état.heroGender# ivre, comme #heroSubj# a vécu",
+		"s'est #action.heroGender# #heroSubj#-même par désespoir",
+		"puisse-t-#heroSubj# rejoindre le créateur en paix avec les immondices qu'#heroSubj# a commis",
+		"#heroSubj# a rejoint son amant qui lui manquait tant",
+		"puisse tu être dans un monde meilleur mon enfant...",
+		"-Des marques de griffure masquent l'épitaphe-",
+		"-Une main a été clouée sur la pierre tombale, 2 de ses doigts ont été rongés-",
+		"#action.heroGender# le jour de ses 5 ans",
+		"#état.heroGender# une bonne fois pour toutes",
+		"si vous trouvez cette tombe vide, merci de vous adresser aux services funéraire dans les plus brefs délais",
+		"#action.heroGender# par un médiateur maccabre qu'il avait refusé de payer",
+		"son absence de foi a sans doute condamné son âme aux limbes",
+		"s'est ôté la vie",
+		"#heroSubj# ne connaissait personne d'encore en vie",
+		"son corps fut retrouvé en cet endroit même un bon matin",
+		"#état.heroGender# après 20 jours de prison abominablement durs."
+		
+	]
+  
+}

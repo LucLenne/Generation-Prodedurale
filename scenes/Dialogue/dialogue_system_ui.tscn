@@ -16,8 +16,8 @@ shadow_color = Color(0, 0, 0, 0.2)
 shadow_size = 10
 shadow_offset = Vector2(0, 5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_normal"]
-bg_color = Color(1, 0.321569, 0.321569, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_hover"]
+bg_color = Color(1, 0.421569, 0.421569, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -30,22 +30,8 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_hover"]
-bg_color = Color(1, 0.421569, 0.421569, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_normal"]
-bg_color = Color(0.992157, 0.796078, 0.431373, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_pressed"]
-bg_color = Color(0.892157, 0.696078, 0.331373, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_intimidant_normal"]
+bg_color = Color(1, 0.321569, 0.321569, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -58,8 +44,22 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_normal"]
-bg_color = Color(0, 0.721569, 0.580392, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_pressed"]
+bg_color = Color(0.892157, 0.696078, 0.331373, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amical_normal"]
+bg_color = Color(0.992157, 0.796078, 0.431373, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_hover"]
+bg_color = Color(0.1, 0.821569, 0.680392, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -72,8 +72,8 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_hover"]
-bg_color = Color(0.1, 0.821569, 0.680392, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_persuasif_normal"]
+bg_color = Color(0, 0.721569, 0.580392, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -144,9 +144,9 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_intimidant_normal")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_intimidant_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_intimidant_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_intimidant_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_intimidant_normal")
 text = "Je suis intimidant "
 
 [node name="BtnFriendly" type="Button" parent="ResponseButtons"]
@@ -154,9 +154,9 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.176471, 0.203922, 0.211765, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_amical_normal")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_amical_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_amical_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_amical_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_amical_normal")
 text = "Je suis amical"
 
 [node name="BtnPersuade" type="Button" parent="ResponseButtons"]
@@ -164,7 +164,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_persuasif_normal")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_persuasif_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_persuasif_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_persuasif_pressed")
+theme_override_styles/normal = SubResource("StyleBoxFlat_persuasif_normal")
 text = "Je suis persuasif"

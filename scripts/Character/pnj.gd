@@ -2,6 +2,7 @@ class_name PNJ extends CharacterBase
 
 
 @export var interact_prompt: String = "Appuyer sur [E] pour parler"
+@export var QuestGiverDialogueSystem : DialogueSystem
 
 var current_quest: QuestBase
 var has_active_quest: bool = false 
@@ -11,6 +12,10 @@ func _update_state(delta : float):
 
 @onready var quest_indicator_label: Label = $QuestIndicatorLabel # Assurez-vous que le chemin du Node est correct, ici j'utilise @onready
 
+
+func interact():
+	pass
+	
 func _ready():
 	if not quest_indicator_label:
 		pass

@@ -226,4 +226,29 @@ func grow_zone_organic(data: MapData, zone_id: int, seed: Vector2i, target_size:
 			var score = -dist + (noise_val * 5.0)
 			candidates[neighbor] = score
 			
+			candidates[neighbor] = score
+			
+	# Smoothing Pass (Cellular Automata - simple)
+	return _smooth_zone(zone)
+
+func _smooth_zone(zone: Zone) -> Zone:
+	var cells_set = {}
+	for c in zone.cells: cells_set[c] = true
+	
+	var new_cells = []
+	
+	# Erosion / Smoothing
+	for c in zone.cells:
+		var neighbors = 0
+		for dx in range(-1, 2):
+			for dy in range(-1, 2):
+				if dx == 0 and dy == 0: continue
+				if cells_set.has(c + Vector2i(dx, dy)):
+					neighbors += 1
+		
+		# Keep if enough neighbors (solid)
+		if neighbors >= 3:
+			new_cells.append(c)
+			
+	zone.cells = new_cells
 	return zone

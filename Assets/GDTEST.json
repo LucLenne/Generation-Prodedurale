@@ -1,17 +1,15 @@
 {
-  "origin": [
-	"#setPronouns# #début.heroGender.capitalize# #distinction.heroGender#, #nom#, #épitaphe.heroGender.capitalize#."
-  ],
-
-  "début": [
-	  "Ci-gît",
-	  "Ici repose",
-	  "Enterré bien profond ici | Enterrée bien profond ici",
-	  "Enterré pour la deuxième fois | Enterrée pour la deuxième fois",
-	  "Inhumé en ce lieu | Inhumée en ce lieu"
-  ],
- 
-  "nom": [
+	"origin": [
+		"#setPronouns# #début.heroGender.capitalize# #distinction.heroGender#, #nom#, #épitaphe.heroGender.capitalize#."
+	],
+	"début": [
+		"Ci-gît",
+		"Ici repose",
+		"Enterré bien profond ici | Enterrée bien profond ici",
+		"Enterré pour la deuxième fois | Enterrée pour la deuxième fois",
+		"Inhumé en ce lieu | Inhumée en ce lieu"
+	],
+	"nom": [
 		"Berjamin",
 		"Gustrand",
 		"Cecile",
@@ -37,8 +35,7 @@
 		"Manu",
 		"Tulipe"
 	],
-  
-  "distinction": [
+	"distinction": [
 		"le baron | la baronne",
 		"le boucher | la bouchère",
 		"le fossoyeur | la fossoyeuse",
@@ -55,8 +52,7 @@
 		"mon fidèle chien",
 		"notre ami | notre amie"
 	],
-	
-  "état": [
+	"état": [
 		"mort",
 		"décédé",
 		"crevé",
@@ -64,8 +60,7 @@
 		"#heroSubj# nous a quitté",
 		"eternellement endormi"
 	],
-	
-  "action": [
+	"action": [
 		"mangé",
 		"tué",
 		"fauché",
@@ -86,13 +81,11 @@
 		"noyé",
 		"éventré"
 	],
-	
-  "setPronouns": [
+	"setPronouns": [
 		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
 		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
 	],
-	
-  "épitaphe": [
+	"épitaphe": [
 		"#état.heroGender# de faim",
 		"#état.heroGender# de flemme",
 		"#action.heroGender# par sa propre mère",

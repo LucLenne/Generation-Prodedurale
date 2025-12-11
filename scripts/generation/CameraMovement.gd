@@ -3,6 +3,8 @@ class_name CameraMovement extends Camera2D
 @export var speed = 400.0
 
 func _process(delta):
+	if not enabled: return
+	
 	var direction = Vector2.ZERO
 	if Input.is_action_pressed("ui_right"):
 		direction.x += 1

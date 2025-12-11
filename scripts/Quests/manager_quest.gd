@@ -1,5 +1,7 @@
 class_name QuestManager extends Node
 
+const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
+
 
 @export_group("Génération")
 @export var _numberQuest : int = 5
@@ -40,7 +42,10 @@ func spawn_entity_in_world(scene: PackedScene, min_dist: float = 100, max_dist: 
 		instance.global_position = center + offset
 
 	if Player.Instance and Player.Instance.get_parent():
-		Player.Instance.get_parent().call_deferred("add_child", instance)
+		var parent = Player.Instance.get_parent()
+		parent.call_deferred("add_child", instance)
+		if parent.has_method("register_generated_object"):
+			parent.call_deferred("register_generated_object", instance)
 	else:
 		get_tree().root.call_deferred("add_child", instance)
 		
@@ -81,23 +86,153 @@ func spawn_quests_in_world(world_gen: WorldGenerator) -> void:
 	for i in range(_numberQuest):
 		var scene = quest_scenes.pick_random()
 		if scene == null: continue
-	
-		var spawn_pos = Vector2.ZERO
-		if world_gen.has_method("get_random_building_door"):
-			spawn_pos = world_gen.get_random_building_door()
-		else:
-			var zone = world_gen.get_random_zone()
-			if zone: spawn_pos = Vector2(zone.center) * 32
+		
+		# 1. Determine size & footprint
+		var temp = scene.instantiate()
+		var quest_size = Vector2i(3,3)
+		var offset = Vector2i.ZERO
+		var actual_cells = []
+		
+		var tile_layer_node = temp.get_node_or_null("TileMapLayer")
+		if not tile_layer_node:
+			for child in temp.get_children():
+				if child is TileMapLayer or child is TileMap:
+					tile_layer_node = child
+					break
+					
+		if tile_layer_node:
+			var rect = tile_layer_node.get_used_rect()
+			if rect.has_area():
+				quest_size = rect.size
+				offset = rect.position
+				for cell in tile_layer_node.get_used_cells():
+					actual_cells.append(cell - offset)
+
+		# Fallback footprint
+		if actual_cells.is_empty():
+			for x in range(quest_size.x):
+				for y in range(quest_size.y):
+					actual_cells.append(Vector2i(x,y))
+		temp.free()
+
+		# 2. Find valid position
+		var valid_pos = Vector2.INF
+		
+		# Gather spawn candidates (zone centers since we spawn BEFORE structures)
+		var spawn_origins: Array[Vector2i] = []
+		if world_gen.map_data:
+			for zone in world_gen.map_data.zones:
+				spawn_origins.append(zone.center)
+		
+		print("ManagerQuest: Found ", spawn_origins.size(), " spawn origins (Zone centers).")
+		
+		if spawn_origins.is_empty(): 
+			spawn_origins.append(Vector2i(world_gen.width/2, world_gen.height/2))
+		
+		var occupied_cells = world_gen.map_data.reserved_cells
+		var candidate_cell = Vector2i.ZERO
+		
+		for attempt in range(100):
+			var origin = spawn_origins.pick_random()
+			# Random offset near origin
+			var r = randi_range(1, 10)
+			var angle = randf() * TAU
+			candidate_cell = origin + Vector2i(cos(angle)*r, sin(angle)*r)
 			
+			if not world_gen.map_data.is_in_bounds(candidate_cell.x, candidate_cell.y): continue
+			
+			var is_safe = true
+			for rel_cell in actual_cells:
+				var check_cell = candidate_cell + rel_cell
+				
+				# Check Bounds
+				if not world_gen.map_data.is_in_bounds(check_cell.x, check_cell.y):
+					is_safe = false; break
+				
+				# Check Strict Reservation (Walls, Buildings, Rivers)
+				if occupied_cells.has(check_cell):
+					is_safe = false; break
+					
+				# Check Water (Explicitly for safety)
+				if TileConfigScript.is_water(world_gen.map_data.wall_layer.get_cell_atlas_coords(check_cell)):
+					is_safe = false; break
+					
+				# Check Path (Optional but good)
+				if world_gen.map_data.ground_layer.get_cell_atlas_coords(check_cell) == TileConfigScript.PATH:
+					is_safe = false; break
+			
+			if is_safe:
+				valid_pos = Vector2(candidate_cell) * TileConfigScript.TILE_SIZE
+				
+				# Register reservation immediately to prevent self-overlap in next loop
+				for rel_cell in actual_cells:
+					var check_cell = candidate_cell + rel_cell
+					if world_gen.map_data:
+						world_gen.map_data.reserved_cells[check_cell] = true
+				break
+		
+		if valid_pos == Vector2.INF:
+			print("ManagerQuest: Failed to find valid spot for quest ", i)
+			continue
+			
+		var spawn_pos = valid_pos
 		var instance = scene.instantiate()
-		instance.position = spawn_pos
+		instance.position = spawn_pos - (Vector2(offset) * TileConfigScript.TILE_SIZE) # Adjust for offset because we calculated valid_pos as top-left of footprint relative to origin
+		# Wait, valid_pos is based on candidate_cell which we treated as the anchor for (cell - offset).
+		# In logic above: check_cell = candidate_cell + (cell - offset)
+		# So candidate_cell represents the 'position' of the node (usually (0,0) of scene).
+		# yes. So instance.position = valid_pos is correct assuming offset logic matches instantiation.
+		# The offset was calculated as rect.position. actual_cells took this into account (cell - offset).
+		# So actual_cells serves as relative coordinates from (0,0).
+		# So candidate_cell is the World Position meant for (0,0) of the instance.
+		
+		instance.position = valid_pos # This should be correct without extra offset sub if valid_pos IS the origin.
+		# Let's verify: check_cell = candidate_cell + rel_cell. rel_cell = cell_in_tilemap - offset.
+		# If we place instance at candidate_cell, its tilemap will draw at (cell_in_tilemap).
+		# Wait: instance pos (global) + tilemap cell pos (local) = world cell pos?
+		# TileMapLayer in scene is at (0,0)? Usually yes.
+		# If TileMapLayer is at (0,0), then drawing a tile at (2,2) means it appears at (2,2) relative to instance.
+		# If instance is at (10,10), visual is (12,12).
+		# Our math: check_cell = (10,10) + (2,2) - offset.
+		# If offset is (0,0), check_cell is (12,12). Correct.
+		# If offset is (2,2), rel_cell is (0,0). check_cell is (10,10). Visual is (12,12)?
+		# No, offset is just to shift the "anchor" of our collision shape check.
+		# Ideally we want to center or align.
+		# Let's keep it simple: We validated that if we place the ORIGIN at candidate_cell, the tiles (shifted by offset logic) fall in safe spots.
+		# But wait, actual_cells = cell - offset.
+		# So we assumed we SHIFT the visual so that 'offset' becomes (0,0)? NO.
+		# If we don't shift the instance visual, the tile at 'cell' will be at 'cell'.
+		# If we want the collision check to match the visual:
+		# Visual world pos = instance_pos + cell.
+		# We checked: candidate_cell + (cell - offset).
+		# So instance_pos must be = candidate_cell - offset.
+		# wait...
+		# If cell is (2,2) and offset is (2,2). rel is (0,0).
+		# candidates_cell is (10,10). check_cell is (10,10).
+		# If we place instance at (10,10), tile (2,2) is at (12,12).
+		# Gap!
+		
+		# Correction:
+		# We want to place the bounding box TOP-LEFT at candidate_cell.
+		# rect.position is 'offset'.
+		# If we want rect.position to align with candidate_cell?
+		# No, we essentially treat actual_cells as "relative to some anchor".
+		# Let's say we want to verify placing the instance at `P`.
+		# Tile `C` is at `P + C`.
+		# We want `P + C` to be safe.
+		# In loop, we did `check = candidate + (C - offset)`.
+		# This implies `P + C = candidate + C - offset`.
+		# `P = candidate - offset`.
+		# So `instance.position = (candidate - offset) * TILE_SIZE`.
+		
+		instance.position = valid_pos - (Vector2(offset) * TileConfigScript.TILE_SIZE)
 		instance.scale = entity_scale
 		world_gen.add_child(instance)
 		
-		if world_gen.has_method("register_reserved_area"):
-			world_gen.register_reserved_area(spawn_pos, 2)
-			
-		print("ManagerQuest: Spawned quest at ", spawn_pos)
+		if world_gen.has_method("register_generated_object"):
+			world_gen.register_generated_object(instance)
+		
+		print("ManagerQuest: Spawned quest at ", instance.position)
 		
 		if instance is QuestBase:
 			_inactiveQuest.append(instance)
@@ -121,7 +256,17 @@ func _process(_delta: float) -> void:
 			DeleteQuestUI(quest.id)
 			_successQuest.append(quest)
 			_activeQuest.erase(quest)
-		if(quest._state == QuestBase.STATE.FAIL):
-			DeleteQuestUI(quest.id)
 			_failQuest.append(quest)
 			_activeQuest.erase(quest)
+
+func get_spawn_position_from_direction(direction: String, distance: float, origin_pos: Vector2) -> Vector2:
+	var dir_vec = Vector2.RIGHT # Default
+	match direction.to_upper():
+		"NORD": dir_vec = Vector2.UP
+		"SUD": dir_vec = Vector2.DOWN
+		"EST": dir_vec = Vector2.RIGHT
+		"OUEST": dir_vec = Vector2.LEFT
+		_:
+			printerr("QuestManager: Unknown direction '%s', defaulting to EST" % direction)
+	
+	return origin_pos + (dir_vec * distance)

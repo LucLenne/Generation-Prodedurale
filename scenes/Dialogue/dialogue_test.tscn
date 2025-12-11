@@ -1,34 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://cl3gt7icjil5a"]
+[gd_scene load_steps=8 format=3 uid="uid://b25v3r16kcrtb"]
 
-[ext_resource type="Script" path="res://scripts/Dialogue/dialogue_system.gd" id="1_8rghh"]
+[ext_resource type="Script" uid="uid://yr8c14qo708p" path="res://scripts/Dialogue/dialogue_system.gd" id="1_8rghh"]
 [ext_resource type="PackedScene" uid="uid://bfcmgquain0r4" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="2_8rghh"]
-[ext_resource type="JSON" path="res://Assets/ExampleNPC.json" id="2_lksov"]
-[ext_resource type="JSON" path="res://Assets/ExampleMonster.json" id="3_cyii7"]
-[ext_resource type="Script" path="res://scripts/Character/player_controller.gd" id="5_cyii7"]
-[ext_resource type="Script" path="res://scripts/Resource/movement_parameters.gd" id="6_n73t5"]
+[ext_resource type="Script" uid="uid://ckmui7cav8sp7" path="res://scripts/Character/player_controller.gd" id="5_cyii7"]
+[ext_resource type="Script" uid="uid://dwhtkltr0pm6f" path="res://scripts/Resource/movement_parameters.gd" id="6_n73t5"]
 
 [sub_resource type="Resource" id="Resource_11me4"]
 script = ExtResource("6_n73t5")
-speed_max = 2.0
-acceleration = 12.0
-friction = 12.0
 metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
 
 [sub_resource type="Resource" id="Resource_fsfhq"]
 script = ExtResource("6_n73t5")
-speed_max = 2.0
-acceleration = 12.0
-friction = 12.0
 metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyii7"]
 
-[node name="DialogueSystem" type="Node" node_paths=PackedStringArray("dialogue_ui", "player_controller")]
+[node name="DialogueSystem2" type="Node"]
 script = ExtResource("1_8rghh")
-npc_json_file = ExtResource("2_lksov")
-monster_json_file = ExtResource("3_cyii7")
-dialogue_ui = NodePath("DialogueSystemUI")
-player_controller = NodePath("PlayerController")
 metadata/_custom_type_script = "uid://yr8c14qo708p"
 
 [node name="DialogueSystemUI" parent="." instance=ExtResource("2_8rghh")]

@@ -43,6 +43,10 @@ func generate(data: MapData, zone_seeds: Array[Vector2i]):
 			
 			for seed in zone_seeds:
 				var dist = current_pos.distance_to(seed)
+				# Warp distance with noise for organic borders
+				var noise_val = data.noise.get_noise_2d(current_pos.x * 2.0, current_pos.y * 2.0)
+				dist += noise_val * 25.0 
+				
 				if dist < min_dist:
 					min_dist = dist
 					closest_seed = seed

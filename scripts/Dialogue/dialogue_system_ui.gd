@@ -1,7 +1,9 @@
-class_name DialogueSystemUI extends Control
+class_name DialogueSystemUI extends CanvasLayer
 
-signal dialogue_closed 
-signal player_answered(mood: DialogueSystem.Mood)
+var QuestGiver : PNJ
+
+signal dialogue_closed(questGiver : PNJ)
+signal player_answered(mood: DialogueSystem.Mood, questGiver : PNJ)
 
 @export_group("UI Bindings")
 @export var dialogue_text: RichTextLabel
@@ -23,7 +25,22 @@ var is_typing: bool = false
 var is_interaction_mode: bool = false
 var current_tween: Tween
 
+static var instance : DialogueSystemUI
+
+func _enter_tree():
+	if instance != null:
+		push_warning("Attention : Deux DialogueSystemUI existent en même temps !")
+		queue_free()
+		return
+	instance = self
+
+func _exit_tree():
+	if instance == self:
+		instance = null
+		
+
 func _ready():
+	visible = false
 	response_container.visible = false
 	
 	btn_intimidate.pressed.connect(_on_response_pressed.bind(DialogueSystem.Mood.INTIMIDATING))
@@ -32,14 +49,15 @@ func _ready():
 
 	click_button.pressed.connect(_on_bubble_clicked)
 
-
+func _initNewDialog(questGiver : PNJ) :
+	QuestGiver = questGiver
+	
 func _on_bubble_clicked():
 	if is_typing:
 		if current_tween:
 			current_tween.kill()
 		dialogue_text.visible_ratio = 1.0
 		is_typing = false
-		
 	else:
 		if not text_queue.is_empty():
 			_display_next_line()
@@ -50,14 +68,13 @@ func _on_bubble_clicked():
 				close_dialogue()
 
 func _on_response_pressed(mood: DialogueSystem.Mood):
-	player_answered.emit(mood)
-	close_dialogue()
+	player_answered.emit(mood, QuestGiver)
 
 func close_dialogue():
 	visible = false
-	dialogue_closed.emit()
+	dialogue_closed.emit(QuestGiver)
 
-func show_intro_dialogue(text: String):
+func show_non_interractive_dialogue(text: String):
 	is_interaction_mode = false
 	start_dialogue_sequence(text, false)
 

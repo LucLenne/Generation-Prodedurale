@@ -1,37 +1,82 @@
-class_name Player extends CharacterBody2D
+class_name Player extends PlayerController
 static var Instance : Player
 
-@export var speed: float = 100.0
-@export var _inventory : Array[CollectibleBase]
+var _quest_book_ui = preload("res://scripts/UI/quest_book_ui.gd")
 
 func _enter_tree():
-	if Instance == null:
-		Instance = self
+	if Instance != null:
+		push_warning("Attention : Deux Player existent en même temps !")
+		queue_free()
+		return
+	Instance = self
 
+func _exit_tree():
+	if Instance == self:
+		Instance = null
+		
 func _ready():
-	$Camera2D.make_current()
+	super._ready()
+	
+	# Assign main sprite for rotation logic in base class
+	main_sprite = $Sprite2D
+	
+	# Set Fixed orientation to prevent rotation
+	orientation = ORIENTATION.FIXED
+	
+	# Setup default movement if not assigned in Inspector
+	if default_movement == null:
+		default_movement = MovementParameters.new()
+		default_movement.speed_max = 400.0 # Much faster
+		default_movement.acceleration = 2500.0 # Very snappy
+		default_movement.friction = 2000.0
+	
+	_current_movement = default_movement
+	
+	## Camera setup is handled by WorldGenerator now, but we can ensure internal cam is off
+	#$Camera2D.enabled = false
 
-
+func _process(delta: float) -> void:
+	super._process(delta) # Handles state updates
+	
+	if(Input.is_action_pressed("open_inventory")):
+		QuestBookUI.Instance.visible = !QuestBookUI.Instance.visible
 
 func _physics_process(delta):
-	var direction = Vector2.ZERO
+	# Map Input to _direction for CharacterBase
+	var input_dir = Vector2.ZERO
+	if Input.is_action_pressed("Up"): input_dir.y -= 1
+	if Input.is_action_pressed("Down"): input_dir.y += 1
+	if Input.is_action_pressed("Left"): input_dir.x -= 1
+	if Input.is_action_pressed("Right"): input_dir.x += 1
 	
-	if direction == Vector2.ZERO:
-		if Input.is_action_pressed("Up"): direction.y -= 1
-		if Input.is_action_pressed("Down"): direction.y += 1
-		if Input.is_action_pressed("Left"): direction.x -= 1
-		if Input.is_action_pressed("Right"): direction.x += 1
-		direction = direction.normalized()
-	if(Input.is_action_just_pressed("open_inventory")):
-		QuestBookUi.visible = !QuestBookUi.visible
-	velocity = direction * speed
-	move_and_slide()
+	_direction = input_dir.normalized()
 	
+	# Call base physics (velocity calc + move_and_slide)
+	super._physics_process(delta)
+	
+	# Camera updates
 	if velocity != Vector2.ZERO:
-		pass
+		var world_gen = get_parent()
+		if world_gen and world_gen.has_method("update_camera_limits"):
+			world_gen.update_camera_limits(global_position)
 		
 	detect_biome()
+	
+	if Input.is_key_pressed(KEY_C):
+		if not _c_pressed:
+			_c_pressed = true
+			var world_gen = get_parent()
+			if world_gen and world_gen.has_method("toggle_camera"):
+				world_gen.toggle_camera()
+	else:
+		_c_pressed = false
 
+func _update_state(delta : float):
+	# Logic specific to player state?
+	# For now, just keep it simple or delegate to base
+	pass
+
+var _c_pressed : bool = false
 var current_biome_name: String = ""
 
 func detect_biome():

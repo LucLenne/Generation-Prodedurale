@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuce4ii08v1rv"]
+
+[ext_resource type="Script" uid="uid://d3v6selq7myvq" path="res://scripts/Tombstone/epitaphe_system.gd" id="1_15l1k"]
+[ext_resource type="Texture2D" uid="uid://d16glphbdsfp8" path="res://scenes/sprites/Tilemap/colored_tilemap.png" id="2_cxlyk"]
+[ext_resource type="FontFile" uid="uid://bsj5qrm4y2nek" path="res://scenes/sprites/Minecraftia-Regular.ttf" id="3_15l1k"]
+
+[node name="EpitahpSystem" type="MarginContainer"]
+clip_contents = true
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 73.0
+offset_bottom = 33.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_15l1k")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_cxlyk")
+region_rect = Rect2(134, 27, 9, 8)
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_15l1k")
+theme_override_font_sizes/font_size = 8
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="finished_displaying" from="." to="." method="_on_finished_displaying"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

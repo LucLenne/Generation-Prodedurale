@@ -5,12 +5,15 @@ class_name Enemy extends CharacterBase
 @export var detection_radius : float = 200.0
 @export var attack_distance : float = 40.0
 @export var attack_warm_up : float = 0.5
+@export var chase_limit_distance : float = 300.0
 
+var start_position : Vector2
 var target : Node2D
 var _state_timer : float = 0.0
 
 func _ready() -> void:
 	super._ready()
+	start_position = global_position
 	_set_state(STATE.IDLE)
 
 func _process(delta: float) -> void:
@@ -40,7 +43,10 @@ func _update_state(delta : float) -> void:
 		STATE.CHASE:
 			if is_instance_valid(target):
 				var dist = global_position.distance_to(target.global_position)
-				if dist <= attack_distance:
+				if global_position.distance_to(start_position) > chase_limit_distance:
+					target = null
+					_set_state(STATE.RETURN)
+				elif dist <= attack_distance:
 					_start_attack()
 				elif dist > detection_radius * 2.0: # Abandon chase if too far
 					target = null
@@ -50,14 +56,25 @@ func _update_state(delta : float) -> void:
 			else:
 				# Target lost or dead
 				_set_state(STATE.IDLE)
-				
+		
+		STATE.RETURN:
+			var dist = global_position.distance_to(start_position)
+			if dist < 5.0:
+				_set_state(STATE.IDLE)
+				_direction = Vector2.ZERO
+			else:
+				_direction = (start_position - global_position).normalized()
+
 		STATE.ATTACKING:
 			# Attente du warm_up avant de spawn la hitbox
 			_direction = Vector2.ZERO
 			if _state_timer >= attack_warm_up:
 				_spawn_attack_scene()
 				# Après l'attaque, on retourne en chasse ou idle
-				_set_state(STATE.CHASE if is_instance_valid(target) else STATE.IDLE)
+				if is_instance_valid(target) and global_position.distance_to(start_position) <= chase_limit_distance:
+					_set_state(STATE.CHASE)
+				else:
+					_set_state(STATE.RETURN)
 		
 		STATE.DEAD:
 			_direction = Vector2.ZERO

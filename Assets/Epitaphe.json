@@ -1,6 +1,6 @@
 {
   "origin": [
-	"#setPronouns##début.capitalize.heroGender# #distinction.heroGender# #nom#, #épitaphe#."
+	"#setPronouns##début.capitalize.heroGender# #distinction.heroGender# #nom#,&& #épitaphe#."
   ],
 
   "début": [
@@ -161,7 +161,7 @@
 		"#action.heroGender# lentement par de viles zombies",
 		"#action.heroGender# pour trahison",
 		"#action.heroGender# dans son sommeil",
-		"ne nous embêtera plus",
+		"#heroSubj# ne nous embêtera plus",
 		"au revoir vieil ami",
 		"chut ! mieux vaut ne pas #heroObj# réveiller",
 		"#action.heroGender# injustement par de terribles monstres",

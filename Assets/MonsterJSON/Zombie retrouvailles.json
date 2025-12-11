@@ -1,10 +1,10 @@
 {
 	"introIntimidation": [
-		"#propriétaire# ? je ne veut pas le voir ",
-		"#propriétaire# s'inquiète pour moi ?",
-		"dit a #propriétaire# d'aller se faire voir",
+		"#proprietaire# ? je ne veut pas le voir ",
+		"#proprietaire# s'inquiète pour moi ?",
+		"dit a #proprietaire# d'aller se faire voir",
 		"#donneurquete# ? jamais entendu parlé. ",
-		"j'men fou de #propriétaire#",
+		"j'men fou de #proprietaire#",
 		
 	],
 	
@@ -22,10 +22,10 @@
 		"ya aucun arrangement possible"
 	],
 	"introAmical": [
-		"#propriétaire# ? ",
-		"#propriétaire# se fais du soucis ?",
-		"c'est #propriétaire# qui t'envoie ?",
-		"oh ! #propriétaire# ?",
+		"#proprietaire# ? ",
+		"#proprietaire# se fais du soucis ?",
+		"c'est #proprietaire# qui t'envoie ?",
+		"oh ! #proprietaire# ?",
 		"",
 		
 	],
@@ -45,10 +45,10 @@
 	],
 
 	"introPersuasif": [
-		"hmm, #propriétaire# ? je vois. ",
-		"tu vien défendre les interêts de #propriétaire# ?",
-		"je comprend tout a fait la requête de #propriétaire# mais",
-		"oui, ton client, #propriétaire#.",
+		"hmm, #proprietaire# ? je vois. ",
+		"tu vien défendre les interêts de #proprietaire# ?",
+		"je comprend tout a fait la requête de #proprietaire# mais",
+		"oui, ton client, #proprietaire#.",
 		
 	],
 	
@@ -82,7 +82,7 @@
 	],
 	
 	
-	"replique_intimidation": [
+	"replique_intimidant": [
 		"#zombish# #introIntimidation# #zombish# #suiteIntimidation# #finIntimidation# #zombish#"
 	],
 	

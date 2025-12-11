@@ -13,7 +13,7 @@
 		"#politesse_intimidant# #jmapl#.&&#demande_intimidant#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def#.&&#conclusion_intimidant#"
 	],
 	"intro_quete_amical": [
-		"#heroSubj##heroSubj##heroSubj##heroSubj##rela##rela##rela##rela##politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.indef#.&&#heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_amical#"
+		"#politesse_Amical# #jmapl#.&&#demande_amical#. C'est #type_monstre.indef#.&&#heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_amical#"
 	],
 	"intro_quete_persuasif": [
 		"#politesse_persuasif# #jmapl#.&&#demande_persuasif#. C'est #type_monstre.indef#.&& #heroSubj# #parti# #direction.def# #complement_parti#.&&#conclusion_persuasif#"
@@ -23,14 +23,14 @@
 		"Non mais tu te prends pour qui ?",
 		"Tu crois que tu me fais peur sale #insulte# ?",
 		"Venir me menacer chez moi ? t'as du culot,",
-		"Je suis vraiment très intéressé par ce que tu me dis."
+		"Ta grand mère non ?"
 		
 	],
 	"retour_echec_intimidant_part2": [
 		"Dégage de là avant que j't'assome!",
 		"maintenant casses toi.",
 		"Venir me menacer chez moi ? t'as du culot,",
-		"Je suis vraiment très intéressé par ce que tu me dis."
+		"Aller casse toi #insulte# de #insulte"
 		
 	],
 	

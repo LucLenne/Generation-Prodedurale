@@ -37,6 +37,24 @@ QuestTypeEnabeling = Dictionary[int, bool]({
 
 [node name="Interractable" parent="." instance=ExtResource("5_8hmlm")]
 
+[node name="Direction" type="Node" parent="."]
+
+[node name="North" type="Marker2D" parent="Direction"]
+position = Vector2(0, -50)
+gizmo_extents = 9.0
+
+[node name="East" type="Marker2D" parent="Direction"]
+position = Vector2(50, 0)
+gizmo_extents = 9.0
+
+[node name="South" type="Marker2D" parent="Direction"]
+position = Vector2(0, 50)
+gizmo_extents = 9.0
+
+[node name="West" type="Marker2D" parent="Direction"]
+position = Vector2(-50, 0)
+gizmo_extents = 9.0
+
 [connection signal="OnPlayerInterract" from="Interractable" to="DialogueSystem" method="_on_interractable_on_player_interract"]
 
 [editable path="Interractable"]

@@ -6,7 +6,6 @@ class_name QuestManager extends Node
 @export var list_collectibles : Array[CollectibleBase]
 @export var list_biomes : Array[String]
 @export var _type_ennemies : Array[PackedScene]
-@export var _directions : Array[Node2D]
 
 var _typeQuest : Array[Script] = [TalkQuest]
 var _activeQuest : Array[QuestBase]
@@ -62,11 +61,11 @@ func GetPNJ() -> PNJ:
 	return pnj
 	
 	
-func SpawnPNJ(dir : DialogueSystem.Directions, Name : String) -> PNJ:
+func SpawnPNJ(dir : DialogueSystem.Directions, Name : String, questGiver : PNJ) -> PNJ:
 	var scene_pnj : PackedScene = _type_ennemies.pick_random() 
 	var pnj = scene_pnj.instantiate()
 	if pnj is PNJ:
-		pnj.position = _pos_dir(dir)
+		pnj.position = questGiver._get_direction_position(dir)
 		pnj.Name = Name
 		return pnj
 	return 
@@ -92,22 +91,22 @@ func _init_list_npc():
 		if child is PNJ:
 			_pnj.append(child)
 
-func _pos_dir(dir : DialogueSystem.Directions) -> Vector2:
-	match dir:
-		DialogueSystem.Directions.NORD:
-			var north =  _directions[0]
-			if north is Node2D:
-				return north.position
-		DialogueSystem.Directions.EST:
-			var est =  _directions[1]
-			if est is Node2D:
-				return est.position
-		DialogueSystem.Directions.SUD:
-			var sud =  _directions[2]
-			if sud is Node2D:
-				return sud.position
-		DialogueSystem.Directions.OUEST:
-			var ouest =  _directions[3]
-			if ouest is Node2D:
-				return ouest.position
-	return Vector2.ZERO
+#func _pos_dir(dir : DialogueSystem.Directions) -> Vector2:
+	#match dir:
+		#DialogueSystem.Directions.NORD:
+			#var north =  _directions[0]
+			#if north is Node2D:
+				#return north.position
+		#DialogueSystem.Directions.EST:
+			#var est =  _directions[1]
+			#if est is Node2D:
+				#return est.position
+		#DialogueSystem.Directions.SUD:
+			#var sud =  _directions[2]
+			#if sud is Node2D:
+				#return sud.position
+		#DialogueSystem.Directions.OUEST:
+			#var ouest =  _directions[3]
+			#if ouest is Node2D:
+				#return ouest.position
+	#return Vector2.ZERO

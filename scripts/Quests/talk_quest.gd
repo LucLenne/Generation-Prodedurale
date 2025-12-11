@@ -11,12 +11,14 @@ func init() -> void :
 		ManagerQuest._delete_quest_UI(id)
 		return
 	pnj.create_dialogue()
+	pnj.current_quest = self
 	
 
 	var quest_data = pnj.dialogue_system.current_quest_data
 	var Direction = pnj.dialogue_system._string_to_direction_enum(quest_data["target_direction"])
 	
-	enemy = ManagerQuest.SpawnPNJ(Direction, quest_data["target_name"])
+	pnj.name = quest_data["owner_name"]
+	enemy = ManagerQuest.SpawnPNJ(Direction, quest_data["target_name"], pnj)
 	pnj.dialogue_system.targetInterractable = enemy.get_node("Interractable")
 	
 	var QuestGiverDialogueSystem: DialogueSystem = pnj.dialogue_system

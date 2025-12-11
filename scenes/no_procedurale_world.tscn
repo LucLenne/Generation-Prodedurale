@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://dwhtkltr0pm6f"
 [node name="NoProceduraleWorld" type="Node2D"]
 
 [node name="DialogueSystemUI" parent="." instance=ExtResource("7_61t4g")]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(123, -31)

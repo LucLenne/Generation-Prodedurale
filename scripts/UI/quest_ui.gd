@@ -7,8 +7,7 @@ var id : int
 
 
 func _init() -> void :
-	while(Text == ""):
-		_try_init_value()
+	_try_init_value()
 	
 	
 func _try_init_value() -> void:

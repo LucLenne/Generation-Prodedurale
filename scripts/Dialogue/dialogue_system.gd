@@ -232,7 +232,7 @@ func _on_dialogue_closed(questGiver : PNJ):
 			targetInterractable.showLabel = false
 			if _last_success:
 				if pnj and pnj.current_quest:
-					pnj.current_quest.valid_quest()
+					pnj.current_quest._valid_quest()
 					quest_ended = true
 			else:
 				is_second_chance = true
@@ -242,7 +242,7 @@ func _on_dialogue_closed(questGiver : PNJ):
 		elif is_second_chance:
 			if _last_success:
 				if pnj and pnj.current_quest:
-					pnj.current_quest.valid_quest()
+					pnj.current_quest._valid_quest()
 					quest_ended = true
 				is_second_chance = false
 			else:
@@ -257,8 +257,7 @@ func _on_dialogue_closed(questGiver : PNJ):
 		interractable.showLabel = false
 		targetInterractable.showLabel = true
 		ManagerQuest.ActiveQuest(pnj.current_quest)
-			
-			
+
 
 var _last_success : bool = false
 

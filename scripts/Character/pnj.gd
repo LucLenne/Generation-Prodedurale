@@ -4,8 +4,7 @@ class_name PNJ extends CharacterBase
 
 var current_quest: QuestBase
 var has_active_quest: bool = false 
-
-
+@onready var dialogue_system : DialogueSystem = $DialogueSystem
 @onready var quest_indicator_label: Label = $QuestIndicatorLabel # Assurez-vous que le chemin du Node est correct, ici j'utilise @onready
 
 func _update_state(_delta : float):
@@ -18,7 +17,7 @@ func _ready():
 		pass
 
 func create_dialogue():
-	QuestGiverDialogueSystem.generate_new_quest()
+	dialogue_system.generate_new_quest()
 
 func active_quest():
 	QuestGiverDialogueSystem.active

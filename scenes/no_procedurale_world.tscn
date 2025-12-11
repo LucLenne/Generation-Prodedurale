@@ -35,10 +35,16 @@ Name = null
 emotion = null
 
 [node name="PNJ" parent="." instance=ExtResource("5_loppu")]
-position = Vector2(494, 332)
+position = Vector2(505, 357)
 
 [node name="PNJ2" parent="." instance=ExtResource("5_loppu")]
-position = Vector2(506, 370)
+position = Vector2(438, 370)
 
 [node name="PNJ3" parent="." instance=ExtResource("5_loppu")]
-position = Vector2(566, 334)
+position = Vector2(569, 387)
+
+[node name="PNJ4" parent="." instance=ExtResource("5_loppu")]
+position = Vector2(594, 321)
+
+[node name="PNJ5" parent="." instance=ExtResource("5_loppu")]
+position = Vector2(477, 297)

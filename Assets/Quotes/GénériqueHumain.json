@@ -1,0 +1,112 @@
+{
+  "origin": [
+	"#setPronouns##salutation.capitalize.heroGender#&& #phrase1#&& #conclusion#."
+  ],
+
+  "salutation": [
+	"Salut jeune homme",
+	"Bonjour, chèr compagnon",
+	"Ohé, toi ! On t’voit d’loin, tu sais.",
+	"kestuveu toi ?",
+	"...",
+	"Bonjour voyageur! Quelle ignoble journée n'est-ce-pas ?",
+	"Oh! Un médiateur,on en voit pas souvent.",
+	"Gloupgloup !! Laisse moi boire en paix étrangé !",
+	"J'suis pas encort mort...",
+	"j'suis vraiment pas d'humeur...",
+	"",
+	"",
+	""
+	
+  ],
+ 
+  "phrase1": [
+		"Tu me dérange.",
+		"Vas-t-en.",
+		"Tu me veux quoi?",
+		"Dégage.",
+		"Je bois là.",
+		"J'ai perdu #objet.indef#.",
+		"Je trouve plus mon pouce, je l'ai cherché partout dans les bois.",
+		"laisse moi, je cherche mon fils.",
+		"Touche pas à ma bouteille.",
+		"joli chemise que vous avez ici! C'est du sang dessus?",
+		"Qu'est ce que tu penses de la politique actuelle de Lunepart ?",
+		"Avant, je travaillais pour le service funéraire, mais j'ai arrêté.",
+		"Toi aussi des fois tu sens comme si ton âme, c'était enfait #objet.indef#?",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+		
+	],
+  
+  "objet": [
+		"^poubelle",
+		"!sale gosse",
+		"!chat",
+		"!pouce",
+		"!pantalon",
+		"!ami",
+		"!sac de chair",
+		"^chemise",
+		"^fleur"
+		
+	],
+  
+	
+	"optionnel":[
+		"de ma mère",
+		"de mon père",
+		"en prison",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+	],
+	
+	"zombish": [
+		"...",
+		"cluck",
+		"ah...",
+		"..skluc...",
+		" tlic...",
+		"..cluckclik...",
+		"..clkclk..",
+	],
+	
+  "conclusion": [
+		"ça donne soif de parler autant héhé",
+		"C'est bon j'en ai marre de te parler",
+		"Bon, c'est pas tout mais faut que je retrouve #objet.poss_m#",
+		"laisse moi dormir maintenant.&& Ouais j'ai pas de lit et alors ?",
+		"Tu comprend ce que j'essaye de te dire ?",
+		"Aller je retourne aux toilette moi.",
+		"...y a trop de courant d'air ici...",
+		"Pourquoi tu restes là à me regarder sans rien dire ?",
+		"Ouais...&& Ouais ouais ouais...&& ...&& C'est pas très marrant de parler avec toi hein?",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		""
+	],
+	
+  "setPronouns": [
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
+		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
+	],
+	
+  
+		
+	
+  
+}

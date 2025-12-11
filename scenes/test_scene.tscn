@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://2i7imvprbpwm"]
+[gd_scene load_steps=7 format=3 uid="uid://2i7imvprbpwm"]
 
 [ext_resource type="Script" uid="uid://6e7guym14skf" path="res://scenes/test_scene.gd" id="1_7ddre"]
 [ext_resource type="PackedScene" uid="uid://0p75vujhhefy" path="res://scenes/Tombstone/Tombstone.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://ttl1qa1b0t4f" path="res://scenes/character/player.tscn" id="2_nd71p"]
+[ext_resource type="JSON" path="res://Assets/Epitaphes.json" id="3_3qnke"]
 [ext_resource type="PackedScene" uid="uid://ct6nvsrsswmct" path="res://scenes/generation/NPC.tscn" id="3_nd71p"]
 [ext_resource type="PackedScene" uid="uid://bfcmgquain0r4" path="res://scenes/Dialogue/dialogue_system_ui.tscn" id="5_qjeyg"]
 
@@ -11,6 +12,7 @@ script = ExtResource("1_7ddre")
 
 [node name="PierreTombale" parent="." instance=ExtResource("1_j8ivh")]
 position = Vector2(332, 203)
+EpitaphJson = ExtResource("3_3qnke")
 
 [node name="Player" parent="." instance=ExtResource("2_nd71p")]
 position = Vector2(277, 217)

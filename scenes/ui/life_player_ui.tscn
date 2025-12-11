@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://t7ejye8cdncd"]
+[gd_scene load_steps=6 format=3 uid="uid://dafag2j5ylgha"]
 
 [ext_resource type="Script" path="res://scripts/UI/life_player_ui.gd" id="1_aetms"]
 [ext_resource type="Texture2D" uid="uid://coomnanjg4knk" path="res://scenes/sprites/placeholder.png" id="1_fpavo"]
@@ -13,28 +13,25 @@ region = Rect2(40, 0, 8, 8)
 script = ExtResource("1_aetms")
 
 [node name="background" type="TextureRect" parent="."]
-anchors_preset = -1
-anchor_left = 0.9
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.075
+offset_left = -117.0
+offset_bottom = 43.0
 grow_horizontal = 0
 texture = ExtResource("1_fpavo")
 
-[node name="heart" type="TextureRect" parent="."]
+[node name="number_life" type="Label" parent="background"]
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.9600694
-anchor_top = 0.0061728396
-anchor_right = 0.9965278
-anchor_bottom = 0.06790123
-grow_horizontal = 0
-texture = SubResource("AtlasTexture_qbaqa")
-
-[node name="number_life" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.9088542
-anchor_top = 0.010802469
-anchor_right = 0.9583333
-anchor_bottom = 0.074074075
+anchor_left = 0.96093744
+anchor_top = 0.0313786
+anchor_right = 1.0104166
+anchor_bottom = 0.09465017
+offset_left = -94.49999
+offset_top = 6.475
+offset_right = -73.895744
+offset_bottom = 36.968826
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_aetms")
@@ -43,3 +40,17 @@ text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="heart" type="TextureRect" parent="background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9600694
+anchor_top = 0.0061728396
+anchor_right = 0.9965278
+anchor_bottom = 0.06790123
+offset_left = -52.399994
+offset_top = 3.7
+offset_right = -22.599998
+offset_bottom = 35.7
+grow_horizontal = 0
+texture = SubResource("AtlasTexture_qbaqa")

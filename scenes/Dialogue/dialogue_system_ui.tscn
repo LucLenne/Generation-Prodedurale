@@ -98,6 +98,7 @@ text = "i love my job, i love my job,i love my job ,i love my job ,i love my job
 layout_mode = 2
 focus_mode = 0
 flat = true
+autowrap_mode = 3
 
 [node name="ResponseButtons" type="HBoxContainer" parent="."]
 anchors_preset = 12
@@ -122,6 +123,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_t5me1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_wpcr7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4vmct")
 text = "Je suis intimidant "
+autowrap_mode = 3
 
 [node name="BtnFriendly" type="Button" parent="ResponseButtons"]
 custom_minimum_size = Vector2(200, 0)
@@ -132,6 +134,7 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_y4yf4")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_anckf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6fprb")
 text = "Je suis amical"
+autowrap_mode = 3
 
 [node name="BtnPersuade" type="Button" parent="ResponseButtons"]
 custom_minimum_size = Vector2(200, 0)
@@ -142,3 +145,4 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_425yg")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_625c0")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rcdeh")
 text = "Je suis persuasif"
+autowrap_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bn0tpbonr0m81"]
 
 [ext_resource type="Script" uid="uid://ceo03ys1xgg7" path="res://scripts/Character/Zombie.gd" id="1_ocl7y"]
-[ext_resource type="Texture2D" uid="uid://cplrajd73ii3d" path="res://scenes/sprites/Tiles/Colored/tile_0006.png" id="2_sprite"]
+[ext_resource type="Texture2D" uid="uid://bq0tfjf1nkply" path="res://scenes/sprites/Tiles/Colored/tile_0011.png" id="2_ocl7y"]
 [ext_resource type="PackedScene" uid="uid://dt1s722ml5xdj" path="res://scenes/Dialogue/DialogueSystem.tscn" id="4_nef7k"]
 [ext_resource type="PackedScene" uid="uid://clsjugqie7jn8" path="res://Interractable.tscn" id="5_8hmlm"]
 
@@ -12,7 +12,7 @@ radius = 4.0
 script = ExtResource("1_ocl7y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_sprite")
+texture = ExtResource("2_ocl7y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_zombie")

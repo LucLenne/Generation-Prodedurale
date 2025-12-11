@@ -20,6 +20,7 @@ func _fail_quest()-> void:
 func _give_reward()-> void:
 	if Player.Instance:
 		Player.Instance.heal(1) # Ajoute 1 PV en récompense
+		print("Quest Reward! +1 HP. Current Health: ", Player.Instance.life)
 	
 func init() -> void:
 	pass

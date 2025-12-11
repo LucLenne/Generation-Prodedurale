@@ -1,24 +1,24 @@
 {
 	"introIntimidation": [
-		"#proprietaire# ? je ne veut pas le voir ",
+		"#proprietaire# ? je ne veux pas le voir ",
 		"#proprietaire# s'inquiète pour moi ?",
-		"dit a #proprietaire# d'aller se faire voir",
-		"#proprietaire# ? jamais entendu parlé. ",
-		"j'men fou de #proprietaire#",
+		"dit à #proprietaire# d'aller se faire voir",
+		"#proprietaire# ? Jamais entendu parlé. ",
+		"j'm'en fous de #proprietaire#",
 		
 	],
 	
 	"suiteIntimidation": [
 		"je vais rester ici",
 		"je ne veut pas le voir",
-		"j'irais nul part ailleur",
+		"j'irais nul part ailleurs",
 		"si il veut me voir qu'il vienne"
 	],
 	
 	"finIntimidation": [
-		"et tu vas rien faire dutout !",
+		"et tu vas rien faire du tout !",
 		"j'en ai rien a faire de ton avis",
-		"dégage avant que je te bouffe",
+		"dégages avant que je te bouffe",
 		"ya aucun arrangement possible"
 	],
 	"introAmical": [
@@ -73,7 +73,7 @@
 		"ah...",
 		"..burp...",
 		" gaaah...",
-		"CERVEAUUUUUU",
+		"CERVEAUUUUUU...",
 		"",
 		"",
 		"",
@@ -93,18 +93,18 @@
 		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
 	"retour_victoire_persuasif": [
-		"okay, tu m'a convaincu, je retourne chez #proprietaire#", "tu sais bien parler toi !&& j'accepte "
+		"okay, tu m'as convaincu, je retourne chez #proprietaire#", "tu sais bien parler toi !&& j'accepte "
 	],
 	"retour_victoire_intimidant": [
-		"D'accord, D'accord pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
+		"D'accord... pas besoin d'être aussi violent", "okay j'y retourne mais pitié ne me fait pas de mal"
 	],
 	
 	"retour_victoire_amical": [
-		"D'accord, mais c'est bien parceque t'a l'air sympa.", "d'accord, j'ai hate de revoir #proprietaire# !"
+		"D'accord, mais c'est bien parce que t'as l'air sympa.", "d'accord, j'ai hâte de revoir #proprietaire# !"
 	],
 	
 	"retour_echec_persuasif": [
-		"je comprend t'es arguments, mais c'est non."
+		"je comprends tes arguments, mais c'est non."
 	],
 	"retour_echec_intimidant": [
 		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
@@ -113,13 +113,13 @@
 		"c'est vraiment très gentil mais non merci."
 	],
 	"btn_intimidation": [
-		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi"
+		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi."
 	],
 	"btn_amical": [
-		"#proprietaire# tien vraiment a toi, reviens.", "Tu traversse une tempête emotionelle, et c'est O.K"
+		"#proprietaire# tient vraiment à toi, reviens.", "Tu traverses une tempête émotionnelle, et c'est O.K"
 	],
 	"btn_persuasion": [
-		"selon l'article 27 du code du service funéraire, tu doit rentrer", "#proprietaire# te payera grassement si tu vien revien"
+		"selon l'article 27 du code du service funéraire, tu dois rentrer", "#proprietaire# te payera grassement si tu reviens."
 		
 		
 	]

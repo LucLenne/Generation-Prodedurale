@@ -3,7 +3,7 @@
 		"#proprietaire# ? je ne veut pas le voir ",
 		"#proprietaire# s'inquiète pour moi ?",
 		"dit a #proprietaire# d'aller se faire voir",
-		"#donneurquete# ? jamais entendu parlé. ",
+		"#proprietaire# ? jamais entendu parlé. ",
 		"j'men fou de #proprietaire#",
 		
 	],
@@ -73,7 +73,7 @@
 		"ah...",
 		"..burp...",
 		" gaaah...",
-		"",
+		"CERVEAUUUUUU",
 		"",
 		"",
 		"",
@@ -92,17 +92,32 @@
 	"replique_persuasif": [
 		"#zombish# #introPersuasif# #zombish# #suitePersuasif# #finPersuasif# #zombish#"
 	],
-	"reaction_victoire": [
+	"retour_victoire_persuasif": [
 		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
 	],
-	"reaction_echec": [
+	
+	"retour_victoire_intimidant": [
+		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+	],
+	
+	"retour_victoire_amical": [
+		"D'accord, d'accord...&&Tu as gagné.&&Je m'en vais de chez #proprietaire#."
+	],
+	
+	"retour_echec_persuasif": [
+		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+	],
+	"retour_echec_intimidant": [
+		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
+	],
+	"retour_echec_amical": [
 		"Hahaha ! Tu es pathétique !&&Dégage avant que je ne m'énerve vraiment !"
 	],
 	"btn_intimidation": [
-		"(Force)Sors d'ici tout de suite !"
+		"Tu vas venir avec moi tout de suite !", "ta gueule ! suis moi"
 	],
 	"btn_amical": [
-		"(Calme) Tout va bien se passer, viens."
+		"#proprietaire# tien vraiment a toi, reviens.", "Tu traversse une tempête emotionelle, et c'est O.K"
 	],
 	"btn_persuasion": [
 		"(Négo) Tu n'as légalement aucun droit ici."

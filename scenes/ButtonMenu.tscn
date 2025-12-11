@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy8e51dnea48x"]
+
+[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="1_s1utn"]
+[ext_resource type="Script" uid="uid://wdqiskeh2tri" path="res://scripts/UI/ButtonMenu.gd" id="1_script"]
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(200, 60)
+offset_right = 200.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_s1utn")
+text = "BUTTON"
+script = ExtResource("1_script")

@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://csvkd5b4xvahn"]
+
+[ext_resource type="Script" uid="uid://bw0y15slj5l6n" path="res://scripts/Character/pnj.gd" id="1_hgjgv"]
+[ext_resource type="Texture2D" uid="uid://bobdbroo70rrq" path="res://scenes/sprites/Tiles/Colored/tile_0005.png" id="2_unudr"]
+[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="3_tipdn"]
+[ext_resource type="PackedScene" uid="uid://dt1s722ml5xdj" path="res://scenes/Dialogue/DialogueSystem.tscn" id="4_dgn37"]
+[ext_resource type="PackedScene" uid="uid://clsjugqie7jn8" path="res://Interractable.tscn" id="5_jot2r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_npc"]
+radius = 5.0990195
+
+[node name="PNJ" type="CharacterBody2D"]
+script = ExtResource("1_hgjgv")
+metadata/_custom_type_script = "uid://bw0y15slj5l6n"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_unudr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_npc")
+
+[node name="quest" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 36.0
+offset_bottom = 19.0
+scale = Vector2(0.1999991, 0.24000001)
+theme_override_fonts/font = ExtResource("3_tipdn")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DialogueSystem" parent="." instance=ExtResource("4_dgn37")]
+QuestTypeEnabeling = Dictionary[int, bool]({
+0: true
+})
+
+[node name="Interractable" parent="." instance=ExtResource("5_jot2r")]
+
+[node name="Direction" type="Node2D" parent="."]
+
+[node name="North" type="Marker2D" parent="Direction"]
+position = Vector2(0, -50)
+gizmo_extents = 9.0
+
+[node name="East" type="Marker2D" parent="Direction"]
+position = Vector2(50, 0)
+gizmo_extents = 9.0
+
+[node name="South" type="Marker2D" parent="Direction"]
+position = Vector2(0, 50)
+gizmo_extents = 9.0
+
+[node name="West" type="Marker2D" parent="Direction"]
+position = Vector2(-50, 0)
+gizmo_extents = 9.0
+
+[connection signal="OnPlayerInterract" from="Interractable" to="DialogueSystem" method="_on_interractable_on_player_interract"]
+
+[editable path="Interractable"]

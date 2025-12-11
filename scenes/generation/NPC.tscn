@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ct6nvsrsswmct"]
+[gd_scene load_steps=7 format=3 uid="uid://bim2xiya8fmh2"]
 
 [ext_resource type="Script" uid="uid://bw0y15slj5l6n" path="res://scripts/Character/pnj.gd" id="1_un5nn"]
 [ext_resource type="Texture2D" uid="uid://bobdbroo70rrq" path="res://scenes/sprites/Tiles/Colored/tile_0005.png" id="2_iqjc7"]

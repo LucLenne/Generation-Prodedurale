@@ -40,6 +40,7 @@ func _exit_tree():
 		
 
 func _ready():
+
 	visible = false
 	response_container.visible = false
 	

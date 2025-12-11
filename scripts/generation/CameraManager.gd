@@ -4,6 +4,7 @@ class_name CameraManager extends Camera2D
 @export var map_zoom : Vector2 = Vector2(0.5, 0.5)
 @export var zoom_speed : float = 5.0
 @export var move_speed : float = 5.0
+@export var limit_smoothing_speed : float = 2.5 # Faster to ensure visible switch
 @export var free_move_speed : float = 600.0
 
 var target_node : Node2D
@@ -21,7 +22,18 @@ func _ready():
 	
 	# Enable built-in smoothing for stable follow
 	position_smoothing_enabled = true
-	position_smoothing_speed = move_speed
+	position_smoothing_speed = 3.0
+	
+	# Fix Jitter: Sync camera updates with physics engine
+	process_callback = Camera2D.CAMERA2D_PROCESS_PHYSICS
+	
+	# Enable Drag Margins (Dead Zone)
+	drag_horizontal_enabled = true
+	drag_vertical_enabled = true
+	drag_left_margin = 0.1
+	drag_top_margin = 0.1
+	drag_right_margin = 0.1
+	drag_bottom_margin = 0.1
 
 func _physics_process(delta):
 	# 1. Zoom Transition
@@ -30,8 +42,8 @@ func _physics_process(delta):
 	
 	# 2. Limits Transition (Soft Limits)
 	# We interpret limit_left/top/right/bottom as a Rect2 for interpolation
-	current_limits_rect.position = current_limits_rect.position.lerp(target_limits_rect.position, move_speed * delta)
-	current_limits_rect.size = current_limits_rect.size.lerp(target_limits_rect.size, move_speed * delta)
+	current_limits_rect.position = current_limits_rect.position.lerp(target_limits_rect.position, limit_smoothing_speed * delta)
+	current_limits_rect.size = current_limits_rect.size.lerp(target_limits_rect.size, limit_smoothing_speed * delta)
 	
 	# Apply limits
 	limit_left = int(current_limits_rect.position.x)
@@ -54,10 +66,14 @@ func _process_free_roam(delta):
 	
 	global_position += direction.normalized() * free_move_speed * delta
 
+var forced_center = null
+
 func _process_follow(delta):
-	if is_instance_valid(target_node):
-		# Use built-in smoothing by just setting the target position
-		# This avoids jitter often caused by manual lerp in _process vs physics
+	# If we have a forced center (Grid Mode), aim for it
+	if forced_center != null:
+		global_position = forced_center
+	elif is_instance_valid(target_node):
+		# Standard follow
 		global_position = target_node.global_position
 
 func set_target(node: Node2D):

@@ -1,6 +1,6 @@
 class_name QuestBookUI extends CanvasLayer
 
-var _quest_ui = preload("res://scripts/UI/quest_ui.gd")
+var _quest_ui = preload("res://scenes/ui/quest_ui.tscn")
 @onready var left = $LeftPage
 @onready var friendly = $RightPage/Friendly
 @onready var intimidating = $RightPage/Intimidating

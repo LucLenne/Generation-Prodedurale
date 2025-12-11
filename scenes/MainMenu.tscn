@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbvkmpw8q1ios"]
+
+[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="1_0ykhv"]
+[ext_resource type="PackedScene" uid="uid://dy8e51dnea48x" path="res://scenes/ButtonMenu.tscn" id="1_yqorp"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.231373, 0.396078, 0.560784, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -205.0
+offset_top = 120.0
+offset_right = 206.0
+offset_bottom = 184.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_0ykhv")
+theme_override_font_sizes/font_size = 64
+text = "B.O.R.D.E.L"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Label"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -205.5
+offset_top = 64.0
+offset_right = 211.5
+offset_bottom = 87.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_0ykhv")
+text = "Base Organique Randomisée Dans un Espace Ludique"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PlayBtn" parent="VBoxContainer" instance=ExtResource("1_yqorp")]
+layout_mode = 2
+text = "JOUER"
+
+[node name="CreditBtn" parent="VBoxContainer" instance=ExtResource("1_yqorp")]
+layout_mode = 2
+text = "CRÉDITS
+"
+
+[node name="QuitBtn" parent="VBoxContainer" instance=ExtResource("1_yqorp")]
+layout_mode = 2
+text = "QUITTER"

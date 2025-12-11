@@ -6,9 +6,9 @@ var enemy : PNJ
 func init() -> void :
 	type = TYPE.TALK
 	pnj.create_dialogue()
-	pnj = ManagerQuest.Getpnj()
-	enemy = ManagerQuest.Getpnj()
-	enemy.QuestGiverDialogueSystem = pnj._dialogue_system
+	pnj = ManagerQuest.GetPNJ()
+	enemy = ManagerQuest.GetPNJ()
+	enemy.QuestGiverDialogueSystem = pnj.QuestGiverDialogueSystem
 	var quest_data = pnj._dialogue_system.current_quest_data
 	ManagerQuest.Spawn_PNJ(quest_data["target_direction"],quest_data["owner_name"])
 	title = "Tu dois réconcilier " + pnj.Name + " et " + enemy.Name + "."

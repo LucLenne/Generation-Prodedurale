@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx4wk1vqn31bo"]
+[gd_scene load_steps=3 format=3 uid="uid://6nyg2cnh4k7n"]
 
 [ext_resource type="Script" uid="uid://bmfvd66vurgsg" path="res://scripts/TestGDTraceryJSONFR&EN.gd" id="1_dm38y"]
-[ext_resource type="JSON" path="res://Assets/MonsterJSON/Zombie retrouvailles.json" id="3_dm38y"]
+[ext_resource type="JSON" path="res://Assets/GénériqueSpectre.json" id="2_7a874"]
 
 [node name="TestJSONTraceryNode" type="Node"]
 script = ExtResource("1_dm38y")
-jsonEN = ExtResource("3_dm38y")
-jsonFR = ExtResource("3_dm38y")
+jsonEN = ExtResource("2_7a874")
+jsonFR = ExtResource("2_7a874")

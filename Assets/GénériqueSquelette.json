@@ -1,17 +1,17 @@
 {
   "origin": [
-	"#setPronouns##salutation.capitalize.heroGender# #phrase1# #zombish# #text# #conclusion#."
+	"#setPronouns##salutation.capitalize.heroGender# #zombish# #text# #conclusion#."
   ],
 
   "salutation": [
 	  "Salut l'humain",
-	  "grrrr... bonjour",
-	  "miam t'a l'air apétissant",
+	  "Bon...jour",
+	  "mmh passe moi une côte",
 	  "kestuveu toi ?",
 	  "...",
-	  "Ghrrrr... Argh... salutation",
-	  "hey! tu marches sur mes tripes là !",
-	  "Bleuuuuuuurg !! Laisse moi vomir en paix étrangé !",
+	  "clic... cluc... salutation",
+	  "hey! tu marches sur mon femur là !",
+	  "Gloupgloup !! Laisse moi boire en paix étrangé !",
 	  "J'suis pas encort mort...",
 	  "j'suis vraiment pas d'humeur !",
 	
@@ -22,18 +22,19 @@
 		"vas-t-en,",
 		"tu me veux quoi,",
 		"dégage",
-		"je mange la,",
+		"je bois la,",
+		"tj'ai perdu une côte,",
+		"je trouve plus mon pouce,",
+		"laisse moi je cherche mon pied gauche,",
 	],
   
   "sujet1": [
 		"déchets de la société",
 		"sale type",
-		"bon repas",
-		"chat",
-		"mère",
-		"terre",
-		"boyaux", 
-		"cadavre",
+		"sale moche",
+		"pauvre type",
+		"bon à rien",
+		"timbré",
 	],
 	
 	"phrase2": [
@@ -42,7 +43,10 @@
 		"tu serait pas",
 		"je détèste les",
 		"tu ressemble à",
+		"tu aurais pas un os pour moi,",
 		"j'aime pas quand #sujet.indef# se comporte comme",
+		"t'aurais pas vu une mains droite trainé,",
+		"y'a trop"
 	],
   
   	"sujet2": [
@@ -55,7 +59,7 @@
 		"chat",
 		"mère",
 		"terre",
-		"boyaux", 
+		"charpentier", 
 		"cadavre",
 	],
 	
@@ -78,23 +82,22 @@
 	
 	"zombish": [
 		"...",
-		"grrr",
+		"cluck",
 		"ah...",
-		"..burp...",
-		" gaaah...",
-		"..argh...",
-		"..reuuu..",
-		"..rrrr..",
+		"..skluc...",
+		" tlic...",
+		"..cluckclik...",
+		"..clkclk..",
 	],
 	
   "conclusion": [
-		"ça donne faim héhé",
+		"ça donne soif héhé",
 		"c'est pour ça que tu devrait partir",
 		"donc casse toi !",
 		"mais les gardes m'ont chassés",
-		"c'est pour ça que ça sens mauvais",
+		"c'est pour ça que y a des troues",
 		"c'est dégeulasse",
-		"... Arhhhg",
+		"...y a trop de courant d'air ici",
 		" ",
 	],
 	

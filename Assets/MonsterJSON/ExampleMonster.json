@@ -10,24 +10,24 @@
 	],
 	
 	"retour_victoire_intimidant": [
-		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
+		"retour victoire Monstre intimidant"
 	],
 	"retour_victoire_amical": [
-		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
+		"retour victoire Monstre amical"
 	],
 	"retour_victoire_persuasif": [
-		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
+		"retour victoire Monstre persuasif"
 	],
 	
 	"retour_echec_intimidant": [
-		"Quoi ? Tu as peur ?&&Retourne là-bas et vire-le !&&Sinon c'est toi que je vire !"
+		"retour echec Monstre intimidant"
 	],
 
 	"retour_echec_amical": [
-		"Oh non... Tu n'as pas réussi ?&&Je ne sais plus quoi faire...&&Je suis désespéré..."
+		"retour echec Monstre amical"
 	],
 	"retour_echec_persuasif": [
-		"Écoute, la situation est simple : il doit partir.&&Trouve les bons arguments.&&Je te paie pour ça, pas pour échouer."
+		"retour echec Monstre persuasif"
 	],
 	
 	

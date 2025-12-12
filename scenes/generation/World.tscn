@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ba101fnwl5x8"]
+[gd_scene load_steps=48 format=3 uid="uid://ba101fnwl5x8"]
 
 [ext_resource type="Script" uid="uid://ccqp4hpxew7qw" path="res://scripts/generation/WorldGenerator.gd" id="1_gen"]
 [ext_resource type="Script" uid="uid://b55vv14byrhfe" path="res://scripts/generation/CameraManager.gd" id="3_cam"]
@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cdsnltt23q77t" path="res://scenes/generation/PNJ.tscn" id="4_npc"]
 [ext_resource type="Script" uid="uid://c27v73t3q056k" path="res://scripts/generation/BiomeResource.gd" id="4_ywfdd"]
 [ext_resource type="PackedScene" uid="uid://dovl2tbyrw1d" path="res://scenes/Quest/test/ManagerQuest.tscn" id="5_w234y"]
+[ext_resource type="AudioStream" uid="uid://du6inrjmsw8yb" path="res://MusicGame.mp3" id="6_rgbw1"]
 [ext_resource type="PackedScene" uid="uid://cekv5rwqf8jch" path="res://scenes/houses/Biome_P/MediumHouseP1.tscn" id="7_68qco"]
 [ext_resource type="PackedScene" uid="uid://c85lwwlt3138q" path="res://scenes/houses/Biome_P/SimpleHouseP2.tscn" id="7_ikso6"]
-[ext_resource type="Script" path="res://scripts/generation/DecorationItem.gd" id="7_w234y"]
+[ext_resource type="Script" uid="uid://v1fnj4abka1u" path="res://scripts/generation/DecorationItem.gd" id="7_w234y"]
 [ext_resource type="TileSet" uid="uid://2rmp57x3ojmi" path="res://scenes/sprites/Tilemap/biomeq_tile_set.tres" id="8_68qco"]
 [ext_resource type="PackedScene" uid="uid://djspu8srsty1o" path="res://scenes/houses/Biome_P/SimpleHouseP1.tscn" id="8_cg1mt"]
 [ext_resource type="PackedScene" uid="uid://cwnkq0f2rrkwn" path="res://scenes/houses/Biome_P/MediumHouseP2.tscn" id="9_1kmxa"]
@@ -141,6 +142,7 @@ npc_scene = ExtResource("4_npc")
 player_scene = ExtResource("3_p6oac")
 collision_scene = ExtResource("4_68qco")
 manager_quest_scene = ExtResource("5_w234y")
+background_music = ExtResource("6_rgbw1")
 ground_layer = NodePath("GroundLayer")
 wall_layer = NodePath("WallLayer")
 available_biomes = Array[ExtResource("4_ywfdd")]([SubResource("Resource_p6oac"), SubResource("Resource_5gwx6"), SubResource("Resource_ikso6"), SubResource("Resource_cg1mt")])

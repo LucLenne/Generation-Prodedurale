@@ -30,17 +30,21 @@ func ActiveQuest(quest : QuestBase):
 		_activeQuest.append(quest)
 		_create_quest_ui(quest)
 
+signal quest_finished(quest: QuestBase, success: bool)
+
 func SuccessQuest(quest : QuestBase):
 	if _activeQuest.has(quest):
 		_activeQuest.erase(quest)
 		_successQuest.append(quest)
 		_delete_quest_UI(quest.id)
+		emit_signal("quest_finished", quest, true)
 		
 func FailQuest(quest : QuestBase):
 	if _activeQuest.has(quest):
 		_activeQuest.erase(quest)
 		_failQuest.append(quest)
 		_delete_quest_UI(quest.id)
+		emit_signal("quest_finished", quest, false)
 		
 func GetQuest(type : QuestBase.TYPE) -> QuestBase:
 	for quest in _inactiveQuest:

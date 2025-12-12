@@ -32,6 +32,9 @@ class_name WorldGenerator extends Node2D
 @export var player_scene: PackedScene
 @export var collision_scene: PackedScene
 @export var manager_quest_scene: PackedScene
+@export var hud_scene: PackedScene
+@export var background_music: AudioStream
+
 
 @export_group("Layers")
 @export var ground_layer: TileMapLayer
@@ -74,6 +77,17 @@ func _ready():
 		npc_scene = preload("res://scenes/generation/PNJ.tscn")
 	if player_scene == null:
 		player_scene = preload("res://scenes/Player.tscn")
+	if hud_scene == null:
+		hud_scene = preload("res://scenes/ui/hud.tscn")
+	
+	
+	# Gestion de la Musique d'Ambiance
+	if background_music:
+		var music_player = AudioStreamPlayer.new()
+		music_player.stream = background_music
+		music_player.autoplay = true
+		# music_player.bus = "Music" # Décommenter si un bus "Music" existe
+		add_child(music_player)
 	
 	# Vérifie les layers
 	if ground_layer == null or wall_layer == null:
@@ -110,7 +124,7 @@ func generate_world():
 	var zone_gen = ZoneGenScript.new(zone_count_range, zone_size_range, min_zone_distance, entrance_count_range, zone_dirt_ratio)
 	var path_gen = PathGenScript.new(path_width, path_smoothness, path_edge_grass_ratio, path_edge_dirt_ratio)
 	var structure_gen = StructureGenScript.new(building_count_range, tombstone_count_range, npc_without_dialogue_count_range)
-	var spawner_gen = SpawnerScript.new(player_scene, npc_scene, manager_quest_scene)
+	var spawner_gen = SpawnerScript.new(player_scene, npc_scene, manager_quest_scene, hud_scene)
 	
 	# Pipeline de génération
 	var zone_seeds = zone_gen.generate_seeds(map_data)

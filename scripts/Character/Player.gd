@@ -3,6 +3,11 @@ static var Instance : Player
 
 var _quest_book_ui = preload("res://scripts/UI/quest_book_ui.gd")
 
+# Wobble Settings
+@export var wobble_speed : float = 15.0
+@export var wobble_intensity : float = 0.2
+var _wobble_time : float = 0.0
+
 func _enter_tree():
 	if Instance != null:
 		push_warning("Attention : Deux Player existent en même temps !")
@@ -53,6 +58,16 @@ func _physics_process(delta):
 	
 	# Call base physics (velocity calc + move_and_slide)
 	super._physics_process(delta)
+	
+	# Wobble Effect
+	if velocity.length() > 10.0:
+		_wobble_time += delta * wobble_speed
+		if main_sprite:
+			main_sprite.rotation = sin(_wobble_time) * wobble_intensity
+	else:
+		# Reset wobble smoothly
+		if main_sprite:
+			main_sprite.rotation = lerp_angle(main_sprite.rotation, 0.0, delta * 10.0)
 	
 	# Camera updates
 	if velocity != Vector2.ZERO:

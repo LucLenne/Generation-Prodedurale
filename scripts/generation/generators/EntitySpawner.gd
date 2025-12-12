@@ -7,12 +7,14 @@ const TileConfigScript = preload("res://scripts/generation/TileConfig.gd")
 var player_scene: PackedScene
 var npc_scene: PackedScene
 var manager_quest_scene: PackedScene
+var hud_scene: PackedScene
 
 
-func _init(p_scene: PackedScene, n_scene: PackedScene, mq_scene: PackedScene):
+func _init(p_scene: PackedScene, n_scene: PackedScene, mq_scene: PackedScene, h_scene: PackedScene):
 	player_scene = p_scene
 	npc_scene = n_scene
 	manager_quest_scene = mq_scene
+	hud_scene = h_scene
 
 
 ## Instancie le ManagerQuest si nécessaire.
@@ -67,6 +69,14 @@ func spawn_player(data: MapData, parent: Node2D) -> Node2D:
 	
 	print("Spawning player...")
 	var player = player_scene.instantiate()
+	
+	# Ajout du HUD si disponible
+	if hud_scene:
+		print("Spawning HUD...")
+		var hud = hud_scene.instantiate()
+		player.add_child(hud)
+	else:
+		printerr("HUD scene not assigned in EntitySpawner!")
 	
 	# Cherche une position valide près du centre de la première zone
 	var center = data.zones[0].center

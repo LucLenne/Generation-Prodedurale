@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfcmgquain0r4"]
+[gd_scene load_steps=17 format=3 uid="uid://bfcmgquain0r4"]
 
 [ext_resource type="Script" uid="uid://blqppoxo8mcic" path="res://scripts/Dialogue/dialogue_system_ui.gd" id="1_2eajr"]
 [ext_resource type="Texture2D" uid="uid://d1jvocug6cb8" path="res://sprites/UI/UI.png" id="2_y4yf4"]
@@ -22,33 +22,45 @@ texture = ExtResource("2_y4yf4")
 region_rect = Rect2(48, 0, 16, 8)
 modulate_color = Color(0.57996243, 0.57996243, 0.57996243, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcnxi"]
+atlas = ExtResource("2_y4yf4")
+region = Rect2(80, 0, 8, 8)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4yf4"]
 texture = ExtResource("2_y4yf4")
-region_rect = Rect2(64, 0, 16, 8)
+region_rect = Rect2(64.080925, 8.126967, 16.08165, 7.5941124)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_anckf"]
 texture = ExtResource("2_y4yf4")
-region_rect = Rect2(64, 0, 16, 8)
-modulate_color = Color(0.7285387, 0.7285387, 0.7285387, 1)
+region_rect = Rect2(64, 7.903611, 16, 7.9291477)
+modulate_color = Color(0.5275753, 0.5275753, 0.5275753, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6fprb"]
 texture = ExtResource("2_y4yf4")
-region_rect = Rect2(64, 0, 16, 8)
-modulate_color = Color(0.8151441, 0.8151441, 0.8151441, 1)
+region_rect = Rect2(64, 8.01529, 16, 7.929146)
+modulate_color = Color(0.614648, 0.614648, 0.614648, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5me1"]
+atlas = ExtResource("2_y4yf4")
+region = Rect2(80, 8, 8, 8)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_425yg"]
 texture = ExtResource("2_y4yf4")
-region_rect = Rect2(64, 8, 16, 8)
+region_rect = Rect2(64, -0.02553463, 15.827545, 8.040825)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_625c0"]
 texture = ExtResource("2_y4yf4")
-region_rect = Rect2(64, 8, 16, 8)
-modulate_color = Color(0.7852611, 0.7852611, 0.7852611, 1)
+region_rect = Rect2(64, -0.02553463, 16, 8.152502)
+modulate_color = Color(0.6620764, 0.6620764, 0.6620764, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rcdeh"]
 texture = ExtResource("2_y4yf4")
-region_rect = Rect2(64, 8, 16, 8)
-modulate_color = Color(0.7285387, 0.7285387, 0.7285387, 1)
+region_rect = Rect2(64, 0.08614349, 16, 7.929147)
+modulate_color = Color(0.548294, 0.548294, 0.548294, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpcr7"]
+atlas = ExtResource("2_y4yf4")
+region = Rect2(88, 0, 8, 8)
 
 [node name="DialogueSystemUI" type="CanvasLayer" node_paths=PackedStringArray("dialogue_text", "response_container", "dialogue_container", "click_button", "btn_intimidate", "btn_friendly", "btn_persuade")]
 script = ExtResource("1_2eajr")
@@ -129,6 +141,14 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_4vmct")
 text = "Je suis intimidant "
 autowrap_mode = 3
 
+[node name="IconIntimidating" type="TextureRect" parent="ResponseButtons/BtnIntimidate"]
+layout_mode = 0
+offset_left = -24.0
+offset_top = -42.0
+offset_right = 16.0
+offset_bottom = -2.0
+texture = SubResource("AtlasTexture_jcnxi")
+
 [node name="BtnFriendly" type="Button" parent="ResponseButtons"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -141,6 +161,14 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_6fprb")
 text = "Je suis amical"
 autowrap_mode = 3
 
+[node name="IconFriendly" type="TextureRect" parent="ResponseButtons/BtnFriendly"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = -39.0
+offset_right = 19.0
+offset_bottom = 1.0
+texture = SubResource("AtlasTexture_t5me1")
+
 [node name="BtnPersuade" type="Button" parent="ResponseButtons"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -152,3 +180,12 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_625c0")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rcdeh")
 text = "Je suis persuasif"
 autowrap_mode = 3
+
+[node name="IconPersuasive" type="TextureRect" parent="ResponseButtons/BtnPersuade"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -37.0
+offset_right = 41.0
+offset_bottom = 3.0
+texture = SubResource("AtlasTexture_wpcr7")
+flip_v = true

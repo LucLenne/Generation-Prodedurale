@@ -128,7 +128,7 @@
 	"retour_echec_intimidant": [
 		"Hahaha ! T'es con!&&Dégage avant que je ne m'énerve vraiment !",
 		"HAHAHAHAHA ! Oups, j'ai tellement ri que j'en ai fait tombé #objet.poss_m#",
-		"#propriétaire peut aller se faire voir, #zombish# et toi avec !#"
+		"#proprietaire# peut aller se faire voir, #zombish# et toi avec !"
 	],
 	"retour_echec_amical": [
 		"c'est vraiment très gentil mais non merci."

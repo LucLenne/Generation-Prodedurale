@@ -1,12 +1,10 @@
 {
- 	"setup_variables": [
-	"#setPronouns#"
-	],
+ 	"setup_variables": ["#setPronouns#"],
 	
 	"setPronouns": [
-		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroGender:f]",
-		"[heroSubj:il][heroObj:le][heroPoss:son][heroGender:]"
-		],
+		"[heroSubj:elle][heroObj:la][heroPoss:sa][heroPoss_m:ma][heroGender:f]",
+        "[heroSubj:il][heroObj:le][heroPoss:son][heroPoss_m:mon][heroGender:]"
+	],
 	
 
 	"introIntimidation": [
@@ -163,10 +161,7 @@
 	"btn_persuasion": [
 		"selon l'article 27 du code du service funéraire tu dois rentrer", 
 		"#proprietaire.capitalize# te payera grassement si tu reviens.", 
-		"Etre avec ses proches donne un joli teint aux os tu sais ?", 
-		""
-		
-		
+		"Etre avec ses proches donne un joli teint aux os tu sais ?"
 	],
 	
 	"Objet": [

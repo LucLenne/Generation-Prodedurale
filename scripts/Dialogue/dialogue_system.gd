@@ -102,6 +102,7 @@ func generate_new_quest():
 	current_quest_data.giver_mood = Mood.values()[randi() % Mood.size()]
 	
 	grammar_npc.flatten("#setup_variables#")
+	grammar_monster.flatten("#setup_variables#")
 	
 	current_quest_data.target_mood = _string_to_mood_enum(grammar_npc._save_data.get("mood_monstre", ["FRIENDLY"]))
 

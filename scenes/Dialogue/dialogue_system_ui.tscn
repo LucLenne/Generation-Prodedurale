@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfcmgquain0r4"]
+[gd_scene load_steps=14 format=3 uid="uid://bfcmgquain0r4"]
 
 [ext_resource type="Script" uid="uid://blqppoxo8mcic" path="res://scripts/Dialogue/dialogue_system_ui.gd" id="1_2eajr"]
 [ext_resource type="Texture2D" uid="uid://d1jvocug6cb8" path="res://sprites/UI/UI.png" id="2_y4yf4"]
+[ext_resource type="FontFile" uid="uid://cdy5x6i4gnnsd" path="res://scenes/sprites/Minecraft.ttf" id="3_jcnxi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jcnxi"]
 texture = ExtResource("2_y4yf4")
@@ -74,9 +75,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 89.0
-offset_top = -328.0
+offset_top = -420.0
 offset_right = -78.0
-offset_bottom = -85.0
+offset_bottom = -177.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_jcnxi")
@@ -91,6 +92,8 @@ theme_override_constants/margin_bottom = 0
 [node name="DialogueText" type="RichTextLabel" parent="DialogueContainer/MarginContainer"]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/normal_font = ExtResource("3_jcnxi")
+theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "i love my job, i love my job,i love my job ,i love my job ,i love my job"
 
@@ -105,10 +108,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 42.03
-offset_top = -81.32501
-offset_right = -37.02002
-offset_bottom = -3.295044
+offset_left = 42.0
+offset_top = -133.0
+offset_right = -37.05005
+offset_bottom = -54.97003
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 75
@@ -119,6 +122,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_fonts/font = ExtResource("3_jcnxi")
 theme_override_styles/normal = SubResource("StyleBoxTexture_t5me1")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_wpcr7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4vmct")
@@ -130,6 +134,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.176471, 0.203922, 0.211765, 1)
+theme_override_fonts/font = ExtResource("3_jcnxi")
 theme_override_styles/normal = SubResource("StyleBoxTexture_y4yf4")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_anckf")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6fprb")
@@ -141,6 +146,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_fonts/font = ExtResource("3_jcnxi")
 theme_override_styles/normal = SubResource("StyleBoxTexture_425yg")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_625c0")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rcdeh")

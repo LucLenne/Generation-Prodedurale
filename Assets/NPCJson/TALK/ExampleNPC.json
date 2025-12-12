@@ -37,7 +37,7 @@
 	"retour_echec_amical_part1": [
 		"Je t'arrêtes tout de suite, je te connais pas moi.",
 		"*snif* merci d'être là pour moi.",
-		"Enfait c'est #heroPoss_m# #rela.heroGender# qui avait mon argent.",
+		"Enfait c'est #rela.heroGender.poss_m# qui avait mon argent.",
 		"Tu es vraiment un bon ami."
 		
 	],
@@ -53,7 +53,7 @@
 		"Arrêtez d'essayer de me convaincre.",
 		"J'ai pas compris ce que vous m'avez dit...",
 		"Enfait j'ai pas d'argent, désolé hihihi",
-		"Pas de paiement tant que je ne vois pas #heroPoss_m# #rela.heroGender#"
+		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#"
 		
 	],
 	"retour_echec_persuasif_part2": [
@@ -61,7 +61,7 @@
 		"sortez de chez moi s'il vous plait.",
 		"Mais c'était une négociation agréable.",
 		"La prochaine fois, faites votre travail",
-		"Pas de paiement tant que je ne vois pas #heroPoss_m# #rela.heroGender#",
+		"Pas de paiement tant que je ne vois pas #rela.heroGender.poss_m#",
 		"Je comprend mieux pourquoi tout le monde déteste les médiateur."
 		
 	],
@@ -129,7 +129,7 @@
 		"Qui à besoin d'#rela.heroGender.indef# de toutes façons ?",
 		"Voilà tout mon argent, c'est pas assez ? Tenez, voilà #objet.poss_m# en plus.",
 		"Tu sais quoi ? je suis convaincu, voilà toutes mes économies.",
-		"#heroPoss_m# #rela.heroGender# aurait été convaincu j'en suis sûr.",
+		"#rela.heroGender.poss_m# aurait été convaincu j'en suis sûr.",
 		"Si je pouvais vous donner ma jambe je le ferais ! Vous la voulez vraiment ?"
 		
 	],
@@ -147,22 +147,22 @@
 	],
 
 	"seconde_chance_intimidant": [
-		"Déjà revenu ? Et sans #heroPoss_m# #rela.heroGender# ? J'espère que tu as une bonne explication.",
+		"Déjà revenu ? Et sans #rela.heroGender.poss_m# ? J'espère que tu as une bonne explication.",
 		"Tu me déranges pendant mon raclage de peau morte quotidien ? J'espère que tu as de bonnes nouvelles.",
-		"Qu'est ce que tu fous là sans #heroPoss_m# #rela.heroGender#, tu veux que j'te démarre ?"
+		"Qu'est ce que tu fous là sans #rela.heroGender.poss_m#, tu veux que j'te démarre ?"
 	],
 	
 	"seconde_chance_amical": [
 		"Oh tiens salut ! tu es de retour ! Alors, comment ça s'est passé ?",
-		"Hey, coucou ! Oh, mais où est #heroPoss_m# #rela.heroGender# ?",
-		"Oh ! vous êtes revenu ! je pensais justement à #heroPoss_m# #rela.heroGender# et à comment j'étais content de le revoir sain et sauf !"
+		"Hey, coucou ! Oh, mais où est #rela.heroGender.poss_m# ?",
+		"Oh ! vous êtes revenu ! je pensais justement à #rela.heroGender.poss_m# et à comment j'étais content de le revoir sain et sauf !"
 	],
 
 	"seconde_chance_persuasif": [
 		"Ah! Déjà de retour ? La mission à été menée à bien ?",
-		"Hum... Je ne vois pas #heroPoss_m# #rela.heroGender#... J'espère que vous ne revenez pas bredouille en espérant me convaincre de vous payer quand même.",
+		"Hum... Je ne vois pas #rela.heroGender.poss_m#... J'espère que vous ne revenez pas bredouille en espérant me convaincre de vous payer quand même.",
 		"Bonjour, vous avez de bonnes nouvelles j'espère.",
-		"Qu'est ce que vous faites là tout seul ? où est #heroPoss_m# #rela.heroGender# ?"
+		"Qu'est ce que vous faites là tout seul ? où est #rela.heroGender.poss_m# ?"
 	],
 
 	"btn_intimidation": ["#heroSubj# reviendra pas #cible_nom#, payes moi quand même !", "Donne moi la thune tout de suite !", "Sympa cette maison, c'est des murs inflammables ?", "Payes moi ou mange tes dents, c'est simple non ?", "J'vais t'briser les os, j'vais boire ton sang.", "C'est triste tout ça... t'as mon argent ?" ],
@@ -274,29 +274,29 @@
 	],
 	
 	"demande_intimidant":[
-		"retrouve vite #heroPoss_m# #rela.heroGender.hero# #cible_nom#",
-		"va vite chercher #heroPoss_m# #rela.heroGender# #cible_nom#",
-		"dépèche toi de retrouver #heroPoss_m# #rela.heroGender# #cible_nom#",
-		"faut que tu retrouves #heroPoss_m# #rela.heroGender# #cible_nom#",
-		"#heroPoss_m# #rela.heroGender# #cible_nom# a disparu, retrouve #heroObj#"
+		"retrouve vite #rela.heroGender.poss_m# #cible_nom#",
+		"va vite chercher #rela.heroGender.poss_m# #cible_nom#",
+		"dépèche toi de retrouver #rela.heroGender.poss_m# #cible_nom#",
+		"faut que tu retrouves #rela.heroGender.poss_m# #cible_nom#",
+		"#rela.heroGender.poss_m# #cible_nom# a disparu, retrouve #heroObj#"
 		
 	],
 	
 	"demande_amical":[
-		"je t'en supplie, j'ai perdu #heroPoss_m# #rela.heroGender#, #heroSubj# se nomme #cible_nom#",
-		"retrouve #heroPoss_m# #rela.heroGender# #cible_nom#",
-		"si tu me retrouves #heroPoss_m# #rela.heroGender# #cible_nom# je te serais éternellement reconnaissant",
-		"retrouve #heroPoss_m# #rela.heroGender# #cible_nom# s'il te plait",
-		"#cible_nom#, #heroPoss_m# #rela.heroGender# a disparu, par pitié, retrouve #heroObj#",
+		"je t'en supplie, j'ai perdu #rela.heroGender.poss_m#, #heroSubj# se nomme #cible_nom#",
+		"retrouve #rela.heroGender.poss_m# #cible_nom#",
+		"si tu me retrouves #rela.heroGender.poss_m# #cible_nom# je te serais éternellement reconnaissant",
+		"retrouve #rela.heroGender.poss_m# #cible_nom# s'il te plait",
+		"#cible_nom#, #rela.heroGender.poss_m# a disparu, par pitié, retrouve #heroObj#",
 		
 	],
 	
 	"demande_persuasif":[
-		"si tu retrouves #cible_nom#, #heroPoss_m# #rela.heroGender#, tu auras une récompense ",
-		"cela fait des jours que #heroPoss_m# #rela.heroGender# #cible_nom# à disparu, je m'inquiète même si c'est #insulte.heroGender.indef#",
-		"tu es bien médiateur non ? Va chercher #heroPoss_m# #rela.heroGender# #cible_nom#, c'est ton métier après tout.",
-		"tu dois me venir en aide, ton serment t'y oblige, retrouves #heroPoss_m# #rela.heroGender# #cible_nom#",
-		"si tu retrouves #cible_nom#, #heroPoss_m# #rela.heroGender# pour moi, je t'en devrais une"
+		"si tu retrouves #cible_nom#, #rela.heroGender.poss_m#, tu auras une récompense ",
+		"cela fait des jours que #rela.heroGender.poss_m# #cible_nom# à disparu, je m'inquiète même si c'est #insulte.heroGender.indef#",
+		"tu es bien médiateur non ? Va chercher #rela.heroGender.poss_m# #cible_nom#, c'est ton métier après tout.",
+		"tu dois me venir en aide, ton serment t'y oblige, retrouves #rela.heroGender.poss_m# #cible_nom#",
+		"si tu retrouves #cible_nom#, #rela.heroGender.poss_m# pour moi, je t'en devrais une"
 		
 	],
 	
@@ -353,7 +353,7 @@
 
 	"conclusion_amical": [
 	"#cible_nom# s'enfuit tout le temps, pourtant je lui fais pas de mal je crois ?",
-	"retrouve #heroPoss_m# #rela.heroGender# je t'en supplie...",
+	"retrouve #rela.heroGender.poss_m# je t'en supplie...",
 	"je ne sais pas ce que je ferais sans #rela.heroGender#, ramène #heroObj# je t'en prie.",
 	"J'espère que tu seras à la hauteur...",
 	"reviens vite étranger, je te donnerais tout ce que j'ai si tu me #heroObj# ramènes.",

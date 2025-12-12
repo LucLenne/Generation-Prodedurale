@@ -17,6 +17,8 @@ func _init():
 		"al": ["Cheval"],
 		"bijou": ["Bijou / Bijoux"],
 		"pneu": ["Pneu / Pneus"],
+		"frère" : ["Frère | Soeur"],
+		"mari" : ["Mari | Femme"],
 		
 		# --- AUTO-FÉMININS ---
 		"actif": ["Actif"],
@@ -116,6 +118,10 @@ func _init():
 		{"tag": "#avion.indef#",  "expect": "un Avion",  "desc": "Indef: Pas d'élision sur Un"},
 		{"tag": "#rat.s.indef#",  "expect": "des Rats",  "desc": "Indef: Pluriel"},
 
+		{"tag": "#frère.f.indef#",  "expect": "une Soeur",  "desc": "Indef: Fem"},
+		{"tag": "#frère.f.s.indef#",  "expect": "des Soeurs",  "desc": "Indef: Fem Pluriel"},
+		{"tag": "#mari.f.indef#",  "expect": "une Femme",  "desc": "Indef: Fem"},
+		{"tag": "#mari.f.s.indef#",  "expect": "des Femmes",  "desc": "Indef: Fem Pluriel"},
 		# E. PARTITIFS DÉFINIS
 		{"tag": "#rat.partDef#",    "expect": "du Rat",       "desc": "PartDef: Masc Consonne"},
 		{"tag": "#souris.partDef#", "expect": "de la Souris","desc": "PartDef: Fem Consonne"},

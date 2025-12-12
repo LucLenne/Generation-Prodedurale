@@ -526,7 +526,7 @@ class GrammarFR extends RefCounted:
 	
 	
 	func _apply_modifiers(resolved: String, modifiers: Array) -> String:
-		# Définir les priorités
+		# je définis les priorités
 		var priority_map = {
 			"f": 1,         
 			"s": 2,          
@@ -541,16 +541,23 @@ class GrammarFR extends RefCounted:
 			
 		}
 	
-		
+		# je fais une pré-résolution des modificateurs dynamiques Ex heroGender : f <- c'est ça le modifier dynamique
 		var expanded_modifiers = []
 		for m in modifiers:
 			if _save_data.has(m):
+				# C'est une variable, on récupère sa valeur
 				var val = _save_data[m]
+				
+				# Gestion des chaînes vides : si la valeur est vide, on l'ignore
+				if typeof(val) == TYPE_STRING and val.is_empty():
+					continue
+					
 				if typeof(val) == TYPE_ARRAY:
 					expanded_modifiers.append_array(val)
 				else:
 					expanded_modifiers.append(str(val))
 			else:
+				# Ce n'est pas une variable connue, on garde le modificateur tel quel
 				expanded_modifiers.append(m)
 		
 		# Trier les modificateurs selon leur priorité
@@ -565,7 +572,7 @@ class GrammarFR extends RefCounted:
 		if "f" not in sorted_modifiers:
 			resolved = ModifiersFR._get_word_without_gender_separator(resolved)
 		
-		# 2. Application des modificateurs
+		# Application des modificateurs
 		for m in sorted_modifiers:
 			
 			if m != "f" and m != "s" and "s" not in sorted_modifiers:
